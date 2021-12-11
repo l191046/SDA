@@ -62,6 +62,7 @@ public class JHome extends javax.swing.JFrame {
         card_flights = new javax.swing.JPanel();
         backDrop1 = new javax.swing.JPanel();
         lbl_name1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         card_checkFlight = new javax.swing.JPanel();
         backDrop2 = new javax.swing.JPanel();
         lbl_name2 = new javax.swing.JLabel();
@@ -407,13 +408,19 @@ public class JHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel2.setText("FROM");
+
         javax.swing.GroupLayout card_flightsLayout = new javax.swing.GroupLayout(card_flights);
         card_flights.setLayout(card_flightsLayout);
         card_flightsLayout.setHorizontalGroup(
             card_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(card_flightsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(backDrop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(card_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backDrop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(card_flightsLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         card_flightsLayout.setVerticalGroup(
@@ -421,7 +428,9 @@ public class JHome extends javax.swing.JFrame {
             .addGroup(card_flightsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backDrop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(539, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jLabel2)
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         cardstack.add(card_flights, "card_flights");
@@ -580,6 +589,7 @@ public class JHome extends javax.swing.JFrame {
     private javax.swing.JPanel highlight_history;
     private javax.swing.JPanel highlight_home;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbl_flyWith;
     private javax.swing.JLabel lbl_home;
     private javax.swing.JLabel lbl_home1;
