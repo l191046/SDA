@@ -51,6 +51,7 @@ public class JHome extends javax.swing.JFrame {
         btn_history = new javax.swing.JPanel();
         lbl_home3 = new javax.swing.JLabel();
         highlight_history = new javax.swing.JPanel();
+        btn_adminLogin = new javax.swing.JLabel();
         cardstack = new javax.swing.JPanel();
         card_home = new javax.swing.JPanel();
         lbl_flyWith = new javax.swing.JLabel();
@@ -269,18 +270,30 @@ public class JHome extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
+        btn_adminLogin.setBackground(new java.awt.Color(77, 80, 97));
+        btn_adminLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btn_adminLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_adminLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/administrator-24.png"))); // NOI18N
+        btn_adminLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_adminLogin.setIconTextGap(10);
+        btn_adminLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_adminLoginMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidebarLayout = new javax.swing.GroupLayout(sidebar);
         sidebar.setLayout(sidebarLayout);
         sidebarLayout.setHorizontalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidebarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarLayout.createSequentialGroup()
+                .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(sidebarLayout.createSequentialGroup()
                         .addComponent(highlight_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarLayout.createSequentialGroup()
+                    .addGroup(sidebarLayout.createSequentialGroup()
                         .addComponent(highlight_flights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btn_flights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -293,6 +306,9 @@ public class JHome extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(btn_history, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(sidebarLayout.createSequentialGroup()
+                .addComponent(btn_adminLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         sidebarLayout.setVerticalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +329,8 @@ public class JHome extends javax.swing.JFrame {
                 .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_history, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(highlight_history, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
+                .addComponent(btn_adminLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         highlight_home.getAccessibleContext().setAccessibleName("highlight_home");
@@ -375,7 +392,7 @@ public class JHome extends javax.swing.JFrame {
                         .addComponent(lbl_takeOff, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(card_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_tagline, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                            .addComponent(lbl_tagline, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -420,7 +437,6 @@ public class JHome extends javax.swing.JFrame {
                 .addComponent(lbl_name1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
 
         jLabel2.setText("Search All Possible Flights");
 
@@ -563,7 +579,7 @@ public class JHome extends javax.swing.JFrame {
             .addGroup(backDrop2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_name2)
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addContainerGap(462, Short.MAX_VALUE))
         );
         backDrop2Layout.setVerticalGroup(
             backDrop2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -605,7 +621,7 @@ public class JHome extends javax.swing.JFrame {
             .addGroup(backDrop3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_name3)
-                .addContainerGap(669, Short.MAX_VALUE))
+                .addContainerGap(670, Short.MAX_VALUE))
         );
         backDrop3Layout.setVerticalGroup(
             backDrop3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -684,12 +700,20 @@ public class JHome extends javax.swing.JFrame {
         setHighlights("highlight_history");
     }//GEN-LAST:event_btn_historyMouseClicked
 
+    private void btn_adminLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_adminLoginMouseClicked
+        //close current frame
+        this.dispose();
+        //open Admin_GUI
+        Admin_GUI aGui = new Admin_GUI();
+    }//GEN-LAST:event_btn_adminLoginMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel backDrop;
     private javax.swing.JPanel backDrop1;
     private javax.swing.JPanel backDrop2;
     private javax.swing.JPanel backDrop3;
+    private javax.swing.JLabel btn_adminLogin;
     private javax.swing.JPanel btn_checkFlight;
     private javax.swing.JPanel btn_flights;
     private javax.swing.JPanel btn_history;
