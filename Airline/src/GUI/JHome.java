@@ -85,7 +85,6 @@ public class JHome extends javax.swing.JFrame {
         lbl_name3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(null);
         setResizable(false);
 
         sidebar.setBackground(new java.awt.Color(48, 50, 61));
