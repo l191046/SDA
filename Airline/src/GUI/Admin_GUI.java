@@ -59,9 +59,33 @@ public class Admin_GUI extends javax.swing.JFrame {
         NoFlyList_highlight = new javax.swing.JPanel();
         internal_cardstack = new javax.swing.JPanel();
         Home = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        card_home = new javax.swing.JPanel();
+        lbl_AdminProfile = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelhomelite = new javax.swing.JLabel();
+        home1 = new javax.swing.JPanel();
+        jLabelCompanyinfo = new javax.swing.JLabel();
+        home2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabelfirstname = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabellastname = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabeladdress = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabelsalary = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabeldesignation = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         Manage_flights = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        card_home1 = new javax.swing.JPanel();
+        lbl_AdminProfile1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabelhomelite1 = new javax.swing.JLabel();
+        home3 = new javax.swing.JPanel();
+        jLabelCompanyinfo1 = new javax.swing.JLabel();
+        home4 = new javax.swing.JPanel();
         Add_flight = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         View_NoFlyList = new javax.swing.JPanel();
@@ -155,7 +179,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         );
         Image_panelLayout.setVerticalGroup(
             Image_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(image_label, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+            .addComponent(image_label, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout Login_pageLayout = new javax.swing.GroupLayout(Login_page);
@@ -288,21 +312,16 @@ public class Admin_GUI extends javax.swing.JFrame {
             .addGroup(NavbarLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Home_Highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Manage_flight_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Add_flight_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NoFlyList_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NoFlyList_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Home_Highlight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(NavbarLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(Home_label, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(NavbarLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Add_flight_label, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Manage_flight_label, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NoFlyList_label, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(Add_flight_label, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Manage_flight_label, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NoFlyList_label, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Home_label, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         NavbarLayout.setVerticalGroup(
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,44 +349,297 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         internal_cardstack.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setText("Home");
+        card_home.setBackground(new java.awt.Color(255, 102, 102));
+        card_home.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lbl_AdminProfile.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
+        lbl_AdminProfile.setForeground(new java.awt.Color(51, 0, 51));
+        lbl_AdminProfile.setText(" Admin Profile ");
+        lbl_AdminProfile.setMaximumSize(new java.awt.Dimension(150, 30));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel5.setText("|");
+
+        jLabelhomelite.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        jLabelhomelite.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelhomelite.setText("Home");
+
+        home1.setBackground(new java.awt.Color(255, 204, 102));
+
+        jLabelCompanyinfo.setBackground(new java.awt.Color(0, 102, 102));
+        jLabelCompanyinfo.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabelCompanyinfo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCompanyinfo.setText("Company Information");
+
+        home2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel6.setText("CNIC:");
+
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel7.setText("XYZ");
+
+        jLabelfirstname.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabelfirstname.setText("First Name:");
+
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel8.setText("XYZ");
+
+        jLabellastname.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabellastname.setText("Last Name: ");
+
+        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setText("1234567891011");
+
+        jLabeladdress.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabeladdress.setText("Address:");
+
+        jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel11.setText("1 XYZ street,XYZ city,Pakistan");
+
+        jLabelsalary.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabelsalary.setText("Salary:");
+
+        jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel13.setText("Rs.500,000");
+
+        jLabeldesignation.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabeldesignation.setText("Designation:");
+
+        jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel15.setText("XYZ");
+
+        javax.swing.GroupLayout home2Layout = new javax.swing.GroupLayout(home2);
+        home2.setLayout(home2Layout);
+        home2Layout.setHorizontalGroup(
+            home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(home2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabellastname, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelfirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabeldesignation, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(home2Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabelsalary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(home2Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(113, 113, 113)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(home2Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabeladdress, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(470, Short.MAX_VALUE))
+        );
+        home2Layout.setVerticalGroup(
+            home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(home2Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelfirstname)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabeladdress)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabellastname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addGroup(home2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelsalary, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabeldesignation, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15)))
+                .addContainerGap(147, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout home1Layout = new javax.swing.GroupLayout(home1);
+        home1.setLayout(home1Layout);
+        home1Layout.setHorizontalGroup(
+            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(home1Layout.createSequentialGroup()
+                .addGroup(home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCompanyinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(home2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
+        home1Layout.setVerticalGroup(
+            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(home1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelCompanyinfo)
+                .addGap(18, 18, 18)
+                .addComponent(home2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout card_homeLayout = new javax.swing.GroupLayout(card_home);
+        card_home.setLayout(card_homeLayout);
+        card_homeLayout.setHorizontalGroup(
+            card_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(card_homeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_AdminProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelhomelite, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(card_homeLayout.createSequentialGroup()
+                .addComponent(home1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        card_homeLayout.setVerticalGroup(
+            card_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(card_homeLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(card_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_AdminProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelhomelite))
+                .addGap(18, 18, 18)
+                .addComponent(home1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(631, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
         Home.setLayout(HomeLayout);
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addGap(246, 246, 246)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(card_home, javax.swing.GroupLayout.PREFERRED_SIZE, 1057, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel1)
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(card_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(Home, "Home");
 
-        jLabel2.setText("Manage flights");
+        card_home1.setBackground(new java.awt.Color(255, 102, 102));
+        card_home1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lbl_AdminProfile1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
+        lbl_AdminProfile1.setForeground(new java.awt.Color(51, 0, 51));
+        lbl_AdminProfile1.setText(" Admin Profile ");
+        lbl_AdminProfile1.setMaximumSize(new java.awt.Dimension(150, 30));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setText("|");
+
+        jLabelhomelite1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        jLabelhomelite1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelhomelite1.setText("Manage Flights");
+
+        home3.setBackground(new java.awt.Color(255, 204, 102));
+
+        jLabelCompanyinfo1.setBackground(new java.awt.Color(0, 102, 102));
+        jLabelCompanyinfo1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabelCompanyinfo1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCompanyinfo1.setText("Flight Information Information");
+
+        home4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout home4Layout = new javax.swing.GroupLayout(home4);
+        home4.setLayout(home4Layout);
+        home4Layout.setHorizontalGroup(
+            home4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1154, Short.MAX_VALUE)
+        );
+        home4Layout.setVerticalGroup(
+            home4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 285, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout home3Layout = new javax.swing.GroupLayout(home3);
+        home3.setLayout(home3Layout);
+        home3Layout.setHorizontalGroup(
+            home3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(home3Layout.createSequentialGroup()
+                .addGroup(home3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCompanyinfo1, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(home4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
+        home3Layout.setVerticalGroup(
+            home3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(home3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelCompanyinfo1)
+                .addGap(18, 18, 18)
+                .addComponent(home4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout card_home1Layout = new javax.swing.GroupLayout(card_home1);
+        card_home1.setLayout(card_home1Layout);
+        card_home1Layout.setHorizontalGroup(
+            card_home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(card_home1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_AdminProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelhomelite1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(card_home1Layout.createSequentialGroup()
+                .addComponent(home3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        card_home1Layout.setVerticalGroup(
+            card_home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(card_home1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(card_home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_AdminProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabelhomelite1))
+                .addGap(18, 18, 18)
+                .addComponent(home3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(631, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout Manage_flightsLayout = new javax.swing.GroupLayout(Manage_flights);
         Manage_flights.setLayout(Manage_flightsLayout);
         Manage_flightsLayout.setHorizontalGroup(
             Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Manage_flightsLayout.createSequentialGroup()
-                .addGap(285, 285, 285)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(card_home1, javax.swing.GroupLayout.PREFERRED_SIZE, 1057, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         Manage_flightsLayout.setVerticalGroup(
             Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Manage_flightsLayout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(jLabel2)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(card_home1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(Manage_flights, "Manage_flights");
@@ -381,14 +653,14 @@ public class Admin_GUI extends javax.swing.JFrame {
             .addGroup(Add_flightLayout.createSequentialGroup()
                 .addGap(298, 298, 298)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addContainerGap(722, Short.MAX_VALUE))
         );
         Add_flightLayout.setVerticalGroup(
             Add_flightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Add_flightLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jLabel3)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap(920, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(Add_flight, "Add_flight");
@@ -403,14 +675,14 @@ public class Admin_GUI extends javax.swing.JFrame {
             .addGroup(View_NoFlyListLayout.createSequentialGroup()
                 .addGap(310, 310, 310)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addContainerGap(710, Short.MAX_VALUE))
         );
         View_NoFlyListLayout.setVerticalGroup(
             View_NoFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(View_NoFlyListLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(jLabel4)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(973, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(View_NoFlyList, "View_NoFlyList");
@@ -529,11 +801,35 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel Username_label;
     private javax.swing.JPanel View_NoFlyList;
     private javax.swing.JLabel Welcome_label;
+    private javax.swing.JPanel card_home;
+    private javax.swing.JPanel card_home1;
+    private javax.swing.JPanel home1;
+    private javax.swing.JPanel home2;
+    private javax.swing.JPanel home3;
+    private javax.swing.JPanel home4;
     private javax.swing.JLabel image_label;
     private javax.swing.JPanel internal_cardstack;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCompanyinfo;
+    private javax.swing.JLabel jLabelCompanyinfo1;
+    private javax.swing.JLabel jLabeladdress;
+    private javax.swing.JLabel jLabeldesignation;
+    private javax.swing.JLabel jLabelfirstname;
+    private javax.swing.JLabel jLabelhomelite;
+    private javax.swing.JLabel jLabelhomelite1;
+    private javax.swing.JLabel jLabellastname;
+    private javax.swing.JLabel jLabelsalary;
+    private javax.swing.JLabel lbl_AdminProfile;
+    private javax.swing.JLabel lbl_AdminProfile1;
     // End of variables declaration//GEN-END:variables
 }
