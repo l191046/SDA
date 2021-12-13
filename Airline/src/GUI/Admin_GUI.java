@@ -73,16 +73,46 @@ public class Admin_GUI extends javax.swing.JFrame {
         Address_label = new javax.swing.JLabel();
         Salary_label = new javax.swing.JLabel();
         Manage_flights = new javax.swing.JPanel();
+        Header2 = new javax.swing.JPanel();
+        Title2 = new javax.swing.JLabel();
+        Seperator2 = new javax.swing.JLabel();
+        Home_lite2 = new javax.swing.JLabel();
+        Company_panel2 = new javax.swing.JPanel();
+        Company_info_label2 = new javax.swing.JLabel();
+        Info_panel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        Add_flight = new javax.swing.JPanel();
         Header1 = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
         Seperator1 = new javax.swing.JLabel();
         Home_lite1 = new javax.swing.JLabel();
         Company_panel1 = new javax.swing.JPanel();
         Company_info_label1 = new javax.swing.JLabel();
-        Add_flight = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        Info_panel2 = new javax.swing.JPanel();
+        FirstName_label1 = new javax.swing.JLabel();
+        LastName_label1 = new javax.swing.JLabel();
+        CNIC_label1 = new javax.swing.JLabel();
+        Designation_label1 = new javax.swing.JLabel();
+        Address_label1 = new javax.swing.JLabel();
+        Salary_label1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jSpinner1 = new javax.swing.JSpinner();
         View_NoFlyList = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        Header3 = new javax.swing.JPanel();
+        Title3 = new javax.swing.JLabel();
+        Seperator3 = new javax.swing.JLabel();
+        Home_lite3 = new javax.swing.JLabel();
+        Company_panel3 = new javax.swing.JPanel();
+        Company_info_label3 = new javax.swing.JLabel();
+        Info_panel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -473,20 +503,155 @@ public class Admin_GUI extends javax.swing.JFrame {
         Home.setLayout(HomeLayout);
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(HomeLayout.createSequentialGroup()
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 202, Short.MAX_VALUE))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(Home, "Home");
+
+        Header2.setBackground(new java.awt.Color(255, 102, 102));
+        Header2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        Title2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
+        Title2.setForeground(new java.awt.Color(51, 0, 51));
+        Title2.setText(" Admin Profile ");
+        Title2.setMaximumSize(new java.awt.Dimension(150, 30));
+
+        Seperator2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Seperator2.setForeground(new java.awt.Color(102, 102, 102));
+        Seperator2.setText("|");
+
+        Home_lite2.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        Home_lite2.setForeground(new java.awt.Color(102, 102, 102));
+        Home_lite2.setText("Manage Flights");
+
+        Company_panel2.setBackground(new java.awt.Color(255, 204, 102));
+
+        Company_info_label2.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Company_info_label2.setForeground(new java.awt.Color(255, 255, 255));
+        Company_info_label2.setText("Flight Information");
+
+        javax.swing.GroupLayout Company_panel2Layout = new javax.swing.GroupLayout(Company_panel2);
+        Company_panel2.setLayout(Company_panel2Layout);
+        Company_panel2Layout.setHorizontalGroup(
+            Company_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Company_panel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(Company_info_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        Company_panel2Layout.setVerticalGroup(
+            Company_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Company_panel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Company_info_label2)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        Info_panel1.setBackground(new java.awt.Color(250, 250, 250));
+
+        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Flight ID", "Source", "Destination", "Capacity", "Time"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("Time");
+        }
+
+        javax.swing.GroupLayout Info_panel1Layout = new javax.swing.GroupLayout(Info_panel1);
+        Info_panel1.setLayout(Info_panel1Layout);
+        Info_panel1Layout.setHorizontalGroup(
+            Info_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Info_panel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+        Info_panel1Layout.setVerticalGroup(
+            Info_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Info_panel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(368, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout Header2Layout = new javax.swing.GroupLayout(Header2);
+        Header2.setLayout(Header2Layout);
+        Header2Layout.setHorizontalGroup(
+            Header2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Header2Layout.createSequentialGroup()
+                .addGroup(Header2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Info_panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Header2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Title2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Seperator2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Home_lite2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Company_panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 398, Short.MAX_VALUE))
+        );
+        Header2Layout.setVerticalGroup(
+            Header2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Header2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(Header2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Title2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Seperator2)
+                    .addComponent(Home_lite2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Company_panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Info_panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(671, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout Manage_flightsLayout = new javax.swing.GroupLayout(Manage_flights);
+        Manage_flights.setLayout(Manage_flightsLayout);
+        Manage_flightsLayout.setHorizontalGroup(
+            Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Manage_flightsLayout.createSequentialGroup()
+                .addComponent(Header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 202, Short.MAX_VALUE))
+        );
+        Manage_flightsLayout.setVerticalGroup(
+            Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Manage_flightsLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        internal_cardstack.add(Manage_flights, "Manage_flights");
 
         Header1.setBackground(new java.awt.Color(255, 102, 102));
         Header1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -502,13 +667,13 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         Home_lite1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         Home_lite1.setForeground(new java.awt.Color(102, 102, 102));
-        Home_lite1.setText("Home");
+        Home_lite1.setText("Add Flight");
 
         Company_panel1.setBackground(new java.awt.Color(255, 204, 102));
 
         Company_info_label1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
         Company_info_label1.setForeground(new java.awt.Color(255, 255, 255));
-        Company_info_label1.setText("Flight Information");
+        Company_info_label1.setText("Add New Flight");
 
         javax.swing.GroupLayout Company_panel1Layout = new javax.swing.GroupLayout(Company_panel1);
         Company_panel1.setLayout(Company_panel1Layout);
@@ -517,7 +682,7 @@ public class Admin_GUI extends javax.swing.JFrame {
             .addGroup(Company_panel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(Company_info_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Company_panel1Layout.setVerticalGroup(
             Company_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,20 +692,130 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        Info_panel2.setBackground(new java.awt.Color(250, 250, 250));
+
+        FirstName_label1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        FirstName_label1.setText("Flight ID:");
+
+        LastName_label1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        LastName_label1.setText("Source:");
+
+        CNIC_label1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        CNIC_label1.setText("Capacity:");
+
+        Designation_label1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        Designation_label1.setText("Destination:");
+
+        Address_label1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        Address_label1.setText("Time:");
+
+        Salary_label1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        Salary_label1.setText("Cost:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Info_panel2Layout = new javax.swing.GroupLayout(Info_panel2);
+        Info_panel2.setLayout(Info_panel2Layout);
+        Info_panel2Layout.setHorizontalGroup(
+            Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Info_panel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addComponent(FirstName_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Designation_label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                            .addComponent(LastName_label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(157, 157, 157)
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addComponent(Address_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addComponent(CNIC_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addComponent(Salary_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(276, Short.MAX_VALUE))
+        );
+        Info_panel2Layout.setVerticalGroup(
+            Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Info_panel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FirstName_label1)
+                    .addComponent(CNIC_label1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LastName_label1)
+                    .addComponent(Address_label1)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Salary_label1)
+                    .addComponent(Designation_label1)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(316, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout Header1Layout = new javax.swing.GroupLayout(Header1);
         Header1.setLayout(Header1Layout);
         Header1Layout.setHorizontalGroup(
             Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Header1Layout.createSequentialGroup()
-                .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Info_panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Header1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Title1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Seperator1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Home_lite1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Company_panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Home_lite1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Company_panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 398, Short.MAX_VALUE))
         );
         Header1Layout.setVerticalGroup(
@@ -553,67 +828,175 @@ public class Admin_GUI extends javax.swing.JFrame {
                     .addComponent(Home_lite1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Company_panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(303, 303, 303))
-        );
-
-        javax.swing.GroupLayout Manage_flightsLayout = new javax.swing.GroupLayout(Manage_flights);
-        Manage_flights.setLayout(Manage_flightsLayout);
-        Manage_flightsLayout.setHorizontalGroup(
-            Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Manage_flightsLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        Manage_flightsLayout.setVerticalGroup(
-            Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Manage_flightsLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(Header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 886, Short.MAX_VALUE))
+                .addComponent(Info_panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(671, Short.MAX_VALUE))
         );
-
-        internal_cardstack.add(Manage_flights, "Manage_flights");
-
-        jLabel3.setText("Add flights");
 
         javax.swing.GroupLayout Add_flightLayout = new javax.swing.GroupLayout(Add_flight);
         Add_flight.setLayout(Add_flightLayout);
         Add_flightLayout.setHorizontalGroup(
             Add_flightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Add_flightLayout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(742, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Add_flightLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Add_flightLayout.setVerticalGroup(
             Add_flightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Add_flightLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel3)
-                .addContainerGap(1170, Short.MAX_VALUE))
+                .addComponent(Header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(Add_flight, "Add_flight");
         Add_flight.getAccessibleContext().setAccessibleName("");
 
-        jLabel4.setText("No fly list");
+        Header3.setBackground(new java.awt.Color(255, 102, 102));
+        Header3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        Title3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
+        Title3.setForeground(new java.awt.Color(51, 0, 51));
+        Title3.setText(" Admin Profile ");
+        Title3.setMaximumSize(new java.awt.Dimension(150, 30));
+
+        Seperator3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Seperator3.setForeground(new java.awt.Color(102, 102, 102));
+        Seperator3.setText("|");
+
+        Home_lite3.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        Home_lite3.setForeground(new java.awt.Color(102, 102, 102));
+        Home_lite3.setText("No Fly List");
+
+        Company_panel3.setBackground(new java.awt.Color(255, 204, 102));
+
+        Company_info_label3.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Company_info_label3.setForeground(new java.awt.Color(255, 255, 255));
+        Company_info_label3.setText("Customer No Fly List");
+
+        javax.swing.GroupLayout Company_panel3Layout = new javax.swing.GroupLayout(Company_panel3);
+        Company_panel3.setLayout(Company_panel3Layout);
+        Company_panel3Layout.setHorizontalGroup(
+            Company_panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Company_panel3Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(Company_info_label3, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        Company_panel3Layout.setVerticalGroup(
+            Company_panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Company_panel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Company_info_label3)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        Info_panel3.setBackground(new java.awt.Color(250, 250, 250));
+
+        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Customer CNIC", "First Name", "Last Name", "Contact Number"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jButton1.setText("Add New Customer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Info_panel3Layout = new javax.swing.GroupLayout(Info_panel3);
+        Info_panel3.setLayout(Info_panel3Layout);
+        Info_panel3Layout.setHorizontalGroup(
+            Info_panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Info_panel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(Info_panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        Info_panel3Layout.setVerticalGroup(
+            Info_panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Info_panel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(264, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout Header3Layout = new javax.swing.GroupLayout(Header3);
+        Header3.setLayout(Header3Layout);
+        Header3Layout.setHorizontalGroup(
+            Header3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Header3Layout.createSequentialGroup()
+                .addGroup(Header3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Info_panel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Header3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Title3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Seperator3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Home_lite3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Company_panel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 203, Short.MAX_VALUE))
+        );
+        Header3Layout.setVerticalGroup(
+            Header3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Header3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(Header3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Title3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Seperator3)
+                    .addComponent(Home_lite3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Company_panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Info_panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(264, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout View_NoFlyListLayout = new javax.swing.GroupLayout(View_NoFlyList);
         View_NoFlyList.setLayout(View_NoFlyListLayout);
         View_NoFlyListLayout.setHorizontalGroup(
             View_NoFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(View_NoFlyListLayout.createSequentialGroup()
-                .addGap(310, 310, 310)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(730, Short.MAX_VALUE))
+                .addComponent(Header3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 397, Short.MAX_VALUE))
         );
         View_NoFlyListLayout.setVerticalGroup(
             View_NoFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(View_NoFlyListLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel4)
-                .addContainerGap(1223, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, View_NoFlyListLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Header3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(396, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(View_NoFlyList, "View_NoFlyList");
@@ -652,7 +1035,7 @@ public class Admin_GUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Top_cardstack, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Top_cardstack.getAccessibleContext().setAccessibleName("Top_cardstack");
@@ -713,30 +1096,70 @@ public class Admin_GUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_NoFlyList_labelMouseClicked
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Add_flight;
     private javax.swing.JPanel Add_flight_highlight;
     private javax.swing.JLabel Add_flight_label;
     private javax.swing.JLabel Address_label;
+    private javax.swing.JLabel Address_label1;
     private javax.swing.JLabel CNIC_label;
+    private javax.swing.JLabel CNIC_label1;
     private javax.swing.JLabel Company_info_label;
     private javax.swing.JLabel Company_info_label1;
+    private javax.swing.JLabel Company_info_label2;
+    private javax.swing.JLabel Company_info_label3;
     private javax.swing.JPanel Company_panel;
     private javax.swing.JPanel Company_panel1;
+    private javax.swing.JPanel Company_panel2;
+    private javax.swing.JPanel Company_panel3;
     private javax.swing.JLabel Designation_label;
+    private javax.swing.JLabel Designation_label1;
     private javax.swing.JLabel FirstName_label;
+    private javax.swing.JLabel FirstName_label1;
     private javax.swing.JPanel Header;
     private javax.swing.JPanel Header1;
+    private javax.swing.JPanel Header2;
+    private javax.swing.JPanel Header3;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel Home_Highlight;
     private javax.swing.JLabel Home_label;
     private javax.swing.JLabel Home_lite;
     private javax.swing.JLabel Home_lite1;
+    private javax.swing.JLabel Home_lite2;
+    private javax.swing.JLabel Home_lite3;
     private javax.swing.JPanel Image_panel;
     private javax.swing.JPanel Info_panel;
+    private javax.swing.JPanel Info_panel1;
+    private javax.swing.JPanel Info_panel2;
+    private javax.swing.JPanel Info_panel3;
     private javax.swing.JPanel Landing_page;
     private javax.swing.JLabel LastName_label;
+    private javax.swing.JLabel LastName_label1;
     private javax.swing.JPanel Login_page;
     private javax.swing.JPanel Manage_flight_highlight;
     private javax.swing.JLabel Manage_flight_label;
@@ -747,12 +1170,17 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JTextField Password_field;
     private javax.swing.JLabel Password_label;
     private javax.swing.JLabel Salary_label;
+    private javax.swing.JLabel Salary_label1;
     private javax.swing.JLabel Seperator;
     private javax.swing.JLabel Seperator1;
+    private javax.swing.JLabel Seperator2;
+    private javax.swing.JLabel Seperator3;
     private javax.swing.JPanel Sigin_panel;
     private javax.swing.JLabel Signin_label;
     private javax.swing.JLabel Title;
     private javax.swing.JLabel Title1;
+    private javax.swing.JLabel Title2;
+    private javax.swing.JLabel Title3;
     private javax.swing.JPanel Top_cardstack;
     private javax.swing.JTextField Username_field;
     private javax.swing.JLabel Username_label;
@@ -760,7 +1188,16 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel Welcome_label;
     private javax.swing.JLabel image_label;
     private javax.swing.JPanel internal_cardstack;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
