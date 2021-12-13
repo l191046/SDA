@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashSet;
+import javax.swing.table.TableModel;
 
 public class JHome extends javax.swing.JFrame {
 
@@ -596,6 +597,11 @@ public class JHome extends javax.swing.JFrame {
         table_routes.setRowHeight(30);
         table_routes.setSelectionBackground(new java.awt.Color(92, 128, 188));
         table_routes.getTableHeader().setReorderingAllowed(false);
+        table_routes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_routesMouseClicked(evt);
+            }
+        });
         scroll_routes.setViewportView(table_routes);
         if (table_routes.getColumnModel().getColumnCount() > 0) {
             table_routes.getColumnModel().getColumn(0).setResizable(false);
@@ -1014,6 +1020,15 @@ public class JHome extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btn_checkHistoryMouseClicked
+
+    private void table_routesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_routesMouseClicked
+        int row = this.table_routes.getSelectedRow();
+        if (row != -1){
+            //open customer info form
+            JBooking booking = new JBooking();
+        }
+        
+    }//GEN-LAST:event_table_routesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
