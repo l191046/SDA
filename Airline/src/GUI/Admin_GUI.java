@@ -13,18 +13,31 @@ import java.util.HashSet;
 public class Admin_GUI extends javax.swing.JFrame {
     private CardLayout T_cardstack;
     private CardLayout inner_cardstack;
-    /**
-     * Creates new form Admin_GUI
-     */
+    private ArrayList<JPanel> highlights;
+    
     public Admin_GUI() {
         initComponents();
         setVisible(true);
         T_cardstack = (CardLayout) this.Top_cardstack.getLayout();
         inner_cardstack = (CardLayout) this.internal_cardstack.getLayout();
         
-        
+        highlights = new ArrayList<JPanel>();
+        highlights.add(this.highlight_home);
+        highlights.add(this.highlight_manageFlights);
+        highlights.add(this.highlight_addFlight);
+        highlights.add(this.highlight_noFlyList);
     }
     
+    private void setHighlights(String btn_name){
+       for(int i=0; i<highlights.size(); i++){
+           JPanel hl = highlights.get(i);
+           
+           if(hl.getName() == btn_name)
+                hl.setBackground(Color.decode("#FEB63E"));
+           else
+               hl.setBackground(Color.decode("#4D5061"));
+       }
+    }
    
 
     /**
@@ -41,37 +54,45 @@ public class Admin_GUI extends javax.swing.JFrame {
         Sigin_panel = new javax.swing.JPanel();
         Welcome_label = new javax.swing.JLabel();
         Username_field = new javax.swing.JTextField();
-        Password_field = new javax.swing.JTextField();
         Username_label = new javax.swing.JLabel();
         Password_label = new javax.swing.JLabel();
         Signin_label = new javax.swing.JLabel();
+        btn_back = new javax.swing.JLabel();
+        txtbox_password = new javax.swing.JPasswordField();
         Image_panel = new javax.swing.JPanel();
         image_label = new javax.swing.JLabel();
         Landing_page = new javax.swing.JPanel();
         Navbar = new javax.swing.JPanel();
-        Home_Highlight = new javax.swing.JPanel();
+        highlight_home = new javax.swing.JPanel();
+        highlight_manageFlights = new javax.swing.JPanel();
+        highlight_addFlight = new javax.swing.JPanel();
+        highlight_noFlyList = new javax.swing.JPanel();
+        btn_home = new javax.swing.JPanel();
         Home_label = new javax.swing.JLabel();
-        Manage_flight_highlight = new javax.swing.JPanel();
+        btn_manageFlights = new javax.swing.JPanel();
         Manage_flight_label = new javax.swing.JLabel();
-        Add_flight_highlight = new javax.swing.JPanel();
+        btn_addFlight = new javax.swing.JPanel();
         Add_flight_label = new javax.swing.JLabel();
+        btn_noFlyList = new javax.swing.JPanel();
         NoFlyList_label = new javax.swing.JLabel();
-        NoFlyList_highlight = new javax.swing.JPanel();
         internal_cardstack = new javax.swing.JPanel();
         Home = new javax.swing.JPanel();
-        Header = new javax.swing.JPanel();
-        Title = new javax.swing.JLabel();
-        Seperator = new javax.swing.JLabel();
-        Home_lite = new javax.swing.JLabel();
-        Company_panel = new javax.swing.JPanel();
-        Company_info_label = new javax.swing.JLabel();
-        Info_panel = new javax.swing.JPanel();
-        FirstName_label = new javax.swing.JLabel();
-        LastName_label = new javax.swing.JLabel();
-        CNIC_label = new javax.swing.JLabel();
-        Designation_label = new javax.swing.JLabel();
-        Address_label = new javax.swing.JLabel();
-        Salary_label = new javax.swing.JLabel();
+        panel_empInfoBackdrop = new javax.swing.JPanel();
+        lbl_employeeInfo = new javax.swing.JLabel();
+        panel_empInfo = new javax.swing.JPanel();
+        lbl_firstName = new javax.swing.JLabel();
+        txtbox_firstName = new javax.swing.JTextField();
+        lbl_lastName = new javax.swing.JLabel();
+        txtbox_lastName = new javax.swing.JTextField();
+        lbl_CNIC = new javax.swing.JLabel();
+        txtbox_CNIC = new javax.swing.JTextField();
+        lbl_address = new javax.swing.JLabel();
+        txtbox_address = new javax.swing.JTextField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 200), new java.awt.Dimension(2, 200), new java.awt.Dimension(32767, 200));
+        lbl_designation = new javax.swing.JLabel();
+        txtbox_designation = new javax.swing.JTextField();
+        lbl_salary = new javax.swing.JLabel();
+        txtbox_salary = new javax.swing.JTextField();
         Manage_flights = new javax.swing.JPanel();
         Header2 = new javax.swing.JPanel();
         Title2 = new javax.swing.JLabel();
@@ -119,76 +140,96 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         Top_cardstack.setLayout(new java.awt.CardLayout());
 
-        Sigin_panel.setBackground(new java.awt.Color(247, 127, 0));
+        Sigin_panel.setBackground(new java.awt.Color(254, 182, 62));
 
         Welcome_label.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
         Welcome_label.setForeground(new java.awt.Color(255, 255, 255));
         Welcome_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Welcome_label.setText("Welcome to XYZ Airlines");
+        Welcome_label.setText("Welcome to XYZ Airways");
 
+        Username_field.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        Username_field.setBorder(null);
         Username_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Username_fieldActionPerformed(evt);
             }
         });
 
-        Password_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Password_fieldActionPerformed(evt);
-            }
-        });
-
+        Username_label.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         Username_label.setForeground(new java.awt.Color(255, 255, 255));
         Username_label.setText("Username");
 
+        Password_label.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         Password_label.setForeground(new java.awt.Color(255, 255, 255));
         Password_label.setText("Password");
 
+        Signin_label.setBackground(new java.awt.Color(77, 80, 97));
         Signin_label.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
         Signin_label.setForeground(new java.awt.Color(255, 255, 255));
+        Signin_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Signin_label.setText("Sign in");
+        Signin_label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Signin_label.setOpaque(true);
         Signin_label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Signin_labelMouseClicked(evt);
             }
         });
 
+        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/arrow-91-24.png"))); // NOI18N
+        btn_back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_backMouseClicked(evt);
+            }
+        });
+
+        txtbox_password.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_password.setBorder(null);
+
         javax.swing.GroupLayout Sigin_panelLayout = new javax.swing.GroupLayout(Sigin_panel);
         Sigin_panel.setLayout(Sigin_panelLayout);
         Sigin_panelLayout.setHorizontalGroup(
             Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Sigin_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_back)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Sigin_panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Signin_label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
+            .addGroup(Sigin_panelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Welcome_label, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                     .addGroup(Sigin_panelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Welcome_label, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(Username_field)
-                                .addComponent(Password_field))
+                        .addGroup(Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Password_label, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Username_label)
-                            .addComponent(Password_label, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Sigin_panelLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(Signin_label)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                            .addComponent(Username_field)
+                            .addComponent(txtbox_password, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         Sigin_panelLayout.setVerticalGroup(
             Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Sigin_panelLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(62, 62, 62)
                 .addComponent(Welcome_label)
-                .addGap(81, 81, 81)
+                .addGap(54, 54, 54)
                 .addComponent(Username_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Username_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(Username_field, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Password_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Password_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(Signin_label)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtbox_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Signin_label, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_back)
+                .addContainerGap())
         );
 
         Image_panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -227,106 +268,190 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         Landing_page.setPreferredSize(new java.awt.Dimension(612, 408));
 
-        Navbar.setBackground(new java.awt.Color(240, 40, 40));
+        Navbar.setBackground(new java.awt.Color(48, 50, 61));
 
-        Home_Highlight.setBackground(new java.awt.Color(250, 250, 250));
+        highlight_home.setBackground(new java.awt.Color(254, 182, 62));
+        highlight_home.setName("highlight_home"); // NOI18N
 
-        javax.swing.GroupLayout Home_HighlightLayout = new javax.swing.GroupLayout(Home_Highlight);
-        Home_Highlight.setLayout(Home_HighlightLayout);
-        Home_HighlightLayout.setHorizontalGroup(
-            Home_HighlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout highlight_homeLayout = new javax.swing.GroupLayout(highlight_home);
+        highlight_home.setLayout(highlight_homeLayout);
+        highlight_homeLayout.setHorizontalGroup(
+            highlight_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 8, Short.MAX_VALUE)
         );
-        Home_HighlightLayout.setVerticalGroup(
-            Home_HighlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        highlight_homeLayout.setVerticalGroup(
+            highlight_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        Home_label.setBackground(new java.awt.Color(247, 127, 0));
-        Home_label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        highlight_manageFlights.setBackground(new java.awt.Color(77, 80, 97));
+        highlight_manageFlights.setName("highlight_manageFlights"); // NOI18N
+
+        javax.swing.GroupLayout highlight_manageFlightsLayout = new javax.swing.GroupLayout(highlight_manageFlights);
+        highlight_manageFlights.setLayout(highlight_manageFlightsLayout);
+        highlight_manageFlightsLayout.setHorizontalGroup(
+            highlight_manageFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        highlight_manageFlightsLayout.setVerticalGroup(
+            highlight_manageFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        highlight_addFlight.setBackground(new java.awt.Color(77, 80, 97));
+        highlight_addFlight.setName("highlight_addFlight"); // NOI18N
+
+        javax.swing.GroupLayout highlight_addFlightLayout = new javax.swing.GroupLayout(highlight_addFlight);
+        highlight_addFlight.setLayout(highlight_addFlightLayout);
+        highlight_addFlightLayout.setHorizontalGroup(
+            highlight_addFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        highlight_addFlightLayout.setVerticalGroup(
+            highlight_addFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        highlight_noFlyList.setBackground(new java.awt.Color(77, 80, 97));
+        highlight_noFlyList.setName("highlight_noFlyList"); // NOI18N
+
+        javax.swing.GroupLayout highlight_noFlyListLayout = new javax.swing.GroupLayout(highlight_noFlyList);
+        highlight_noFlyList.setLayout(highlight_noFlyListLayout);
+        highlight_noFlyListLayout.setHorizontalGroup(
+            highlight_noFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        highlight_noFlyListLayout.setVerticalGroup(
+            highlight_noFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        btn_home.setBackground(new java.awt.Color(77, 80, 97));
+        btn_home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_homeMouseClicked(evt);
+            }
+        });
+
+        Home_label.setBackground(new java.awt.Color(254, 182, 62));
+        Home_label.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         Home_label.setForeground(new java.awt.Color(255, 255, 255));
-        Home_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Home_label.setText("Home");
-        Home_label.setOpaque(true);
-        Home_label.addMouseListener(new java.awt.event.MouseAdapter() {
+        Home_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/home-2-16.png"))); // NOI18N
+        Home_label.setText("HOME");
+        Home_label.setIconTextGap(5);
+
+        javax.swing.GroupLayout btn_homeLayout = new javax.swing.GroupLayout(btn_home);
+        btn_home.setLayout(btn_homeLayout);
+        btn_homeLayout.setHorizontalGroup(
+            btn_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_homeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Home_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btn_homeLayout.setVerticalGroup(
+            btn_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_homeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Home_label)
+                .addContainerGap())
+        );
+
+        btn_manageFlights.setBackground(new java.awt.Color(77, 80, 97));
+        btn_manageFlights.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_manageFlights.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Home_labelMouseClicked(evt);
+                btn_manageFlightsMouseClicked(evt);
             }
         });
 
-        Manage_flight_highlight.setBackground(new java.awt.Color(250, 250, 250));
-
-        javax.swing.GroupLayout Manage_flight_highlightLayout = new javax.swing.GroupLayout(Manage_flight_highlight);
-        Manage_flight_highlight.setLayout(Manage_flight_highlightLayout);
-        Manage_flight_highlightLayout.setHorizontalGroup(
-            Manage_flight_highlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 8, Short.MAX_VALUE)
-        );
-        Manage_flight_highlightLayout.setVerticalGroup(
-            Manage_flight_highlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-
-        Manage_flight_label.setBackground(new java.awt.Color(247, 127, 0));
-        Manage_flight_label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Manage_flight_label.setBackground(new java.awt.Color(254, 182, 62));
+        Manage_flight_label.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         Manage_flight_label.setForeground(new java.awt.Color(255, 255, 255));
-        Manage_flight_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Manage_flight_label.setText("Manage Flights");
-        Manage_flight_label.setOpaque(true);
-        Manage_flight_label.addMouseListener(new java.awt.event.MouseAdapter() {
+        Manage_flight_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/airplane-5-16.png"))); // NOI18N
+        Manage_flight_label.setText("MANAGE FLIGHTS");
+        Manage_flight_label.setIconTextGap(5);
+
+        javax.swing.GroupLayout btn_manageFlightsLayout = new javax.swing.GroupLayout(btn_manageFlights);
+        btn_manageFlights.setLayout(btn_manageFlightsLayout);
+        btn_manageFlightsLayout.setHorizontalGroup(
+            btn_manageFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_manageFlightsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Manage_flight_label)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        btn_manageFlightsLayout.setVerticalGroup(
+            btn_manageFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_manageFlightsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Manage_flight_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btn_addFlight.setBackground(new java.awt.Color(77, 80, 97));
+        btn_addFlight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addFlight.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Manage_flight_labelMouseClicked(evt);
+                btn_addFlightMouseClicked(evt);
             }
         });
 
-        Add_flight_highlight.setBackground(new java.awt.Color(250, 250, 250));
-
-        javax.swing.GroupLayout Add_flight_highlightLayout = new javax.swing.GroupLayout(Add_flight_highlight);
-        Add_flight_highlight.setLayout(Add_flight_highlightLayout);
-        Add_flight_highlightLayout.setHorizontalGroup(
-            Add_flight_highlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 8, Short.MAX_VALUE)
-        );
-        Add_flight_highlightLayout.setVerticalGroup(
-            Add_flight_highlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-
-        Add_flight_label.setBackground(new java.awt.Color(247, 127, 0));
-        Add_flight_label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Add_flight_label.setBackground(new java.awt.Color(254, 182, 62));
+        Add_flight_label.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         Add_flight_label.setForeground(new java.awt.Color(255, 255, 255));
-        Add_flight_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Add_flight_label.setText("Add Flight");
-        Add_flight_label.setOpaque(true);
-        Add_flight_label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Add_flight_labelMouseClicked(evt);
-            }
-        });
+        Add_flight_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/plus-4-16.png"))); // NOI18N
+        Add_flight_label.setText("ADD FLIGHT");
+        Add_flight_label.setIconTextGap(5);
 
-        NoFlyList_label.setBackground(new java.awt.Color(247, 127, 0));
-        NoFlyList_label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        NoFlyList_label.setForeground(new java.awt.Color(255, 255, 255));
-        NoFlyList_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NoFlyList_label.setText("Manage No-fly list");
-        NoFlyList_label.setOpaque(true);
-        NoFlyList_label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                NoFlyList_labelMouseClicked(evt);
-            }
-        });
-
-        NoFlyList_highlight.setBackground(new java.awt.Color(250, 250, 250));
-
-        javax.swing.GroupLayout NoFlyList_highlightLayout = new javax.swing.GroupLayout(NoFlyList_highlight);
-        NoFlyList_highlight.setLayout(NoFlyList_highlightLayout);
-        NoFlyList_highlightLayout.setHorizontalGroup(
-            NoFlyList_highlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 8, Short.MAX_VALUE)
+        javax.swing.GroupLayout btn_addFlightLayout = new javax.swing.GroupLayout(btn_addFlight);
+        btn_addFlight.setLayout(btn_addFlightLayout);
+        btn_addFlightLayout.setHorizontalGroup(
+            btn_addFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_addFlightLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Add_flight_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        NoFlyList_highlightLayout.setVerticalGroup(
-            NoFlyList_highlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
+        btn_addFlightLayout.setVerticalGroup(
+            btn_addFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_addFlightLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Add_flight_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btn_noFlyList.setBackground(new java.awt.Color(77, 80, 97));
+        btn_noFlyList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_noFlyList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_noFlyListMouseClicked(evt);
+            }
+        });
+
+        NoFlyList_label.setBackground(new java.awt.Color(254, 182, 62));
+        NoFlyList_label.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        NoFlyList_label.setForeground(new java.awt.Color(255, 255, 255));
+        NoFlyList_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/remove-user-16.png"))); // NOI18N
+        NoFlyList_label.setText("MANAGE NO-FLY LIST");
+        NoFlyList_label.setIconTextGap(5);
+
+        javax.swing.GroupLayout btn_noFlyListLayout = new javax.swing.GroupLayout(btn_noFlyList);
+        btn_noFlyList.setLayout(btn_noFlyListLayout);
+        btn_noFlyListLayout.setHorizontalGroup(
+            btn_noFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_noFlyListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(NoFlyList_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btn_noFlyListLayout.setVerticalGroup(
+            btn_noFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_noFlyListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(NoFlyList_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout NavbarLayout = new javax.swing.GroupLayout(Navbar);
@@ -334,169 +459,199 @@ public class Admin_GUI extends javax.swing.JFrame {
         NavbarLayout.setHorizontalGroup(
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Manage_flight_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Add_flight_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NoFlyList_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Home_Highlight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Add_flight_label, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(Manage_flight_label, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(NoFlyList_label, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(Home_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(highlight_manageFlights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(highlight_addFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(highlight_noFlyList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(highlight_home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_manageFlights, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_addFlight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_noFlyList, javax.swing.GroupLayout.PREFERRED_SIZE, 189, Short.MAX_VALUE))
+                .addContainerGap())
         );
         NavbarLayout.setVerticalGroup(
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Home_Highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Home_label, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Manage_flight_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Manage_flight_label, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Add_flight_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Add_flight_label, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(NoFlyList_highlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NoFlyList_label, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(highlight_home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(highlight_manageFlights, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_manageFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(highlight_addFlight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_addFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(highlight_noFlyList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_noFlyList, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Home_Highlight.getAccessibleContext().setAccessibleName("Home_Highlight");
+        highlight_home.getAccessibleContext().setAccessibleName("highlight_home");
+        highlight_manageFlights.getAccessibleContext().setAccessibleName("highlight_manageFlights");
+        highlight_addFlight.getAccessibleContext().setAccessibleName("highlight_addFlight");
+        highlight_noFlyList.getAccessibleContext().setAccessibleName("highlight_noFlyList");
 
         internal_cardstack.setLayout(new java.awt.CardLayout());
 
-        Header.setBackground(new java.awt.Color(255, 102, 102));
-        Header.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Home.setBackground(new java.awt.Color(205, 209, 196));
 
-        Title.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
-        Title.setForeground(new java.awt.Color(51, 0, 51));
-        Title.setText(" Admin Profile ");
-        Title.setMaximumSize(new java.awt.Dimension(150, 30));
+        panel_empInfoBackdrop.setBackground(new java.awt.Color(254, 182, 62));
 
-        Seperator.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Seperator.setForeground(new java.awt.Color(102, 102, 102));
-        Seperator.setText("|");
+        lbl_employeeInfo.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        lbl_employeeInfo.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_employeeInfo.setText("EMPLOYEE INFORMATION");
 
-        Home_lite.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        Home_lite.setForeground(new java.awt.Color(102, 102, 102));
-        Home_lite.setText("Home");
-
-        Company_panel.setBackground(new java.awt.Color(255, 204, 102));
-
-        Company_info_label.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
-        Company_info_label.setForeground(new java.awt.Color(255, 255, 255));
-        Company_info_label.setText("Company Information");
-
-        javax.swing.GroupLayout Company_panelLayout = new javax.swing.GroupLayout(Company_panel);
-        Company_panel.setLayout(Company_panelLayout);
-        Company_panelLayout.setHorizontalGroup(
-            Company_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Company_panelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(Company_info_label, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panel_empInfoBackdropLayout = new javax.swing.GroupLayout(panel_empInfoBackdrop);
+        panel_empInfoBackdrop.setLayout(panel_empInfoBackdropLayout);
+        panel_empInfoBackdropLayout.setHorizontalGroup(
+            panel_empInfoBackdropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_empInfoBackdropLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_employeeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        Company_panelLayout.setVerticalGroup(
-            Company_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Company_panelLayout.createSequentialGroup()
+        panel_empInfoBackdropLayout.setVerticalGroup(
+            panel_empInfoBackdropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_empInfoBackdropLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_employeeInfo)
+                .addContainerGap())
+        );
+
+        panel_empInfo.setBackground(new java.awt.Color(205, 209, 196));
+        panel_empInfo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 5, true));
+
+        lbl_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_firstName.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_firstName.setText("First Name:");
+
+        txtbox_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_firstName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_firstName.setOpaque(false);
+
+        lbl_lastName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_lastName.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_lastName.setText("Last Name:");
+
+        txtbox_lastName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_lastName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_lastName.setOpaque(false);
+
+        lbl_CNIC.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_CNIC.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_CNIC.setText("CNIC:");
+
+        txtbox_CNIC.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_CNIC.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_CNIC.setOpaque(false);
+
+        lbl_address.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_address.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_address.setText("Address:");
+
+        txtbox_address.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_address.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_address.setOpaque(false);
+
+        filler1.setBackground(new java.awt.Color(254, 182, 62));
+        filler1.setOpaque(true);
+
+        lbl_designation.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_designation.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_designation.setText("Designation:");
+
+        txtbox_designation.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_designation.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_designation.setFocusable(false);
+        txtbox_designation.setOpaque(false);
+
+        lbl_salary.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_salary.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_salary.setText("Salary:");
+
+        txtbox_salary.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_salary.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_salary.setFocusable(false);
+        txtbox_salary.setOpaque(false);
+
+        javax.swing.GroupLayout panel_empInfoLayout = new javax.swing.GroupLayout(panel_empInfo);
+        panel_empInfo.setLayout(panel_empInfoLayout);
+        panel_empInfoLayout.setHorizontalGroup(
+            panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_empInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Company_info_label)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-
-        Info_panel.setBackground(new java.awt.Color(250, 250, 250));
-
-        FirstName_label.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        FirstName_label.setText("First Name:");
-
-        LastName_label.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        LastName_label.setText("Last Name:");
-
-        CNIC_label.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        CNIC_label.setText("CNIC:");
-
-        Designation_label.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        Designation_label.setText("Designation:");
-
-        Address_label.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        Address_label.setText("Address:");
-
-        Salary_label.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        Salary_label.setText("Salary:");
-
-        javax.swing.GroupLayout Info_panelLayout = new javax.swing.GroupLayout(Info_panel);
-        Info_panel.setLayout(Info_panelLayout);
-        Info_panelLayout.setHorizontalGroup(
-            Info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Info_panelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(Info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FirstName_label, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LastName_label, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Designation_label, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(157, 157, 157)
-                .addGroup(Info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Address_label, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CNIC_label, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Salary_label, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(244, Short.MAX_VALUE))
-        );
-        Info_panelLayout.setVerticalGroup(
-            Info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Info_panelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(Info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FirstName_label)
-                    .addComponent(CNIC_label))
-                .addGap(56, 56, 56)
-                .addGroup(Info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LastName_label)
-                    .addComponent(Address_label))
-                .addGap(56, 56, 56)
-                .addGroup(Info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Salary_label)
-                    .addComponent(Designation_label))
-                .addContainerGap(316, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
-        Header.setLayout(HeaderLayout);
-        HeaderLayout.setHorizontalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderLayout.createSequentialGroup()
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Info_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HeaderLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addComponent(lbl_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Seperator)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Home_lite, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Company_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 398, Short.MAX_VALUE))
+                        .addComponent(txtbox_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addComponent(lbl_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbox_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addComponent(lbl_CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbox_CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addComponent(lbl_address, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbox_address, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_designation, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbox_designation, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(lbl_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbox_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
-        HeaderLayout.setVerticalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Seperator)
-                    .addComponent(Home_lite))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Company_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(Info_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(671, Short.MAX_VALUE))
+        panel_empInfoLayout.setVerticalGroup(
+            panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_empInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_designation)
+                            .addComponent(txtbox_designation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_salary)
+                            .addComponent(txtbox_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panel_empInfoLayout.createSequentialGroup()
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_firstName)
+                            .addComponent(txtbox_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_lastName)
+                            .addComponent(txtbox_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_CNIC)
+                            .addComponent(txtbox_CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_address)
+                            .addComponent(txtbox_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
@@ -504,14 +659,20 @@ public class Admin_GUI extends javax.swing.JFrame {
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 202, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_empInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_empInfoBackdrop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panel_empInfoBackdrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel_empInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         internal_cardstack.add(Home, "Home");
@@ -641,7 +802,7 @@ public class Admin_GUI extends javax.swing.JFrame {
             Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Manage_flightsLayout.createSequentialGroup()
                 .addComponent(Header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 202, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         Manage_flightsLayout.setVerticalGroup(
             Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -846,7 +1007,7 @@ public class Admin_GUI extends javax.swing.JFrame {
             Add_flightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Add_flightLayout.createSequentialGroup()
                 .addComponent(Header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(Add_flight, "Add_flight");
@@ -989,14 +1150,14 @@ public class Admin_GUI extends javax.swing.JFrame {
             View_NoFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(View_NoFlyListLayout.createSequentialGroup()
                 .addComponent(Header3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 397, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         View_NoFlyListLayout.setVerticalGroup(
             View_NoFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, View_NoFlyListLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Header3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         internal_cardstack.add(View_NoFlyList, "View_NoFlyList");
@@ -1007,15 +1168,13 @@ public class Admin_GUI extends javax.swing.JFrame {
             Landing_pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Landing_pageLayout.createSequentialGroup()
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(internal_cardstack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(internal_cardstack, javax.swing.GroupLayout.PREFERRED_SIZE, 685, Short.MAX_VALUE))
         );
         Landing_pageLayout.setVerticalGroup(
             Landing_pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(internal_cardstack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(Landing_pageLayout.createSequentialGroup()
-                .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(internal_cardstack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 407, Short.MAX_VALUE)
+            .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Navbar.getAccessibleContext().setAccessibleName("Navbar");
@@ -1035,7 +1194,7 @@ public class Admin_GUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Top_cardstack, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         Top_cardstack.getAccessibleContext().setAccessibleName("Top_cardstack");
@@ -1047,54 +1206,9 @@ public class Admin_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Username_fieldActionPerformed
 
-    private void Password_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Password_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Password_fieldActionPerformed
-
     private void Signin_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Signin_labelMouseClicked
         T_cardstack.show(this.Top_cardstack, "Landing_page");
     }//GEN-LAST:event_Signin_labelMouseClicked
-
-    private void Home_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Home_labelMouseClicked
-
-        this.Home_Highlight.setBackground(Color.BLACK);
-        this.Manage_flight_highlight.setBackground(Color.WHITE);
-        this.Add_flight_highlight.setBackground(Color.WHITE);
-        this.NoFlyList_highlight.setBackground(Color.WHITE);
-        inner_cardstack.show(this.internal_cardstack, "Home");
-        
-        
-    }//GEN-LAST:event_Home_labelMouseClicked
-
-    private void Manage_flight_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Manage_flight_labelMouseClicked
-
-        this.Home_Highlight.setBackground(Color.WHITE);
-        this.Manage_flight_highlight.setBackground(Color.BLACK);
-        this.Add_flight_highlight.setBackground(Color.WHITE);
-        this.NoFlyList_highlight.setBackground(Color.WHITE);
-        inner_cardstack.show(this.internal_cardstack, "Manage_flights");
-        
-    }//GEN-LAST:event_Manage_flight_labelMouseClicked
-
-    private void Add_flight_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Add_flight_labelMouseClicked
-
-        this.Home_Highlight.setBackground(Color.WHITE);
-        this.Manage_flight_highlight.setBackground(Color.WHITE);
-        this.Add_flight_highlight.setBackground(Color.BLACK);
-        this.NoFlyList_highlight.setBackground(Color.WHITE);
-        inner_cardstack.show(this.internal_cardstack, "Add_flight");
-        
-    }//GEN-LAST:event_Add_flight_labelMouseClicked
-
-    private void NoFlyList_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoFlyList_labelMouseClicked
- 
-        this.Home_Highlight.setBackground(Color.WHITE);
-        this.Manage_flight_highlight.setBackground(Color.WHITE);
-        this.Add_flight_highlight.setBackground(Color.WHITE);
-        this.NoFlyList_highlight.setBackground(Color.BLACK);
-        inner_cardstack.show(this.internal_cardstack, "View_NoFlyList");
-        
-    }//GEN-LAST:event_NoFlyList_labelMouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -1120,64 +1234,71 @@ public class Admin_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
+        this.dispose();
+        JHome home = new JHome();
+    }//GEN-LAST:event_btn_backMouseClicked
+
+    private void btn_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseClicked
+        this.inner_cardstack.show(this.internal_cardstack, "Home");
+        this.setHighlights("highlight_home");
+    }//GEN-LAST:event_btn_homeMouseClicked
+
+    private void btn_manageFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manageFlightsMouseClicked
+        this.inner_cardstack.show(this.internal_cardstack, "Manage_flights");
+        this.setHighlights("highlight_manageFlights");
+    }//GEN-LAST:event_btn_manageFlightsMouseClicked
+
+    private void btn_addFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addFlightMouseClicked
+        this.inner_cardstack.show(this.internal_cardstack, "Add_flight");
+        this.setHighlights("highlight_addFlight");
+    }//GEN-LAST:event_btn_addFlightMouseClicked
+
+    private void btn_noFlyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_noFlyListMouseClicked
+        this.inner_cardstack.show(this.internal_cardstack, "View_NoFlyList");
+        this.setHighlights("highlight_noFlyList");
+    }//GEN-LAST:event_btn_noFlyListMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Add_flight;
-    private javax.swing.JPanel Add_flight_highlight;
     private javax.swing.JLabel Add_flight_label;
-    private javax.swing.JLabel Address_label;
     private javax.swing.JLabel Address_label1;
-    private javax.swing.JLabel CNIC_label;
     private javax.swing.JLabel CNIC_label1;
-    private javax.swing.JLabel Company_info_label;
     private javax.swing.JLabel Company_info_label1;
     private javax.swing.JLabel Company_info_label2;
     private javax.swing.JLabel Company_info_label3;
-    private javax.swing.JPanel Company_panel;
     private javax.swing.JPanel Company_panel1;
     private javax.swing.JPanel Company_panel2;
     private javax.swing.JPanel Company_panel3;
-    private javax.swing.JLabel Designation_label;
     private javax.swing.JLabel Designation_label1;
-    private javax.swing.JLabel FirstName_label;
     private javax.swing.JLabel FirstName_label1;
-    private javax.swing.JPanel Header;
     private javax.swing.JPanel Header1;
     private javax.swing.JPanel Header2;
     private javax.swing.JPanel Header3;
     private javax.swing.JPanel Home;
-    private javax.swing.JPanel Home_Highlight;
     private javax.swing.JLabel Home_label;
-    private javax.swing.JLabel Home_lite;
     private javax.swing.JLabel Home_lite1;
     private javax.swing.JLabel Home_lite2;
     private javax.swing.JLabel Home_lite3;
     private javax.swing.JPanel Image_panel;
-    private javax.swing.JPanel Info_panel;
     private javax.swing.JPanel Info_panel1;
     private javax.swing.JPanel Info_panel2;
     private javax.swing.JPanel Info_panel3;
     private javax.swing.JPanel Landing_page;
-    private javax.swing.JLabel LastName_label;
     private javax.swing.JLabel LastName_label1;
     private javax.swing.JPanel Login_page;
-    private javax.swing.JPanel Manage_flight_highlight;
     private javax.swing.JLabel Manage_flight_label;
     private javax.swing.JPanel Manage_flights;
     private javax.swing.JPanel Navbar;
-    private javax.swing.JPanel NoFlyList_highlight;
     private javax.swing.JLabel NoFlyList_label;
-    private javax.swing.JTextField Password_field;
     private javax.swing.JLabel Password_label;
-    private javax.swing.JLabel Salary_label;
     private javax.swing.JLabel Salary_label1;
-    private javax.swing.JLabel Seperator;
     private javax.swing.JLabel Seperator1;
     private javax.swing.JLabel Seperator2;
     private javax.swing.JLabel Seperator3;
     private javax.swing.JPanel Sigin_panel;
     private javax.swing.JLabel Signin_label;
-    private javax.swing.JLabel Title;
     private javax.swing.JLabel Title1;
     private javax.swing.JLabel Title2;
     private javax.swing.JLabel Title3;
@@ -1186,6 +1307,16 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel Username_label;
     private javax.swing.JPanel View_NoFlyList;
     private javax.swing.JLabel Welcome_label;
+    private javax.swing.JPanel btn_addFlight;
+    private javax.swing.JLabel btn_back;
+    private javax.swing.JPanel btn_home;
+    private javax.swing.JPanel btn_manageFlights;
+    private javax.swing.JPanel btn_noFlyList;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JPanel highlight_addFlight;
+    private javax.swing.JPanel highlight_home;
+    private javax.swing.JPanel highlight_manageFlights;
+    private javax.swing.JPanel highlight_noFlyList;
     private javax.swing.JLabel image_label;
     private javax.swing.JPanel internal_cardstack;
     private javax.swing.JButton jButton1;
@@ -1199,5 +1330,21 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel lbl_CNIC;
+    private javax.swing.JLabel lbl_address;
+    private javax.swing.JLabel lbl_designation;
+    private javax.swing.JLabel lbl_employeeInfo;
+    private javax.swing.JLabel lbl_firstName;
+    private javax.swing.JLabel lbl_lastName;
+    private javax.swing.JLabel lbl_salary;
+    private javax.swing.JPanel panel_empInfo;
+    private javax.swing.JPanel panel_empInfoBackdrop;
+    private javax.swing.JTextField txtbox_CNIC;
+    private javax.swing.JTextField txtbox_address;
+    private javax.swing.JTextField txtbox_designation;
+    private javax.swing.JTextField txtbox_firstName;
+    private javax.swing.JTextField txtbox_lastName;
+    private javax.swing.JPasswordField txtbox_password;
+    private javax.swing.JTextField txtbox_salary;
     // End of variables declaration//GEN-END:variables
 }
