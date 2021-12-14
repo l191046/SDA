@@ -690,7 +690,6 @@ public class JHome extends javax.swing.JFrame {
         lbl_enterFlightCode.setForeground(new java.awt.Color(255, 255, 255));
         lbl_enterFlightCode.setText("ENTER FLIGHT CODE:");
 
-        txtbox_flightCode.setBackground(new java.awt.Color(205, 209, 196));
         txtbox_flightCode.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
         txtbox_flightCode.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtbox_flightCode.setToolTipText("Enter Flight code");
@@ -834,7 +833,6 @@ public class JHome extends javax.swing.JFrame {
         lbl_enterCNIC.setForeground(new java.awt.Color(255, 255, 255));
         lbl_enterCNIC.setText("ENTER CNIC:");
 
-        txtbox_cnic.setBackground(new java.awt.Color(205, 209, 196));
         txtbox_cnic.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
         txtbox_cnic.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtbox_cnic.setToolTipText("Enter Flight code");
