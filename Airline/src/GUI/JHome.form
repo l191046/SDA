@@ -1170,9 +1170,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtbox_flightCode">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="c4" green="d1" red="cd" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Microsoft JhengHei UI Light" size="18" style="0"/>
                     </Property>
@@ -1434,9 +1431,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtbox_cnic">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="c4" green="d1" red="cd" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Microsoft JhengHei UI Light" size="18" style="0"/>
                     </Property>
