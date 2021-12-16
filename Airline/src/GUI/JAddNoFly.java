@@ -3,10 +3,10 @@ package GUI;
 import java.awt.CardLayout;
 
 
-public class JBooking extends javax.swing.JFrame {
+public class JAddNoFly extends javax.swing.JFrame {
     private CardLayout cards;
     
-    public JBooking() {
+    public JAddNoFly() {
         initComponents();
         this.setVisible(true);
     }
@@ -30,10 +30,6 @@ public class JBooking extends javax.swing.JFrame {
         lbl_cnic = new javax.swing.JLabel();
         panel_cnicField = new javax.swing.JPanel();
         txtbox_cnic = new javax.swing.JTextField();
-        panel_address = new javax.swing.JPanel();
-        lbl_address = new javax.swing.JLabel();
-        panel_addressField = new javax.swing.JPanel();
-        txtbox_address = new javax.swing.JTextField();
         panel_contact = new javax.swing.JPanel();
         lbl_contact = new javax.swing.JLabel();
         panel_contactField = new javax.swing.JPanel();
@@ -48,11 +44,11 @@ public class JBooking extends javax.swing.JFrame {
         cardstack.setBackground(new java.awt.Color(205, 209, 196));
         cardstack.setLayout(new java.awt.CardLayout());
 
-        backdrop1.setBackground(new java.awt.Color(48, 50, 61));
+        backdrop1.setBackground(new java.awt.Color(254, 182, 62));
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("BOOKING | CUSTOMER DETAILS");
+        jLabel1.setText("ADD TO NO FLY LIST");
 
         javax.swing.GroupLayout backdrop1Layout = new javax.swing.GroupLayout(backdrop1);
         backdrop1.setLayout(backdrop1Layout);
@@ -182,43 +178,6 @@ public class JBooking extends javax.swing.JFrame {
             .addComponent(txtbox_cnic)
         );
 
-        panel_address.setBackground(new java.awt.Color(77, 80, 97));
-
-        lbl_address.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
-        lbl_address.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_address.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lbl_address.setText("Address");
-
-        javax.swing.GroupLayout panel_addressLayout = new javax.swing.GroupLayout(panel_address);
-        panel_address.setLayout(panel_addressLayout);
-        panel_addressLayout.setHorizontalGroup(
-            panel_addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_addressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_address, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panel_addressLayout.setVerticalGroup(
-            panel_addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_addressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_address)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        txtbox_address.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-
-        javax.swing.GroupLayout panel_addressFieldLayout = new javax.swing.GroupLayout(panel_addressField);
-        panel_addressField.setLayout(panel_addressFieldLayout);
-        panel_addressFieldLayout.setHorizontalGroup(
-            panel_addressFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtbox_address)
-        );
-        panel_addressFieldLayout.setVerticalGroup(
-            panel_addressFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtbox_address)
-        );
-
         panel_contact.setBackground(new java.awt.Color(77, 80, 97));
 
         lbl_contact.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
@@ -232,8 +191,8 @@ public class JBooking extends javax.swing.JFrame {
             panel_contactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_contactLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_contact)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbl_contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panel_contactLayout.setVerticalGroup(
             panel_contactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +208,7 @@ public class JBooking extends javax.swing.JFrame {
         panel_contactField.setLayout(panel_contactFieldLayout);
         panel_contactFieldLayout.setHorizontalGroup(
             panel_contactFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtbox_contact, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(txtbox_contact)
         );
         panel_contactFieldLayout.setVerticalGroup(
             panel_contactFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,10 +233,10 @@ public class JBooking extends javax.swing.JFrame {
         btn_next.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         btn_next.setForeground(new java.awt.Color(255, 255, 255));
         btn_next.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/arrow-27-24.png"))); // NOI18N
-        btn_next.setText("NEXT");
+        btn_next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/plus-4-24.png"))); // NOI18N
+        btn_next.setText("ADD");
         btn_next.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_next.setIconTextGap(-70);
+        btn_next.setIconTextGap(-60);
         btn_next.setOpaque(true);
         btn_next.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -301,14 +260,12 @@ public class JBooking extends javax.swing.JFrame {
                         .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(panel_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panel_address, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_cnic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_lastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panel_lastNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_cnicField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panel_addressField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_contactField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_firstNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -331,13 +288,9 @@ public class JBooking extends javax.swing.JFrame {
                     .addComponent(panel_cnicField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel_address, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_addressField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel_contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_contactField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_next, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_cancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -354,7 +307,7 @@ public class JBooking extends javax.swing.JFrame {
         );
         card_seatSelectionLayout.setVerticalGroup(
             card_seatSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
 
         cardstack.add(card_seatSelection, "card3");
@@ -379,7 +332,6 @@ public class JBooking extends javax.swing.JFrame {
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
         this.dispose();
-        JSeatSelect seats = new JSeatSelect();
     }//GEN-LAST:event_btn_nextMouseClicked
 
 
@@ -391,13 +343,10 @@ public class JBooking extends javax.swing.JFrame {
     private javax.swing.JPanel card_seatSelection;
     private javax.swing.JPanel cardstack;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lbl_address;
     private javax.swing.JLabel lbl_cnic;
     private javax.swing.JLabel lbl_contact;
     private javax.swing.JLabel lbl_firstName;
     private javax.swing.JLabel lbl_lastName;
-    private javax.swing.JPanel panel_address;
-    private javax.swing.JPanel panel_addressField;
     private javax.swing.JPanel panel_cnic;
     private javax.swing.JPanel panel_cnicField;
     private javax.swing.JPanel panel_contact;
@@ -406,7 +355,6 @@ public class JBooking extends javax.swing.JFrame {
     private javax.swing.JPanel panel_firstNameField;
     private javax.swing.JPanel panel_lastName;
     private javax.swing.JPanel panel_lastNameField;
-    private javax.swing.JTextField txtbox_address;
     private javax.swing.JTextField txtbox_cnic;
     private javax.swing.JTextField txtbox_contact;
     private javax.swing.JTextField txtbox_firstName;

@@ -101,6 +101,8 @@ public class Admin_GUI extends javax.swing.JFrame {
         Company_info_label2 = new javax.swing.JLabel();
         scroll_flights = new javax.swing.JScrollPane();
         table_flights = new javax.swing.JTable();
+        btn_removeFlight = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         Add_flight = new javax.swing.JPanel();
         Company_panel1 = new javax.swing.JPanel();
         Company_info_label1 = new javax.swing.JLabel();
@@ -125,8 +127,10 @@ public class Admin_GUI extends javax.swing.JFrame {
         Company_info_label3 = new javax.swing.JLabel();
         scroll_customer = new javax.swing.JScrollPane();
         table_customers = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        btn_addToNoFly = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        btn_removeNoFly = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -776,6 +780,11 @@ public class Admin_GUI extends javax.swing.JFrame {
         });
         table_flights.setIntercellSpacing(new java.awt.Dimension(10, 10));
         table_flights.setRowHeight(30);
+        table_flights.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_flightsMouseClicked(evt);
+            }
+        });
         scroll_flights.setViewportView(table_flights);
         if (table_flights.getColumnModel().getColumnCount() > 0) {
             table_flights.getColumnModel().getColumn(0).setResizable(false);
@@ -784,6 +793,39 @@ public class Admin_GUI extends javax.swing.JFrame {
             table_flights.getColumnModel().getColumn(3).setResizable(false);
             table_flights.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        btn_removeFlight.setBackground(new java.awt.Color(77, 80, 97));
+        btn_removeFlight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_removeFlight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_removeFlightMouseClicked(evt);
+            }
+        });
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/minus-4-16.png"))); // NOI18N
+        jLabel5.setText("REMOVE");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.setIconTextGap(-80);
+
+        javax.swing.GroupLayout btn_removeFlightLayout = new javax.swing.GroupLayout(btn_removeFlight);
+        btn_removeFlight.setLayout(btn_removeFlightLayout);
+        btn_removeFlightLayout.setHorizontalGroup(
+            btn_removeFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_removeFlightLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel5)
+                .addGap(5, 5, 5))
+        );
+        btn_removeFlightLayout.setVerticalGroup(
+            btn_removeFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_removeFlightLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel5)
+                .addGap(5, 5, 5))
+        );
 
         javax.swing.GroupLayout Manage_flightsLayout = new javax.swing.GroupLayout(Manage_flights);
         Manage_flights.setLayout(Manage_flightsLayout);
@@ -795,6 +837,10 @@ public class Admin_GUI extends javax.swing.JFrame {
                     .addComponent(Company_panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scroll_flights, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Manage_flightsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_removeFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         Manage_flightsLayout.setVerticalGroup(
             Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -802,7 +848,9 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Company_panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll_flights, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addComponent(scroll_flights, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_removeFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1062,32 +1110,76 @@ public class Admin_GUI extends javax.swing.JFrame {
         });
         table_customers.setIntercellSpacing(new java.awt.Dimension(10, 10));
         table_customers.setRowHeight(30);
+        table_customers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_customersMouseClicked(evt);
+            }
+        });
         scroll_customer.setViewportView(table_customers);
 
-        jPanel1.setBackground(new java.awt.Color(77, 80, 97));
+        btn_addToNoFly.setBackground(new java.awt.Color(77, 80, 97));
+        btn_addToNoFly.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addToNoFly.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addToNoFlyMouseClicked(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/plus-4-16.png"))); // NOI18N
         jLabel2.setText("ADD");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setIconTextGap(-50);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout btn_addToNoFlyLayout = new javax.swing.GroupLayout(btn_addToNoFly);
+        btn_addToNoFly.setLayout(btn_addToNoFlyLayout);
+        btn_addToNoFlyLayout.setHorizontalGroup(
+            btn_addToNoFlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_addToNoFlyLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        btn_addToNoFlyLayout.setVerticalGroup(
+            btn_addToNoFlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_addToNoFlyLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jLabel2)
+                .addGap(5, 5, 5))
+        );
+
+        btn_removeNoFly.setBackground(new java.awt.Color(77, 80, 97));
+        btn_removeNoFly.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_removeNoFly.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_removeNoFlyMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/minus-4-16.png"))); // NOI18N
+        jLabel3.setText("REMOVE");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.setIconTextGap(-80);
+
+        javax.swing.GroupLayout btn_removeNoFlyLayout = new javax.swing.GroupLayout(btn_removeNoFly);
+        btn_removeNoFly.setLayout(btn_removeNoFlyLayout);
+        btn_removeNoFlyLayout.setHorizontalGroup(
+            btn_removeNoFlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_removeNoFlyLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel3)
+                .addGap(5, 5, 5))
+        );
+        btn_removeNoFlyLayout.setVerticalGroup(
+            btn_removeNoFlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_removeNoFlyLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel3)
                 .addGap(5, 5, 5))
         );
 
@@ -1102,7 +1194,9 @@ public class Admin_GUI extends javax.swing.JFrame {
                     .addComponent(scroll_customer, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, View_NoFlyListLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_removeNoFly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_addToNoFly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         View_NoFlyListLayout.setVerticalGroup(
@@ -1111,9 +1205,11 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Company_panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll_customer, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scroll_customer, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
+                .addGroup(View_NoFlyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_addToNoFly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_removeNoFly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1180,6 +1276,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private void btn_manageFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manageFlightsMouseClicked
         this.inner_cardstack.show(this.internal_cardstack, "Manage_flights");
         this.setHighlights("highlight_manageFlights");
+        this.btn_removeFlight.setVisible(false);
     }//GEN-LAST:event_btn_manageFlightsMouseClicked
 
     private void btn_addFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addFlightMouseClicked
@@ -1190,11 +1287,38 @@ public class Admin_GUI extends javax.swing.JFrame {
     private void btn_noFlyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_noFlyListMouseClicked
         this.inner_cardstack.show(this.internal_cardstack, "View_NoFlyList");
         this.setHighlights("highlight_noFlyList");
+        this.btn_removeNoFly.setVisible(false);
     }//GEN-LAST:event_btn_noFlyListMouseClicked
 
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
         this.T_cardstack.show(this.Top_cardstack, "Login_card");
     }//GEN-LAST:event_btn_logoutMouseClicked
+
+    private void btn_addToNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addToNoFlyMouseClicked
+        JAddNoFly addNoFly = new JAddNoFly();
+    }//GEN-LAST:event_btn_addToNoFlyMouseClicked
+
+    private void btn_removeNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeNoFlyMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_removeNoFlyMouseClicked
+
+    private void table_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_customersMouseClicked
+        int row = this.table_customers.getSelectedRow();
+        if (row != -1){
+            this.btn_removeNoFly.setVisible(true);
+        }
+    }//GEN-LAST:event_table_customersMouseClicked
+
+    private void btn_removeFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeFlightMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_removeFlightMouseClicked
+
+    private void table_flightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_flightsMouseClicked
+        int row = this.table_flights.getSelectedRow();
+        if (row != -1){
+            this.btn_removeFlight.setVisible(true);
+        }
+    }//GEN-LAST:event_table_flightsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1226,20 +1350,17 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel Welcome_label;
     private javax.swing.JPanel btn_addFlight;
     private javax.swing.JPanel btn_addNewFlight;
+    private javax.swing.JPanel btn_addToNoFly;
     private javax.swing.JLabel btn_back;
     private javax.swing.JPanel btn_edit;
-    private javax.swing.JPanel btn_edit1;
-    private javax.swing.JPanel btn_edit2;
-    private javax.swing.JPanel btn_edit3;
-    private javax.swing.JPanel btn_edit5;
     private javax.swing.JPanel btn_home;
     private javax.swing.JLabel btn_logout;
     private javax.swing.JPanel btn_manageFlights;
     private javax.swing.JPanel btn_noFlyList;
+    private javax.swing.JPanel btn_removeFlight;
+    private javax.swing.JPanel btn_removeNoFly;
+    private javax.swing.JPanel btn_removeNoFly1;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler3;
-    private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.JPanel highlight_addFlight;
     private javax.swing.JPanel highlight_home;
@@ -1253,78 +1374,37 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_CNIC;
-    private javax.swing.JLabel lbl_CNIC1;
-    private javax.swing.JLabel lbl_CNIC2;
-    private javax.swing.JLabel lbl_CNIC3;
     private javax.swing.JLabel lbl_address;
-    private javax.swing.JLabel lbl_address1;
-    private javax.swing.JLabel lbl_address2;
-    private javax.swing.JLabel lbl_address3;
     private javax.swing.JLabel lbl_capacity;
     private javax.swing.JLabel lbl_cost;
     private javax.swing.JLabel lbl_designation;
-    private javax.swing.JLabel lbl_designation1;
-    private javax.swing.JLabel lbl_designation2;
-    private javax.swing.JLabel lbl_designation3;
     private javax.swing.JLabel lbl_destination;
     private javax.swing.JLabel lbl_duration;
     private javax.swing.JLabel lbl_employeeInfo;
     private javax.swing.JLabel lbl_firstName;
-    private javax.swing.JLabel lbl_firstName1;
-    private javax.swing.JLabel lbl_firstName2;
-    private javax.swing.JLabel lbl_firstName3;
     private javax.swing.JLabel lbl_flightCode;
     private javax.swing.JLabel lbl_lastName;
-    private javax.swing.JLabel lbl_lastName1;
-    private javax.swing.JLabel lbl_lastName2;
-    private javax.swing.JLabel lbl_lastName3;
     private javax.swing.JLabel lbl_salary;
-    private javax.swing.JLabel lbl_salary1;
-    private javax.swing.JLabel lbl_salary2;
-    private javax.swing.JLabel lbl_salary3;
     private javax.swing.JLabel lbl_source;
     private javax.swing.JPanel panel_empInfo;
-    private javax.swing.JPanel panel_empInfo1;
-    private javax.swing.JPanel panel_empInfo2;
-    private javax.swing.JPanel panel_empInfo3;
     private javax.swing.JPanel panel_empInfoBackdrop;
     private javax.swing.JScrollPane scroll_customer;
     private javax.swing.JScrollPane scroll_flights;
     private javax.swing.JTable table_customers;
     private javax.swing.JTable table_flights;
     private javax.swing.JTextField txtbox_CNIC;
-    private javax.swing.JTextField txtbox_CNIC1;
-    private javax.swing.JTextField txtbox_CNIC2;
-    private javax.swing.JTextField txtbox_CNIC3;
     private javax.swing.JTextField txtbox_address;
-    private javax.swing.JTextField txtbox_address1;
-    private javax.swing.JTextField txtbox_address2;
-    private javax.swing.JTextField txtbox_address3;
     private javax.swing.JSpinner txtbox_capacity;
     private javax.swing.JTextField txtbox_cost;
     private javax.swing.JTextField txtbox_designation;
-    private javax.swing.JTextField txtbox_designation1;
-    private javax.swing.JTextField txtbox_designation2;
-    private javax.swing.JTextField txtbox_designation3;
     private javax.swing.JTextField txtbox_destination;
     private javax.swing.JTextField txtbox_duration;
     private javax.swing.JTextField txtbox_firstName;
-    private javax.swing.JTextField txtbox_firstName1;
-    private javax.swing.JTextField txtbox_firstName2;
-    private javax.swing.JTextField txtbox_firstName3;
     private javax.swing.JTextField txtbox_flightCode;
     private javax.swing.JTextField txtbox_lastName;
-    private javax.swing.JTextField txtbox_lastName1;
-    private javax.swing.JTextField txtbox_lastName2;
-    private javax.swing.JTextField txtbox_lastName3;
     private javax.swing.JPasswordField txtbox_password;
     private javax.swing.JTextField txtbox_salary;
-    private javax.swing.JTextField txtbox_salary1;
-    private javax.swing.JTextField txtbox_salary2;
-    private javax.swing.JTextField txtbox_salary3;
     private javax.swing.JTextField txtbox_source;
     // End of variables declaration//GEN-END:variables
 }
