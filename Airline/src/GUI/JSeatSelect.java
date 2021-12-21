@@ -4,15 +4,108 @@
  */
 package GUI;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class JSeatSelect extends javax.swing.JFrame {
 
-
+    private ArrayList<JPanel> seats;
+    
     public JSeatSelect() {
         initComponents();
         this.setVisible(true);
+        
+        seats = new ArrayList<JPanel>();
+        /*Set Names of All Pannels, Store them in seat array, work on it's functionality*/
+        getComponentsRecursive(JSeatSelect.this,seats);
+//        getComponentsRecursive(MiddleClass,seats);
+//        getComponentsRecursive(MiddleClass1,seats);
+//        getComponentsRecursive(MiddleClass2,seats);
+//        getComponentsRecursive(MiddleClass3,seats);
+//        
+        for(int i = 0; i < seats.size(); i++){
+            String loc = seats.get(i).getName();
+            if(seats.get(i).getName() == "A1"){
+                seats.get(i).addMouseListener(new MouseAdapter(){
+                    public void mouseClicked(MouseEvent e) {
+
+                    JPanel p = (JPanel)e.getSource();
+                    //Makes sure it only registers for single clicks(always registers even on double clicks, just registers twice.)
+                     if (e.getClickCount() == 1) {
+
+                       p.setBackground(Color.red);
+                       Seat_Loc.setText(loc);
+                        }
+                    }       
+                });
+            }
+        }
+        
+       // PanelListener listener = new PanelListener();
+
+//        listAllComponentsIn(JSeatSelect.this,seats);
+//        
+//        seats.get(0).setBackground(Color.red);
+//        seats.get(1).setBackground(Color.blue);
+//        seats.get(2).setBackground(Color.green);
+//        seats.get(3).setBackground(Color.CYAN);
+//        
+//        
+//        seats.get(4).setBackground(Color.red);
+//        seats.get(5).setBackground(Color.blue);
+//        seats.get(6).setBackground(Color.green);
+//        seats.get(7).setBackground(Color.CYAN);
+//        
+//        seats.get(8).setBackground(Color.red);
+//        seats.get(9).setBackground(Color.blue);
+//        seats.get(10).setBackground(Color.green);
+//        seats.get(11).setBackground(Color.CYAN);
+//        
+//        seats.get(12).setBackground(Color.red);
+//        seats.get(13).setBackground(Color.blue);
+//        seats.get(14).setBackground(Color.green);
+//        seats.get(15).setBackground(Color.CYAN);
+//        
+//        seats.get(16).setBackground(Color.red);
+//        seats.get(17).setBackground(Color.blue);
+//        seats.get(18).setBackground(Color.green);
+//        seats.get(19).setBackground(Color.CYAN);
+
+        
+        
+//        for(int i = 0; i < seats.size(); i++){
+//            seats.get(i).setBackground(Color.red);
+//            
+//        }
+        
     }
+    
+    public void getComponentsRecursive(Container parent,ArrayList<JPanel> seats)
+{
+    for (Component c : parent.getComponents())
+    {
+        
+        //System.out.println(c.getParent().toString());
+        Dimension d = c.getSize();
+        if(d.height == 26 && d.width == 28){
+            System.out.println(c.toString());
+            seats.add((JPanel) c);
+        }
+        
+        //seats.add((JPanel) c);
+        if (c instanceof Container)
+            getComponentsRecursive((Container)c,seats);
+    }
+}
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -154,9 +247,14 @@ public class JSeatSelect extends javax.swing.JFrame {
         txtbox_firstName2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        txtbox_firstName3 = new javax.swing.JTextField();
+        Seat_Loc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(64, 81, 178));
 
@@ -356,6 +454,12 @@ public class JSeatSelect extends javax.swing.JFrame {
 
         A1.setBackground(new java.awt.Color(238, 193, 48));
         A1.setToolTipText("");
+        A1.setName("A1"); // NOI18N
+        A1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                A1MouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout A1Layout = new javax.swing.GroupLayout(A1);
         A1.setLayout(A1Layout);
@@ -674,6 +778,10 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addComponent(F3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        A1.getAccessibleContext().setAccessibleName("A1");
+        A2.getAccessibleContext().setAccessibleName("A2");
+        A3.getAccessibleContext().setAccessibleName("A3");
+
         MiddleClass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         A4.setBackground(new java.awt.Color(53, 140, 250));
@@ -690,6 +798,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         MiddleClass.add(A4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, -1, -1));
+        A4.getAccessibleContext().setAccessibleName("A4");
 
         A5.setBackground(new java.awt.Color(53, 140, 250));
 
@@ -705,6 +814,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         MiddleClass.add(A5, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 0, -1, -1));
+        A5.getAccessibleContext().setAccessibleName("A5");
 
         A6.setBackground(new java.awt.Color(53, 140, 250));
 
@@ -720,6 +830,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         MiddleClass.add(A6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 0, -1, -1));
+        A6.getAccessibleContext().setAccessibleName("A6");
 
         B4.setBackground(new java.awt.Color(53, 140, 250));
 
@@ -1258,6 +1369,10 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addComponent(F12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        A10.getAccessibleContext().setAccessibleName("A10");
+        A11.getAccessibleContext().setAccessibleName("A11");
+        A12.getAccessibleContext().setAccessibleName("A12");
+
         A7.setBackground(new java.awt.Color(53, 140, 250));
 
         javax.swing.GroupLayout A7Layout = new javax.swing.GroupLayout(A7);
@@ -1570,6 +1685,10 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addComponent(F8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(F9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        A7.getAccessibleContext().setAccessibleName("A7");
+        A8.getAccessibleContext().setAccessibleName("A8");
+        A9.getAccessibleContext().setAccessibleName("A9");
 
         A13.setBackground(new java.awt.Color(53, 140, 250));
 
@@ -1884,6 +2003,10 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addComponent(F15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        A13.getAccessibleContext().setAccessibleName("A13");
+        A14.getAccessibleContext().setAccessibleName("A14");
+        A15.getAccessibleContext().setAccessibleName("A15");
+
         backDrop2.setBackground(new java.awt.Color(255, 255, 255));
         backDrop2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1966,7 +2089,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         jPanel92.setLayout(jPanel92Layout);
         jPanel92Layout.setHorizontalGroup(
             jPanel92Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
         jPanel92Layout.setVerticalGroup(
             jPanel92Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1984,7 +2107,7 @@ public class JSeatSelect extends javax.swing.JFrame {
             backDrop10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backDrop10Layout.createSequentialGroup()
                 .addComponent(jPanel92, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
@@ -2004,7 +2127,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         jPanel93.setLayout(jPanel93Layout);
         jPanel93Layout.setHorizontalGroup(
             jPanel93Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
         jPanel93Layout.setVerticalGroup(
             jPanel93Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2022,7 +2145,7 @@ public class JSeatSelect extends javax.swing.JFrame {
             backDrop12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backDrop12Layout.createSequentialGroup()
                 .addComponent(jPanel93, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
@@ -2042,7 +2165,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         jPanel94.setLayout(jPanel94Layout);
         jPanel94Layout.setHorizontalGroup(
             jPanel94Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
         jPanel94Layout.setVerticalGroup(
             jPanel94Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2060,7 +2183,7 @@ public class JSeatSelect extends javax.swing.JFrame {
             backDrop13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backDrop13Layout.createSequentialGroup()
                 .addComponent(jPanel94, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
@@ -2126,7 +2249,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("Seat Selected:");
 
-        txtbox_firstName3.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        Seat_Loc.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel95Layout = new javax.swing.GroupLayout(jPanel95);
         jPanel95.setLayout(jPanel95Layout);
@@ -2149,7 +2272,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addGroup(jPanel95Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtbox_firstName3, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addComponent(Seat_Loc, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2174,7 +2297,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel16)
-                    .addComponent(txtbox_firstName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Seat_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2252,6 +2375,15 @@ public class JSeatSelect extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void A1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1MouseEntered
+        // TODO add yfour handling code here:
+    }//GEN-LAST:event_A1MouseEntered
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2350,6 +2482,7 @@ public class JSeatSelect extends javax.swing.JFrame {
     private javax.swing.JPanel MiddleClass1;
     private javax.swing.JPanel MiddleClass2;
     private javax.swing.JPanel MiddleClass3;
+    private javax.swing.JTextField Seat_Loc;
     private javax.swing.JPanel backDrop1;
     private javax.swing.JPanel backDrop10;
     private javax.swing.JPanel backDrop11;
@@ -2391,6 +2524,5 @@ public class JSeatSelect extends javax.swing.JFrame {
     private javax.swing.JTextField txtbox_firstName;
     private javax.swing.JTextField txtbox_firstName1;
     private javax.swing.JTextField txtbox_firstName2;
-    private javax.swing.JTextField txtbox_firstName3;
     // End of variables declaration//GEN-END:variables
 }
