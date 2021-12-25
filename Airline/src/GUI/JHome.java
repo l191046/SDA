@@ -14,6 +14,7 @@ public class JHome extends javax.swing.JFrame {
     
             
     public JHome() {
+
         initComponents();
         setVisible(true);
         cards = (CardLayout) this.cardstack.getLayout();
@@ -1021,9 +1022,18 @@ public class JHome extends javax.swing.JFrame {
 
     private void table_routesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_routesMouseClicked
         int row = this.table_routes.getSelectedRow();
+       
         if (row != -1){
             //open customer info form
-            JBooking booking = new JBooking();
+            String id = table_routes.getModel().getValueAt(row, 0).toString();
+            String src = table_routes.getModel().getValueAt(row, 1).toString();
+            String dest = table_routes.getModel().getValueAt(row, 2).toString();
+            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
+            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
+            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
+
+
+            JBooking booking = new JBooking(id, src, dest, Ddate, Dtime, Connections);
         }
         
     }//GEN-LAST:event_table_routesMouseClicked

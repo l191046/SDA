@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class JSeatSelect extends javax.swing.JFrame {
 
@@ -36,52 +37,49 @@ public class JSeatSelect extends javax.swing.JFrame {
                     JPanel p = (JPanel)e.getSource();
                     //Makes sure it only registers for single clicks(always registers even on double clicks, just registers twice.)
                      if (e.getClickCount() == 1) {
+                       
+                       
+                       p.setBackground( Color.LIGHT_GRAY);
+                       Seat_Loc.setText(loc);
+                       txtbox_fseatCost.setText("$10");
+                        }
+                    }       
+                });
 
-                       p.setBackground(Color.red);
+        }        
+    }
+    
+    public JSeatSelect(String flightId, String firstName, String lastName, String cnic, String address, String contact) {
+        initComponents();
+        this.setVisible(true);
+        
+        seats = new ArrayList<JPanel>();
+
+        getComponentsRecursive(JSeatSelect.this,seats);
+        
+        txtbox_firstName.setText(firstName);
+
+        txtbox_flight.setText("American Express - Dummy");
+
+        
+        for(int i = 0; i < seats.size(); i++){
+            String loc = seats.get(i).getName();
+
+                seats.get(i).addMouseListener(new MouseAdapter(){
+                    public void mouseClicked(MouseEvent e) {
+
+                    JPanel p = (JPanel)e.getSource();
+                    //Makes sure it only registers for single clicks(always registers even on double clicks, just registers twice.)
+                     if (e.getClickCount() == 1) {
+                       
+                       
+                       p.setBackground( Color.LIGHT_GRAY);
                        Seat_Loc.setText(loc);
                         }
                     }       
                 });
 
-        }
-        
-       // PanelListener listener = new PanelListener();
-
-//        listAllComponentsIn(JSeatSelect.this,seats);
-//        
-//        seats.get(0).setBackground(Color.red);
-//        seats.get(1).setBackground(Color.blue);
-//        seats.get(2).setBackground(Color.green);
-//        seats.get(3).setBackground(Color.CYAN);
-//        
-//        
-//        seats.get(4).setBackground(Color.red);
-//        seats.get(5).setBackground(Color.blue);
-//        seats.get(6).setBackground(Color.green);
-//        seats.get(7).setBackground(Color.CYAN);
-//        
-//        seats.get(8).setBackground(Color.red);
-//        seats.get(9).setBackground(Color.blue);
-//        seats.get(10).setBackground(Color.green);
-//        seats.get(11).setBackground(Color.CYAN);
-//        
-//        seats.get(12).setBackground(Color.red);
-//        seats.get(13).setBackground(Color.blue);
-//        seats.get(14).setBackground(Color.green);
-//        seats.get(15).setBackground(Color.CYAN);
-//        
-//        seats.get(16).setBackground(Color.red);
-//        seats.get(17).setBackground(Color.blue);
-//        seats.get(18).setBackground(Color.green);
-//        seats.get(19).setBackground(Color.CYAN);
-
-        
-        
-//        for(int i = 0; i < seats.size(); i++){
-//            seats.get(i).setBackground(Color.red);
-//            
-//        }
-        
+        }        
     }
     
     public void getComponentsRecursive(Container parent,ArrayList<JPanel> seats)
@@ -238,11 +236,11 @@ public class JSeatSelect extends javax.swing.JFrame {
         jPanel95 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txtbox_firstName = new javax.swing.JTextField();
-        txtbox_firstName1 = new javax.swing.JTextField();
+        txtbox_flight = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         panel_firstName = new javax.swing.JPanel();
         lbl_firstName = new javax.swing.JLabel();
-        txtbox_firstName2 = new javax.swing.JTextField();
+        txtbox_fseatCost = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         Seat_Loc = new javax.swing.JTextField();
@@ -541,6 +539,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C1.setBackground(new java.awt.Color(238, 193, 48));
+        C1.setName("C1"); // NOI18N
 
         javax.swing.GroupLayout C1Layout = new javax.swing.GroupLayout(C1);
         C1.setLayout(C1Layout);
@@ -554,6 +553,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C2.setBackground(new java.awt.Color(238, 193, 48));
+        C2.setName("C2"); // NOI18N
 
         javax.swing.GroupLayout C2Layout = new javax.swing.GroupLayout(C2);
         C2.setLayout(C2Layout);
@@ -567,6 +567,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C3.setBackground(new java.awt.Color(238, 193, 48));
+        C3.setName("C3"); // NOI18N
 
         javax.swing.GroupLayout C3Layout = new javax.swing.GroupLayout(C3);
         C3.setLayout(C3Layout);
@@ -580,6 +581,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D1.setBackground(new java.awt.Color(238, 193, 48));
+        D1.setName("D1"); // NOI18N
 
         javax.swing.GroupLayout D1Layout = new javax.swing.GroupLayout(D1);
         D1.setLayout(D1Layout);
@@ -593,6 +595,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D2.setBackground(new java.awt.Color(238, 193, 48));
+        D2.setName("D2"); // NOI18N
 
         javax.swing.GroupLayout D2Layout = new javax.swing.GroupLayout(D2);
         D2.setLayout(D2Layout);
@@ -606,6 +609,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D3.setBackground(new java.awt.Color(238, 193, 48));
+        D3.setName("D3"); // NOI18N
 
         javax.swing.GroupLayout D3Layout = new javax.swing.GroupLayout(D3);
         D3.setLayout(D3Layout);
@@ -619,6 +623,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E1.setBackground(new java.awt.Color(238, 193, 48));
+        E1.setName("E1"); // NOI18N
 
         javax.swing.GroupLayout E1Layout = new javax.swing.GroupLayout(E1);
         E1.setLayout(E1Layout);
@@ -632,6 +637,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E2.setBackground(new java.awt.Color(238, 193, 48));
+        E2.setName("E2"); // NOI18N
 
         javax.swing.GroupLayout E2Layout = new javax.swing.GroupLayout(E2);
         E2.setLayout(E2Layout);
@@ -645,6 +651,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E3.setBackground(new java.awt.Color(238, 193, 48));
+        E3.setName("E3"); // NOI18N
 
         javax.swing.GroupLayout E3Layout = new javax.swing.GroupLayout(E3);
         E3.setLayout(E3Layout);
@@ -658,6 +665,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F1.setBackground(new java.awt.Color(238, 193, 48));
+        F1.setName("F1"); // NOI18N
 
         javax.swing.GroupLayout F1Layout = new javax.swing.GroupLayout(F1);
         F1.setLayout(F1Layout);
@@ -671,6 +679,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F2.setBackground(new java.awt.Color(238, 193, 48));
+        F2.setName("E16"); // NOI18N
 
         javax.swing.GroupLayout F2Layout = new javax.swing.GroupLayout(F2);
         F2.setLayout(F2Layout);
@@ -872,6 +881,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(B5, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 39, -1, -1));
 
         B6.setBackground(new java.awt.Color(53, 140, 250));
+        B6.setName("B6"); // NOI18N
 
         javax.swing.GroupLayout B6Layout = new javax.swing.GroupLayout(B6);
         B6.setLayout(B6Layout);
@@ -887,6 +897,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(B6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 39, -1, -1));
 
         C4.setBackground(new java.awt.Color(53, 140, 250));
+        C4.setName("C4"); // NOI18N
 
         javax.swing.GroupLayout C4Layout = new javax.swing.GroupLayout(C4);
         C4.setLayout(C4Layout);
@@ -902,6 +913,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(C4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 98, -1, -1));
 
         C5.setBackground(new java.awt.Color(53, 140, 250));
+        C5.setName("C5"); // NOI18N
 
         javax.swing.GroupLayout C5Layout = new javax.swing.GroupLayout(C5);
         C5.setLayout(C5Layout);
@@ -917,6 +929,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(C5, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 98, -1, -1));
 
         C6.setBackground(new java.awt.Color(53, 140, 250));
+        C6.setName("C6"); // NOI18N
 
         javax.swing.GroupLayout C6Layout = new javax.swing.GroupLayout(C6);
         C6.setLayout(C6Layout);
@@ -932,6 +945,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(C6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 98, -1, -1));
 
         D4.setBackground(new java.awt.Color(53, 140, 250));
+        D4.setName("D4"); // NOI18N
 
         javax.swing.GroupLayout D4Layout = new javax.swing.GroupLayout(D4);
         D4.setLayout(D4Layout);
@@ -947,6 +961,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(D4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 137, -1, -1));
 
         D5.setBackground(new java.awt.Color(53, 140, 250));
+        D5.setName("D5"); // NOI18N
 
         javax.swing.GroupLayout D5Layout = new javax.swing.GroupLayout(D5);
         D5.setLayout(D5Layout);
@@ -962,6 +977,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(D5, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 137, -1, -1));
 
         D6.setBackground(new java.awt.Color(53, 140, 250));
+        D6.setName("C6"); // NOI18N
 
         javax.swing.GroupLayout D6Layout = new javax.swing.GroupLayout(D6);
         D6.setLayout(D6Layout);
@@ -977,6 +993,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(D6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 137, -1, -1));
 
         E4.setBackground(new java.awt.Color(53, 140, 250));
+        E4.setName("E4"); // NOI18N
 
         javax.swing.GroupLayout E4Layout = new javax.swing.GroupLayout(E4);
         E4.setLayout(E4Layout);
@@ -992,6 +1009,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(E4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 209, -1, -1));
 
         E5.setBackground(new java.awt.Color(53, 140, 250));
+        E5.setName("E5"); // NOI18N
 
         javax.swing.GroupLayout E5Layout = new javax.swing.GroupLayout(E5);
         E5.setLayout(E5Layout);
@@ -1007,6 +1025,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(E5, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 209, -1, -1));
 
         E6.setBackground(new java.awt.Color(53, 140, 250));
+        E6.setName("E6"); // NOI18N
 
         javax.swing.GroupLayout E6Layout = new javax.swing.GroupLayout(E6);
         E6.setLayout(E6Layout);
@@ -1109,6 +1128,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B10.setBackground(new java.awt.Color(53, 140, 250));
+        B10.setName("B10"); // NOI18N
 
         javax.swing.GroupLayout B10Layout = new javax.swing.GroupLayout(B10);
         B10.setLayout(B10Layout);
@@ -1122,6 +1142,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B11.setBackground(new java.awt.Color(53, 140, 250));
+        B11.setName("B11"); // NOI18N
 
         javax.swing.GroupLayout B11Layout = new javax.swing.GroupLayout(B11);
         B11.setLayout(B11Layout);
@@ -1135,6 +1156,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B12.setBackground(new java.awt.Color(53, 140, 250));
+        B12.setName("B12"); // NOI18N
 
         javax.swing.GroupLayout B12Layout = new javax.swing.GroupLayout(B12);
         B12.setLayout(B12Layout);
@@ -1148,6 +1170,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C10.setBackground(new java.awt.Color(53, 140, 250));
+        C10.setName("C10"); // NOI18N
 
         javax.swing.GroupLayout C10Layout = new javax.swing.GroupLayout(C10);
         C10.setLayout(C10Layout);
@@ -1161,6 +1184,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C11.setBackground(new java.awt.Color(53, 140, 250));
+        C11.setName("C11"); // NOI18N
 
         javax.swing.GroupLayout C11Layout = new javax.swing.GroupLayout(C11);
         C11.setLayout(C11Layout);
@@ -1174,6 +1198,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C12.setBackground(new java.awt.Color(53, 140, 250));
+        C12.setName("C12"); // NOI18N
 
         javax.swing.GroupLayout C12Layout = new javax.swing.GroupLayout(C12);
         C12.setLayout(C12Layout);
@@ -1187,6 +1212,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D10.setBackground(new java.awt.Color(53, 140, 250));
+        D10.setName("C10"); // NOI18N
 
         javax.swing.GroupLayout D10Layout = new javax.swing.GroupLayout(D10);
         D10.setLayout(D10Layout);
@@ -1200,6 +1226,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D11.setBackground(new java.awt.Color(53, 140, 250));
+        D11.setName("C11"); // NOI18N
 
         javax.swing.GroupLayout D11Layout = new javax.swing.GroupLayout(D11);
         D11.setLayout(D11Layout);
@@ -1213,6 +1240,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D12.setBackground(new java.awt.Color(53, 140, 250));
+        D12.setName("C12"); // NOI18N
 
         javax.swing.GroupLayout D12Layout = new javax.swing.GroupLayout(D12);
         D12.setLayout(D12Layout);
@@ -1226,6 +1254,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E10.setBackground(new java.awt.Color(53, 140, 250));
+        E10.setName("E10"); // NOI18N
 
         javax.swing.GroupLayout E10Layout = new javax.swing.GroupLayout(E10);
         E10.setLayout(E10Layout);
@@ -1239,6 +1268,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E11.setBackground(new java.awt.Color(53, 140, 250));
+        E11.setName("E11"); // NOI18N
 
         javax.swing.GroupLayout E11Layout = new javax.swing.GroupLayout(E11);
         E11.setLayout(E11Layout);
@@ -1252,6 +1282,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E12.setBackground(new java.awt.Color(53, 140, 250));
+        E12.setName("E12"); // NOI18N
 
         javax.swing.GroupLayout E12Layout = new javax.swing.GroupLayout(E12);
         E12.setLayout(E12Layout);
@@ -1428,6 +1459,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B7.setBackground(new java.awt.Color(53, 140, 250));
+        B7.setName("B7"); // NOI18N
 
         javax.swing.GroupLayout B7Layout = new javax.swing.GroupLayout(B7);
         B7.setLayout(B7Layout);
@@ -1441,6 +1473,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B8.setBackground(new java.awt.Color(53, 140, 250));
+        B8.setName("B8"); // NOI18N
 
         javax.swing.GroupLayout B8Layout = new javax.swing.GroupLayout(B8);
         B8.setLayout(B8Layout);
@@ -1454,6 +1487,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B9.setBackground(new java.awt.Color(53, 140, 250));
+        B9.setName("B9"); // NOI18N
 
         javax.swing.GroupLayout B9Layout = new javax.swing.GroupLayout(B9);
         B9.setLayout(B9Layout);
@@ -1467,6 +1501,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C7.setBackground(new java.awt.Color(53, 140, 250));
+        C7.setName("C7"); // NOI18N
 
         javax.swing.GroupLayout C7Layout = new javax.swing.GroupLayout(C7);
         C7.setLayout(C7Layout);
@@ -1480,6 +1515,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C8.setBackground(new java.awt.Color(53, 140, 250));
+        C8.setName("C8"); // NOI18N
 
         javax.swing.GroupLayout C8Layout = new javax.swing.GroupLayout(C8);
         C8.setLayout(C8Layout);
@@ -1493,6 +1529,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C9.setBackground(new java.awt.Color(53, 140, 250));
+        C9.setName("C9"); // NOI18N
 
         javax.swing.GroupLayout C9Layout = new javax.swing.GroupLayout(C9);
         C9.setLayout(C9Layout);
@@ -1506,6 +1543,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D7.setBackground(new java.awt.Color(53, 140, 250));
+        D7.setName("C7"); // NOI18N
 
         javax.swing.GroupLayout D7Layout = new javax.swing.GroupLayout(D7);
         D7.setLayout(D7Layout);
@@ -1519,6 +1557,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D8.setBackground(new java.awt.Color(53, 140, 250));
+        D8.setName("C8"); // NOI18N
 
         javax.swing.GroupLayout D8Layout = new javax.swing.GroupLayout(D8);
         D8.setLayout(D8Layout);
@@ -1532,6 +1571,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D9.setBackground(new java.awt.Color(53, 140, 250));
+        D9.setName("C9"); // NOI18N
 
         javax.swing.GroupLayout D9Layout = new javax.swing.GroupLayout(D9);
         D9.setLayout(D9Layout);
@@ -1545,6 +1585,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E7.setBackground(new java.awt.Color(53, 140, 250));
+        E7.setName("E7"); // NOI18N
 
         javax.swing.GroupLayout E7Layout = new javax.swing.GroupLayout(E7);
         E7.setLayout(E7Layout);
@@ -1558,6 +1599,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E8.setBackground(new java.awt.Color(53, 140, 250));
+        E8.setName("E8"); // NOI18N
 
         javax.swing.GroupLayout E8Layout = new javax.swing.GroupLayout(E8);
         E8.setLayout(E8Layout);
@@ -1571,6 +1613,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E9.setBackground(new java.awt.Color(53, 140, 250));
+        E9.setName("E9"); // NOI18N
 
         javax.swing.GroupLayout E9Layout = new javax.swing.GroupLayout(E9);
         E9.setLayout(E9Layout);
@@ -1748,6 +1791,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B13.setBackground(new java.awt.Color(53, 140, 250));
+        B13.setName("B13"); // NOI18N
 
         javax.swing.GroupLayout B13Layout = new javax.swing.GroupLayout(B13);
         B13.setLayout(B13Layout);
@@ -1761,6 +1805,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B14.setBackground(new java.awt.Color(53, 140, 250));
+        B14.setName("B14"); // NOI18N
 
         javax.swing.GroupLayout B14Layout = new javax.swing.GroupLayout(B14);
         B14.setLayout(B14Layout);
@@ -1774,6 +1819,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B15.setBackground(new java.awt.Color(53, 140, 250));
+        B15.setName("B15"); // NOI18N
 
         javax.swing.GroupLayout B15Layout = new javax.swing.GroupLayout(B15);
         B15.setLayout(B15Layout);
@@ -1787,6 +1833,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C13.setBackground(new java.awt.Color(53, 140, 250));
+        C13.setName("C13"); // NOI18N
 
         javax.swing.GroupLayout C13Layout = new javax.swing.GroupLayout(C13);
         C13.setLayout(C13Layout);
@@ -1800,6 +1847,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C14.setBackground(new java.awt.Color(53, 140, 250));
+        C14.setName("C14"); // NOI18N
 
         javax.swing.GroupLayout C14Layout = new javax.swing.GroupLayout(C14);
         C14.setLayout(C14Layout);
@@ -1813,6 +1861,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         C15.setBackground(new java.awt.Color(53, 140, 250));
+        C15.setName("C15"); // NOI18N
 
         javax.swing.GroupLayout C15Layout = new javax.swing.GroupLayout(C15);
         C15.setLayout(C15Layout);
@@ -1826,6 +1875,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D13.setBackground(new java.awt.Color(53, 140, 250));
+        D13.setName("C13"); // NOI18N
 
         javax.swing.GroupLayout D13Layout = new javax.swing.GroupLayout(D13);
         D13.setLayout(D13Layout);
@@ -1839,6 +1889,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D14.setBackground(new java.awt.Color(53, 140, 250));
+        D14.setName("C14"); // NOI18N
 
         javax.swing.GroupLayout D14Layout = new javax.swing.GroupLayout(D14);
         D14.setLayout(D14Layout);
@@ -1852,6 +1903,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         D15.setBackground(new java.awt.Color(53, 140, 250));
+        D15.setName("C15"); // NOI18N
 
         javax.swing.GroupLayout D15Layout = new javax.swing.GroupLayout(D15);
         D15.setLayout(D15Layout);
@@ -1865,6 +1917,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E13.setBackground(new java.awt.Color(53, 140, 250));
+        E13.setName("E13"); // NOI18N
 
         javax.swing.GroupLayout E13Layout = new javax.swing.GroupLayout(E13);
         E13.setLayout(E13Layout);
@@ -1878,6 +1931,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E14.setBackground(new java.awt.Color(53, 140, 250));
+        E14.setName("E13"); // NOI18N
 
         javax.swing.GroupLayout E14Layout = new javax.swing.GroupLayout(E14);
         E14.setLayout(E14Layout);
@@ -1891,6 +1945,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         E15.setBackground(new java.awt.Color(53, 140, 250));
+        E15.setName("E14"); // NOI18N
 
         javax.swing.GroupLayout E15Layout = new javax.swing.GroupLayout(E15);
         E15.setLayout(E15Layout);
@@ -2216,9 +2271,16 @@ public class JSeatSelect extends javax.swing.JFrame {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Name:");
 
-        txtbox_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_firstName.setEditable(false);
+        txtbox_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
+        txtbox_firstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbox_firstNameActionPerformed(evt);
+            }
+        });
 
-        txtbox_firstName1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_flight.setEditable(false);
+        txtbox_flight.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
@@ -2232,7 +2294,8 @@ public class JSeatSelect extends javax.swing.JFrame {
         lbl_firstName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lbl_firstName.setText("SEAT COST:");
 
-        txtbox_firstName2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_fseatCost.setEditable(false);
+        txtbox_fseatCost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout panel_firstNameLayout = new javax.swing.GroupLayout(panel_firstName);
         panel_firstName.setLayout(panel_firstNameLayout);
@@ -2242,7 +2305,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbl_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtbox_firstName2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtbox_fseatCost, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panel_firstNameLayout.setVerticalGroup(
@@ -2251,7 +2314,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panel_firstNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_firstName)
-                    .addComponent(txtbox_firstName2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtbox_fseatCost, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2286,7 +2349,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                                 .addGap(9, 9, 9)))
                         .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtbox_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                            .addComponent(txtbox_firstName1)))
+                            .addComponent(txtbox_flight)))
                     .addGroup(jPanel95Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -2310,7 +2373,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(txtbox_firstName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtbox_flight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -2392,6 +2455,8 @@ public class JSeatSelect extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        completeBooking booking = new completeBooking();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void A1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1MouseEntered
@@ -2402,6 +2467,10 @@ public class JSeatSelect extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_formMouseEntered
+
+    private void txtbox_firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbox_firstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbox_firstNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2540,7 +2609,7 @@ public class JSeatSelect extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_firstName;
     private javax.swing.JPanel panel_firstName;
     private javax.swing.JTextField txtbox_firstName;
-    private javax.swing.JTextField txtbox_firstName1;
-    private javax.swing.JTextField txtbox_firstName2;
+    private javax.swing.JTextField txtbox_flight;
+    private javax.swing.JTextField txtbox_fseatCost;
     // End of variables declaration//GEN-END:variables
 }
