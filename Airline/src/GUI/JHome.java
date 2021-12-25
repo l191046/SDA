@@ -1,19 +1,23 @@
 package GUI;
 
+import Business.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashSet;
-import javax.swing.table.TableModel;
+import javax.swing.table.DefaultTableModel;
 
 public class JHome extends javax.swing.JFrame {
 
+    JSystem system;
     private CardLayout cards;
     private ArrayList<JPanel> highlights;
     
             
-    public JHome() {
+    public JHome(JSystem system) {
+        this.system = system;
+        
         initComponents();
         setVisible(true);
         cards = (CardLayout) this.cardstack.getLayout();
@@ -989,6 +993,7 @@ public class JHome extends javax.swing.JFrame {
         setHighlights("highlight_checkFlight");
         //hide table
         this.scroll_status.setVisible(false);
+        this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
     }//GEN-LAST:event_btn_checkFlightMouseClicked
 
     private void btn_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_historyMouseClicked
@@ -1008,9 +1013,19 @@ public class JHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_adminLoginMouseClicked
 
     private void btn_statusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_statusMouseClicked
-        this.scroll_status.setVisible(true);
-        this.revalidate();
-        this.repaint();
+        String flight_id = this.txtbox_flightCode.getText().toString();
+        System.out.println(">" + flight_id + "<");
+        if (flight_id.equals("")){
+            this.txtbox_flightCode.setBackground(Color.decode("#e87c74"));
+        }
+        else {
+            this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
+            if (system.checkFlightStatus(Integer.parseInt(flight_id), (DefaultTableModel) this.table_status.getModel())){
+                this.scroll_status.setVisible(true);
+                this.revalidate();
+                this.repaint();
+            }
+        }
     }//GEN-LAST:event_btn_statusMouseClicked
 
     private void btn_checkHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_checkHistoryMouseClicked

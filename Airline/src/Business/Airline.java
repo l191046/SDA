@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class Airline {
     
     private static MSsql database;
-    
+    private static JSystem system;
     public static void printDemo(){
         try(ResultSet result = database.demo()){
             while(result.next()){
@@ -26,10 +26,10 @@ public class Airline {
     }
     public static void main(String[] args) {
         database = new MSsql();
-        //JHome jHome = new JHome();
-        //jHome.setTitle("XYZ AIRWAYS");
+        system = JSystem.getInstance();
         
-        printDemo();
+        JHome jHome = new JHome(system);
+        jHome.setTitle("XYZ AIRWAYS");
         
     }
     
