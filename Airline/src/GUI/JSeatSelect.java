@@ -92,7 +92,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         //System.out.println(c.getParent().toString());
         Dimension d = c.getSize();
         if(d.height == 26 && d.width == 28){
-            System.out.println(c.toString());
+          //  System.out.println(c.toString());
             seats.add((JPanel) c);
         }
         
@@ -100,7 +100,9 @@ public class JSeatSelect extends javax.swing.JFrame {
         if (c instanceof Container)
             getComponentsRecursive((Container)c,seats);
     }
+ 
 }
+    
 
 
     @SuppressWarnings("unchecked")
@@ -469,6 +471,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A2.setBackground(new java.awt.Color(238, 193, 48));
+        A2.setName("A2"); // NOI18N
 
         javax.swing.GroupLayout A2Layout = new javax.swing.GroupLayout(A2);
         A2.setLayout(A2Layout);
@@ -482,6 +485,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A3.setBackground(new java.awt.Color(238, 193, 48));
+        A3.setName("A3"); // NOI18N
 
         javax.swing.GroupLayout A3Layout = new javax.swing.GroupLayout(A3);
         A3.setLayout(A3Layout);
@@ -495,6 +499,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B1.setBackground(new java.awt.Color(238, 193, 48));
+        B1.setName("B1"); // NOI18N
 
         javax.swing.GroupLayout B1Layout = new javax.swing.GroupLayout(B1);
         B1.setLayout(B1Layout);
@@ -508,6 +513,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B2.setBackground(new java.awt.Color(238, 193, 48));
+        B2.setName("B2"); // NOI18N
 
         javax.swing.GroupLayout B2Layout = new javax.swing.GroupLayout(B2);
         B2.setLayout(B2Layout);
@@ -521,6 +527,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         B3.setBackground(new java.awt.Color(238, 193, 48));
+        B3.setName("B3"); // NOI18N
 
         javax.swing.GroupLayout B3Layout = new javax.swing.GroupLayout(B3);
         B3.setLayout(B3Layout);
@@ -774,7 +781,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addComponent(F3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        A1.getAccessibleContext().setAccessibleName("A2");
+        A1.getAccessibleContext().setAccessibleName("");
         A2.getAccessibleContext().setAccessibleName("A3");
         A3.getAccessibleContext().setAccessibleName("A3");
         B1.getAccessibleContext().setAccessibleName("A2");
@@ -782,6 +789,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         A4.setBackground(new java.awt.Color(53, 140, 250));
+        A4.setName("A4"); // NOI18N
 
         javax.swing.GroupLayout A4Layout = new javax.swing.GroupLayout(A4);
         A4.setLayout(A4Layout);
@@ -798,6 +806,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         A4.getAccessibleContext().setAccessibleName("A4");
 
         A5.setBackground(new java.awt.Color(53, 140, 250));
+        A5.setName("A5"); // NOI18N
 
         javax.swing.GroupLayout A5Layout = new javax.swing.GroupLayout(A5);
         A5.setLayout(A5Layout);
@@ -814,6 +823,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         A5.getAccessibleContext().setAccessibleName("A5");
 
         A6.setBackground(new java.awt.Color(53, 140, 250));
+        A6.setName("A6"); // NOI18N
 
         javax.swing.GroupLayout A6Layout = new javax.swing.GroupLayout(A6);
         A6.setLayout(A6Layout);
@@ -830,6 +840,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         A6.getAccessibleContext().setAccessibleName("A6");
 
         B4.setBackground(new java.awt.Color(53, 140, 250));
+        B4.setName("B4"); // NOI18N
 
         javax.swing.GroupLayout B4Layout = new javax.swing.GroupLayout(B4);
         B4.setLayout(B4Layout);
@@ -845,6 +856,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(B4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 39, -1, -1));
 
         B5.setBackground(new java.awt.Color(53, 140, 250));
+        B5.setName("B5"); // NOI18N
 
         javax.swing.GroupLayout B5Layout = new javax.swing.GroupLayout(B5);
         B5.setLayout(B5Layout);
@@ -1055,6 +1067,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(F6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 248, -1, -1));
 
         A10.setBackground(new java.awt.Color(53, 140, 250));
+        A10.setName("A10"); // NOI18N
 
         javax.swing.GroupLayout A10Layout = new javax.swing.GroupLayout(A10);
         A10.setLayout(A10Layout);
@@ -1068,6 +1081,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A11.setBackground(new java.awt.Color(53, 140, 250));
+        A11.setName("A11"); // NOI18N
 
         javax.swing.GroupLayout A11Layout = new javax.swing.GroupLayout(A11);
         A11.setLayout(A11Layout);
@@ -1081,6 +1095,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A12.setBackground(new java.awt.Color(53, 140, 250));
+        A12.setName("A12"); // NOI18N
 
         javax.swing.GroupLayout A12Layout = new javax.swing.GroupLayout(A12);
         A12.setLayout(A12Layout);
@@ -1371,6 +1386,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         A12.getAccessibleContext().setAccessibleName("A12");
 
         A7.setBackground(new java.awt.Color(53, 140, 250));
+        A7.setName("A7"); // NOI18N
 
         javax.swing.GroupLayout A7Layout = new javax.swing.GroupLayout(A7);
         A7.setLayout(A7Layout);
@@ -1384,6 +1400,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A8.setBackground(new java.awt.Color(53, 140, 250));
+        A8.setName("A8"); // NOI18N
 
         javax.swing.GroupLayout A8Layout = new javax.swing.GroupLayout(A8);
         A8.setLayout(A8Layout);
@@ -1397,6 +1414,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A9.setBackground(new java.awt.Color(53, 140, 250));
+        A9.setName("A9"); // NOI18N
 
         javax.swing.GroupLayout A9Layout = new javax.swing.GroupLayout(A9);
         A9.setLayout(A9Layout);
@@ -1688,6 +1706,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         A9.getAccessibleContext().setAccessibleName("A9");
 
         A13.setBackground(new java.awt.Color(53, 140, 250));
+        A13.setName("A13"); // NOI18N
 
         javax.swing.GroupLayout A13Layout = new javax.swing.GroupLayout(A13);
         A13.setLayout(A13Layout);
@@ -1701,6 +1720,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A14.setBackground(new java.awt.Color(53, 140, 250));
+        A14.setName("A14"); // NOI18N
 
         javax.swing.GroupLayout A14Layout = new javax.swing.GroupLayout(A14);
         A14.setLayout(A14Layout);
@@ -1714,6 +1734,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         A15.setBackground(new java.awt.Color(53, 140, 250));
+        A15.setName("A15"); // NOI18N
 
         javax.swing.GroupLayout A15Layout = new javax.swing.GroupLayout(A15);
         A15.setLayout(A15Layout);
