@@ -3,6 +3,7 @@ package Business;
 import java.time.*;
 
 public class Admin extends Person {
+    
     private LocalDate employment_date;
     private float salary;
 

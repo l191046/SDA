@@ -13,6 +13,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private CardLayout T_cardstack;
     private CardLayout inner_cardstack;
     private ArrayList<JPanel> highlights;
+    private ArrayList<JTextField> profile;
     
     public Admin_GUI(JSystem system) {
         this.system = system;
@@ -27,6 +28,15 @@ public class Admin_GUI extends javax.swing.JFrame {
         highlights.add(this.highlight_manageFlights);
         highlights.add(this.highlight_addFlight);
         highlights.add(this.highlight_noFlyList);
+        
+        profile = new ArrayList<JTextField>();
+        profile.add(this.txtbox_firstName);
+        profile.add(this.txtbox_lastName);
+        profile.add(this.txtbox_CNIC);
+        profile.add(this.txtbox_address);
+        profile.add(this.txtbox_employment);
+        profile.add(this.txtbox_salary);
+        
     }
     
     private void setHighlights(String btn_name){
@@ -39,7 +49,17 @@ public class Admin_GUI extends javax.swing.JFrame {
                hl.setBackground(Color.decode("#4D5061"));
        }
     }
-   
+    private void setProfile(){
+        ArrayList<String> fields = system.getAdmin();
+        for (int i=0; i<profile.size(); i++){
+            profile.get(i).setText(fields.get(i));
+        }
+    }
+    private void clearProfile(){
+        for (int i=0; i<profile.size(); i++){
+            profile.get(i).setText("");
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -85,8 +105,8 @@ public class Admin_GUI extends javax.swing.JFrame {
         lbl_address = new javax.swing.JLabel();
         txtbox_address = new javax.swing.JTextField();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 200), new java.awt.Dimension(2, 200), new java.awt.Dimension(32767, 200));
-        lbl_designation = new javax.swing.JLabel();
-        txtbox_designation = new javax.swing.JTextField();
+        lbl_employment = new javax.swing.JLabel();
+        txtbox_employment = new javax.swing.JTextField();
         lbl_salary = new javax.swing.JLabel();
         txtbox_salary = new javax.swing.JTextField();
         btn_edit = new javax.swing.JPanel();
@@ -573,13 +593,13 @@ public class Admin_GUI extends javax.swing.JFrame {
         filler1.setBackground(new java.awt.Color(254, 182, 62));
         filler1.setOpaque(true);
 
-        lbl_designation.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        lbl_designation.setForeground(new java.awt.Color(48, 50, 61));
-        lbl_designation.setText("Designation:");
+        lbl_employment.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_employment.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_employment.setText("Employment");
 
-        txtbox_designation.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        txtbox_designation.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
-        txtbox_designation.setFocusable(false);
+        txtbox_employment.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_employment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_employment.setFocusable(false);
 
         lbl_salary.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         lbl_salary.setForeground(new java.awt.Color(48, 50, 61));
@@ -643,9 +663,9 @@ public class Admin_GUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lbl_designation, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_employment, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_designation, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtbox_employment, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_empInfoLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(lbl_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -664,8 +684,8 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_empInfoLayout.createSequentialGroup()
                         .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_designation)
-                            .addComponent(txtbox_designation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_employment)
+                            .addComponent(txtbox_employment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_salary)
@@ -1264,11 +1284,15 @@ public class Admin_GUI extends javax.swing.JFrame {
         this.txtbox_password.setText("");
         
         if (!username.equals("") && !password.equals("") && system.adminSignIn(username, password)){
+            setProfile();
             T_cardstack.show(this.Top_cardstack, "Landing_page");
         }
         else{
             this.btn_signin.setFocusable(true); //allow user to click again
         }
+        
+        
+        
     }//GEN-LAST:event_btn_signinMouseClicked
 
     private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
@@ -1277,6 +1301,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_backMouseClicked
 
     private void btn_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseClicked
+        setProfile();
         this.inner_cardstack.show(this.internal_cardstack, "Home");
         this.setHighlights("highlight_home");
     }//GEN-LAST:event_btn_homeMouseClicked
@@ -1300,6 +1325,7 @@ public class Admin_GUI extends javax.swing.JFrame {
 
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
         system.closeSession();
+        this.clearProfile();
         this.T_cardstack.show(this.Top_cardstack, "Login_card");
     }//GEN-LAST:event_btn_logoutMouseClicked
 
@@ -1384,10 +1410,10 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_address;
     private javax.swing.JLabel lbl_capacity;
     private javax.swing.JLabel lbl_cost;
-    private javax.swing.JLabel lbl_designation;
     private javax.swing.JLabel lbl_destination;
     private javax.swing.JLabel lbl_duration;
     private javax.swing.JLabel lbl_employeeInfo;
+    private javax.swing.JLabel lbl_employment;
     private javax.swing.JLabel lbl_firstName;
     private javax.swing.JLabel lbl_flightCode;
     private javax.swing.JLabel lbl_lastName;
@@ -1403,9 +1429,9 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtbox_address;
     private javax.swing.JSpinner txtbox_capacity;
     private javax.swing.JTextField txtbox_cost;
-    private javax.swing.JTextField txtbox_designation;
     private javax.swing.JTextField txtbox_destination;
     private javax.swing.JTextField txtbox_duration;
+    private javax.swing.JTextField txtbox_employment;
     private javax.swing.JTextField txtbox_firstName;
     private javax.swing.JTextField txtbox_flightCode;
     private javax.swing.JTextField txtbox_lastName;

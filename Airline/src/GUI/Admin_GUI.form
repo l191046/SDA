@@ -831,9 +831,9 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="filler1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="lbl_designation" min="-2" pref="80" max="-2" attributes="0"/>
+                                          <Component id="lbl_employment" min="-2" pref="80" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtbox_designation" min="-2" pref="190" max="-2" attributes="0"/>
+                                          <Component id="txtbox_employment" min="-2" pref="190" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
@@ -858,8 +858,8 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="lbl_designation" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtbox_designation" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_employment" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtbox_employment" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1018,7 +1018,7 @@
                             <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.VerticalStrut"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="lbl_designation">
+                        <Component class="javax.swing.JLabel" name="lbl_employment">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Microsoft JhengHei UI Light" size="14" style="0"/>
@@ -1026,10 +1026,10 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="3d" green="32" red="30" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Designation:"/>
+                            <Property name="text" type="java.lang.String" value="Employment"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtbox_designation">
+                        <Component class="javax.swing.JTextField" name="txtbox_employment">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Microsoft JhengHei UI Light" size="14" style="0"/>
