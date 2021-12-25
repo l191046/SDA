@@ -1,41 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package Business;
 
-/**
- *
- * @author HP PC
- */
 public class Person {
-    int CNIC;
-    String Firstname;
-    String Lastname;
-    String Address;
+    private String CNIC;
+    private String Firstname;
+    private String Lastname;
+    private String Address;
+
+    public String getCNIC() {
+        return CNIC;
+    }
+
+    public String getFirstname() {
+        return Firstname;
+    }
+
+    public String getLastname() {
+        return Lastname;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setCNIC(String CNIC) {
+        this.CNIC = CNIC;
+    }
+
+    public void setFirstname(String Firstname) {
+        this.Firstname = Firstname;
+    }
+
+    public void setLastname(String Lastname) {
+        this.Lastname = Lastname;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
     
-  void changeCNIC(int x)
-  { 
-      CNIC=x;
-  }
-  void changefirstname(String x)
-  {
-      Firstname=x;
-  }
-  void changelastname(String x)  
-  {
-      Lastname=x;
-  }
-  void changeaddress(String x)
-  {
-      Address=x;
-  }
-  void print()
-  {
+    void print() {
       System.out.println("CNIC: "+CNIC);
       System.out.println("Firstname: "+Firstname);
       System.out.println("Lastname: "+Lastname);
       System.out.println("Address: "+Address);
       
-  }
+    }
 }

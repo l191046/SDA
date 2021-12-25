@@ -1,30 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package Business;
 
-/**
- *
- * @author HP PC
- */
+import java.time.*;
+
 public class Admin extends Person {
-    String EmploymentDate;
-    int salary;
-    
-    void changeEmpDate(String x)
-  { 
-      EmploymentDate=x;
-  }
-    void changesalary(int x)
-    {
-        salary=x;
+    private LocalDate employment_date;
+    private float salary;
+
+    public LocalDate getEmploymentDate() {
+        return employment_date;
     }
+
+    public float getSalary() {
+        return salary;
+    }
+
+    public void setEmploymentDate(LocalDate employment_date) {
+        this.employment_date = employment_date;
+    }
+
+    public void setSalary(float salary) {
+        this.salary = salary;
+    }
+    
     @Override
-    void  print()
-    {
-        System.out.println("Employment Date: "+EmploymentDate);
-      System.out.println("Salary: "+salary);
+    void  print() {
+        System.out.println("Employment Date: "+ employment_date.toString());
+        System.out.println("Salary: "+salary);
     }
     
 }
