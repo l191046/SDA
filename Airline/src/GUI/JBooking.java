@@ -2,18 +2,46 @@ package GUI;
 
 import Business.JSystem;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.JTextField;
 
 
 public class JBooking extends javax.swing.JFrame {
     
     private JSystem system;
     private CardLayout cards;
+    private String flightId;
+    private ArrayList<JTextField> textFields;
     
     public JBooking(JSystem system) {
         this.system = system;
         initComponents();
         this.setVisible(true);
     }
+    
+    public JBooking(String id, String src, String dest, String Ddate, String Dtime, String Connections){
+        initComponents();
+        this.setVisible(true);
+        
+        flightId = id;
+        textFields = new ArrayList<>();
+        textFields.add(txtbox_firstName);
+        textFields.add(txtbox_lastName);
+        textFields.add(txtbox_cnic);
+        textFields.add(txtbox_address);
+        textFields.add(txtbox_contact);
+    }
+    
+    public boolean allFieldsEmpty() {
+        for (JTextField textbox : textFields) {
+            if (! textbox.getText().trim().isEmpty() ) {
+                return false;   // one field is non-empty, so we can stop immediately
+            }
+        }
+        return true;  // every field was empty (or else we'd have stopped earlier)
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -382,8 +410,20 @@ public class JBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseClicked
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
-        this.dispose();
-        JSeatSelect seats = new JSeatSelect(system);
+        
+        if(allFieldsEmpty()){
+            showMessageDialog(null, "Please Fill Out All Details To Continue!");
+        } else{
+            String firstName = txtbox_firstName.getText().trim();
+            String lastName = txtbox_lastName.getText().trim();
+            String cnic = txtbox_cnic.getText().trim();
+            String address = txtbox_address.getText().trim();
+            String contact = txtbox_contact.getText().trim();
+            
+            
+            this.dispose();
+            JSeatSelect seats = new JSeatSelect(flightId, firstName, lastName, cnic, address, contact);
+        }
     }//GEN-LAST:event_btn_nextMouseClicked
 
 
