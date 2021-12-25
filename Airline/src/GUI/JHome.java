@@ -1047,7 +1047,7 @@ public class JHome extends javax.swing.JFrame {
             String Connections = table_routes.getModel().getValueAt(row, 5).toString();
 
 
-            JBooking booking = new JBooking(id, src, dest, Ddate, Dtime, Connections);
+            JBooking booking = new JBooking(system, id, src, dest, Ddate, Dtime, Connections);
         }
         
     }//GEN-LAST:event_table_routesMouseClicked
