@@ -16,9 +16,9 @@ public class FlightList {
         return true;
     }
     public Flight searchFlight(int id){
-        for(int i=0; i<flights.size(); i++){
-            if (flights.get(i).getFlightID() == id)
-                return flights.get(i);
+        for(int i=0; i<Flights.size(); i++){
+            if (Flights.get(i).getFlightID() == id)
+                return Flights.get(i);
         }
         return null;
     }
