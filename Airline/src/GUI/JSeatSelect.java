@@ -24,16 +24,12 @@ public class JSeatSelect extends javax.swing.JFrame {
         this.setVisible(true);
         
         seats = new ArrayList<JPanel>();
-        /*Set Names of All Pannels, Store them in seat array, work on it's functionality*/
+
         getComponentsRecursive(JSeatSelect.this,seats);
-//        getComponentsRecursive(MiddleClass,seats);
-//        getComponentsRecursive(MiddleClass1,seats);
-//        getComponentsRecursive(MiddleClass2,seats);
-//        getComponentsRecursive(MiddleClass3,seats);
-//        
+        System.out.println("Hello World");
         for(int i = 0; i < seats.size(); i++){
             String loc = seats.get(i).getName();
-            if(seats.get(i).getName() == "A1"){
+
                 seats.get(i).addMouseListener(new MouseAdapter(){
                     public void mouseClicked(MouseEvent e) {
 
@@ -46,7 +42,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                         }
                     }       
                 });
-            }
+
         }
         
        // PanelListener listener = new PanelListener();
@@ -778,9 +774,10 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addComponent(F3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        A1.getAccessibleContext().setAccessibleName("A1");
-        A2.getAccessibleContext().setAccessibleName("A2");
+        A1.getAccessibleContext().setAccessibleName("A2");
+        A2.getAccessibleContext().setAccessibleName("A3");
         A3.getAccessibleContext().setAccessibleName("A3");
+        B1.getAccessibleContext().setAccessibleName("A2");
 
         MiddleClass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 public class MSsql {
     //CHANGE SERVER NAME ACCORDINGLY AND SAVE
-    protected String url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;";   //Abdul Muneem
+    //protected String url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;";   //Abdul Muneem
     //protected String url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Razi
     //protected String url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Sukhan
-    //protected String url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Behzad
+    protected String url="jdbc:sqlserver://DESKTOP-21OEGT1\\SQLEXPRESS;"+"databaseName=airline;integratedSecurity=true;"; //Behzad
     
     public ResultSet demo(){
         ResultSet result = null;

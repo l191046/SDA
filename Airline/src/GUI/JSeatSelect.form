@@ -581,7 +581,7 @@
             <Property name="name" type="java.lang.String" value="A1" noResource="true"/>
           </Properties>
           <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="A1"/>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="A2"/>
           </AccessibilityProperties>
           <Events>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A1MouseEntered"/>
@@ -607,7 +607,7 @@
             </Property>
           </Properties>
           <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="A2"/>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="A3"/>
           </AccessibilityProperties>
 
           <Layout>
@@ -652,6 +652,9 @@
               <Color blue="30" green="c1" red="ee" type="rgb"/>
             </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="A2"/>
+          </AccessibilityProperties>
 
           <Layout>
             <DimensionLayout dim="0">
