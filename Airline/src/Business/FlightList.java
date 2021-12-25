@@ -1,18 +1,18 @@
 package Business;
-
 import java.util.ArrayList;
 
 public class FlightList {
-    private ArrayList<Flight> flights;
+    public ArrayList<Flight> Flights;
     
     public FlightList(){
-        flights = new ArrayList<Flight>();
+        Flights = new ArrayList<Flight>();
     }
+    
     
     public boolean addFlight(Flight new_flight){
         if (searchFlight(new_flight.getFlightID()) != null) //if flight already exists
             return false;
-        flights.add(new_flight);
+        Flights.add(new_flight);
         return true;
     }
     public Flight searchFlight(int id){

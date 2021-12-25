@@ -4,10 +4,6 @@
  */
 package Business;
 
-/**
- *
- * @author Fajar
- */
 public class Airport {
     private int Code;
     private String Name;
