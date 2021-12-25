@@ -20,35 +20,6 @@ public class JSeatSelect extends javax.swing.JFrame {
 
     private ArrayList<JPanel> seats;
     
-    public JSeatSelect() {
-        initComponents();
-        this.setVisible(true);
-        
-        seats = new ArrayList<JPanel>();
-
-        getComponentsRecursive(JSeatSelect.this,seats);
-        System.out.println("Hello World");
-        for(int i = 0; i < seats.size(); i++){
-            String loc = seats.get(i).getName();
-
-                seats.get(i).addMouseListener(new MouseAdapter(){
-                    public void mouseClicked(MouseEvent e) {
-
-                    JPanel p = (JPanel)e.getSource();
-                    //Makes sure it only registers for single clicks(always registers even on double clicks, just registers twice.)
-                     if (e.getClickCount() == 1) {
-                       
-                       
-                       p.setBackground( Color.LIGHT_GRAY);
-                       Seat_Loc.setText(loc);
-                       txtbox_fseatCost.setText("$10");
-                        }
-                    }       
-                });
-
-        }        
-    }
-    
     public JSeatSelect(String flightId, String firstName, String lastName, String cnic, String address, String contact) {
         initComponents();
         this.setVisible(true);
