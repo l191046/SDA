@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class JHome extends javax.swing.JFrame {
 
-    JSystem system;
+    private JSystem system;
     private CardLayout cards;
     private ArrayList<JPanel> highlights;
     
@@ -1009,7 +1009,7 @@ public class JHome extends javax.swing.JFrame {
         //close current frame
         this.dispose();
         //open Admin_GUI
-        Admin_GUI aGui = new Admin_GUI();
+        Admin_GUI aGui = new Admin_GUI(system);
     }//GEN-LAST:event_btn_adminLoginMouseClicked
 
     private void btn_statusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_statusMouseClicked
@@ -1038,7 +1038,7 @@ public class JHome extends javax.swing.JFrame {
         int row = this.table_routes.getSelectedRow();
         if (row != -1){
             //open customer info form
-            JBooking booking = new JBooking();
+            JBooking booking = new JBooking(system);
         }
         
     }//GEN-LAST:event_table_routesMouseClicked
