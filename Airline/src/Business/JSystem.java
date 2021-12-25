@@ -1,10 +1,10 @@
 package Business;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import Database.MSsql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class JSystem {
@@ -22,10 +22,7 @@ public class JSystem {
         return instance;
     }
     
-    public void test(){
-        System.out.println("Test successful");
-    }
-    
+    //CUSTOMER
     //Populate table_model with results of search in flightlist
     public boolean checkFlightStatus(int flight_id, DefaultTableModel table_model){
         Flight flight = flight_list.searchFlight(flight_id);
@@ -45,6 +42,8 @@ public class JSystem {
         return true;
     }
     
+    
+    //ADMIN
     //Set admin session
     public boolean adminSignIn(String username, String password){
         try (ResultSet result = database.checkAdmin(username, password);) {
@@ -71,6 +70,17 @@ public class JSystem {
     }
     public void closeSession(){
         admin_session = null;
+    }
+    //retrieve strings for home page
+    public ArrayList<String> getAdmin(){
+        ArrayList<String> fields = new ArrayList<String>();
+        fields.add(admin_session.getFirstname());
+        fields.add(admin_session.getLastname());
+        fields.add(admin_session.getCNIC());
+        fields.add(admin_session.getAddress());
+        fields.add(admin_session.getEmploymentDate().toString());
+        fields.add(Float.toString(admin_session.getSalary()));
+        return fields;
     }
     
 }

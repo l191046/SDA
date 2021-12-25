@@ -5,18 +5,30 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.net.InetAddress;
 
 public class MSsql {
     //CHANGE SERVER NAME ACCORDINGLY AND SAVE
-    //protected String url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=SDA;integratedSecurity=true;";   //Abdul Muneem
-    protected String url="jdbc:sqlserver://MOHAMMAD\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Razi
-    //protected String url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Sukhan
-    //protected String url="jdbc:sqlserver://DESKTOP-21OEGT1\\SQLEXPRESS;"+"databaseName=airline;integratedSecurity=true;"; //Behzad
+    protected String url;
     
     private static final MSsql instance = new MSsql();
     
     private MSsql(){
-        
+        try {
+            //AUTO-ASSIGN SQL CONNECTION STRING
+            url = "jdbc:sqlserver://";
+            url += InetAddress.getLocalHost().getHostName().toUpperCase();
+            url += "\\MSSQLSERVER;databaseName=SDA;integratedSecurity=true;";
+            
+            //CHOOSE MANUALLY incase is (inevitably) fails
+            //url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=SDA;integratedSecurity=true;";   //Abdul Muneem
+            //url="jdbc:sqlserver://MOHAMMAD\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Razi
+            //url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Sukhan
+            //url="jdbc:sqlserver://DESKTOP-21OEGT1\\SQLEXPRESS;"+"databaseName=airline;integratedSecurity=true;"; //Behzad
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public static MSsql getInstance(){
         return instance;
