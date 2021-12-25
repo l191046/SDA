@@ -2,14 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package airline;
+package Business;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Fajar
- */
 public class TimeCalculator implements RouteCalculations {
     
     public float returnTotalTime(Route obj){
@@ -18,7 +14,6 @@ public class TimeCalculator implements RouteCalculations {
         for(int i = 0; i< myFlights.size();i++){
             totalTime+=myFlights.get(i).getDuration();
         }
-        
         return totalTime;
     }
     

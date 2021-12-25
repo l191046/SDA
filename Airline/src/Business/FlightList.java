@@ -1,13 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package airline;
+package Business;
+import java.util.ArrayList;
 
-/**
- *
- * @author Fajar
- */
 public class FlightList {
+    public ArrayList<Flight> Flights;
     
+    public FlightList(){
+        Flights = new ArrayList<Flight>();
+    }
+    
+    
+    public boolean addFlight(Flight new_flight){
+        if (searchFlight(new_flight.getFlightID()) != null) //if flight already exists
+            return false;
+        Flights.add(new_flight);
+        return true;
+    }
+    public Flight searchFlight(int id){
+        for(int i=0; i<Flights.size(); i++){
+            if (Flights.get(i).getFlightID() == id)
+                return Flights.get(i);
+        }
+        return null;
+    }
 }

@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Business.JSystem;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -18,9 +19,11 @@ import javax.swing.border.Border;
 
 public class JSeatSelect extends javax.swing.JFrame {
 
+    private JSystem system;
     private ArrayList<JPanel> seats;
-    
-    public JSeatSelect(String flightId, String firstName, String lastName, String cnic, String address, String contact) {
+   
+    public JSeatSelect(JSystem system, String flightId, String firstName, String lastName, String cnic, String address, String contact) {
+        this.system = system;
         initComponents();
         this.setVisible(true);
         

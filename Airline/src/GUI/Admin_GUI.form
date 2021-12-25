@@ -93,7 +93,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="Signin_label" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btn_signin" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -104,7 +104,7 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="Password_label" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
                                       <Component id="Username_label" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Username_field" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtbox_username" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtbox_password" alignment="0" pref="246" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -122,13 +122,13 @@
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                           <Component id="Username_label" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Username_field" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtbox_username" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="Password_label" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtbox_password" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="Signin_label" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btn_signin" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btn_back" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -149,7 +149,7 @@
                     <Property name="text" type="java.lang.String" value="Welcome to XYZ Airways"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="Username_field">
+                <Component class="javax.swing.JTextField" name="txtbox_username">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Microsoft JhengHei UI Light" size="14" style="0"/>
@@ -159,7 +159,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Username_fieldActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtbox_usernameActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Username_label">
@@ -184,7 +184,7 @@
                     <Property name="text" type="java.lang.String" value="Password"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="Signin_label">
+                <Component class="javax.swing.JLabel" name="btn_signin">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="61" green="50" red="4d" type="rgb"/>
@@ -203,7 +203,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Signin_labelMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_signinMouseClicked"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="btn_back">
@@ -831,9 +831,9 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="filler1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="lbl_designation" min="-2" pref="80" max="-2" attributes="0"/>
+                                          <Component id="lbl_employment" min="-2" pref="80" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtbox_designation" min="-2" pref="190" max="-2" attributes="0"/>
+                                          <Component id="txtbox_employment" min="-2" pref="190" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
@@ -858,8 +858,8 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="lbl_designation" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtbox_designation" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_employment" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtbox_employment" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1018,7 +1018,7 @@
                             <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.VerticalStrut"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="lbl_designation">
+                        <Component class="javax.swing.JLabel" name="lbl_employment">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Microsoft JhengHei UI Light" size="14" style="0"/>
@@ -1026,10 +1026,10 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="3d" green="32" red="30" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Designation:"/>
+                            <Property name="text" type="java.lang.String" value="Employment"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtbox_designation">
+                        <Component class="javax.swing.JTextField" name="txtbox_employment">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Microsoft JhengHei UI Light" size="14" style="0"/>
