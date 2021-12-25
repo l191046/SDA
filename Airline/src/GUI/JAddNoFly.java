@@ -1,12 +1,16 @@
 package GUI;
 
+import Business.JSystem;
 import java.awt.CardLayout;
 
 
 public class JAddNoFly extends javax.swing.JFrame {
+    
+    private JSystem system;
     private CardLayout cards;
     
-    public JAddNoFly() {
+    public JAddNoFly(JSystem system) {
+        this.system = system;
         initComponents();
         this.setVisible(true);
     }

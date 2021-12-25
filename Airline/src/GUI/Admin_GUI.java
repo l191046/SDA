@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Business.JSystem;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -11,11 +12,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Admin_GUI extends javax.swing.JFrame {
+    
+    private JSystem system;
     private CardLayout T_cardstack;
     private CardLayout inner_cardstack;
     private ArrayList<JPanel> highlights;
     
-    public Admin_GUI() {
+    public Admin_GUI(JSystem system) {
+        this.system = system;
+        
         initComponents();
         setVisible(true);
         T_cardstack = (CardLayout) this.Top_cardstack.getLayout();
@@ -1265,7 +1270,7 @@ public class Admin_GUI extends javax.swing.JFrame {
 
     private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
         this.dispose();
-        JHome home = new JHome();
+        JHome home = new JHome(system);
     }//GEN-LAST:event_btn_backMouseClicked
 
     private void btn_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseClicked
@@ -1295,7 +1300,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutMouseClicked
 
     private void btn_addToNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addToNoFlyMouseClicked
-        JAddNoFly addNoFly = new JAddNoFly();
+        JAddNoFly addNoFly = new JAddNoFly(system);
     }//GEN-LAST:event_btn_addToNoFlyMouseClicked
 
     private void btn_removeNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeNoFlyMouseClicked

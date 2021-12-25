@@ -1,12 +1,16 @@
 package GUI;
 
+import Business.JSystem;
 import java.awt.CardLayout;
 
 
 public class JBooking extends javax.swing.JFrame {
+    
+    private JSystem system;
     private CardLayout cards;
     
-    public JBooking() {
+    public JBooking(JSystem system) {
+        this.system = system;
         initComponents();
         this.setVisible(true);
     }
@@ -379,7 +383,7 @@ public class JBooking extends javax.swing.JFrame {
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
         this.dispose();
-        JSeatSelect seats = new JSeatSelect();
+        JSeatSelect seats = new JSeatSelect(system);
     }//GEN-LAST:event_btn_nextMouseClicked
 
 
