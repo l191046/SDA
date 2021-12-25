@@ -51,8 +51,6 @@ public class Airline {
         PathFinderAlgorithm calcPaths = new PathFinderAlgorithm(flightList);
         
         calcPaths.findPaths(a2, a4);
-        
-        database = new MSsql();
 
         system = JSystem.getInstance();
         
