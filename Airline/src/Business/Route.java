@@ -14,6 +14,13 @@ public class Route{
     
     private ArrayList<Flight> Flights;
     
+    public Route(ArrayList<Flight> obj){
+        Flights = new ArrayList<Flight>();
+        for(int i = 0; i < obj.size();i++){
+            this.Flights.add(obj.get(i));
+        }
+    }
+    
     public Route(){
         Flights = new ArrayList<Flight>();
     }

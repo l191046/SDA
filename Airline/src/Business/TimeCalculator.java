@@ -6,10 +6,6 @@ package Business;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Fajar
- */
 public class TimeCalculator implements RouteCalculations {
     
     public float returnTotalTime(Route obj){
@@ -18,7 +14,6 @@ public class TimeCalculator implements RouteCalculations {
         for(int i = 0; i< myFlights.size();i++){
             totalTime+=myFlights.get(i).getDuration();
         }
-        
         return totalTime;
     }
     
