@@ -20,7 +20,7 @@ public class MSsql {
             url += InetAddress.getLocalHost().getHostName().toUpperCase();
             url += "\\MSSQLSERVER;databaseName=SDA;integratedSecurity=true;";
             
-            //CHOOSE MANUALLY incase is (inevitably) fails
+            //CHOOSE MANUALLY incase it (inevitably) fails
             //url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=SDA;integratedSecurity=true;";   //Abdul Muneem
             //url="jdbc:sqlserver://MOHAMMAD\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Razi
             //url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Sukhan
