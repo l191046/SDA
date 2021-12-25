@@ -1,5 +1,6 @@
 package GUI;
 
+import Business.JSystem;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -7,11 +8,14 @@ import javax.swing.JTextField;
 
 
 public class JBooking extends javax.swing.JFrame {
+    
+    private JSystem system;
     private CardLayout cards;
     private String flightId;
     private ArrayList<JTextField> textFields;
     
-    public JBooking() {
+    public JBooking(JSystem system) {
+        this.system = system;
         initComponents();
         this.setVisible(true);
     }
@@ -420,8 +424,6 @@ public class JBooking extends javax.swing.JFrame {
             this.dispose();
             JSeatSelect seats = new JSeatSelect(flightId, firstName, lastName, cnic, address, contact);
         }
-        
-        
     }//GEN-LAST:event_btn_nextMouseClicked
 
 

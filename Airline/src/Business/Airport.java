@@ -2,12 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package airline;
+package Business;
 
-/**
- *
- * @author Fajar
- */
 public class Airport {
     private int Code;
     private String Name;
