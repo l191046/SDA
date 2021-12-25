@@ -20,7 +20,8 @@ public class JBooking extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public JBooking(String id, String src, String dest, String Ddate, String Dtime, String Connections){
+    public JBooking(JSystem system, String id, String src, String dest, String Ddate, String Dtime, String Connections){
+        this.system = system;
         initComponents();
         this.setVisible(true);
         
@@ -422,7 +423,7 @@ public class JBooking extends javax.swing.JFrame {
             
             
             this.dispose();
-            JSeatSelect seats = new JSeatSelect(flightId, firstName, lastName, cnic, address, contact);
+            JSeatSelect seats = new JSeatSelect(system, flightId, firstName, lastName, cnic, address, contact);
         }
     }//GEN-LAST:event_btn_nextMouseClicked
 
