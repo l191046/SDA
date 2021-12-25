@@ -20,7 +20,8 @@ public class JBooking extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public JBooking(String id, String src, String dest, String Ddate, String Dtime, String Connections){
+    public JBooking(JSystem system, String id, String src, String dest, String Ddate, String Dtime, String Connections){
+        this.system = system;
         initComponents();
         this.setVisible(true);
         
@@ -33,13 +34,13 @@ public class JBooking extends javax.swing.JFrame {
         textFields.add(txtbox_contact);
     }
     
-    public boolean allFieldsEmpty() {
+    public boolean anyFieldsEmpty() {
         for (JTextField textbox : textFields) {
-            if (! textbox.getText().trim().isEmpty() ) {
-                return false;   // one field is non-empty, so we can stop immediately
+            if (textbox.getText().trim().isEmpty() ) {
+                return true;   // one field is non-empty, so we can stop immediately
             }
         }
-        return true;  // every field was empty (or else we'd have stopped earlier)
+        return false;  // every field was empty (or else we'd have stopped earlier)
     }
     
     @SuppressWarnings("unchecked")
@@ -411,7 +412,7 @@ public class JBooking extends javax.swing.JFrame {
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
         
-        if(allFieldsEmpty()){
+        if(anyFieldsEmpty()){
             showMessageDialog(null, "Please Fill Out All Details To Continue!");
         } else{
             String firstName = txtbox_firstName.getText().trim();
@@ -422,7 +423,7 @@ public class JBooking extends javax.swing.JFrame {
             
             
             this.dispose();
-            JSeatSelect seats = new JSeatSelect(flightId, firstName, lastName, cnic, address, contact);
+            JSeatSelect seats = new JSeatSelect(system, flightId, firstName, lastName, cnic, address, contact);
         }
     }//GEN-LAST:event_btn_nextMouseClicked
 
