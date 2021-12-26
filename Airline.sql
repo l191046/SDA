@@ -87,7 +87,7 @@ INSERT Person([Firstname], [LastName], [CNIC], [Address]) VALUES ('Behzad','Khok
 INSERT Customer ([CNIC],Contact, No_Fly) VALUES ('3453819234532','29304532910', 1)
 INSERT Customer ([CNIC],Contact, No_Fly) VALUES ('3452815234532','93043219342', 0)
 
-INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('5930219384320','sukhanamir','crunchyroll',54000,'2000-04-20')
+INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3453819234532','sukhanamir','crunchyroll',54000,'2000-04-20')
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3452815234532','admin','admin',400000,'2020-01-19')
 
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE23','US1','DO60','02:30',50000,'Delayed','11:00')
