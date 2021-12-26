@@ -929,7 +929,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="30" green="c1" red="ee" type="rgb"/>
             </Property>
-            <Property name="name" type="java.lang.String" value="E16" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="F2" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -950,6 +950,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="30" green="c1" red="ee" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F3" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -1393,6 +1394,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F4" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1418,6 +1420,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F5" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1443,6 +1446,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F6" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1891,6 +1895,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F10" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -1911,6 +1916,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F11" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -1931,6 +1937,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F12" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -2375,6 +2382,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F7" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -2395,6 +2403,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F8" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -2415,6 +2424,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F9" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -2859,6 +2869,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F13" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -2879,6 +2890,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F14" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -2899,6 +2911,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="8c" red="35" type="rgb"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="F15" noResource="true"/>
           </Properties>
 
           <Layout>
@@ -3336,7 +3349,7 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Microsoft JhengHei UI Light" size="14" style="1"/>
+              <Font name="Microsoft JhengHei UI Light" size="18" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -3412,8 +3425,9 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Microsoft JhengHei UI Light" size="14" style="0"/>
+                  <Font name="Microsoft JhengHei UI Light" size="24" style="1"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="$"/>
               </Properties>
             </Component>
           </SubComponents>
