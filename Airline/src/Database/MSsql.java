@@ -50,6 +50,7 @@ public class MSsql {
         return result;
     }
     
+    //admin profile functions
     public ResultSet checkAdmin(String username, String password){
         ResultSet result = null;
         try {
@@ -61,6 +62,44 @@ public class MSsql {
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString(1, username);
             Cmt.setString(2, password);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public boolean editAdmin(String CNIC, String fName, String lName, String address){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [admin_signin](?,?,?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString(1, CNIC);
+            Cmt.setString(2, fName);
+            Cmt.setString(3, lName);
+            Cmt.setString(4, address);
+            Cmt.executeQuery();
+            return true;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    //retrieve table of flights
+    public ResultSet getTableFlights(){
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [get_flights]}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
             result=Cmt.executeQuery();
         }
         catch(Exception e) {

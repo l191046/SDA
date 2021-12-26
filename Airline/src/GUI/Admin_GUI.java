@@ -4,6 +4,7 @@ import Business.JSystem;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -14,12 +15,16 @@ public class Admin_GUI extends javax.swing.JFrame {
     private CardLayout inner_cardstack;
     private ArrayList<JPanel> highlights;
     private ArrayList<JTextField> profile;
+    private DefaultTableModel model_flights;
+    
     
     public Admin_GUI(JSystem system) {
         this.system = system;
         
+        setTableFlights();
         initComponents();
         setVisible(true);
+        
         T_cardstack = (CardLayout) this.Top_cardstack.getLayout();
         inner_cardstack = (CardLayout) this.internal_cardstack.getLayout();
         
@@ -39,6 +44,18 @@ public class Admin_GUI extends javax.swing.JFrame {
         
     }
     
+    private void setTableFlights(){
+        model_flights = new DefaultTableModel();
+        String header[] = new String[] {
+            "Flight Code", "From", "To", "Departure", "Duration", "Status", "Ticket"
+        };
+        
+        model_flights.setColumnCount(7);
+        model_flights.setColumnIdentifiers(header);
+    }
+    private void populateTableFlights(){
+        system.getTableFlights(this.model_flights);
+    }
     private void setHighlights(String btn_name){
        for(int i=0; i<highlights.size(); i++){
            JPanel hl = highlights.get(i);
@@ -54,6 +71,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         for (int i=0; i<profile.size(); i++){
             profile.get(i).setText(fields.get(i));
         }
+        this.btn_edit.setVisible(false);
     }
     private void clearProfile(){
         for (int i=0; i<profile.size(); i++){
@@ -568,6 +586,11 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         txtbox_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         txtbox_firstName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_firstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbox_firstNameKeyTyped(evt);
+            }
+        });
 
         lbl_lastName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         lbl_lastName.setForeground(new java.awt.Color(48, 50, 61));
@@ -575,6 +598,11 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         txtbox_lastName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         txtbox_lastName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_lastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbox_lastNameKeyTyped(evt);
+            }
+        });
 
         lbl_CNIC.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         lbl_CNIC.setForeground(new java.awt.Color(48, 50, 61));
@@ -582,6 +610,7 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         txtbox_CNIC.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         txtbox_CNIC.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_CNIC.setFocusable(false);
 
         lbl_address.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         lbl_address.setForeground(new java.awt.Color(48, 50, 61));
@@ -589,6 +618,11 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         txtbox_address.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         txtbox_address.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        txtbox_address.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbox_addressKeyTyped(evt);
+            }
+        });
 
         filler1.setBackground(new java.awt.Color(254, 182, 62));
         filler1.setOpaque(true);
@@ -611,6 +645,11 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         btn_edit.setBackground(new java.awt.Color(77, 80, 97));
         btn_edit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_editMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -762,37 +801,8 @@ public class Admin_GUI extends javax.swing.JFrame {
         scroll_flights.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
 
         table_flights.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        table_flights.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
-        table_flights.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Flight ID", "Source", "Destination", "Capacity", "Time"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        table_flights.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        table_flights.setModel(model_flights);
         table_flights.setIntercellSpacing(new java.awt.Dimension(10, 10));
         table_flights.setRowHeight(30);
         table_flights.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -801,13 +811,6 @@ public class Admin_GUI extends javax.swing.JFrame {
             }
         });
         scroll_flights.setViewportView(table_flights);
-        if (table_flights.getColumnModel().getColumnCount() > 0) {
-            table_flights.getColumnModel().getColumn(0).setResizable(false);
-            table_flights.getColumnModel().getColumn(1).setResizable(false);
-            table_flights.getColumnModel().getColumn(2).setResizable(false);
-            table_flights.getColumnModel().getColumn(3).setResizable(false);
-            table_flights.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         btn_removeFlight.setBackground(new java.awt.Color(77, 80, 97));
         btn_removeFlight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1307,6 +1310,8 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_homeMouseClicked
 
     private void btn_manageFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manageFlightsMouseClicked
+        //UPDATE TABLE
+        populateTableFlights();
         this.inner_cardstack.show(this.internal_cardstack, "Manage_flights");
         this.setHighlights("highlight_manageFlights");
         this.btn_removeFlight.setVisible(false);
@@ -1354,6 +1359,45 @@ public class Admin_GUI extends javax.swing.JFrame {
             this.btn_removeFlight.setVisible(true);
         }
     }//GEN-LAST:event_table_flightsMouseClicked
+
+    private void txtbox_addressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbox_addressKeyTyped
+        if (!profile.get(3).equals(this.txtbox_address.getText())){
+            this.btn_edit.setVisible(true);
+        }
+        else {
+            this.btn_edit.setVisible(false);
+        }
+    }//GEN-LAST:event_txtbox_addressKeyTyped
+
+    private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
+        String new_fname = this.txtbox_firstName.getText();
+        String new_lname = this.txtbox_lastName.getText();
+        String new_address = this.txtbox_address.getText();
+        if (new_fname.equals("") || new_lname.equals("") || new_address.equals("")){
+            //validation check
+        }
+        else {
+            
+        }
+    }//GEN-LAST:event_btn_editMouseClicked
+
+    private void txtbox_firstNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbox_firstNameKeyTyped
+        if (!profile.get(0).equals(this.txtbox_address.getText())){
+            this.btn_edit.setVisible(true);
+        }
+        else {
+            this.btn_edit.setVisible(false);
+        }
+    }//GEN-LAST:event_txtbox_firstNameKeyTyped
+
+    private void txtbox_lastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbox_lastNameKeyTyped
+        if (!profile.get(1).equals(this.txtbox_address.getText())){
+            this.btn_edit.setVisible(true);
+        }
+        else {
+            this.btn_edit.setVisible(true);
+        }
+    }//GEN-LAST:event_txtbox_lastNameKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
