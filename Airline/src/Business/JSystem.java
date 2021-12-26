@@ -72,6 +72,9 @@ public class JSystem {
     }
     public void editAdmin(String fname, String lname, String address){
         database.editAdmin(admin_session.getCNIC(), fname, lname, address);
+        admin_session.setFirstname(fname);
+        admin_session.setLastname(lname);
+        admin_session.setAddress(address);
     }
     //retrieve strings for home page
     public ArrayList<String> getAdmin(){
@@ -111,5 +114,9 @@ public class JSystem {
             e.printStackTrace();
         }
     }
-    
+    //remove flight
+    public boolean removeFlight(String flightID){
+        //awaiting implementation
+        return false;
+    }
 }

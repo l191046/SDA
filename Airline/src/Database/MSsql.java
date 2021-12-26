@@ -74,14 +74,14 @@ public class MSsql {
             Connection con = DriverManager.getConnection(url);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //CALLING STORED PROCEDURE
-            String SQL = "{call [admin_signin](?,?,?,?)}";
+            String SQL = "{call [edit_admin](?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString(1, CNIC);
             Cmt.setString(2, fName);
             Cmt.setString(3, lName);
             Cmt.setString(4, address);
-            Cmt.executeQuery();
+            Cmt.execute();
             return true;
         }
         catch(Exception e) {
