@@ -112,6 +112,20 @@ AS
 	WHERE	[Admin].Username = @username AND [Admin].Password = @password
 GO
 
+Go
+CREATE PROCEDURE edit_admin
+@fname	varchar(20),
+@lname	varchar(20),
+@adress	nvarchar(255),
+@cnic	char(13)
+AS
+	UPDATE	[Person]
+	SET		FirstName = @fname,
+			LastName = @lname,
+			[Address]=@adress
+	WHERE	CNIC = @cnic
+GO
+
 GO
 CREATE PROCEDURE get_flights
 AS
