@@ -54,6 +54,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         model_flights.setColumnIdentifiers(header);
     }
     private void populateTableFlights(){
+        this.model_flights.setRowCount(0);
         system.getTableFlights(this.model_flights);
     }
     private void setHighlights(String btn_name){
@@ -1350,7 +1351,14 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_table_customersMouseClicked
 
     private void btn_removeFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeFlightMouseClicked
-        // TODO add your handling code here:
+        this.btn_removeFlight.setFocusable(false);
+        
+        DefaultTableModel flightsTable = (DefaultTableModel) this.table_flights.getModel();
+        int row = this.table_flights.getSelectedRow();
+        
+        String flightID = flightsTable.getValueAt(row, 0).toString(); //get flightID to be removed
+        //awaiting implementation
+        this.btn_removeFlight.setFocusable(true);
     }//GEN-LAST:event_btn_removeFlightMouseClicked
 
     private void table_flightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_flightsMouseClicked
@@ -1370,6 +1378,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtbox_addressKeyTyped
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
+        this.btn_edit.setFocusable(false); //lock button
         String new_fname = this.txtbox_firstName.getText();
         String new_lname = this.txtbox_lastName.getText();
         String new_address = this.txtbox_address.getText();
@@ -1377,8 +1386,10 @@ public class Admin_GUI extends javax.swing.JFrame {
             //validation check
         }
         else {
-            
+            system.editAdmin(new_fname, new_lname, new_address);
+            setProfile();
         }
+        this.btn_edit.setFocusable(true); //unlock button
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void txtbox_firstNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbox_firstNameKeyTyped
