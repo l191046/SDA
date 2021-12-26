@@ -21,7 +21,8 @@ ADD CONSTRAINT PK_Person PRIMARY KEY (CNIC);
 
 CREATE TABLE [Customer] (
   [CNIC] varchar(13) NOT NULL,
-  [Contact] char(11)
+  [Contact] char(11),
+  [No_Fly] BIT
 )
 GO
 ALTER TABLE Customer
@@ -83,8 +84,8 @@ INSERT Person([Firstname], [LastName], [CNIC], [Address]) VALUES ('Rana','Muneem
 INSERT Person([Firstname], [LastName], [CNIC], [Address]) VALUES ('Razi','Ahmed','5930219384320','Johartown,Lahore')
 INSERT Person([Firstname], [LastName], [CNIC], [Address]) VALUES ('Behzad','Khokhar','3029473829134','Wapda Town,Lahore')
 
-INSERT Customer ([CNIC],Contact) VALUES ('3453819234532','29304532910')
-INSERT Customer ([CNIC],Contact) VALUES ('3452815234532','93043219342')
+INSERT Customer ([CNIC],Contact,[No_Fly]) VALUES ('3453819234532','29304532910',1)
+INSERT Customer ([CNIC],Contact,[No_Fly]) VALUES ('3452815234532','93043219342',0)
 
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('5930219384320','sukhanamir','crunchyroll',54000,'2000-04-20')
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3452815234532','abdulmuneem','dancingfajita',400000,'2020-01-19')
@@ -119,6 +120,25 @@ AS
 	FROM	Flight
 GO		
 
+CREATE PROCEDURE No_FlyList
+
+
+AS
+	SELECT *
+	FROM	[Customer]
+	WHERE	[Customer].[No_Fly]=1
+GO
+
+CREATE PROCEDURE delete_flight
+@flightid	 varchar(10)  
+
+AS
+		DELETE 
+		FROM	 Flight
+		WHERE	 Flight.FlightId=@flightid
+GO		
+
+EXEC delete_flight @flightid='LHE23';
 --drop procedure admin_signin;
 --EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
 
