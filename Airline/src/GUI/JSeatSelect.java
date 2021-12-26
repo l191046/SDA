@@ -15,12 +15,15 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 public class JSeatSelect extends javax.swing.JFrame {
 
     private JSystem system;
     private ArrayList<JPanel> seats;
+    private JPanel lastSelectSeat;
+    private Color lastSelectSeatColor;
    
     public JSeatSelect(JSystem system, String flightId, String firstName, String lastName, String cnic, String address, String contact) {
         this.system = system;
@@ -35,25 +38,38 @@ public class JSeatSelect extends javax.swing.JFrame {
 
         txtbox_flight.setText("American Express - Dummy");
 
-        
-        for(int i = 0; i < seats.size(); i++){
-            String loc = seats.get(i).getName();
+        lastSelectSeatColor = Color.black;
+        for (int i = 0; i < seats.size(); i++) {
+            String seatName = seats.get(i).getName();
 
-                seats.get(i).addMouseListener(new MouseAdapter(){
-                    public void mouseClicked(MouseEvent e) {
+            seats.get(i).addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
 
-                    JPanel p = (JPanel)e.getSource();
+                    JPanel p = (JPanel) e.getSource();
                     //Makes sure it only registers for single clicks(always registers even on double clicks, just registers twice.)
-                     if (e.getClickCount() == 1) {
-                       
-                       
-                       p.setBackground( Color.LIGHT_GRAY);
-                       Seat_Loc.setText(loc);
-                        }
-                    }       
-                });
+                    if (e.getClickCount() == 1) {
 
-        }        
+                        if (lastSelectSeatColor == Color.black) {
+                            lastSelectSeat = p;
+                            lastSelectSeatColor = p.getBackground();
+
+                        } else {
+                            lastSelectSeat.setBackground(lastSelectSeatColor);
+                            lastSelectSeat = p;
+                            lastSelectSeatColor = p.getBackground();
+                        }
+                        p.setBackground(Color.LIGHT_GRAY);
+                        Seat_Loc.setText(seatName);
+                        if (p.getParent() == FirstClass) {
+                            txtbox_fseatCost.setText("$550");
+                        } else {
+                            txtbox_fseatCost.setText("$250");
+                        }
+                    }
+                }
+            });
+
+        }
     }
     
     public void getComponentsRecursive(Container parent,ArrayList<JPanel> seats)
@@ -653,7 +669,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F2.setBackground(new java.awt.Color(238, 193, 48));
-        F2.setName("E16"); // NOI18N
+        F2.setName("F2"); // NOI18N
 
         javax.swing.GroupLayout F2Layout = new javax.swing.GroupLayout(F2);
         F2.setLayout(F2Layout);
@@ -667,6 +683,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F3.setBackground(new java.awt.Color(238, 193, 48));
+        F3.setName("F3"); // NOI18N
 
         javax.swing.GroupLayout F3Layout = new javax.swing.GroupLayout(F3);
         F3.setLayout(F3Layout);
@@ -1015,6 +1032,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(E6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 209, -1, -1));
 
         F4.setBackground(new java.awt.Color(53, 140, 250));
+        F4.setName("F4"); // NOI18N
 
         javax.swing.GroupLayout F4Layout = new javax.swing.GroupLayout(F4);
         F4.setLayout(F4Layout);
@@ -1030,6 +1048,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(F4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 248, -1, -1));
 
         F5.setBackground(new java.awt.Color(53, 140, 250));
+        F5.setName("F5"); // NOI18N
 
         javax.swing.GroupLayout F5Layout = new javax.swing.GroupLayout(F5);
         F5.setLayout(F5Layout);
@@ -1045,6 +1064,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         MiddleClass.add(F5, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 248, -1, -1));
 
         F6.setBackground(new java.awt.Color(53, 140, 250));
+        F6.setName("F6"); // NOI18N
 
         javax.swing.GroupLayout F6Layout = new javax.swing.GroupLayout(F6);
         F6.setLayout(F6Layout);
@@ -1270,6 +1290,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F10.setBackground(new java.awt.Color(53, 140, 250));
+        F10.setName("F10"); // NOI18N
 
         javax.swing.GroupLayout F10Layout = new javax.swing.GroupLayout(F10);
         F10.setLayout(F10Layout);
@@ -1283,6 +1304,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F11.setBackground(new java.awt.Color(53, 140, 250));
+        F11.setName("F11"); // NOI18N
 
         javax.swing.GroupLayout F11Layout = new javax.swing.GroupLayout(F11);
         F11.setLayout(F11Layout);
@@ -1296,6 +1318,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F12.setBackground(new java.awt.Color(53, 140, 250));
+        F12.setName("F12"); // NOI18N
 
         javax.swing.GroupLayout F12Layout = new javax.swing.GroupLayout(F12);
         F12.setLayout(F12Layout);
@@ -1601,6 +1624,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F7.setBackground(new java.awt.Color(53, 140, 250));
+        F7.setName("F7"); // NOI18N
 
         javax.swing.GroupLayout F7Layout = new javax.swing.GroupLayout(F7);
         F7.setLayout(F7Layout);
@@ -1614,6 +1638,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F8.setBackground(new java.awt.Color(53, 140, 250));
+        F8.setName("F8"); // NOI18N
 
         javax.swing.GroupLayout F8Layout = new javax.swing.GroupLayout(F8);
         F8.setLayout(F8Layout);
@@ -1627,6 +1652,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F9.setBackground(new java.awt.Color(53, 140, 250));
+        F9.setName("F9"); // NOI18N
 
         javax.swing.GroupLayout F9Layout = new javax.swing.GroupLayout(F9);
         F9.setLayout(F9Layout);
@@ -1933,6 +1959,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F13.setBackground(new java.awt.Color(53, 140, 250));
+        F13.setName("F13"); // NOI18N
 
         javax.swing.GroupLayout F13Layout = new javax.swing.GroupLayout(F13);
         F13.setLayout(F13Layout);
@@ -1946,6 +1973,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F14.setBackground(new java.awt.Color(53, 140, 250));
+        F14.setName("F14"); // NOI18N
 
         javax.swing.GroupLayout F14Layout = new javax.swing.GroupLayout(F14);
         F14.setLayout(F14Layout);
@@ -1959,6 +1987,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         );
 
         F15.setBackground(new java.awt.Color(53, 140, 250));
+        F15.setName("F15"); // NOI18N
 
         javax.swing.GroupLayout F15Layout = new javax.swing.GroupLayout(F15);
         F15.setLayout(F15Layout);
@@ -2246,7 +2275,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         jLabel14.setText("Name:");
 
         txtbox_firstName.setEditable(false);
-        txtbox_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
+        txtbox_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 18)); // NOI18N
         txtbox_firstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbox_firstNameActionPerformed(evt);
@@ -2269,7 +2298,8 @@ public class JSeatSelect extends javax.swing.JFrame {
         lbl_firstName.setText("SEAT COST:");
 
         txtbox_fseatCost.setEditable(false);
-        txtbox_fseatCost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_fseatCost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
+        txtbox_fseatCost.setText("$");
 
         javax.swing.GroupLayout panel_firstNameLayout = new javax.swing.GroupLayout(panel_firstName);
         panel_firstName.setLayout(panel_firstNameLayout);
