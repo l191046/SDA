@@ -44,17 +44,16 @@ public class JSystem {
     
     
     //ADMIN
-    //Set admin session
+    //admin session/profile funcitons
     public boolean adminSignIn(String username, String password){
         try (ResultSet result = database.checkAdmin(username, password);) {
-            if (result == null)
+            if (result == null || !result.next())
             return false;
         
             if (admin_session == null)
                 admin_session = new Admin();
 
             //SET ADMIN SESSION VALUES
-            result.next();
             admin_session.setFirstname(result.getString("FirstName"));
             admin_session.setLastname(result.getString("LastName"));
             admin_session.setCNIC(result.getString("CNIC"));
@@ -71,6 +70,9 @@ public class JSystem {
     public void closeSession(){
         admin_session = null;
     }
+    public void editAdmin(String fname, String lname, String address){
+        database.editAdmin(admin_session.getCNIC(), fname, lname, address);
+    }
     //retrieve strings for home page
     public ArrayList<String> getAdmin(){
         ArrayList<String> fields = new ArrayList<String>();
@@ -81,6 +83,33 @@ public class JSystem {
         fields.add(admin_session.getEmploymentDate().toString());
         fields.add(Float.toString(admin_session.getSalary()));
         return fields;
+    }
+    
+    //retrieve table of flights
+    public void getTableFlights(DefaultTableModel table_model){
+        try (ResultSet result = database.getTableFlights();) {
+            if (result == null)
+            return;
+            
+            //set table to result set
+            while (result.next()){
+                table_model.addRow(
+                        new Object[] {
+                            result.getString("FlightId"),
+                            result.getString("From"),
+                            result.getString("To"),
+                            result.getDate("Departure"),
+                            result.getTime("Duration"),
+                            result.getString("Status"),
+                            result.getFloat("Ticket")
+                        }
+                );
+            }
+                
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }
