@@ -42,7 +42,7 @@ CREATE TABLE [Flight] (
   [FlightId] varchar(10)  NOT NULL ,
   [Source] varchar(30) NOT NULL,
   [Destination] varchar(30),
-  [Duration] varchar(20),
+  [Duration] time,
   [Cost] int,
   [Status] varchar(20),
   [Time] datetime
@@ -89,9 +89,9 @@ INSERT Customer ([CNIC],Contact) VALUES ('3452815234532','93043219342')
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('5930219384320','sukhanamir','crunchyroll',54000,'2000-04-20')
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3452815234532','abdulmuneem','dancingfajita',400000,'2020-01-19')
 
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE23','Lahore','Abu Dhabi','2.5 hours',50000,'Delayed','11:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE45','Lahore','Paris','2.5 hours',40000,'On time','23:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI25','Karachi','New York','12 hours',110000,'Cancelled','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE23','US1','DO60','02:30',50000,'Delayed','11:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE45','PK35','DO60','02:30',40000,'On time','23:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI25','PK35','US1','12:00',110000,'Cancelled','16:00')
 
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('US1','US International','New York','USA')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('PK35','Jinnah International','Lahore','Pakistan')
@@ -108,9 +108,16 @@ AS
 	SELECT	[Person].FirstName, [Person].LastName, [Person].CNIC,
 			[Person].Address, [Admin].EmploymentDate, [Admin].Salary
 	FROM	[Admin] inner join [Person] on [Admin].CNIC = [Person].CNIC
-	WHERE	[Admin].Username = @username
+	WHERE	[Admin].Username = @username AND [Admin].Password = @password
 GO
 
+GO
+CREATE PROCEDURE get_flights
+AS
+	SELECT	Flight.FlightId, Flight.[Source] as [From], Flight.[Destination] as [To],
+			Flight.[Time] as [Departure],  Flight.Duration, Flight.[Status], Flight.Cost as [Ticket]
+	FROM	Flight
+GO		
 
 --drop procedure admin_signin;
 --EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
