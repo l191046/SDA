@@ -130,7 +130,7 @@ GO
 GO
 CREATE PROCEDURE get_flights
 AS
-	SELECT	Flight.FlightId, Flight.[Source], Flight.[Destination],
+	SELECT	Flight.FlightId, Flight.[Source] as [From], Flight.[Destination] as [To],
 			Flight.[Time],  Flight.Duration, Flight.[Status], Flight.Cost
 	FROM	Flight
 GO
