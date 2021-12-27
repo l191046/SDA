@@ -9,15 +9,19 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Flight {
-    private int FlightID;
+    private String FlightID;
     private Airport Source;
     private Airport Destination;
     private LocalDateTime Time;
     private float Cost;
     private String Status;
-    private int Duration;
+    private LocalTime Duration;
+    
+    public Flight(){
+    
+    }
 
-    public Flight(int FlightID, Airport Source, Airport Destination, LocalDateTime Time, float Cost, String Status, int Duration) {
+    public Flight(String FlightID, Airport Source, Airport Destination, LocalDateTime Time, float Cost, String Status, LocalTime Duration) {
         this.FlightID = FlightID;
         this.Source = Source;
         this.Destination = Destination;
@@ -27,11 +31,11 @@ public class Flight {
         this.Duration = Duration;
     }
 
-    public int getFlightID() {
+    public String getFlightID() {
         return FlightID;
     }
 
-    public void setFlightID(int FlightID) {
+    public void setFlightID(String FlightID) {
         this.FlightID = FlightID;
     }
 
@@ -75,11 +79,11 @@ public class Flight {
         this.Status = Status;
     }
 
-    public int getDuration() {
+    public LocalTime getDuration() {
         return Duration;
     }
 
-    public void setDuration(int Duration) {
+    public void setDuration(LocalTime Duration) {
         this.Duration = Duration;
     }
     

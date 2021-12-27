@@ -1011,7 +1011,7 @@ public class JHome extends javax.swing.JFrame {
         }
         else {
             this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
-            if (system.checkFlightStatus(Integer.parseInt(flight_id), (DefaultTableModel) this.table_status.getModel())){
+            if (system.checkFlightStatus(flight_id, (DefaultTableModel) this.table_status.getModel())){
                 this.scroll_status.setVisible(true);
                 this.revalidate();
                 this.repaint();
@@ -1042,9 +1042,15 @@ public class JHome extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_table_routesMouseClicked
-
     private void btn_searchFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchFlightsMouseClicked
-        //populateTableRoutes();
+        String Destination = this.cbox_destination.getSelectedItem().toString();
+        String Source = this.cbox_source.getSelectedItem().toString();
+        Source = "MCT30";
+        Destination = "PK35";
+        
+        
+        DefaultTableModel myModel = (DefaultTableModel) this.table_routes.getModel();
+        system.findPaths(myModel, Source, Destination);
     }//GEN-LAST:event_btn_searchFlightsMouseClicked
 
 
