@@ -236,12 +236,12 @@ public class JSystem {
                 table_model.addRow(
                         new Object[] {
                             result.getString("FlightId"),
-                            result.getString("From"),
-                            result.getString("To"),
-                            result.getDate("Departure"),
+                            result.getString("Source"),
+                            result.getString("Destination"),
+                            result.getDate("Time"),
                             result.getTime("Duration"),
                             result.getString("Status"),
-                            result.getFloat("Ticket")
+                            result.getFloat("Cost")
                         }
                 );
             }
