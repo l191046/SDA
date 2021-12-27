@@ -107,4 +107,96 @@ public class MSsql {
         }
         return result;
     }
+    
+    //retrieve NoFly customers
+    public ResultSet getTableNoFly(){
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [get_nofly]}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public boolean removeFromNoFly(String CNIC){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [Remove_nofly](?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("cnic", CNIC);
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean addToNoFly(String CNIC, String fname, String lname, String contact, String address){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [add_customer](?,?,?,?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("cnic", CNIC);
+            Cmt.setString("contact", contact);
+            Cmt.setString("fname", fname);
+            Cmt.setString("lname", lname);
+            Cmt.setString("address", address);
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean addToNoFly(String CNIC){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [Add_nofly](?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("cnic", CNIC);
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean searchCustomer(String CNIC){
+        boolean found = false;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [search_customer](?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("cnic", CNIC);
+            Cmt.registerOutParameter("found", java.sql.Types.INTEGER);
+            Cmt.execute();
+            found = (Cmt.getInt("found") == 1);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return found;
+    }
 }

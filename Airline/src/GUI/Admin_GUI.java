@@ -16,12 +16,17 @@ public class Admin_GUI extends javax.swing.JFrame {
     private ArrayList<JPanel> highlights;
     private ArrayList<JTextField> profile;
     private DefaultTableModel model_flights;
+    private DefaultTableModel model_nofly;
     
     
     public Admin_GUI(JSystem system) {
         this.system = system;
         
+        //set tables
         setTableFlights();
+        setTableNoFly();
+        
+        //initialize swing components
         initComponents();
         setVisible(true);
         
@@ -44,6 +49,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         
     }
     
+    //SETUP TABLE FORMAT
     private void setTableFlights(){
         model_flights = new DefaultTableModel();
         String header[] = new String[] {
@@ -53,10 +59,25 @@ public class Admin_GUI extends javax.swing.JFrame {
         model_flights.setColumnCount(7);
         model_flights.setColumnIdentifiers(header);
     }
+    private void setTableNoFly(){
+        model_nofly = new DefaultTableModel();
+        String header[] = new String[] {
+            "First Name", "Last Name", "CNIC", "Address", "Contact"
+        };
+        
+        model_nofly.setColumnCount(5);
+        model_nofly.setColumnIdentifiers(header);
+    }
+    //LOAD TABLE DATA
     private void populateTableFlights(){
         this.model_flights.setRowCount(0);
         system.getTableFlights(this.model_flights);
     }
+    private void populateTableNoFly(){
+        this.model_nofly.setRowCount(0);
+        system.getTableNoFly(model_nofly);
+    }
+    
     private void setHighlights(String btn_name){
        for(int i=0; i<highlights.size(); i++){
            JPanel hl = highlights.get(i);
@@ -79,6 +100,23 @@ public class Admin_GUI extends javax.swing.JFrame {
             profile.get(i).setText("");
         }
     }
+    
+    //GOTO FUNCTIONS
+    public void gotoManageFlights(){
+        //UPDATE TABLE
+        populateTableFlights();
+        this.inner_cardstack.show(this.internal_cardstack, "Manage_flights");
+        this.setHighlights("highlight_manageFlights");
+        this.btn_removeFlight.setVisible(false);
+    }
+    public void gotoNoFly(){
+        //UPDATE TABLE
+        populateTableNoFly();
+        this.inner_cardstack.show(this.internal_cardstack, "View_NoFlyList");
+        this.setHighlights("highlight_noFlyList");
+        this.btn_removeNoFly.setVisible(false);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1100,33 +1138,7 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         table_customers.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         table_customers.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        table_customers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Customer CNIC", "First Name", "Last Name", "Contact Number"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        table_customers.setModel(model_nofly);
         table_customers.setIntercellSpacing(new java.awt.Dimension(10, 10));
         table_customers.setRowHeight(30);
         table_customers.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1311,11 +1323,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_homeMouseClicked
 
     private void btn_manageFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manageFlightsMouseClicked
-        //UPDATE TABLE
-        populateTableFlights();
-        this.inner_cardstack.show(this.internal_cardstack, "Manage_flights");
-        this.setHighlights("highlight_manageFlights");
-        this.btn_removeFlight.setVisible(false);
+        gotoManageFlights();
     }//GEN-LAST:event_btn_manageFlightsMouseClicked
 
     private void btn_addFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addFlightMouseClicked
@@ -1324,9 +1332,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addFlightMouseClicked
 
     private void btn_noFlyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_noFlyListMouseClicked
-        this.inner_cardstack.show(this.internal_cardstack, "View_NoFlyList");
-        this.setHighlights("highlight_noFlyList");
-        this.btn_removeNoFly.setVisible(false);
+        gotoNoFly();
     }//GEN-LAST:event_btn_noFlyListMouseClicked
 
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
@@ -1336,11 +1342,16 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutMouseClicked
 
     private void btn_addToNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addToNoFlyMouseClicked
-        JAddNoFly addNoFly = new JAddNoFly(system);
+        JAddNoFly addNoFly = new JAddNoFly(system, this);
     }//GEN-LAST:event_btn_addToNoFlyMouseClicked
 
     private void btn_removeNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeNoFlyMouseClicked
-        // TODO add your handling code here:
+        this.btn_removeNoFly.setFocusable(false);
+        int row = this.table_customers.getSelectedRow();
+        String cnic = new String(model_nofly.getValueAt(row, 2).toString());
+        system.removeFromNoFly(cnic);
+        gotoNoFly();
+        this.btn_removeNoFly.setFocusable(true);
     }//GEN-LAST:event_btn_removeNoFlyMouseClicked
 
     private void table_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_customersMouseClicked
