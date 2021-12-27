@@ -130,8 +130,8 @@ GO
 GO
 CREATE PROCEDURE get_flights
 AS
-	SELECT	Flight.FlightId, Flight.[Source] as [From], Flight.[Destination] as [To],
-			Flight.[Time] as [Departure],  Flight.Duration, Flight.[Status], Flight.Cost as [Ticket]
+	SELECT	Flight.FlightId, Flight.[Source], Flight.[Destination],
+			Flight.[Time],  Flight.Duration, Flight.[Status], Flight.Cost
 	FROM	Flight
 GO
 
@@ -203,6 +203,22 @@ INSERT INTO Customer VALUES
 (@cnic,@contact,1)
 END
 GO
+
+
+CREATE PROCEDURE get_airport_list
+AS
+	SELECT*
+	FROM [Airport]
+GO
+
+CREATE PROCEDURE get_airport
+@airport varchar(20)
+AS
+	SELECT*
+	FROM [Airport]
+	WHERE [Airport].Code = @airport
+GO
+
 
 --drop procedure search_customer;
 --EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
