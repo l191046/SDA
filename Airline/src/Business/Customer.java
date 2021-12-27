@@ -1,11 +1,14 @@
 package Business;
 
 public class Customer extends Person {
-    String contact;
-    
-    void changecontact(String x)
-    {
-        contact=x;
+    private String contact;
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
     
     @Override

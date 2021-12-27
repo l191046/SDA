@@ -23,6 +23,7 @@ public class JSystem {
     private MSsql database;
     private Admin admin_session;
     private FlightList flight_list;
+    private NoFlyList nofly_list;
     private ArrayList<Airport> airportList;
     private PathFinderAlgorithm PathFinder;
     
@@ -126,11 +127,14 @@ public class JSystem {
         }
 
     }
-    
+  
     private JSystem(){
         airportList = new ArrayList<Airport>();
         database = MSsql.getInstance();
+        nofly_list = new NoFlyList();
+        nofly_list.loadNoFlyList();
         flight_list = new FlightList();
+        flightlist+airportlist
         this.loadAirportList();
         this.loadFlightList();
         
@@ -140,7 +144,6 @@ public class JSystem {
         for(int i = 0; i < this.airportList.size();i++){
             System.out.println(this.airportList.get(i).getCode());
         }
-
     }
     
     public static JSystem getInstance(){
@@ -177,8 +180,8 @@ public class JSystem {
     }
     
     
-    //ADMIN
-    //admin session/profile funcitons
+    //==========ADMIN=============
+    //ADMIN SESSION/PROFILE
     public boolean adminSignIn(String username, String password){
         try (ResultSet result = database.checkAdmin(username, password);) {
             if (result == null || !result.next())
@@ -206,6 +209,9 @@ public class JSystem {
     }
     public void editAdmin(String fname, String lname, String address){
         database.editAdmin(admin_session.getCNIC(), fname, lname, address);
+        admin_session.setFirstname(fname);
+        admin_session.setLastname(lname);
+        admin_session.setAddress(address);
     }
     //retrieve strings for home page
     public ArrayList<String> getAdmin(){
@@ -219,7 +225,7 @@ public class JSystem {
         return fields;
     }
     
-    //retrieve table of flights
+    //FLIGHT MANAGEMENT
     public void getTableFlights(DefaultTableModel table_model){
         try (ResultSet result = database.getTableFlights();) {
             if (result == null)
@@ -245,5 +251,38 @@ public class JSystem {
             e.printStackTrace();
         }
     }
+    //remove flight
+    public boolean removeFlight(String flightID){
+        //awaiting implementation
+        return false;
+    }
     
+    //NOFLY LIST MANAGEMENT
+    public void getTableNoFly(DefaultTableModel table_model){
+        for (Customer customer : nofly_list.getCustomers()){
+            table_model.addRow(
+                    new Object[]{
+                        customer.getFirstname(),
+                        customer.getLastname(),
+                        customer.getCNIC(),
+                        customer.getAddress(),
+                        customer.getContact()
+                    }
+            );
+        }
+    }
+    public void removeFromNoFly(String cnic){
+        database.removeFromNoFly(cnic);
+        nofly_list.loadNoFlyList();
+    }
+    public void addToNoFly(String cnic, String fname, String lname, String contact, String address){
+        boolean exists = database.searchCustomer(cnic);
+        if (exists){
+            database.addToNoFly(cnic);
+        }
+        else {
+            database.addToNoFly(cnic, fname, lname, contact, address);
+        }
+        nofly_list.loadNoFlyList();
+    }
 }
