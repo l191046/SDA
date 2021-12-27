@@ -134,7 +134,6 @@ public class JSystem {
         nofly_list = new NoFlyList();
         nofly_list.loadNoFlyList();
         flight_list = new FlightList();
-        flightlist+airportlist
         this.loadAirportList();
         this.loadFlightList();
         
