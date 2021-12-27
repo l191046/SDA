@@ -5,23 +5,25 @@
 package Business;
 
 public class Airport {
-    private int Code;
+    private String Code;
     private String Name;
     private String City;
     private String Country;
+    
+    public Airport(){}
 
-    public Airport(int Code, String Name, String City, String Country) {
+    public Airport(String Code, String Name, String City, String Country) {
         this.Code = Code;
         this.Name = Name;
         this.City = City;
         this.Country = Country;
     }
 
-    public int getCode() {
+    public String getCode() {
         return Code;
     }
 
-    public void setCode(int Code) {
+    public void setCode(String Code) {
         this.Code = Code;
     }
 

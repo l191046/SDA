@@ -494,6 +494,11 @@ public class JHome extends javax.swing.JFrame {
         jLabel2.setText("SEARCH FLIGHTS");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setOpaque(true);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_lableLayout = new javax.swing.GroupLayout(pnl_lable);
         pnl_lable.setLayout(pnl_lableLayout);
@@ -1020,7 +1025,7 @@ public class JHome extends javax.swing.JFrame {
         }
         else {
             this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
-            if (system.checkFlightStatus(Integer.parseInt(flight_id), (DefaultTableModel) this.table_status.getModel())){
+            if (system.checkFlightStatus(flight_id, (DefaultTableModel) this.table_status.getModel())){
                 this.scroll_status.setVisible(true);
                 this.revalidate();
                 this.repaint();
@@ -1051,6 +1056,20 @@ public class JHome extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_table_routesMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        
+        String Destination = this.cbox_destination.getSelectedItem().toString();
+        String Source = this.cbox_source.getSelectedItem().toString();
+        Source = "MCT30";
+        Destination = "PK35";
+        
+        
+        DefaultTableModel myModel = (DefaultTableModel) this.table_routes.getModel();
+        system.findPaths(myModel, Source, Destination);
+        
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

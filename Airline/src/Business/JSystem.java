@@ -6,6 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.sql.Time;
+import java.sql.Date;
+import java.time.Month;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 
 public class JSystem {
     private static final JSystem instance = new JSystem();
@@ -13,18 +23,142 @@ public class JSystem {
     private MSsql database;
     private Admin admin_session;
     private FlightList flight_list;
+    private ArrayList<Airport> airportList;
+    private PathFinderAlgorithm PathFinder;
+    
+    
+    private Airport retAirportFromList(String airportCode){
+        
+        for(int i = 0; i < this.airportList.size();i++){
+            if(airportCode.equals(this.airportList.get(i).getCode())){
+                return this.airportList.get(i);
+            }
+        }
+        
+        return null;
+        
+    }
+    
+    private void loadFlightList(){
+        
+        try(ResultSet flightTable = database.getTableFlights();){
+            if(flightTable == null)
+                return;
+            
+            while(flightTable.next()){
+                
+                Flight thisFlight = new Flight();
+                
+                thisFlight.setFlightID(flightTable.getString("FlightId"));
+                
+                Airport Src = this.retAirportFromList(flightTable.getString("From"));
+                Airport Dest = this.retAirportFromList(flightTable.getString("To"));
+                
+             
+                Time Duration = flightTable.getTime("Duration");
+                LocalTime duration = Duration.toLocalTime();
+                thisFlight.setDuration(duration);
+                
+                thisFlight.setSource(Src);
+                thisFlight.setDestination(Dest);
+                float cost = (float) flightTable.getFloat("Cost");
+                thisFlight.setCost(cost);
+                thisFlight.setStatus(flightTable.getString("Status"));
+                
+                Time time =  flightTable.getTime("Time");
+                Date date = flightTable.getDate("Time");
+                LocalTime lt = time.toLocalTime();
+                LocalDate ld = date.toLocalDate();
+                LocalDateTime date1 = LocalDateTime.of(ld.getYear(),ld.getMonth(),ld.getDayOfMonth(),lt.getHour(),lt.getMinute(),0,0);
+                thisFlight.setTime(date1);
+                
+                flight_list.addFlight(thisFlight);
+        
+            }
+            
+            
+        }
+        catch(SQLException e){
+            
+            e.printStackTrace();
+        
+        }
+        
+    
+    }
+    
+    private Airport returnAirport(String airportCode){
+        Airport Src = new Airport();
+        
+         try(ResultSet srcTable = database.getAirport(airportCode);){
+                    
+            while(srcTable.next()){
+                Src.setCode(srcTable.getString("Code"));
+                Src.setCity(srcTable.getString("City"));
+                Src.setName(srcTable.getString("Name"));
+                Src.setCountry(srcTable.getString("Country"));
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+         
+         return Src;
+    
+    }
+    
+    private void loadAirportList(){
+
+        try(ResultSet srcTable = database.getTableAirports();){
+
+            while(srcTable.next()){
+                Airport thisAirport = new Airport();
+                thisAirport.setCity(srcTable.getString("City"));
+                thisAirport.setCode(srcTable.getString("Code"));
+                thisAirport.setName(srcTable.getString("Name"));
+                thisAirport.setCountry(srcTable.getString("Country"));
+                this.airportList.add(thisAirport);
+            }
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
     
     private JSystem(){
+        airportList = new ArrayList<Airport>();
         database = MSsql.getInstance();
         flight_list = new FlightList();
+        this.loadAirportList();
+        this.loadFlightList();
+        
+        PathFinder = new PathFinderAlgorithm(this.flight_list);
+        System.out.print(this.flight_list.getFlights().size());
+        
+        for(int i = 0; i < this.airportList.size();i++){
+            System.out.println(this.airportList.get(i).getCode());
+        }
+
     }
+    
     public static JSystem getInstance(){
         return instance;
     }
     
+    public void findPaths(DefaultTableModel table, String Source, String Destination){
+        Airport Src = this.retAirportFromList(Source);
+        Airport Dest = this.retAirportFromList(Destination);
+        
+        ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest);
+        
+    
+    }
+    
     //CUSTOMER
     //Populate table_model with results of search in flightlist
-    public boolean checkFlightStatus(int flight_id, DefaultTableModel table_model){
+    public boolean checkFlightStatus(String flight_id, DefaultTableModel table_model){
         Flight flight = flight_list.searchFlight(flight_id);
         if (flight == null)
             return false;
