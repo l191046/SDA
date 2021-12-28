@@ -23,6 +23,7 @@ public class JHome extends javax.swing.JFrame {
         
         setTableRoutes();
         setComboAirports();
+        populateTableRoutes();
         
         initComponents();
         setVisible(true);
@@ -56,6 +57,7 @@ public class JHome extends javax.swing.JFrame {
     private void populateTableRoutes(){
         model_routes.setRowCount(0);
         //call system class function
+        //system.findPaths(this.model_routes, "DCA7", "SYD6");
     }
     
     private void setHighlights(String btn_name){

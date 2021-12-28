@@ -172,11 +172,33 @@ public class JSystem {
         return null;
         
     }   
-    public void findPaths(DefaultTableModel table, String Source, String Destination){
+    public void findPaths(DefaultTableModel table_model, String Source, String Destination){
         Airport Src = this.retAirportFromList(Source);
         Airport Dest = this.retAirportFromList(Destination);
         
         ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest);
+        
+        ArrayList<Route> routes = myRoutes.getRoutes();
+        String connections = "";
+        int i = 0;
+        for(Route route : routes ){
+            
+            for(Flight flight: route.getFlights()){
+                connections += flight.getDestination().getCode();
+                connections += "->";
+            }
+            table_model.addRow(
+                    new Object[] {
+                        i,
+                        Src.getCode(),
+                        Dest.getCode(),
+                        route.getFlights().get(0).getTime().toLocalDate().toString(),
+                        route.getFlights().get(0).getTime().toLocalTime().toString(),
+                        connections,
+                        route.getRouteCost()
+                    }
+            );
+        }
         
     
     }
