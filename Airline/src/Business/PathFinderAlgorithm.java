@@ -54,7 +54,7 @@ public class PathFinderAlgorithm {
        visited.add(Source);
        
        for(int i = 0; i < this.adjacencyList.get(Source).size();i++){
-           if(!visited.contains(this.adjacencyList.get(Source).get(i).getDestination()) && !this.adjacencyList.get(Source).get(i).getStatus().equals("Cancelled")){
+            if(!visited.contains(this.adjacencyList.get(Source).get(i).getDestination()) && !this.adjacencyList.get(Source).get(i).getStatus().equals("Cancelled")){
                
                currentRoute.add(this.adjacencyList.get(Source).get(i));
                //manage time
@@ -78,24 +78,31 @@ public class PathFinderAlgorithm {
                }
                int index = currentRoute.size()-1;
                currentRoute.remove(index);
+               visited.remove(Source);
            }
        }
        
    }
     
-    public ViableRoutes findPaths(Airport Source, Airport Destination){
+    public ViableRoutes findPaths(Airport Source, Airport Destination, LocalDate Date){
         LocalDateTime currentTime = null;
         ViableRoutes viableRoutes = new ViableRoutes();
         HashSet<Airport> visited = new HashSet<Airport>();
         ArrayList<Flight> currentRoute = new ArrayList<Flight>();
         DFS(Source, Destination, visited, currentRoute, viableRoutes, currentTime);
+        
+        
+        //uncomment after you send the date from GUI
+        /*for(int i = 0; i < viableRoutes.getRoutes().size();i++){
+            LocalDate flightDate = viableRoutes.getRoutes().get(i).getFlights().get(0).getTime().toLocalDate();
+            if(!flightDate.equals(Date)){
+                viableRoutes.getRoutes().remove(i);
+            }
+        
+        }*/
                 
         SorterByCost sorterByCost = new SorterByCost();
         sorterByCost.sort(viableRoutes);
-        viableRoutes.printRoutes();
-        
-        SorterByTime sorterByTime = new SorterByTime();
-        sorterByTime.sort(viableRoutes);
         viableRoutes.printRoutes();
         
         return viableRoutes;
