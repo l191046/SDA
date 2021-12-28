@@ -1,10 +1,10 @@
 package Business;
 
 public class Person {
-    private String CNIC;
-    private String Firstname;
-    private String Lastname;
-    private String Address;
+    protected String CNIC;
+    protected String Firstname;
+    protected String Lastname;
+    protected String Address;
 
     public String getCNIC() {
         return CNIC;
