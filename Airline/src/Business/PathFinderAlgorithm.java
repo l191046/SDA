@@ -25,10 +25,16 @@ public class PathFinderAlgorithm {
         for(int i = 0; i < obj.Flights.size();i++){
             if(!adjacencyList.containsKey(obj.Flights.get(i).getSource())){
                 this.adjacencyList.put(obj.Flights.get(i).getSource(), new ArrayList<Flight>());
+                if(!this.adjacencyList.containsKey(obj.Flights.get(i).getDestination())){
+                    this.adjacencyList.put(obj.Flights.get(i).getDestination(), new ArrayList<Flight>());
+                }
                 this.adjacencyList.get(obj.Flights.get(i).getSource()).add(obj.Flights.get(i));
             }
             else{
                 this.adjacencyList.get(obj.Flights.get(i).getSource()).add(obj.Flights.get(i));
+                if(!this.adjacencyList.containsKey(obj.Flights.get(i).getDestination())){
+                    this.adjacencyList.put(obj.Flights.get(i).getDestination(), new ArrayList<Flight>());
+                }
             }
         }
         
@@ -48,7 +54,8 @@ public class PathFinderAlgorithm {
        visited.add(Source);
        
        for(int i = 0; i < this.adjacencyList.get(Source).size();i++){
-           if(!visited.contains(this.adjacencyList.get(Source).get(i).getDestination())){
+           if(!visited.contains(this.adjacencyList.get(Source).get(i).getDestination()) && !this.adjacencyList.get(Source).get(i).getStatus().equals("Cancelled")){
+               
                currentRoute.add(this.adjacencyList.get(Source).get(i));
                //manage time
                if(currentTime==null){
