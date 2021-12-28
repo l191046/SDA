@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
 
 public class JHome extends javax.swing.JFrame {
 
@@ -1060,11 +1061,12 @@ public class JHome extends javax.swing.JFrame {
         String Destination = this.cbox_destination.getSelectedItem().toString();
         String Source = this.cbox_source.getSelectedItem().toString();
         Source = "MCT30";
+        LocalDate date = LocalDate.now();
         Destination = "PK35";
         
         
         DefaultTableModel myModel = (DefaultTableModel) this.table_routes.getModel();
-        system.findPaths(myModel, Source, Destination);
+        system.findPaths(myModel, Source, Destination, date);
     }//GEN-LAST:event_btn_searchFlightsMouseClicked
 
 
