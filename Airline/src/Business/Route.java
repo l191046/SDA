@@ -36,4 +36,12 @@ public class Route{
     public void addFlight(Flight obj){
         Flights.add(obj);
     }
+    
+    public int getRouteCost(){
+        int cost = 0;
+        for(Flight flight: Flights){
+            cost += flight.getCost();
+        }
+        return cost;
+    }
 }
