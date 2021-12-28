@@ -3,9 +3,13 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Time;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.net.InetAddress;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class MSsql {
     protected String url;
@@ -243,6 +247,30 @@ public class MSsql {
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString("flightid", flightID);
             Cmt.setString("status", status);
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean addFlight(String flightID, String source, String dest, LocalTime duration, LocalDateTime departure, String status, float cost){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [add_flight](?,?,?,?,?,?,?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("flightID", flightID);
+            Cmt.setString("source", source);
+            Cmt.setString("destination", dest);
+            Cmt.setTime("duration", Time.valueOf(duration));
+            Cmt.setInt("cost", (int)cost);
+            Cmt.setString("status", status);
+            Cmt.setDate("dDate", Date.valueOf(departure.toLocalDate()));
+            Cmt.setTime("dTime", Time.valueOf(departure.toLocalTime()));
             Cmt.execute();
             return true;
         }

@@ -1,6 +1,7 @@
 package Business;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
 import Database.MSsql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,6 @@ import java.time.Month;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 
 public class JSystem {
     
@@ -119,17 +119,6 @@ public class JSystem {
         }
 
     }
-    private Airport retAirportFromList(String airportCode){
-        
-        for(int i = 0; i < this.airportList.size();i++){
-            if(airportCode.equals(this.airportList.get(i).getCode())){
-                return this.airportList.get(i);
-            }
-        }
-        
-        return null;
-        
-    }   
     private void loadNoFlyList(){
         try (ResultSet result = database.getTableNoFly();){
             if (result == null)
@@ -172,6 +161,17 @@ public class JSystem {
          return Src;
     
     }
+    private Airport retAirportFromList(String airportCode){
+        
+        for(int i = 0; i < this.airportList.size();i++){
+            if(airportCode.equals(this.airportList.get(i).getCode())){
+                return this.airportList.get(i);
+            }
+        }
+        
+        return null;
+        
+    }   
     public void findPaths(DefaultTableModel table, String Source, String Destination){
         Airport Src = this.retAirportFromList(Source);
         Airport Dest = this.retAirportFromList(Destination);
@@ -221,6 +221,7 @@ public class JSystem {
         profile.add(admin_session.getAdmin().getEmploymentDate().toString());
         profile.add(Float.toString(admin_session.getAdmin().getSalary()));
     }
+    
     //FLIGHT MANAGEMENT
     public void getTableFlights(DefaultTableModel table_model){
         if (flight_list == null)
@@ -245,7 +246,25 @@ public class JSystem {
     public boolean changeStatus(String flightID, String status){
         return flight_list.changeStatus(flightID, status);
     }
-    
+    public void getComboAirports(DefaultComboBoxModel combo_model){
+        if (airportList == null || airportList.size() == 0)
+            return;
+        
+        for (Airport airport : airportList){
+            combo_model.addElement(airport.getCode());
+        }
+    }
+    public boolean addFlight(String flightID, String source, String dest, LocalTime duration, LocalDateTime departure, float cost){        
+        Flight flight = new Flight();
+        flight.setFlightID(flightID);
+        flight.setSource(retAirportFromList(source));
+        flight.setDestination(retAirportFromList(dest));
+        flight.setDuration(duration);
+        flight.setTime(departure);
+        flight.setCost(cost);
+        flight.setStatus("On time");
+        return flight_list.addNewFlight(flight);
+    }
     //NOFLY MANAGEMENT
     public void getTableNoFly(DefaultTableModel table_model){
         for (Customer customer : nofly_list.getCustomers()){

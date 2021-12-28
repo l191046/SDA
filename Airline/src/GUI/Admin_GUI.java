@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import java.util.ArrayList;
+import java.time.*;
+import java.math.*;
 import java.util.HashSet;
 
 public class Admin_GUI extends javax.swing.JFrame {
@@ -19,14 +21,17 @@ public class Admin_GUI extends javax.swing.JFrame {
     private DefaultTableModel model_flights;
     private DefaultTableModel model_nofly;
     private DefaultComboBoxModel model_status;
+    private DefaultComboBoxModel model_source;
+    private DefaultComboBoxModel model_destination;
     
     public Admin_GUI(JSystem system) {
         this.system = system;
         
-        //set tables
+        //set tables/combobox models
         setTableFlights();
         setTableNoFly();
         setComboStatus();
+        setComboAirports();
         //initialize swing components
         initComponents();
         setVisible(true);
@@ -74,6 +79,14 @@ public class Admin_GUI extends javax.swing.JFrame {
         model_status.insertElementAt("On time", 0);
         model_status.insertElementAt("Cancelled", 1);
     }
+    private void setComboAirports(){
+        model_source = new DefaultComboBoxModel();
+        model_destination = new DefaultComboBoxModel();
+        model_source.addElement("Select Airport");
+        system.getComboAirports(model_source);
+        model_destination.addElement("Select Airport");
+        system.getComboAirports(model_destination);
+    }
     //LOAD TABLE DATA
     private void populateTableFlights(){
         this.model_flights.setRowCount(0);
@@ -96,6 +109,10 @@ public class Admin_GUI extends javax.swing.JFrame {
         for (int i=0; i<profile.size(); i++){
             profile.get(i).setText("");
         }
+    }
+    private void clearFlightForm(){
+        this.txtbox_flightCode.setText("");
+        this.txtbox_cost.setText("");
     }
     
     //GOTO PAGE FUNCTIONS
@@ -191,18 +208,24 @@ public class Admin_GUI extends javax.swing.JFrame {
         lbl_flightCode = new javax.swing.JLabel();
         txtbox_flightCode = new javax.swing.JTextField();
         lbl_source = new javax.swing.JLabel();
-        txtbox_source = new javax.swing.JTextField();
         lbl_destination = new javax.swing.JLabel();
-        txtbox_destination = new javax.swing.JTextField();
         lbl_duration = new javax.swing.JLabel();
-        txtbox_duration = new javax.swing.JTextField();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 200), new java.awt.Dimension(2, 200), new java.awt.Dimension(32767, 200));
         lbl_cost = new javax.swing.JLabel();
         txtbox_cost = new javax.swing.JTextField();
-        lbl_capacity = new javax.swing.JLabel();
-        txtbox_capacity = new javax.swing.JSpinner();
         btn_addNewFlight = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        lbl_time = new javax.swing.JLabel();
+        calendar_departure = new com.toedter.calendar.JDateChooser();
+        combo_source = new javax.swing.JComboBox<>();
+        combo_destination = new javax.swing.JComboBox<>();
+        lbl_duration2 = new javax.swing.JLabel();
+        lbl_separator = new javax.swing.JLabel();
+        spinner_hours = new javax.swing.JSpinner();
+        spinner_minutes = new javax.swing.JSpinner();
+        spinner_hoursD = new javax.swing.JSpinner();
+        lbl_separator1 = new javax.swing.JLabel();
+        spinner_minutesD = new javax.swing.JSpinner();
         View_NoFlyList = new javax.swing.JPanel();
         Company_panel3 = new javax.swing.JPanel();
         Company_info_label3 = new javax.swing.JLabel();
@@ -972,41 +995,31 @@ public class Admin_GUI extends javax.swing.JFrame {
         lbl_source.setForeground(new java.awt.Color(48, 50, 61));
         lbl_source.setText("Source:");
 
-        txtbox_source.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        txtbox_source.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
-
         lbl_destination.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         lbl_destination.setForeground(new java.awt.Color(48, 50, 61));
         lbl_destination.setText("Destination:");
 
-        txtbox_destination.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        txtbox_destination.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
-
         lbl_duration.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         lbl_duration.setForeground(new java.awt.Color(48, 50, 61));
-        lbl_duration.setText("Duration");
-
-        txtbox_duration.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        txtbox_duration.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
+        lbl_duration.setText("Duration:");
 
         filler5.setBackground(new java.awt.Color(254, 182, 62));
         filler5.setOpaque(true);
 
         lbl_cost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         lbl_cost.setForeground(new java.awt.Color(48, 50, 61));
-        lbl_cost.setText("Cost:");
+        lbl_cost.setText("Ticket Price:");
 
         txtbox_cost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         txtbox_cost.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
 
-        lbl_capacity.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        lbl_capacity.setForeground(new java.awt.Color(48, 50, 61));
-        lbl_capacity.setText("Capacity:");
-
-        txtbox_capacity.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(254, 182, 62), 2, true));
-
         btn_addNewFlight.setBackground(new java.awt.Color(77, 80, 97));
         btn_addNewFlight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addNewFlight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addNewFlightMouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -1031,6 +1044,36 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        lbl_time.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_time.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_time.setText("Time:");
+
+        combo_source.setModel(model_source);
+
+        combo_destination.setModel(model_destination);
+
+        lbl_duration2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_duration2.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_duration2.setText("Departure:");
+
+        lbl_separator.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
+        lbl_separator.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_separator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_separator.setText(":");
+
+        spinner_hours.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        spinner_minutes.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        spinner_hoursD.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
+
+        lbl_separator1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
+        lbl_separator1.setForeground(new java.awt.Color(48, 50, 61));
+        lbl_separator1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_separator1.setText(":");
+
+        spinner_minutesD.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
         javax.swing.GroupLayout Info_panel2Layout = new javax.swing.GroupLayout(Info_panel2);
         Info_panel2.setLayout(Info_panel2Layout);
         Info_panel2Layout.setHorizontalGroup(
@@ -1039,71 +1082,96 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addComponent(lbl_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addComponent(lbl_source, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_source, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addComponent(lbl_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addComponent(lbl_duration, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_duration, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addComponent(lbl_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addComponent(lbl_source, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(combo_source, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addComponent(lbl_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(combo_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addComponent(lbl_duration, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinner_hoursD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinner_minutesD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(lbl_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Info_panel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addComponent(lbl_duration2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(calendar_departure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                                        .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(spinner_hours, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_separator, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spinner_minutes, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                                        .addComponent(lbl_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 45, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Info_panel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         Info_panel2Layout.setVerticalGroup(
             Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Info_panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_cost)
-                            .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(calendar_departure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbl_flightCode)
+                                .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_duration2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_capacity)
-                            .addComponent(txtbox_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_flightCode)
-                            .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_source)
-                            .addComponent(txtbox_source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_destination)
-                            .addComponent(txtbox_destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_duration)
-                            .addComponent(txtbox_duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_source)
+                                    .addComponent(combo_source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_destination)
+                                    .addComponent(combo_destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(9, 9, 9)
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_duration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(spinner_hoursD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_separator1)
+                                    .addComponent(spinner_minutesD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_time)
+                                    .addComponent(spinner_hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_separator)
+                                    .addComponent(spinner_minutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_cost)
+                                    .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1462,6 +1530,41 @@ public class Admin_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_combo_statusItemStateChanged
 
+    private void btn_addNewFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addNewFlightMouseClicked
+        String flightID = this.txtbox_flightCode.getText();
+        String source = this.combo_source.getSelectedItem().toString();
+        String destination = this.combo_destination.getSelectedItem().toString();
+        
+        int dHours = (int)this.spinner_hoursD.getValue();
+        int dMinutes = (int)this.spinner_minutesD.getValue();
+        LocalTime duration = LocalTime.of(dHours, dMinutes);
+        
+        LocalDate tDate = this.calendar_departure.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int tHours = (int)this.spinner_hours.getValue();
+        int tMinutes = (int)this.spinner_minutes.getValue();
+        LocalDateTime departure = tDate.atTime(tHours, tMinutes);
+        
+        String costS = this.txtbox_cost.getText();
+        
+        float cost = -1;
+        try {
+            cost = Float.parseFloat(costS);
+        }
+        catch(Exception e) {
+            //validation check
+            cost = -1;
+        }
+        if ( flightID.equals("") || source.equals("Select Airport") || 
+                destination.equals("Select Airport") || duration == null || cost < 0
+                    || source.equals(destination)) {
+            //validation checks
+        }
+        else {
+            system.addFlight(flightID, source, destination, duration, departure, cost);
+            clearFlightForm();
+        }
+    }//GEN-LAST:event_btn_addNewFlightMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Add_flight;
@@ -1500,6 +1603,9 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel btn_removeFlight;
     private javax.swing.JPanel btn_removeNoFly;
     private javax.swing.JLabel btn_signin;
+    private com.toedter.calendar.JDateChooser calendar_departure;
+    private javax.swing.JComboBox<String> combo_destination;
+    private javax.swing.JComboBox<String> combo_source;
     private javax.swing.JComboBox<String> combo_status;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler5;
@@ -1516,36 +1622,39 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbl_CNIC;
     private javax.swing.JLabel lbl_address;
-    private javax.swing.JLabel lbl_capacity;
     private javax.swing.JLabel lbl_cost;
     private javax.swing.JLabel lbl_destination;
     private javax.swing.JLabel lbl_duration;
+    private javax.swing.JLabel lbl_duration2;
     private javax.swing.JLabel lbl_employeeInfo;
     private javax.swing.JLabel lbl_employment;
     private javax.swing.JLabel lbl_firstName;
     private javax.swing.JLabel lbl_flightCode;
     private javax.swing.JLabel lbl_lastName;
     private javax.swing.JLabel lbl_salary;
+    private javax.swing.JLabel lbl_separator;
+    private javax.swing.JLabel lbl_separator1;
     private javax.swing.JLabel lbl_source;
+    private javax.swing.JLabel lbl_time;
     private javax.swing.JPanel panel_empInfo;
     private javax.swing.JPanel panel_empInfoBackdrop;
     private javax.swing.JScrollPane scroll_customer;
     private javax.swing.JScrollPane scroll_flights;
+    private javax.swing.JSpinner spinner_hours;
+    private javax.swing.JSpinner spinner_hoursD;
+    private javax.swing.JSpinner spinner_minutes;
+    private javax.swing.JSpinner spinner_minutesD;
     private javax.swing.JTable table_customers;
     private javax.swing.JTable table_flights;
     private javax.swing.JTextField txtbox_CNIC;
     private javax.swing.JTextField txtbox_address;
-    private javax.swing.JSpinner txtbox_capacity;
     private javax.swing.JTextField txtbox_cost;
-    private javax.swing.JTextField txtbox_destination;
-    private javax.swing.JTextField txtbox_duration;
     private javax.swing.JTextField txtbox_employment;
     private javax.swing.JTextField txtbox_firstName;
     private javax.swing.JTextField txtbox_flightCode;
     private javax.swing.JTextField txtbox_lastName;
     private javax.swing.JPasswordField txtbox_password;
     private javax.swing.JTextField txtbox_salary;
-    private javax.swing.JTextField txtbox_source;
     private javax.swing.JTextField txtbox_username;
     // End of variables declaration//GEN-END:variables
 }

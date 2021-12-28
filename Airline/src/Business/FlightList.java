@@ -1,6 +1,8 @@
 package Business;
 import java.util.ArrayList;
 import Database.MSsql;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class FlightList {
     public ArrayList<Flight> Flights;
@@ -22,6 +24,23 @@ public class FlightList {
         if (searchFlight(new_flight.getFlightID()) != null) //if flight already exists
             return false;
         Flights.add(new_flight);
+        return true;
+    }
+    public boolean addNewFlight(Flight new_flight){
+        if (searchFlight(new_flight.getFlightID()) != null) //if flight already exists
+            return false;
+        Flights.add(new_flight);
+        //---------UPDATE DATABASE------------
+        database.addFlight(
+                new_flight.getFlightID(),
+                new_flight.getSource().getCode(),
+                new_flight.getDestination().getCode(),
+                new_flight.getDuration(), 
+                new_flight.getTime(),
+                new_flight.getStatus(),
+                new_flight.getCost()
+        );
+        //------------------------------------
         return true;
     }
     public Flight searchFlight(String id){
