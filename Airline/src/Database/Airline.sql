@@ -7,6 +7,7 @@ GO
 USE SDA
 GO
 
+--============CREATE TABLES===========
 CREATE TABLE [Person] (
   [FirstName] nvarchar(255),
   [LastName] nvarchar(255),
@@ -16,8 +17,6 @@ CREATE TABLE [Person] (
 GO
 ALTER TABLE Person
 ADD CONSTRAINT PK_Person PRIMARY KEY (CNIC);
-
-
 
 CREATE TABLE [Customer] (
   [CNIC] varchar(13) NOT NULL,
@@ -67,18 +66,20 @@ CREATE TABLE [Flight_Seats]
 [SeatId] int NOT NULL,
 [Status] varchar(30)
 )
+GO
 
+--============CREATE CONSTRAINTS===========
 ALTER TABLE Flight_Seats
 ADD CONSTRAINT PK_Seats PRIMARY KEY (FlightId,SeatId);
-ALTER TABLE [Flight_Seats] ADD CONSTRAINT [Flighttoseat] FOREIGN KEY ([FlightId]) REFERENCES [Flight] ([FlightID])
+ALTER TABLE [Flight_Seats]
+ADD CONSTRAINT [Flighttoseat] FOREIGN KEY ([FlightId]) REFERENCES [Flight] ([FlightID]) ON DELETE CASCADE
 GO
-
 ALTER TABLE [Customer] ADD CONSTRAINT [PersonToCustomerRef] FOREIGN KEY ([CNIC]) REFERENCES [Person] ([CNIC])
 GO
-
 ALTER TABLE [Admin] ADD CONSTRAINT [PersonToAdminRef] FOREIGN KEY ([CNIC]) REFERENCES [Person] ([CNIC])
 GO
 
+--=============POPULATE MOCK VALUES===========
 INSERT Person([Firstname], [LastName], [CNIC], [Address]) VALUES ('Sukhan','Amir','3453819234532','Johartown,Lahore')
 INSERT Person([Firstname], [LastName], [CNIC], [Address]) VALUES ('Rana','Muneem','3452815234532','NFC,Lahore')
 INSERT Person([Firstname], [LastName], [CNIC], [Address]) VALUES ('Razi','Ahmed','5930219384320','Johartown,Lahore')
@@ -90,7 +91,7 @@ INSERT Customer ([CNIC],Contact, No_Fly) VALUES ('3452815234532','93043219342', 
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3453819234532','sukhanamir','crunchyroll',54000,'2000-04-20')
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3452815234532','admin','admin',400000,'2020-01-19')
 
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE23','US1','DO60','02:30',50000,'Delayed','11:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE23','US1','DO60','02:30',50000,'On time','11:00')
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE45','PK35','DO60','02:30',40000,'On time','23:00')
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI25','PK35','US1','12:00',110000,'Cancelled','16:00')
 
@@ -100,58 +101,11 @@ INSERT Airport([Code],[Name],[City],[Country]) VALUES ('DO60','Doha Internationa
 
 INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('LHE23',30,'Vaccant')
 INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('KHI25',45,'Taken')
-
---ADMIN PROCEDURES
-GO
-CREATE PROCEDURE admin_signin
-@username	varchar(20),
-@password	varchar(20)
-AS
-	SELECT	[Person].FirstName, [Person].LastName, [Person].CNIC,
-			[Person].Address, [Admin].EmploymentDate, [Admin].Salary
-	FROM	[Admin] inner join [Person] on [Admin].CNIC = [Person].CNIC
-	WHERE	[Admin].Username = @username AND [Admin].Password = @password
 GO
 
-Go
-CREATE PROCEDURE edit_admin
-@fname	varchar(20),
-@lname	varchar(20),
-@adress	nvarchar(255),
-@cnic	char(13)
-AS
-	UPDATE	[Person]
-	SET		FirstName = @fname,
-			LastName = @lname,
-			[Address]=@adress
-	WHERE	CNIC = @cnic
-GO
+--===========STORED PROCEDURES==========================
 
-GO
-CREATE PROCEDURE get_flights
-AS
-	SELECT	Flight.FlightId, Flight.[Source] as [From], Flight.[Destination] as [To],
-			Flight.[Time],  Flight.Duration, Flight.[Status], Flight.Cost
-	FROM	Flight
-GO
-
-CREATE PROCEDURE get_nofly
-AS
-	SELECT	[Person].FirstName, [Person].LastName, [Person].CNIC,
-			[Person].[Address], [Customer].Contact
-	FROM	[Customer] inner join [Person] on [Customer].CNIC = [Person].CNIC
-	WHERE	[Customer].[No_Fly]=1
-GO
-
-CREATE PROCEDURE delete_flight
-@flightid	 varchar(10)  
-
-AS
-	DELETE 
-	FROM	 Flight
-	WHERE	 Flight.FlightId=@flightid
-GO
-
+--===========CUSTOMER===============
 Create PROCEDURE search_customer
 @cnic		varchar(13),
 @found		int output
@@ -167,7 +121,71 @@ ELSE
 	SET @found = 0
 END
 GO
+--===========ADMIN==================
+CREATE PROCEDURE admin_signin
+@username	varchar(20),
+@password	varchar(20)
+AS
+	SELECT	[Person].FirstName, [Person].LastName, [Person].CNIC,
+			[Person].Address, [Admin].EmploymentDate, [Admin].Salary
+	FROM	[Admin] inner join [Person] on [Admin].CNIC = [Person].CNIC
+	WHERE	[Admin].Username = @username AND [Admin].Password = @password
+GO
+CREATE PROCEDURE edit_admin
+@fname	varchar(20),
+@lname	varchar(20),
+@adress	nvarchar(255),
+@cnic	char(13)
+AS
+	UPDATE	[Person]
+	SET		FirstName = @fname,
+			LastName = @lname,
+			[Address]=@adress
+	WHERE	CNIC = @cnic
+GO
+--===========FLIGHTS================
+CREATE PROCEDURE get_flights
+AS
+	SELECT	Flight.FlightId, Flight.[Source] as [From], Flight.[Destination] as [To],
+			Flight.[Time],  Flight.Duration, Flight.[Status], Flight.Cost
+	FROM	Flight
+GO
+CREATE PROCEDURE delete_flight
+@flightid	 varchar(10)  
+AS
+	DELETE 
+	FROM	 Flight
+	WHERE	 Flight.FlightId=@flightid
+GO
+--WIP
+CREATE PROCEDURE add_flight
+@flightID	varchar(10),
+@source		varchar(30),
+@destination	varchar(30),
+@duration	time,
+@cost		int,
+@status		varchar(20),
+@time		datetime
+AS
+	
+GO
+CREATE PROCEDURE update_status
+@flightID	varchar(10),
+@status		varchar(20)
+AS
+	UPDATE	[Flight]
+	SET		[Status] = @status
+	WHERE	FlightId = @flightID
+GO
 
+--===========NO FLY=================
+CREATE PROCEDURE get_nofly
+AS
+	SELECT	[Person].FirstName, [Person].LastName, [Person].CNIC,
+			[Person].[Address], [Customer].Contact
+	FROM	[Customer] inner join [Person] on [Customer].CNIC = [Person].CNIC
+	WHERE	[Customer].[No_Fly]=1
+GO
 CREATE PROCEDURE Add_nofly
 @cnic	varchar(13)
 AS
@@ -175,7 +193,6 @@ AS
 	SET		Customer.No_Fly=1
 	WHERE	CNIC = @cnic
 GO
-
 CREATE PROCEDURE Remove_nofly
 @cnic	varchar(13)
 AS
@@ -183,7 +200,6 @@ AS
 	SET		Customer.No_Fly=0
 	WHERE	CNIC = @cnic
 GO
-
 --add customer directly to nofly
 CREATE PROCEDURE add_customer
 @cnic	varchar(13),
@@ -203,14 +219,12 @@ INSERT INTO Customer VALUES
 (@cnic,@contact,1)
 END
 GO
-
-
+--===========AIRPORT===============
 CREATE PROCEDURE get_airport_list
 AS
 	SELECT*
 	FROM [Airport]
 GO
-
 CREATE PROCEDURE get_airport
 @airport varchar(20)
 AS

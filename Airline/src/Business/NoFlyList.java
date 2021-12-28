@@ -14,29 +14,47 @@ public class NoFlyList {
         database = MSsql.getInstance();
     }
     
-    public void loadNoFlyList(){
-        customers.clear();
-        try (ResultSet result = database.getTableNoFly();){
-            if (result == null)
-                return;
-            while(result.next()){
-                Customer customer = new Customer();
-                customer.setFirstname(result.getString("FirstName"));
-                customer.setLastname(result.getString("LastName"));
-                customer.setCNIC(result.getString("CNIC"));
-                customer.setAddress(result.getString("Address"));
-                customer.setContact(result.getString("Contact"));
-                customers.add(customer);
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
     public ArrayList<Customer> getCustomers() {
         return customers;
     }
     
-    
+    public boolean addCustomer(Customer customer){
+        if (searchCustomer(customer.getCNIC()) != -1)
+            return false;
+        customers.add(customer);
+        //---------UPDATE DATABASE----------
+        if (database.searchCustomer(customer.getCNIC())){
+            database.addToNoFly(customer.getCNIC());
+        }
+        else{
+            database.addToNoFly( 
+                    customer.getCNIC(),
+                    customer.getFirstname(),
+                    customer.getLastname(),
+                    customer.getContact(),
+                    customer.getAddress()
+            );
+        }
+        //----------------------------------
+        return true;
+    }
+    public boolean removeCustomer(String cnic){
+        int i = searchCustomer(cnic);
+        if (i == -1)
+            return false;
+        
+        customers.remove(i);
+        //-----------UPDATE DATABASE------------
+        database.removeFromNoFly(cnic);
+        //--------------------------------------
+        return true;
+    }
+    public int searchCustomer(String cnic){
+        for (int i = 0; i < customers.size(); i++){
+            if (customers.get(i).getCNIC().equals(cnic)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

@@ -8,11 +8,8 @@ import java.sql.SQLException;
 import java.net.InetAddress;
 
 public class MSsql {
-    //CHANGE SERVER NAME ACCORDINGLY AND SAVE
     protected String url;
-    
     private static final MSsql instance = new MSsql();
-    
     private MSsql(){
         try {
             //AUTO-ASSIGN SQL CONNECTION STRING
@@ -34,61 +31,6 @@ public class MSsql {
         return instance;
     }
     
-    public ResultSet demo(){
-        ResultSet result = null;
-        try {
-            Connection con = DriverManager.getConnection(url);
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String sql="Select * from [Person]";
-            PreparedStatement pst;
-            pst = con.prepareStatement(sql);
-            result = pst.executeQuery();
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    
-    //admin profile functions
-    public ResultSet checkAdmin(String username, String password){
-        ResultSet result = null;
-        try {
-            Connection con = DriverManager.getConnection(url);
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            //CALLING STORED PROCEDURE
-            String SQL = "{call [admin_signin](?,?)}";
-            //PROCEDURE PARAMETERS
-            CallableStatement Cmt = con.prepareCall(SQL);
-            Cmt.setString(1, username);
-            Cmt.setString(2, password);
-            result=Cmt.executeQuery();
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    public boolean editAdmin(String CNIC, String fName, String lName, String address){
-        try {
-            Connection con = DriverManager.getConnection(url);
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            //CALLING STORED PROCEDURE
-            String SQL = "{call [edit_admin](?,?,?,?)}";
-            //PROCEDURE PARAMETERS
-            CallableStatement Cmt = con.prepareCall(SQL);
-            Cmt.setString(1, CNIC);
-            Cmt.setString(2, fName);
-            Cmt.setString(3, lName);
-            Cmt.setString(4, address);
-            Cmt.execute();
-            return true;
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
     
     //retrieve table of flights
     public ResultSet getTableFlights(){
@@ -142,7 +84,47 @@ public class MSsql {
     }
     
     
-    //retrieve NoFly customers
+    //===========ADMIN===================
+    //PROFILE MANAGEMENT
+    public ResultSet checkAdmin(String username, String password){
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [admin_signin](?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString(1, username);
+            Cmt.setString(2, password);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public boolean editAdmin(String CNIC, String fName, String lName, String address){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [edit_admin](?,?,?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString(1, CNIC);
+            Cmt.setString(2, fName);
+            Cmt.setString(3, lName);
+            Cmt.setString(4, address);
+            Cmt.execute();
+            return true;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    //NOFLY MANAGEMENT
     public ResultSet getTableNoFly(){
         ResultSet result = null;
         try {
@@ -233,8 +215,42 @@ public class MSsql {
         }
         return found;
     }
-
-    
+    //FLIGHT MANAGEMENT
+    public boolean removeFlight(String flightID){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [delete_flight](?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("flightid", flightID);
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean updateStatus(String flightID, String status){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [update_status](?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("flightid", flightID);
+            Cmt.setString("status", status);
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 
   
 }

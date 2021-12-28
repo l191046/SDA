@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -17,7 +18,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private ArrayList<JTextField> profile;
     private DefaultTableModel model_flights;
     private DefaultTableModel model_nofly;
-    
+    private DefaultComboBoxModel model_status;
     
     public Admin_GUI(JSystem system) {
         this.system = system;
@@ -25,7 +26,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         //set tables
         setTableFlights();
         setTableNoFly();
-        
+        setComboStatus();
         //initialize swing components
         initComponents();
         setVisible(true);
@@ -53,7 +54,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private void setTableFlights(){
         model_flights = new DefaultTableModel();
         String header[] = new String[] {
-            "Flight Code", "From", "To", "Departure", "Duration", "Status", "Ticket"
+            "Flight Code", "From", "To", "Departure", "Duration", "Status", "Cost"
         };
         
         model_flights.setColumnCount(7);
@@ -68,6 +69,11 @@ public class Admin_GUI extends javax.swing.JFrame {
         model_nofly.setColumnCount(5);
         model_nofly.setColumnIdentifiers(header);
     }
+    private void setComboStatus(){
+        model_status = new DefaultComboBoxModel();
+        model_status.insertElementAt("On time", 0);
+        model_status.insertElementAt("Cancelled", 1);
+    }
     //LOAD TABLE DATA
     private void populateTableFlights(){
         this.model_flights.setRowCount(0);
@@ -78,18 +84,9 @@ public class Admin_GUI extends javax.swing.JFrame {
         system.getTableNoFly(model_nofly);
     }
     
-    private void setHighlights(String btn_name){
-       for(int i=0; i<highlights.size(); i++){
-           JPanel hl = highlights.get(i);
-           
-           if(hl.getName() == btn_name)
-                hl.setBackground(Color.decode("#FEB63E"));
-           else
-               hl.setBackground(Color.decode("#4D5061"));
-       }
-    }
     private void setProfile(){
-        ArrayList<String> fields = system.getAdmin();
+        ArrayList<String> fields = new ArrayList<String>();
+        system.getAdminProfile(fields);
         for (int i=0; i<profile.size(); i++){
             profile.get(i).setText(fields.get(i));
         }
@@ -101,13 +98,14 @@ public class Admin_GUI extends javax.swing.JFrame {
         }
     }
     
-    //GOTO FUNCTIONS
+    //GOTO PAGE FUNCTIONS
     public void gotoManageFlights(){
         //UPDATE TABLE
         populateTableFlights();
         this.inner_cardstack.show(this.internal_cardstack, "Manage_flights");
         this.setHighlights("highlight_manageFlights");
         this.btn_removeFlight.setVisible(false);
+        this.combo_status.setVisible(false);
     }
     public void gotoNoFly(){
         //UPDATE TABLE
@@ -115,6 +113,16 @@ public class Admin_GUI extends javax.swing.JFrame {
         this.inner_cardstack.show(this.internal_cardstack, "View_NoFlyList");
         this.setHighlights("highlight_noFlyList");
         this.btn_removeNoFly.setVisible(false);
+    }
+    private void setHighlights(String btn_name){
+       for(int i=0; i<highlights.size(); i++){
+           JPanel hl = highlights.get(i);
+           
+           if(hl.getName() == btn_name)
+                hl.setBackground(Color.decode("#FEB63E"));
+           else
+               hl.setBackground(Color.decode("#4D5061"));
+       }
     }
     
     @SuppressWarnings("unchecked")
@@ -175,6 +183,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         table_flights = new javax.swing.JTable();
         btn_removeFlight = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        combo_status = new javax.swing.JComboBox<>();
         Add_flight = new javax.swing.JPanel();
         Company_panel1 = new javax.swing.JPanel();
         Company_info_label1 = new javax.swing.JLabel();
@@ -884,6 +893,13 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        combo_status.setModel(model_status);
+        combo_status.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                combo_statusItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout Manage_flightsLayout = new javax.swing.GroupLayout(Manage_flights);
         Manage_flights.setLayout(Manage_flightsLayout);
         Manage_flightsLayout.setHorizontalGroup(
@@ -896,6 +912,8 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Manage_flightsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(combo_status, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_removeFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -907,7 +925,9 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll_flights, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_removeFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_removeFlight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(combo_status))
                 .addContainerGap())
         );
 
@@ -1368,7 +1388,8 @@ public class Admin_GUI extends javax.swing.JFrame {
         int row = this.table_flights.getSelectedRow();
         
         String flightID = flightsTable.getValueAt(row, 0).toString(); //get flightID to be removed
-        //awaiting implementation
+        system.removeFlight(flightID);
+        gotoManageFlights();
         this.btn_removeFlight.setFocusable(true);
     }//GEN-LAST:event_btn_removeFlightMouseClicked
 
@@ -1376,6 +1397,10 @@ public class Admin_GUI extends javax.swing.JFrame {
         int row = this.table_flights.getSelectedRow();
         if (row != -1){
             this.btn_removeFlight.setVisible(true);
+            this.combo_status.setVisible(true);
+            int col = model_flights.findColumn("Status");
+            String status = model_flights.getValueAt(row, col).toString();
+            this.combo_status.setSelectedItem(status);
         }
     }//GEN-LAST:event_table_flightsMouseClicked
 
@@ -1390,6 +1415,7 @@ public class Admin_GUI extends javax.swing.JFrame {
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
         this.btn_edit.setFocusable(false); //lock button
+        String cnic = this.txtbox_CNIC.getText();
         String new_fname = this.txtbox_firstName.getText();
         String new_lname = this.txtbox_lastName.getText();
         String new_address = this.txtbox_address.getText();
@@ -1397,7 +1423,7 @@ public class Admin_GUI extends javax.swing.JFrame {
             //validation check
         }
         else {
-            system.editAdmin(new_fname, new_lname, new_address);
+            system.editAdmin(cnic,new_fname, new_lname, new_address);
             setProfile();
         }
         this.btn_edit.setFocusable(true); //unlock button
@@ -1420,6 +1446,21 @@ public class Admin_GUI extends javax.swing.JFrame {
             this.btn_edit.setVisible(true);
         }
     }//GEN-LAST:event_txtbox_lastNameKeyTyped
+
+    private void combo_statusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_statusItemStateChanged
+        int row = this.table_flights.getSelectedRow();
+        if (row != -1){
+            int col = model_flights.findColumn("Status");
+            String status = model_flights.getValueAt(row, col).toString();
+            String new_status = this.combo_status.getSelectedItem().toString();
+            if (!new_status.equals(status)){
+                col = model_flights.findColumn("Flight Code");
+                String flightID = model_flights.getValueAt(row, col).toString();
+                system.changeStatus(flightID, new_status);
+                gotoManageFlights();
+            }
+        }
+    }//GEN-LAST:event_combo_statusItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1459,6 +1500,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel btn_removeFlight;
     private javax.swing.JPanel btn_removeNoFly;
     private javax.swing.JLabel btn_signin;
+    private javax.swing.JComboBox<String> combo_status;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler5;
     private javax.swing.JPanel highlight_addFlight;
@@ -1507,3 +1549,4 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtbox_username;
     // End of variables declaration//GEN-END:variables
 }
+
