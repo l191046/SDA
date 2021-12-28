@@ -14,11 +14,15 @@ public class JHome extends javax.swing.JFrame {
     private CardLayout cards;
     private ArrayList<JPanel> highlights;
     private DefaultTableModel model_routes;
+    private DefaultComboBoxModel model_source;
+    private DefaultComboBoxModel model_destination;
     
             
     public JHome(JSystem system) {
         this.system = system;
+        
         setTableRoutes();
+        setComboAirports();
         
         initComponents();
         setVisible(true);
@@ -29,7 +33,7 @@ public class JHome extends javax.swing.JFrame {
         highlights.add(this.highlight_checkFlight);
         highlights.add(this.highlight_history);
     }
-    //SETUP TABLE FORMAT
+    //SETUP TABLE/COMBO MODELS
     private void setTableRoutes(){
         model_routes = new DefaultTableModel();
         String header[] = new String[] {
@@ -39,6 +43,14 @@ public class JHome extends javax.swing.JFrame {
         
         model_routes.setColumnCount(7);
         model_routes.setColumnIdentifiers(header);
+    }
+    private void setComboAirports(){
+        model_source = new DefaultComboBoxModel();
+        model_destination = new DefaultComboBoxModel();
+        model_source.addElement("Select Airport");
+        system.getComboAirports(model_source);
+        model_destination.addElement("Select Airport");
+        system.getComboAirports(model_destination);
     }
     //LOAD TABLE DATA
     private void populateTableRoutes(){
@@ -483,13 +495,13 @@ public class JHome extends javax.swing.JFrame {
         cbox_source.setBackground(new java.awt.Color(205, 209, 196));
         cbox_source.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         cbox_source.setForeground(new java.awt.Color(48, 50, 61));
-        cbox_source.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pakistan", "America", "Canada", "United Kingdom" }));
+        cbox_source.setModel(model_source);
         cbox_source.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         cbox_destination.setBackground(new java.awt.Color(205, 209, 196));
         cbox_destination.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         cbox_destination.setForeground(new java.awt.Color(48, 50, 61));
-        cbox_destination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "United Kingdom", "Pakistan", "America", "Canada" }));
+        cbox_destination.setModel(model_destination);
 
         lbl_source.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         lbl_source.setForeground(new java.awt.Color(255, 255, 255));

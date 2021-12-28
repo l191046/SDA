@@ -157,7 +157,7 @@ AS
 	FROM	 Flight
 	WHERE	 Flight.FlightId=@flightid
 GO
---WIP
+
 CREATE PROCEDURE add_flight
 @flightID	varchar(10),
 @source		varchar(30),
@@ -165,9 +165,11 @@ CREATE PROCEDURE add_flight
 @duration	time,
 @cost		int,
 @status		varchar(20),
-@time		datetime
+@dDate		date,
+@dTime		time
 AS
-	
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time])
+VALUES (@flightID,@source, @destination, @duration, @cost, @status, cast(@dDate as datetime) + cast(@dTime as datetime))
 GO
 CREATE PROCEDURE update_status
 @flightID	varchar(10),
@@ -234,7 +236,7 @@ AS
 GO
 
 
---drop procedure search_customer;
+drop procedure add_flight;
 --EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
 
 select * from Person;
