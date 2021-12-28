@@ -23,11 +23,13 @@ public class Admin_GUI extends javax.swing.JFrame {
     private DefaultComboBoxModel model_status;
     private DefaultComboBoxModel model_source;
     private DefaultComboBoxModel model_destination;
+    private ArrayList<JLabel> errors_home;
+    private ArrayList<JLabel> errors_addFlight;
     
     public Admin_GUI(JSystem system) {
         this.system = system;
         
-        //set tables/combobox models
+        //set arrays/tables/combobox models
         setTableFlights();
         setTableNoFly();
         setComboStatus();
@@ -35,6 +37,10 @@ public class Admin_GUI extends javax.swing.JFrame {
         //initialize swing components
         initComponents();
         setVisible(true);
+        setErrorsHome();
+        setErrorsAddFlight();
+        this.err_username.setVisible(false);
+        this.err_password.setVisible(false);
         
         T_cardstack = (CardLayout) this.Top_cardstack.getLayout();
         inner_cardstack = (CardLayout) this.internal_cardstack.getLayout();
@@ -53,6 +59,36 @@ public class Admin_GUI extends javax.swing.JFrame {
         profile.add(this.txtbox_employment);
         profile.add(this.txtbox_salary);
         
+    }
+    
+    //SETUP ERROR LABEL LISTS
+    private void setErrorsHome(){
+        errors_home = new ArrayList<JLabel>();
+        for (Component label : this.panel_empInfo.getComponents()) {
+            if (label.getName() != null && label.getName().equals("ERROR")){
+                errors_home.add((JLabel)label);
+            }
+        }
+        hideErrorsHome();
+    }
+    private void hideErrorsHome(){
+        for (JLabel error : errors_home){
+            error.setVisible(false);
+        }
+    }
+    private void setErrorsAddFlight(){
+        errors_addFlight = new ArrayList<JLabel>();
+        for (Component label : this.Info_panel2.getComponents()) {
+            if (label.getName() != null && label.getName().equals("ERROR")){
+                errors_addFlight.add((JLabel)label);
+            }
+        }
+        hideErrorsAddFlight();
+    }
+    private void hideErrorsAddFlight(){
+        for (JLabel error : errors_addFlight){
+            error.setVisible(false);
+        }
     }
     
     //SETUP TABLE FORMAT
@@ -113,6 +149,13 @@ public class Admin_GUI extends javax.swing.JFrame {
     private void clearFlightForm(){
         this.txtbox_flightCode.setText("");
         this.txtbox_cost.setText("");
+        this.spinner_hours.setValue(0);
+        this.spinner_minutes.setValue(0);
+        this.spinner_hoursD.setValue(0);
+        this.spinner_minutesD.setValue(0);
+        this.combo_source.setSelectedIndex(0);
+        this.combo_destination.setSelectedIndex(0);
+        this.calendar_departure.setDate(null);
     }
     
     //GOTO PAGE FUNCTIONS
@@ -122,6 +165,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         this.inner_cardstack.show(this.internal_cardstack, "Manage_flights");
         this.setHighlights("highlight_manageFlights");
         this.btn_removeFlight.setVisible(false);
+        this.btn_view.setVisible(false);
         this.combo_status.setVisible(false);
     }
     public void gotoNoFly(){
@@ -156,6 +200,8 @@ public class Admin_GUI extends javax.swing.JFrame {
         btn_signin = new javax.swing.JLabel();
         btn_back = new javax.swing.JLabel();
         txtbox_password = new javax.swing.JPasswordField();
+        err_username = new javax.swing.JLabel();
+        err_password = new javax.swing.JLabel();
         Image_panel = new javax.swing.JPanel();
         image_label = new javax.swing.JLabel();
         Landing_page = new javax.swing.JPanel();
@@ -193,6 +239,9 @@ public class Admin_GUI extends javax.swing.JFrame {
         txtbox_salary = new javax.swing.JTextField();
         btn_edit = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        err_Home1 = new javax.swing.JLabel();
+        err_Home2 = new javax.swing.JLabel();
+        err_Home3 = new javax.swing.JLabel();
         Manage_flights = new javax.swing.JPanel();
         Company_panel2 = new javax.swing.JPanel();
         Company_info_label2 = new javax.swing.JLabel();
@@ -201,6 +250,8 @@ public class Admin_GUI extends javax.swing.JFrame {
         btn_removeFlight = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         combo_status = new javax.swing.JComboBox<>();
+        btn_view = new javax.swing.JPanel();
+        lbl_view = new javax.swing.JLabel();
         Add_flight = new javax.swing.JPanel();
         Company_panel1 = new javax.swing.JPanel();
         Company_info_label1 = new javax.swing.JLabel();
@@ -226,6 +277,13 @@ public class Admin_GUI extends javax.swing.JFrame {
         spinner_hoursD = new javax.swing.JSpinner();
         lbl_separator1 = new javax.swing.JLabel();
         spinner_minutesD = new javax.swing.JSpinner();
+        err_AddFlight1 = new javax.swing.JLabel();
+        err_AddFlight2 = new javax.swing.JLabel();
+        err_AddFlight3 = new javax.swing.JLabel();
+        err_AddFlight7 = new javax.swing.JLabel();
+        err_AddFlight5 = new javax.swing.JLabel();
+        err_AddFlight6 = new javax.swing.JLabel();
+        err_AddFlight4 = new javax.swing.JLabel();
         View_NoFlyList = new javax.swing.JPanel();
         Company_panel3 = new javax.swing.JPanel();
         Company_info_label3 = new javax.swing.JLabel();
@@ -288,6 +346,16 @@ public class Admin_GUI extends javax.swing.JFrame {
         txtbox_password.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         txtbox_password.setBorder(null);
 
+        err_username.setBackground(new java.awt.Color(214, 40, 40));
+        err_username.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_username.setForeground(new java.awt.Color(214, 40, 40));
+        err_username.setText("ERROR");
+
+        err_password.setBackground(new java.awt.Color(214, 40, 40));
+        err_password.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_password.setForeground(new java.awt.Color(214, 40, 40));
+        err_password.setText("ERROR");
+
         javax.swing.GroupLayout Sigin_panelLayout = new javax.swing.GroupLayout(Sigin_panel);
         Sigin_panel.setLayout(Sigin_panelLayout);
         Sigin_panelLayout.setHorizontalGroup(
@@ -296,10 +364,6 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btn_back)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Sigin_panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_signin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
             .addGroup(Sigin_panelLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,26 +373,36 @@ public class Admin_GUI extends javax.swing.JFrame {
                             .addComponent(Password_label, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Username_label)
                             .addComponent(txtbox_username)
-                            .addComponent(txtbox_password, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                            .addComponent(txtbox_password, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                            .addComponent(err_username, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(err_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Sigin_panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_signin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
         Sigin_panelLayout.setVerticalGroup(
             Sigin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Sigin_panelLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(Welcome_label)
-                .addGap(54, 54, 54)
+                .addGap(31, 31, 31)
                 .addComponent(Username_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtbox_username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(err_username)
+                .addGap(13, 13, 13)
                 .addComponent(Password_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtbox_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(err_password)
                 .addGap(18, 18, 18)
                 .addComponent(btn_signin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(btn_back)
                 .addContainerGap())
         );
@@ -745,6 +819,24 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        err_Home1.setBackground(new java.awt.Color(214, 40, 40));
+        err_Home1.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_Home1.setForeground(new java.awt.Color(214, 40, 40));
+        err_Home1.setText("ERROR");
+        err_Home1.setName("ERROR"); // NOI18N
+
+        err_Home2.setBackground(new java.awt.Color(214, 40, 40));
+        err_Home2.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_Home2.setForeground(new java.awt.Color(214, 40, 40));
+        err_Home2.setText("ERROR");
+        err_Home2.setName("ERROR"); // NOI18N
+
+        err_Home3.setBackground(new java.awt.Color(214, 40, 40));
+        err_Home3.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_Home3.setForeground(new java.awt.Color(214, 40, 40));
+        err_Home3.setText("ERROR");
+        err_Home3.setName("ERROR"); // NOI18N
+
         javax.swing.GroupLayout panel_empInfoLayout = new javax.swing.GroupLayout(panel_empInfo);
         panel_empInfo.setLayout(panel_empInfoLayout);
         panel_empInfoLayout.setHorizontalGroup(
@@ -753,38 +845,43 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_empInfoLayout.createSequentialGroup()
-                        .addComponent(lbl_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_empInfoLayout.createSequentialGroup()
-                        .addComponent(lbl_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_empInfoLayout.createSequentialGroup()
-                        .addComponent(lbl_CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_empInfoLayout.createSequentialGroup()
-                        .addComponent(lbl_address, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_address, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_empInfoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_employment, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_employment, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_empInfoLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(lbl_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbox_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_empInfoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_empInfoLayout.createSequentialGroup()
+                                .addComponent(lbl_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbox_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_empInfoLayout.createSequentialGroup()
+                                .addComponent(lbl_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbox_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_empInfoLayout.createSequentialGroup()
+                                .addComponent(lbl_CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbox_CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_empInfoLayout.createSequentialGroup()
+                                .addComponent(lbl_address, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbox_address, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panel_empInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_empInfoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_employment, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbox_employment, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_empInfoLayout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(lbl_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbox_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 39, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_empInfoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(err_Home1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(err_Home2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(err_Home3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panel_empInfoLayout.setVerticalGroup(
@@ -817,7 +914,13 @@ public class Admin_GUI extends javax.swing.JFrame {
                             .addComponent(lbl_address)
                             .addComponent(txtbox_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
+                .addComponent(err_Home1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(err_Home2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(err_Home3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -922,6 +1025,44 @@ public class Admin_GUI extends javax.swing.JFrame {
                 combo_statusItemStateChanged(evt);
             }
         });
+        combo_status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_statusActionPerformed(evt);
+            }
+        });
+
+        btn_view.setBackground(new java.awt.Color(77, 80, 97));
+        btn_view.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_view.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_viewMouseClicked(evt);
+            }
+        });
+
+        lbl_view.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_view.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_view.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_view.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/info-16.png"))); // NOI18N
+        lbl_view.setText("VIEW");
+        lbl_view.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_view.setIconTextGap(-80);
+
+        javax.swing.GroupLayout btn_viewLayout = new javax.swing.GroupLayout(btn_view);
+        btn_view.setLayout(btn_viewLayout);
+        btn_viewLayout.setHorizontalGroup(
+            btn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_viewLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(lbl_view)
+                .addGap(5, 5, 5))
+        );
+        btn_viewLayout.setVerticalGroup(
+            btn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_viewLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(lbl_view)
+                .addGap(5, 5, 5))
+        );
 
         javax.swing.GroupLayout Manage_flightsLayout = new javax.swing.GroupLayout(Manage_flights);
         Manage_flights.setLayout(Manage_flightsLayout);
@@ -937,6 +1078,8 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(combo_status, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(btn_view, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_removeFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -950,7 +1093,8 @@ public class Admin_GUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(Manage_flightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_removeFlight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(combo_status))
+                    .addComponent(combo_status)
+                    .addComponent(btn_view, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1074,6 +1218,48 @@ public class Admin_GUI extends javax.swing.JFrame {
 
         spinner_minutesD.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
+        err_AddFlight1.setBackground(new java.awt.Color(214, 40, 40));
+        err_AddFlight1.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_AddFlight1.setForeground(new java.awt.Color(214, 40, 40));
+        err_AddFlight1.setText("ERROR");
+        err_AddFlight1.setName("ERROR"); // NOI18N
+
+        err_AddFlight2.setBackground(new java.awt.Color(214, 40, 40));
+        err_AddFlight2.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_AddFlight2.setForeground(new java.awt.Color(214, 40, 40));
+        err_AddFlight2.setText("ERROR");
+        err_AddFlight2.setName("ERROR"); // NOI18N
+
+        err_AddFlight3.setBackground(new java.awt.Color(214, 40, 40));
+        err_AddFlight3.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_AddFlight3.setForeground(new java.awt.Color(214, 40, 40));
+        err_AddFlight3.setText("ERROR");
+        err_AddFlight3.setName("ERROR"); // NOI18N
+
+        err_AddFlight7.setBackground(new java.awt.Color(214, 40, 40));
+        err_AddFlight7.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_AddFlight7.setForeground(new java.awt.Color(214, 40, 40));
+        err_AddFlight7.setText("ERROR");
+        err_AddFlight7.setName("ERROR"); // NOI18N
+
+        err_AddFlight5.setBackground(new java.awt.Color(214, 40, 40));
+        err_AddFlight5.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_AddFlight5.setForeground(new java.awt.Color(214, 40, 40));
+        err_AddFlight5.setText("ERROR");
+        err_AddFlight5.setName("ERROR"); // NOI18N
+
+        err_AddFlight6.setBackground(new java.awt.Color(214, 40, 40));
+        err_AddFlight6.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_AddFlight6.setForeground(new java.awt.Color(214, 40, 40));
+        err_AddFlight6.setText("ERROR");
+        err_AddFlight6.setName("ERROR"); // NOI18N
+
+        err_AddFlight4.setBackground(new java.awt.Color(214, 40, 40));
+        err_AddFlight4.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 12)); // NOI18N
+        err_AddFlight4.setForeground(new java.awt.Color(214, 40, 40));
+        err_AddFlight4.setText("ERROR");
+        err_AddFlight4.setName("ERROR"); // NOI18N
+
         javax.swing.GroupLayout Info_panel2Layout = new javax.swing.GroupLayout(Info_panel2);
         Info_panel2.setLayout(Info_panel2Layout);
         Info_panel2Layout.setHorizontalGroup(
@@ -1081,28 +1267,36 @@ public class Admin_GUI extends javax.swing.JFrame {
             .addGroup(Info_panel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Info_panel2Layout.createSequentialGroup()
+                        .addComponent(err_AddFlight4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(292, 292, 292)
+                        .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Info_panel2Layout.createSequentialGroup()
-                                .addComponent(lbl_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Info_panel2Layout.createSequentialGroup()
-                                .addComponent(lbl_source, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(combo_source, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Info_panel2Layout.createSequentialGroup()
-                                .addComponent(lbl_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(combo_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Info_panel2Layout.createSequentialGroup()
-                                .addComponent(lbl_duration, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spinner_hoursD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spinner_minutesD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(err_AddFlight3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(err_AddFlight2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(err_AddFlight1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(Info_panel2Layout.createSequentialGroup()
+                                    .addComponent(lbl_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(Info_panel2Layout.createSequentialGroup()
+                                    .addComponent(lbl_source, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(combo_source, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(Info_panel2Layout.createSequentialGroup()
+                                    .addComponent(lbl_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(combo_destination, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(Info_panel2Layout.createSequentialGroup()
+                                    .addComponent(lbl_duration, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spinner_hoursD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lbl_separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spinner_minutesD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1112,7 +1306,7 @@ public class Admin_GUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(calendar_departure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(Info_panel2Layout.createSequentialGroup()
-                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(Info_panel2Layout.createSequentialGroup()
                                         .addComponent(lbl_time, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1124,56 +1318,76 @@ public class Admin_GUI extends javax.swing.JFrame {
                                     .addGroup(Info_panel2Layout.createSequentialGroup()
                                         .addComponent(lbl_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 45, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Info_panel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(err_AddFlight5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(err_AddFlight6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(err_AddFlight7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 45, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         Info_panel2Layout.setVerticalGroup(
             Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Info_panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(calendar_departure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbl_flightCode)
-                                .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_duration2))
+                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Info_panel2Layout.createSequentialGroup()
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(calendar_departure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lbl_flightCode)
+                                        .addComponent(txtbox_flightCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbl_duration2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lbl_source)
+                                            .addComponent(combo_source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lbl_destination)
+                                            .addComponent(combo_destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(9, 9, 9)
+                                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lbl_duration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(spinner_hoursD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_separator1)
+                                            .addComponent(spinner_minutesD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lbl_time)
+                                            .addComponent(spinner_hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_separator)
+                                            .addComponent(spinner_minutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lbl_cost)
+                                            .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(30, 30, 30)
+                        .addComponent(err_AddFlight1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Info_panel2Layout.createSequentialGroup()
-                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_source)
-                                    .addComponent(combo_source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_destination)
-                                    .addComponent(combo_destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(9, 9, 9)
-                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_duration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(spinner_hoursD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_separator1)
-                                    .addComponent(spinner_minutesD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(Info_panel2Layout.createSequentialGroup()
-                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_time)
-                                    .addComponent(spinner_hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_separator)
-                                    .addComponent(spinner_minutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_cost)
-                                    .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(err_AddFlight2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(err_AddFlight3))
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addComponent(err_AddFlight5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(err_AddFlight6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(err_AddFlight7)))
+                .addGroup(Info_panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(Info_panel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(err_AddFlight4)
+                        .addContainerGap(40, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout Add_flightLayout = new javax.swing.GroupLayout(Add_flight);
@@ -1380,23 +1594,50 @@ public class Admin_GUI extends javax.swing.JFrame {
 
     private void btn_signinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_signinMouseClicked
         this.btn_signin.setFocusable(false);    //dont let user click again
+        hideErrorsHome();
+        boolean isValid = true;
         //get username and password
         String username = this.txtbox_username.getText();
         String password = new String(this.txtbox_password.getPassword());
+        
+        //VALIDATION
+        if (username.equals("")){
+            this.err_username.setText("Username required");
+            this.err_username.setVisible(true);
+            isValid = false;
+        }
+        else {
+            this.err_username.setVisible(false);
+        }
+        if (password.equals("")){
+            this.err_password.setText("Password required");
+            this.err_password.setVisible(true);
+            isValid = false;
+        }
+        else {
+            this.err_password.setVisible(false);
+        }
+
         //clear fields
         this.txtbox_username.setText("");
         this.txtbox_password.setText("");
         
-        if (!username.equals("") && !password.equals("") && system.adminSignIn(username, password)){
-            setProfile();
-            T_cardstack.show(this.Top_cardstack, "Landing_page");
-        }
-        else{
+        if (!isValid){  //invalid input
             this.btn_signin.setFocusable(true); //allow user to click again
         }
-        
-        
-        
+        else if (system.adminSignIn(username, password)) {  //successful signin
+            setProfile();
+            T_cardstack.show(this.Top_cardstack, "Landing_page");
+            err_username.setVisible(false);
+            err_password.setVisible(false);
+        }
+        else {  //unsuccessful signin
+            this.err_username.setText("Incorrect Username/Password");
+            this.err_password.setText("Incorrect Username/Password");
+            this.err_username.setVisible(true);
+            this.err_password.setVisible(true);
+            this.btn_signin.setFocusable(true); //allow user to click again
+        }
     }//GEN-LAST:event_btn_signinMouseClicked
 
     private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
@@ -1405,32 +1646,44 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_backMouseClicked
 
     private void btn_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseClicked
+        this.btn_home.setFocusable(false);
         setProfile();
         this.inner_cardstack.show(this.internal_cardstack, "Home");
         this.setHighlights("highlight_home");
+        this.btn_home.setFocusable(true);
     }//GEN-LAST:event_btn_homeMouseClicked
 
     private void btn_manageFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manageFlightsMouseClicked
+        this.btn_manageFlights.setFocusable(false);
         gotoManageFlights();
+        this.btn_manageFlights.setFocusable(true);
     }//GEN-LAST:event_btn_manageFlightsMouseClicked
 
     private void btn_addFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addFlightMouseClicked
+        this.btn_addFlight.setFocusable(false);
         this.inner_cardstack.show(this.internal_cardstack, "Add_flight");
         this.setHighlights("highlight_addFlight");
+        this.btn_addFlight.setFocusable(true);
     }//GEN-LAST:event_btn_addFlightMouseClicked
 
     private void btn_noFlyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_noFlyListMouseClicked
+        this.btn_noFlyList.setFocusable(false);
         gotoNoFly();
+        this.btn_noFlyList.setFocusable(true);
     }//GEN-LAST:event_btn_noFlyListMouseClicked
 
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
+        this.btn_logout.setFocusable(false);
         system.closeSession();
         this.clearProfile();
         this.T_cardstack.show(this.Top_cardstack, "Login_card");
+        this.btn_logout.setFocusable(true);
     }//GEN-LAST:event_btn_logoutMouseClicked
 
     private void btn_addToNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addToNoFlyMouseClicked
+        this.btn_addToNoFly.setFocusable(false);
         JAddNoFly addNoFly = new JAddNoFly(system, this);
+        this.btn_addToNoFly.setFocusable(true);
     }//GEN-LAST:event_btn_addToNoFlyMouseClicked
 
     private void btn_removeNoFlyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeNoFlyMouseClicked
@@ -1443,10 +1696,12 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_removeNoFlyMouseClicked
 
     private void table_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_customersMouseClicked
+        this.table_customers.setFocusable(false);
         int row = this.table_customers.getSelectedRow();
         if (row != -1){
             this.btn_removeNoFly.setVisible(true);
         }
+        this.table_customers.setFocusable(true);
     }//GEN-LAST:event_table_customersMouseClicked
 
     private void btn_removeFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeFlightMouseClicked
@@ -1462,14 +1717,17 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_removeFlightMouseClicked
 
     private void table_flightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_flightsMouseClicked
+        this.table_flights.setFocusable(false);
         int row = this.table_flights.getSelectedRow();
         if (row != -1){
             this.btn_removeFlight.setVisible(true);
+            this.btn_view.setVisible(true);
             this.combo_status.setVisible(true);
             int col = model_flights.findColumn("Status");
             String status = model_flights.getValueAt(row, col).toString();
             this.combo_status.setSelectedItem(status);
         }
+        this.table_flights.setFocusable(true);
     }//GEN-LAST:event_table_flightsMouseClicked
 
     private void txtbox_addressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbox_addressKeyTyped
@@ -1483,17 +1741,36 @@ public class Admin_GUI extends javax.swing.JFrame {
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
         this.btn_edit.setFocusable(false); //lock button
+        
         String cnic = this.txtbox_CNIC.getText();
         String new_fname = this.txtbox_firstName.getText();
         String new_lname = this.txtbox_lastName.getText();
         String new_address = this.txtbox_address.getText();
-        if (new_fname.equals("") || new_lname.equals("") || new_address.equals("")){
-            //validation check
+        
+        int errNo = 0;
+        if (new_fname.equals("")){
+            errors_home.get(errNo).setText("First name required");
+            errors_home.get(errNo).setVisible(true);
+            errNo++;
         }
-        else {
+        if (new_lname.equals("")){
+            errors_home.get(errNo).setText("Lirst name required");
+            errors_home.get(errNo).setVisible(true);
+            errNo++;
+        }
+        if (new_address.equals("")){
+            errors_home.get(errNo).setText("Address required");
+            errors_home.get(errNo).setVisible(true);
+            errNo++;
+        }
+        
+        if (errNo == 0){
             system.editAdmin(cnic,new_fname, new_lname, new_address);
             setProfile();
+            this.btn_edit.setVisible(false);
+            hideErrorsHome();
         }
+        
         this.btn_edit.setFocusable(true); //unlock button
     }//GEN-LAST:event_btn_editMouseClicked
 
@@ -1531,6 +1808,10 @@ public class Admin_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_statusItemStateChanged
 
     private void btn_addNewFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addNewFlightMouseClicked
+        this.btn_addFlight.setFocusable(false);
+        hideErrorsAddFlight();
+        int errNo = 0;
+        
         String flightID = this.txtbox_flightCode.getText();
         String source = this.combo_source.getSelectedItem().toString();
         String destination = this.combo_destination.getSelectedItem().toString();
@@ -1539,10 +1820,13 @@ public class Admin_GUI extends javax.swing.JFrame {
         int dMinutes = (int)this.spinner_minutesD.getValue();
         LocalTime duration = LocalTime.of(dHours, dMinutes);
         
-        LocalDate tDate = this.calendar_departure.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        int tHours = (int)this.spinner_hours.getValue();
-        int tMinutes = (int)this.spinner_minutes.getValue();
-        LocalDateTime departure = tDate.atTime(tHours, tMinutes);
+        LocalDateTime departure = null;
+        if (this.calendar_departure.getDate() != null){
+            LocalDate tDate = tDate = this.calendar_departure.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int tHours = (int)this.spinner_hours.getValue();
+            int tMinutes = (int)this.spinner_minutes.getValue();
+            departure = tDate.atTime(tHours, tMinutes);
+        }
         
         String costS = this.txtbox_cost.getText();
         
@@ -1551,19 +1835,73 @@ public class Admin_GUI extends javax.swing.JFrame {
             cost = Float.parseFloat(costS);
         }
         catch(Exception e) {
-            //validation check
             cost = -1;
         }
-        if ( flightID.equals("") || source.equals("Select Airport") || 
-                destination.equals("Select Airport") || duration == null || cost < 0
-                    || source.equals(destination)) {
-            //validation checks
+        
+        if (flightID.equals("")){
+            errors_addFlight.get(errNo).setText("FlightID required");
+            errors_addFlight.get(errNo).setVisible(true);
+            errNo++;
         }
-        else {
-            system.addFlight(flightID, source, destination, duration, departure, cost);
-            clearFlightForm();
+        if (source.equals("Select Airport")){
+            errors_addFlight.get(errNo).setText("Source airport required");
+            errors_addFlight.get(errNo).setVisible(true);
+            errNo++;
         }
+        if (destination.equals("Select Airport")){
+            errors_addFlight.get(errNo).setText("Destination airport required");
+            errors_addFlight.get(errNo).setVisible(true);
+            errNo++;
+        }
+        if (departure == null){
+            errors_addFlight.get(errNo).setText("Departure date required");
+            errors_addFlight.get(errNo).setVisible(true);
+            errNo++;
+        }
+        if (duration == null || duration.equals(LocalTime.of(0,0))){
+            errors_addFlight.get(errNo).setText("Duration required");
+            errors_addFlight.get(errNo).setVisible(true);
+            errNo++;
+        }
+        if (cost < 0){
+            errors_addFlight.get(errNo).setText("Enter valid amount");
+            errors_addFlight.get(errNo).setVisible(true);
+            errNo++;
+        }
+        if (source.equals(destination) && !source.equals("Select Airport")){
+            errors_addFlight.get(errNo).setText("Source and Destination can't be the same");
+            errors_addFlight.get(errNo).setVisible(true);
+            errNo++;
+        }
+        
+        if (errNo == 0) {
+            if (system.addFlight(flightID, source, destination, duration, departure, cost)){
+                clearFlightForm();
+                hideErrorsAddFlight();
+            }
+            else {
+                errors_addFlight.get(errNo).setText("Please enter unique FlightID");
+                errors_addFlight.get(errNo).setVisible(true);
+                errNo++;
+            }
+        }
+        this.btn_addFlight.setFocusable(true);
     }//GEN-LAST:event_btn_addNewFlightMouseClicked
+
+    private void combo_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_statusActionPerformed
+
+    private void btn_viewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_viewMouseClicked
+        this.btn_view.setFocusable(false);
+        int row = this.table_flights.getSelectedRow();
+        if (row != -1){
+            int col = model_flights.findColumn("Flight Code");
+            String flightID = model_flights.getValueAt(row, col).toString();
+            JCustomerList customers = new JCustomerList(flightID);
+        }
+        this.btn_view.setFocusable(true);
+    }//GEN-LAST:event_btn_viewMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1601,12 +1939,26 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel btn_manageFlights;
     private javax.swing.JPanel btn_noFlyList;
     private javax.swing.JPanel btn_removeFlight;
+    private javax.swing.JPanel btn_removeFlight1;
     private javax.swing.JPanel btn_removeNoFly;
     private javax.swing.JLabel btn_signin;
+    private javax.swing.JPanel btn_view;
     private com.toedter.calendar.JDateChooser calendar_departure;
     private javax.swing.JComboBox<String> combo_destination;
     private javax.swing.JComboBox<String> combo_source;
     private javax.swing.JComboBox<String> combo_status;
+    private javax.swing.JLabel err_AddFlight1;
+    private javax.swing.JLabel err_AddFlight2;
+    private javax.swing.JLabel err_AddFlight3;
+    private javax.swing.JLabel err_AddFlight4;
+    private javax.swing.JLabel err_AddFlight5;
+    private javax.swing.JLabel err_AddFlight6;
+    private javax.swing.JLabel err_AddFlight7;
+    private javax.swing.JLabel err_Home1;
+    private javax.swing.JLabel err_Home2;
+    private javax.swing.JLabel err_Home3;
+    private javax.swing.JLabel err_password;
+    private javax.swing.JLabel err_username;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler5;
     private javax.swing.JPanel highlight_addFlight;
@@ -1620,6 +1972,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lbl_CNIC;
     private javax.swing.JLabel lbl_address;
     private javax.swing.JLabel lbl_cost;
@@ -1636,6 +1989,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_separator1;
     private javax.swing.JLabel lbl_source;
     private javax.swing.JLabel lbl_time;
+    private javax.swing.JLabel lbl_view;
     private javax.swing.JPanel panel_empInfo;
     private javax.swing.JPanel panel_empInfoBackdrop;
     private javax.swing.JScrollPane scroll_customer;

@@ -985,6 +985,7 @@
                           <Component id="backDrop2" max="32767" attributes="0"/>
                           <Component id="panel_flightCodeBackdrop" max="32767" attributes="0"/>
                           <Component id="scroll_status" alignment="0" max="32767" attributes="0"/>
+                          <Component id="err_status" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -999,7 +1000,9 @@
                       <Component id="panel_flightCodeBackdrop" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="scroll_status" min="-2" pref="55" max="-2" attributes="0"/>
-                      <EmptySpace pref="396" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="err_status" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="337" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1155,61 +1158,11 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Microsoft JhengHei UI" size="18" style="0"/>
                     </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="1">
-                        <Column editable="false" title="Flight Code" type="java.lang.String">
-                          <Data value="PK 214"/>
-                        </Column>
-                        <Column editable="false" title="Source" type="java.lang.String">
-                          <Data value="LHE"/>
-                        </Column>
-                        <Column editable="false" title="Destination" type="java.lang.String">
-                          <Data value="FAT"/>
-                        </Column>
-                        <Column editable="false" title="Departure Time" type="java.lang.String">
-                          <Data value="12:00"/>
-                        </Column>
-                        <Column editable="false" title="Arrival Time" type="java.lang.String">
-                          <Data value="22:00"/>
-                        </Column>
-                        <Column editable="false" title="Status" type="java.lang.String">
-                          <Data value="On time"/>
-                        </Column>
-                      </Table>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="model_status" type="code"/>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
+                      <TableColumnModel selectionModel="0"/>
                     </Property>
                     <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="c4" green="d1" red="cd" type="rgb"/>
@@ -1229,6 +1182,20 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="err_status">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="28" green="28" red="d6" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Microsoft JhengHei Light" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="28" green="28" red="d6" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="ERROR"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="card_history">

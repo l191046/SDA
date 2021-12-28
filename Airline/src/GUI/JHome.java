@@ -14,6 +14,7 @@ public class JHome extends javax.swing.JFrame {
     private CardLayout cards;
     private ArrayList<JPanel> highlights;
     private DefaultTableModel model_routes;
+    private DefaultTableModel model_status;
     private DefaultComboBoxModel model_source;
     private DefaultComboBoxModel model_destination;
     
@@ -22,10 +23,14 @@ public class JHome extends javax.swing.JFrame {
         this.system = system;
         
         setTableRoutes();
+        setTableStatus();
         setComboAirports();
         
         initComponents();
         setVisible(true);
+        
+        this.err_status.setVisible(false);
+        
         cards = (CardLayout) this.cardstack.getLayout();
         highlights = new ArrayList<JPanel>();
         highlights.add(this.highlight_home);
@@ -44,6 +49,14 @@ public class JHome extends javax.swing.JFrame {
         model_routes.setColumnCount(7);
         model_routes.setColumnIdentifiers(header);
     }
+    private void setTableStatus(){
+        model_status = new DefaultTableModel();
+        String header[] = new String[] {
+            "Flight Code", "From", "To", "Departure Date", "Departure Time", "Expected Arrival Time", "Status"
+        };
+        model_status.setColumnCount(header.length);
+        model_status.setColumnIdentifiers(header);
+    }
     private void setComboAirports(){
         model_source = new DefaultComboBoxModel();
         model_destination = new DefaultComboBoxModel();
@@ -57,7 +70,10 @@ public class JHome extends javax.swing.JFrame {
         model_routes.setRowCount(0);
         //call system class function
     }
-    
+    private void populateTableStatus(String flightID){
+        model_status.setRowCount(0);
+        system.checkFlightStatus(flightID, model_status);
+    }
     private void setHighlights(String btn_name){
        for(int i=0; i<highlights.size(); i++){
            JPanel hl = highlights.get(i);
@@ -67,6 +83,15 @@ public class JHome extends javax.swing.JFrame {
            else
                hl.setBackground(Color.decode("#4D5061"));
        }
+    }
+    
+    private void gotoCheckStatus(){
+        //go to card_checkFlight
+        cards.show(this.cardstack, "card_checkFlight");
+        //set highlights of buttons
+        setHighlights("highlight_checkFlight");
+        //hide table
+        this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
     }
     
     @SuppressWarnings("unchecked")
@@ -121,6 +146,7 @@ public class JHome extends javax.swing.JFrame {
         btn_status = new javax.swing.JLabel();
         scroll_status = new javax.swing.JScrollPane();
         table_status = new javax.swing.JTable();
+        err_status = new javax.swing.JLabel();
         card_history = new javax.swing.JPanel();
         backDrop3 = new javax.swing.JPanel();
         lbl_name3 = new javax.swing.JLabel();
@@ -746,29 +772,7 @@ public class JHome extends javax.swing.JFrame {
         scroll_status.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
 
         table_status.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        table_status.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"PK 214", "LHE", "FAT", "12:00", "22:00", "On time"}
-            },
-            new String [] {
-                "Flight Code", "Source", "Destination", "Departure Time", "Arrival Time", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        table_status.setModel(model_status);
         table_status.setGridColor(new java.awt.Color(205, 209, 196));
         table_status.setIntercellSpacing(new java.awt.Dimension(10, 10));
         table_status.setRowHeight(25);
@@ -776,14 +780,11 @@ public class JHome extends javax.swing.JFrame {
         table_status.setSelectionBackground(new java.awt.Color(92, 128, 188));
         table_status.getTableHeader().setReorderingAllowed(false);
         scroll_status.setViewportView(table_status);
-        if (table_status.getColumnModel().getColumnCount() > 0) {
-            table_status.getColumnModel().getColumn(0).setResizable(false);
-            table_status.getColumnModel().getColumn(1).setResizable(false);
-            table_status.getColumnModel().getColumn(2).setResizable(false);
-            table_status.getColumnModel().getColumn(3).setResizable(false);
-            table_status.getColumnModel().getColumn(4).setResizable(false);
-            table_status.getColumnModel().getColumn(5).setResizable(false);
-        }
+
+        err_status.setBackground(new java.awt.Color(214, 40, 40));
+        err_status.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 14)); // NOI18N
+        err_status.setForeground(new java.awt.Color(214, 40, 40));
+        err_status.setText("ERROR");
 
         javax.swing.GroupLayout card_checkFlightLayout = new javax.swing.GroupLayout(card_checkFlight);
         card_checkFlight.setLayout(card_checkFlightLayout);
@@ -794,7 +795,8 @@ public class JHome extends javax.swing.JFrame {
                 .addGroup(card_checkFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(backDrop2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_flightCodeBackdrop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scroll_status))
+                    .addComponent(scroll_status)
+                    .addComponent(err_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         card_checkFlightLayout.setVerticalGroup(
@@ -806,7 +808,9 @@ public class JHome extends javax.swing.JFrame {
                 .addComponent(panel_flightCodeBackdrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(scroll_status, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(err_status)
+                .addContainerGap(337, Short.MAX_VALUE))
         );
 
         cardstack.add(card_checkFlight, "card_checkFlight");
@@ -990,13 +994,7 @@ public class JHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_flightsMouseClicked
 
     private void btn_checkFlightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_checkFlightMouseClicked
-        //go to card_checkFlight
-        cards.show(this.cardstack, "card_checkFlight");
-        //set highlights of buttons
-        setHighlights("highlight_checkFlight");
-        //hide table
-        this.scroll_status.setVisible(false);
-        this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
+        gotoCheckStatus();
     }//GEN-LAST:event_btn_checkFlightMouseClicked
 
     private void btn_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_historyMouseClicked
@@ -1016,19 +1014,21 @@ public class JHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_adminLoginMouseClicked
 
     private void btn_statusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_statusMouseClicked
+        this.btn_status.setFocusable(false);
+        this.err_status.setVisible(false);
         String flight_id = this.txtbox_flightCode.getText().toString();
-        System.out.println(">" + flight_id + "<");
         if (flight_id.equals("")){
-            this.txtbox_flightCode.setBackground(Color.decode("#e87c74"));
+            this.err_status.setText("Please enter Flight Code");
+            this.err_status.setVisible(true);
+        }
+        else if (system.checkFlightStatus(flight_id, model_status)){
+            this.err_status.setVisible(false);
         }
         else {
-            this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
-            if (system.checkFlightStatus(flight_id, (DefaultTableModel) this.table_status.getModel())){
-                this.scroll_status.setVisible(true);
-                this.revalidate();
-                this.repaint();
-            }
+            this.err_status.setText("Flight not found");
+            this.err_status.setVisible(true);
         }
+        this.btn_status.setFocusable(true);
     }//GEN-LAST:event_btn_statusMouseClicked
 
     private void btn_checkHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_checkHistoryMouseClicked
@@ -1087,6 +1087,7 @@ public class JHome extends javax.swing.JFrame {
     private javax.swing.JPanel cardstack;
     private javax.swing.JComboBox<String> cbox_destination;
     private javax.swing.JComboBox<String> cbox_source;
+    private javax.swing.JLabel err_status;
     private javax.swing.JPanel highlight_checkFlight;
     private javax.swing.JPanel highlight_flights;
     private javax.swing.JPanel highlight_history;

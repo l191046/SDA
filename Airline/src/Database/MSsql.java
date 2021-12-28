@@ -116,10 +116,10 @@ public class MSsql {
             String SQL = "{call [edit_admin](?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
-            Cmt.setString(1, CNIC);
-            Cmt.setString(2, fName);
-            Cmt.setString(3, lName);
-            Cmt.setString(4, address);
+            Cmt.setString("cnic", CNIC);
+            Cmt.setString("fname", fName);
+            Cmt.setString("lname", lName);
+            Cmt.setString("address", address);
             Cmt.execute();
             return true;
         }

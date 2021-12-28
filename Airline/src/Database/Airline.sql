@@ -134,13 +134,13 @@ GO
 CREATE PROCEDURE edit_admin
 @fname	varchar(20),
 @lname	varchar(20),
-@adress	nvarchar(255),
+@address	nvarchar(255),
 @cnic	char(13)
 AS
 	UPDATE	[Person]
 	SET		FirstName = @fname,
 			LastName = @lname,
-			[Address]=@adress
+			[Address]=@address
 	WHERE	CNIC = @cnic
 GO
 --===========FLIGHTS================
@@ -236,7 +236,7 @@ AS
 GO
 
 
-drop procedure add_flight;
+--drop procedure add_flight;
 --EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
 
 select * from Person;
