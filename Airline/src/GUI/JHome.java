@@ -35,6 +35,7 @@ public class JHome extends javax.swing.JFrame {
         
         this.err_status.setVisible(false);
         this.err_browse.setVisible(false);
+        this.err_history.setVisible(false);
         
         cards = (CardLayout) this.cardstack.getLayout();
         highlights = new ArrayList<JPanel>();
