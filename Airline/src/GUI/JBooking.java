@@ -435,7 +435,7 @@ public class JBooking extends javax.swing.JFrame {
             customer.setContact(contact);
             
             if (!system.addCustomer(customer)) {
-                showMessageDialog(null, "You Already Exist. You May Edit");
+                showMessageDialog(null, "You Already Exist. Your Previous Details are Saved.");
             }  
             
             this.dispose();
