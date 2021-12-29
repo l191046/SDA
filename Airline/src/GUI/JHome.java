@@ -27,6 +27,7 @@ public class JHome extends javax.swing.JFrame {
         setTableRoutes();
         setTableStatus();
         setComboAirports();
+        populateTableRoutes();
         
         initComponents();
         setVisible(true);
@@ -72,10 +73,11 @@ public class JHome extends javax.swing.JFrame {
         model_routes.setRowCount(0);
         //call system class function
         
-        if (this.cal_calendar.getDate() != null){
-            LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        if (this.cal_calendar.getDate() != null){
+            //LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate date = LocalDate.now();
             system.findPaths(this.model_routes, "US1", "DO60", date);
-        }
+//        }
     }
     private void populateTableStatus(String flightID){
         model_status.setRowCount(0);

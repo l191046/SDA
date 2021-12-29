@@ -9,6 +9,7 @@ import Business.Flight;
 import Business.FlightList;
 import Business.JSystem;
 import Business.Route;
+import Business.Ticket;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -32,14 +33,18 @@ public class JSeatSelect extends javax.swing.JFrame {
     
     private Customer customer;
     private Route route;
+    private Ticket ticket;
     int flightIndex;
    
-    public JSeatSelect(JSystem system, Customer customer, Route route,int flightIndex) {
+    public JSeatSelect(JSystem system, Customer customer, Route route,int flightIndex, Ticket ticket) {
         
         this.system = system;
         this.customer = customer;
         this.route = route;
         this.flightIndex = flightIndex;
+        this.ticket = ticket;
+        
+        ticket.addBookedFlight(route.getFlights().get(flightIndex));
         
         initComponents();
         this.setVisible(true);
@@ -60,11 +65,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         
         txtbox_flightCost.setText(String.format("$%d",cost));
         
-        for (int i = 0; i < seats.size(); i++){
 
-        }
-        
-       
 
         lastSelectSeatColor = Color.black;
         for (int i = 0; i < seats.size(); i++) {
@@ -95,6 +96,8 @@ public class JSeatSelect extends javax.swing.JFrame {
                         }
                         p.setBackground(Color.LIGHT_GRAY);
                         Seat_Loc.setText(seatName);
+                        ticket.setBookedFlightSeat(flightIndex, seatName);
+                        
                         if (p.getParent() == FirstClass) {
                             txtbox_total.setText(String.format("$%d",550+cost));
                             txtbox_fseatCost.setText("$550");
@@ -2279,7 +2282,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         backDrop13.setBackground(new java.awt.Color(255, 255, 255));
         backDrop13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        pannel_taken_key.setBackground(new java.awt.Color(102, 102, 102));
+        pannel_taken_key.setBackground(new java.awt.Color(0, 0, 0));
         pannel_taken_key.setToolTipText("");
 
         javax.swing.GroupLayout pannel_taken_keyLayout = new javax.swing.GroupLayout(pannel_taken_key);
@@ -2596,9 +2599,13 @@ public class JSeatSelect extends javax.swing.JFrame {
         this.dispose();
         flightIndex++;
         if (flightIndex < route.getFlights().size()) {
-            JSeatSelect j = new JSeatSelect(system, customer, route, flightIndex);
+            //Add Flight To DB
+            //***Move this to JTicket and add with Ticket
+            system.addSeatToFlight(route.getFlights().get(flightIndex).getFlightID(), Seat_Loc.getText());
+            
+            JSeatSelect j = new JSeatSelect(system, customer, route, flightIndex,ticket);
         } else {
-            JTicket booking = new JTicket(system, route, customer);
+            JTicket booking = new JTicket(system, route, customer,ticket);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

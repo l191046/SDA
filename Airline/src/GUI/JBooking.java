@@ -1,9 +1,11 @@
 package GUI;
 
 import Business.Customer;
+import Business.Flight;
 import Business.JSystem;
 import Business.Person;
 import Business.Route;
+import Business.Ticket;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -439,7 +441,14 @@ public class JBooking extends javax.swing.JFrame {
             }  
             
             this.dispose();
-            JSeatSelect seats = new JSeatSelect(system, customer,route,0);
+            Ticket ticket = new Ticket(1);
+            ticket.setCustomer(customer);
+//            for(Flight flight: route.getFlights()){
+//                ticket.addBookedFlight(flight);
+//            }
+//            
+            
+            JSeatSelect seats = new JSeatSelect(system, customer,route,0,ticket);
 
 
         }

@@ -191,10 +191,14 @@ public class JSystem {
         int i = 0;
         for(Route route : routes ){
             connections = "";
-            for(Flight flight: route.getFlights()){
-                connections += flight.getDestination().getCode();
+            for(int k = 0; k < route.getFlights().size(); k++){
+                Flight flight = route.getFlights().get(k);
+                connections += flight.getFlightID();
+                
+                if(k != route.getFlights().size()-1)
                 connections += "->";
             }
+
             table_model.addRow(
                     new Object[] {
                         i,
@@ -207,6 +211,7 @@ public class JSystem {
                         route
                     }
             );
+            i++;
         }
         
     
@@ -350,5 +355,9 @@ public class JSystem {
     public boolean checkSeat(String flightId, String seatLocation){
         
         return database.checkSeat(flightId, seatLocation);
+    }
+    
+    public void addSeatToFlight(String flightId, String seatLocation) {
+        database.addSeatToFlight(flightId,seatLocation);
     }
 }
