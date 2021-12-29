@@ -19,13 +19,18 @@ public class MSsql {
             //AUTO-ASSIGN SQL CONNECTION STRING
             url = "jdbc:sqlserver://";
             url += InetAddress.getLocalHost().getHostName().toUpperCase();
-            url += "\\MSSQLSERVER;databaseName=SDA;integratedSecurity=true;";
+            if (InetAddress.getLocalHost().getHostName().toUpperCase().equals("DESKTOP-21OEGT1")){
+                url += "\\SQLEXPRESS;databaseName=SDA;integratedSecurity=true;";
+            }
+            else {
+                url += "\\MSSQLSERVER;databaseName=SDA;integratedSecurity=true;";
+            }
             
             //CHOOSE MANUALLY incase it (inevitably) fails
             //url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=SDA;integratedSecurity=true;";   //Abdul Muneem
             //url="jdbc:sqlserver://MOHAMMAD\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Razi
             //url="jdbc:sqlserver://RAMHP\\MSSQLSERVER;"+"databaseName=Airline;integratedSecurity=true;"; //Sukhan
-            url="jdbc:sqlserver://DESKTOP-21OEGT1\\SQLEXPRESS;"+"databaseName=SDA;integratedSecurity=true;"; //Behzad
+            //url="jdbc:sqlserver://DESKTOP-21OEGT1\\SQLEXPRESS;"+"databaseName=SDA;integratedSecurity=true;"; //Behzad
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -116,10 +121,10 @@ public class MSsql {
             String SQL = "{call [edit_admin](?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
-            Cmt.setString(1, CNIC);
-            Cmt.setString(2, fName);
-            Cmt.setString(3, lName);
-            Cmt.setString(4, address);
+            Cmt.setString("cnic", CNIC);
+            Cmt.setString("fname", fName);
+            Cmt.setString("lname", lName);
+            Cmt.setString("address", address);
             Cmt.execute();
             return true;
         }
@@ -167,7 +172,7 @@ public class MSsql {
             Connection con = DriverManager.getConnection(url);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //CALLING STORED PROCEDURE
-            String SQL = "{call [add_customer](?,?,?,?,?)}";
+            String SQL = "{call [add_customer_nofly](?,?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString("cnic", CNIC);

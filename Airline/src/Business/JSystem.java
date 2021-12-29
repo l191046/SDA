@@ -10,12 +10,15 @@ import java.util.HashSet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Duration;
 import java.sql.Time;
 import java.sql.Date;
+import java.time.temporal.ChronoUnit;
 import java.time.Month;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 
 public class JSystem {
     
@@ -67,7 +70,12 @@ public class JSystem {
                 
                 Airport Src = this.retAirportFromList(flightTable.getString("From"));
                 Airport Dest = this.retAirportFromList(flightTable.getString("To"));
-                
+                if (Src == null){
+                    System.out.println("not found -> " + flightTable.getString("From"));
+                }
+                if (Dest == null){
+                    System.out.println("not found -> " + flightTable.getString("To"));
+                }
              
                 Time Duration = flightTable.getTime("Duration");
                 LocalTime duration = Duration.toLocalTime();
@@ -172,12 +180,11 @@ public class JSystem {
         return null;
         
     }   
-    public void findPaths(DefaultTableModel table_model, String Source, String Destination){
+    public void findPaths(DefaultTableModel table_model, String Source, String Destination, LocalDate date){
         Airport Src = this.retAirportFromList(Source);
         Airport Dest = this.retAirportFromList(Destination);
         
-        LocalDate date = LocalDate.now();
-        ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest, date );
+        ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest, date);
         
         ArrayList<Route> routes = myRoutes.getRoutes();
         String connections;
@@ -212,13 +219,16 @@ public class JSystem {
         if (flight == null)
             return false;
         
+        long d = flight.getDuration().getHour()*60 + flight.getDuration().getMinute();
+        
         table_model.addRow(
                 new Object[] {
                     flight.getFlightID(), 
                     flight.getSource().getCode(), 
                     flight.getDestination().getCode(),
-                    flight.getTime(),
-                    flight.getTime(),
+                    flight.getTime().toLocalDate(),
+                    flight.getTime().toLocalTime(),
+                    flight.getTime().toLocalTime().plus(d, ChronoUnit.MINUTES),
                     flight.getStatus()
                 }
         );

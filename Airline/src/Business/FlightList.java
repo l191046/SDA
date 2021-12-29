@@ -45,7 +45,7 @@ public class FlightList {
     }
     public Flight searchFlight(String id){
         for(int i=0; i<Flights.size(); i++){
-            if (Flights.get(i).getFlightID() == id)
+            if (Flights.get(i).getFlightID().equals(id))
                 return Flights.get(i);
         }
         return null;
