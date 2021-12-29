@@ -5,6 +5,10 @@
 package GUI;
 
 
+import Business.Customer;
+import Business.Flight;
+import Business.JSystem;
+import Business.Route;
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -21,23 +25,67 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Dell
  */
-public class completeBooking extends javax.swing.JFrame {
+public class JTicket extends javax.swing.JFrame {
 
     /**
      * Creates new form completeBooking
      */
+    private JSystem system;
+    private Customer customer;
+    private Route route;
+    private DefaultTableModel table_model;
+
     
-    
-    public completeBooking(){
+
+    public JTicket(JSystem system, Route route, Customer customer){
+        this.system = system;
+        this.route = route;
+        this.customer = customer;
         initComponents();
         this.setVisible(true);      
+        setTable();
+        populateTable();
+
+
+        
+        
     }
 
+        //SETUP TABLE FORMAT
+    private void setTable(){
+        table_model = (DefaultTableModel) this.jTable1.getModel();
+        String header[] = new String[] {
+            "Flight Code", "From", "To", "Departure", "Duration", "Seat #", "Total Cost"
+        };
+        
+        table_model.setColumnCount(7);
+        table_model.setColumnIdentifiers(header);
+    }
+    
+    private void populateTable(){
+        this.table_model.setRowCount(0);
+        
+        for (Flight flight : route.getFlights()){
+            table_model.addRow( 
+                    new Object[]{
+                        flight.getFlightID(),
+                        flight.getSource().getCode(),
+                        flight.getDestination().getCode(),
+                        flight.getTime(),
+                        flight.getDuration(),
+                        "--",
+                        flight.getCost()
+                    }
+            );
+        }
+
+    }
     
     public BufferedImage printScreen(JPanel panel) throws AWTException {     
         Point p = panel.getLocationOnScreen();
@@ -52,7 +100,7 @@ public class completeBooking extends javax.swing.JFrame {
         try {
             ImageIO.write(screen, "png", new File("screenshot.png"));
                     } catch (IOException ex) {
-            Logger.getLogger(completeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JTicket.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -109,6 +157,8 @@ public class completeBooking extends javax.swing.JFrame {
         backdrop8 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -516,6 +566,19 @@ public class completeBooking extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -523,6 +586,7 @@ public class completeBooking extends javax.swing.JFrame {
             .addComponent(backdrop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,7 +596,9 @@ public class completeBooking extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -567,8 +633,17 @@ public class completeBooking extends javax.swing.JFrame {
             capture = printScreen(jPanel1);
             captureImage(capture);
         } catch (AWTException ex) {
-            Logger.getLogger(completeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JTicket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+//        try {
+//          BufferedImage screen = printScreen(jPanel1);
+//          ImageIO.write(screen, "jpg", new File("screenshot.jpg"));
+//        } catch (AWTException ae) {
+//            ae.printStackTrace();
+//        }
+
+       // ImageIO.write(screen, "jpg", new File("screenshot.jpg"));
         
 //        try {
 //          BufferedImage screen = printScreen(jPanel1);
@@ -583,41 +658,7 @@ public class completeBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
 
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(completeBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(completeBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(completeBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(completeBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new completeBooking().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel backdrop1;
@@ -649,6 +690,8 @@ public class completeBooking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;

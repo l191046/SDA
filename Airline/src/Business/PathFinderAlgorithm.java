@@ -14,17 +14,27 @@ public class PathFinderAlgorithm {
     
     public Map<Airport, ArrayList<Flight>> adjacencyList;
     
+    private int timeToInt(LocalTime obj){
+        return obj.getHour()*60 + obj.getMinute();
+    }
 
     public PathFinderAlgorithm(FlightList obj) {
         //creating adjacencylist
         this.adjacencyList = new HashMap<Airport, ArrayList<Flight>>();
+        
         for(int i = 0; i < obj.Flights.size();i++){
             if(!adjacencyList.containsKey(obj.Flights.get(i).getSource())){
                 this.adjacencyList.put(obj.Flights.get(i).getSource(), new ArrayList<Flight>());
+                if(!this.adjacencyList.containsKey(obj.Flights.get(i).getDestination())){
+                    this.adjacencyList.put(obj.Flights.get(i).getDestination(), new ArrayList<Flight>());
+                }
                 this.adjacencyList.get(obj.Flights.get(i).getSource()).add(obj.Flights.get(i));
             }
             else{
                 this.adjacencyList.get(obj.Flights.get(i).getSource()).add(obj.Flights.get(i));
+                if(!this.adjacencyList.containsKey(obj.Flights.get(i).getDestination())){
+                    this.adjacencyList.put(obj.Flights.get(i).getDestination(), new ArrayList<Flight>());
+                }
             }
         }
         
@@ -44,12 +54,13 @@ public class PathFinderAlgorithm {
        visited.add(Source);
        
        for(int i = 0; i < this.adjacencyList.get(Source).size();i++){
-           if(!visited.contains(this.adjacencyList.get(Source).get(i).getDestination())){
+            if(!visited.contains(this.adjacencyList.get(Source).get(i).getDestination()) && !this.adjacencyList.get(Source).get(i).getStatus().equals("Cancelled")){
+               
                currentRoute.add(this.adjacencyList.get(Source).get(i));
                //manage time
                if(currentTime==null){
                    currentTime = this.adjacencyList.get(Source).get(i).getTime();
-                   currentTime = currentTime.plusMinutes((int) this.adjacencyList.get(Source).get(i).getDuration()); //update time since we are taking this flight
+                   currentTime = currentTime.plusMinutes(timeToInt(this.adjacencyList.get(Source).get(i).getDuration())); //update time since we are taking this flight
                    DFS(this.adjacencyList.get(Source).get(i).getDestination(),Destination, visited, currentRoute, viableRoutes, currentTime);
                    currentTime = currentTimeCopy;   //restore to local time
                }
@@ -59,7 +70,7 @@ public class PathFinderAlgorithm {
                    LocalDateTime maxWaitTime = currentTime.plusHours(10);
                    if(nextFlightTime.isAfter(currentTime) && nextFlightTime.isBefore(maxWaitTime)){
                        currentTime = this.adjacencyList.get(Source).get(i).getTime();
-                       currentTime = currentTime.plusMinutes((int) this.adjacencyList.get(Source).get(i).getDuration()); //update time since we are taking this flight
+                       currentTime = currentTime.plusMinutes(timeToInt(this.adjacencyList.get(Source).get(i).getDuration())); //update time since we are taking this flight
                        DFS(this.adjacencyList.get(Source).get(i).getDestination(),Destination, visited, currentRoute, viableRoutes, currentTime);
                        currentTime = currentTimeCopy;// restore to local time
                    }
@@ -67,27 +78,35 @@ public class PathFinderAlgorithm {
                }
                int index = currentRoute.size()-1;
                currentRoute.remove(index);
+               visited.remove(Source);
            }
        }
        
    }
     
-    public ViableRoutes findPaths(Airport Source, Airport Destination){
+    public ViableRoutes findPaths(Airport Source, Airport Destination, LocalDate Date){
         LocalDateTime currentTime = null;
         ViableRoutes viableRoutes = new ViableRoutes();
         HashSet<Airport> visited = new HashSet<Airport>();
         ArrayList<Flight> currentRoute = new ArrayList<Flight>();
         DFS(Source, Destination, visited, currentRoute, viableRoutes, currentTime);
+        
+        
+        //uncomment after you send the date from GUI
+        /*for(int i = 0; i < viableRoutes.getRoutes().size();i++){
+            LocalDate flightDate = viableRoutes.getRoutes().get(i).getFlights().get(0).getTime().toLocalDate();
+            if(!flightDate.equals(Date)){
+                viableRoutes.getRoutes().remove(i);
+            }
+        
+        }*/
                 
         SorterByCost sorterByCost = new SorterByCost();
         sorterByCost.sort(viableRoutes);
         viableRoutes.printRoutes();
         
-        SorterByTime sorterByTime = new SorterByTime();
-        sorterByTime.sort(viableRoutes);
-        viableRoutes.printRoutes();
-        
         return viableRoutes;
     }
+    
         
 }

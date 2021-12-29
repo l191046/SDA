@@ -1,12 +1,23 @@
 package Business;
 
+import Database.MSsql;
+
 public class Customer extends Person {
-    String contact;
+    private String contact;
+    private MSsql database;
     
-    void changecontact(String x)
-    {
-        contact=x;
+    
+    public String getContact() {
+        return contact;
     }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+    
+
+    
+    
     
     @Override
     void print()

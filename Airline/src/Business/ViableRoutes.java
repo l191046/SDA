@@ -30,7 +30,7 @@ public class ViableRoutes {
         for(int i  =0; i< Routes.size();i++){
             int size = Routes.get(i).getFlights().size();
             for(int j = 0; j < Routes.get(i).getFlights().size();j++){
-                System.out.print(Routes.get(i).getFlights().get(j).getSource().getCode() + " ");
+                System.out.print(Routes.get(i).getFlights().get(j).getSource().getCode().toString() + " ");
             }
             System.out.print(Routes.get(i).getFlights().get(size-1).getDestination().getCode());
             System.out.println();

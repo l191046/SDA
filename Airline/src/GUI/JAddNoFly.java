@@ -2,15 +2,18 @@ package GUI;
 
 import Business.JSystem;
 import java.awt.CardLayout;
+import java.awt.Color;
 
 
 public class JAddNoFly extends javax.swing.JFrame {
     
     private JSystem system;
     private CardLayout cards;
+    private Admin_GUI parent;
     
-    public JAddNoFly(JSystem system) {
+    public JAddNoFly(JSystem system, Admin_GUI parent) {
         this.system = system;
+        this.parent = parent;
         initComponents();
         this.setVisible(true);
     }
@@ -22,6 +25,10 @@ public class JAddNoFly extends javax.swing.JFrame {
         card_customerInfo = new javax.swing.JPanel();
         backdrop1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        panel_CNIC = new javax.swing.JPanel();
+        lbl_CNIC = new javax.swing.JLabel();
+        panel_CNICField = new javax.swing.JPanel();
+        txtbox_CNIC = new javax.swing.JTextField();
         panel_firstName = new javax.swing.JPanel();
         lbl_firstName = new javax.swing.JLabel();
         panel_firstNameField = new javax.swing.JPanel();
@@ -30,16 +37,16 @@ public class JAddNoFly extends javax.swing.JFrame {
         lbl_lastName = new javax.swing.JLabel();
         panel_lastNameField = new javax.swing.JPanel();
         txtbox_lastName = new javax.swing.JTextField();
-        panel_cnic = new javax.swing.JPanel();
-        lbl_cnic = new javax.swing.JLabel();
-        panel_cnicField = new javax.swing.JPanel();
-        txtbox_cnic = new javax.swing.JTextField();
         panel_contact = new javax.swing.JPanel();
         lbl_contact = new javax.swing.JLabel();
         panel_contactField = new javax.swing.JPanel();
         txtbox_contact = new javax.swing.JTextField();
         btn_cancel = new javax.swing.JLabel();
         btn_next = new javax.swing.JLabel();
+        panel_contact1 = new javax.swing.JPanel();
+        lbl_contact1 = new javax.swing.JLabel();
+        panel_contactField1 = new javax.swing.JPanel();
+        txtbox_contact1 = new javax.swing.JTextField();
         card_seatSelection = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,6 +76,43 @@ public class JAddNoFly extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
+        );
+
+        panel_CNIC.setBackground(new java.awt.Color(77, 80, 97));
+
+        lbl_CNIC.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        lbl_CNIC.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_CNIC.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lbl_CNIC.setText("CNIC");
+
+        javax.swing.GroupLayout panel_CNICLayout = new javax.swing.GroupLayout(panel_CNIC);
+        panel_CNIC.setLayout(panel_CNICLayout);
+        panel_CNICLayout.setHorizontalGroup(
+            panel_CNICLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_CNICLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_CNIC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panel_CNICLayout.setVerticalGroup(
+            panel_CNICLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_CNICLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_CNIC)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        txtbox_CNIC.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout panel_CNICFieldLayout = new javax.swing.GroupLayout(panel_CNICField);
+        panel_CNICField.setLayout(panel_CNICFieldLayout);
+        panel_CNICFieldLayout.setHorizontalGroup(
+            panel_CNICFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtbox_CNIC)
+        );
+        panel_CNICFieldLayout.setVerticalGroup(
+            panel_CNICFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtbox_CNIC)
         );
 
         panel_firstName.setBackground(new java.awt.Color(77, 80, 97));
@@ -145,43 +189,6 @@ public class JAddNoFly extends javax.swing.JFrame {
             .addComponent(txtbox_lastName)
         );
 
-        panel_cnic.setBackground(new java.awt.Color(77, 80, 97));
-
-        lbl_cnic.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
-        lbl_cnic.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_cnic.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lbl_cnic.setText("CNIC");
-
-        javax.swing.GroupLayout panel_cnicLayout = new javax.swing.GroupLayout(panel_cnic);
-        panel_cnic.setLayout(panel_cnicLayout);
-        panel_cnicLayout.setHorizontalGroup(
-            panel_cnicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_cnicLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_cnic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panel_cnicLayout.setVerticalGroup(
-            panel_cnicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_cnicLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_cnic)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        txtbox_cnic.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-
-        javax.swing.GroupLayout panel_cnicFieldLayout = new javax.swing.GroupLayout(panel_cnicField);
-        panel_cnicField.setLayout(panel_cnicFieldLayout);
-        panel_cnicFieldLayout.setHorizontalGroup(
-            panel_cnicFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtbox_cnic)
-        );
-        panel_cnicFieldLayout.setVerticalGroup(
-            panel_cnicFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtbox_cnic)
-        );
-
         panel_contact.setBackground(new java.awt.Color(77, 80, 97));
 
         lbl_contact.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
@@ -248,6 +255,43 @@ public class JAddNoFly extends javax.swing.JFrame {
             }
         });
 
+        panel_contact1.setBackground(new java.awt.Color(77, 80, 97));
+
+        lbl_contact1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        lbl_contact1.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_contact1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lbl_contact1.setText("Address");
+
+        javax.swing.GroupLayout panel_contact1Layout = new javax.swing.GroupLayout(panel_contact1);
+        panel_contact1.setLayout(panel_contact1Layout);
+        panel_contact1Layout.setHorizontalGroup(
+            panel_contact1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_contact1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_contact1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panel_contact1Layout.setVerticalGroup(
+            panel_contact1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_contact1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_contact1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        txtbox_contact1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout panel_contactField1Layout = new javax.swing.GroupLayout(panel_contactField1);
+        panel_contactField1.setLayout(panel_contactField1Layout);
+        panel_contactField1Layout.setHorizontalGroup(
+            panel_contactField1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtbox_contact1)
+        );
+        panel_contactField1Layout.setVerticalGroup(
+            panel_contactField1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtbox_contact1)
+        );
+
         javax.swing.GroupLayout card_customerInfoLayout = new javax.swing.GroupLayout(card_customerInfo);
         card_customerInfo.setLayout(card_customerInfoLayout);
         card_customerInfoLayout.setHorizontalGroup(
@@ -262,22 +306,28 @@ public class JAddNoFly extends javax.swing.JFrame {
                         .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(card_customerInfoLayout.createSequentialGroup()
                         .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panel_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel_CNIC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panel_cnic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panel_lastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panel_lastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel_contact1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panel_firstNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_lastNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panel_cnicField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panel_contactField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panel_firstNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(panel_CNICField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel_contactField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         card_customerInfoLayout.setVerticalGroup(
             card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(card_customerInfoLayout.createSequentialGroup()
                 .addComponent(backdrop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_CNIC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_CNICField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,13 +338,13 @@ public class JAddNoFly extends javax.swing.JFrame {
                     .addComponent(panel_lastNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel_cnic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_cnicField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel_contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_contactField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_contact1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_contactField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(card_customerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_next, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_cancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,7 +361,7 @@ public class JAddNoFly extends javax.swing.JFrame {
         );
         card_seatSelectionLayout.setVerticalGroup(
             card_seatSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
+            .addGap(0, 451, Short.MAX_VALUE)
         );
 
         cardstack.add(card_seatSelection, "card3");
@@ -335,7 +385,44 @@ public class JAddNoFly extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseClicked
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
-        this.dispose();
+        this.btn_next.setFocusable(false);
+        
+        this.panel_CNIC.setBackground(Color.decode("#4D5061"));
+        this.panel_firstName.setBackground(Color.decode("#4D5061"));
+        this.panel_lastName.setBackground(Color.decode("#4D5061"));
+        
+        String cnic = new String(this.txtbox_CNIC.getText());
+        String fname = new String(this.txtbox_firstName.getText());
+        String lname = new String(this.txtbox_lastName.getText());
+        String contact = new String(this.txtbox_contact.getText());
+        String address = new String(this.txtbox_contact1.getText());
+        
+        boolean isValid = true;
+        if (cnic.equals("")){
+            this.panel_CNIC.setBackground(Color.decode("#D62828"));
+            isValid = false;
+        }
+        if (fname.equals("")){
+            this.panel_firstName.setBackground(Color.decode("#D62828"));
+            isValid = false;
+        }
+        if (lname.equals("")){
+            this.panel_lastName.setBackground(Color.decode("#D62828"));
+            isValid = false;
+        }
+        if (!contact.equals("") && contact.length()<11){
+            this.panel_contact.setBackground(Color.decode("#D62828"));
+            isValid = false;
+        }
+        if(isValid){
+            system.addToNoFly(cnic, fname, lname, contact, address);
+            parent.gotoNoFly();
+            this.dispose();
+            return;
+        }
+        
+        this.btn_next.setFocusable(true);
+        
     }//GEN-LAST:event_btn_nextMouseClicked
 
 
@@ -347,20 +434,24 @@ public class JAddNoFly extends javax.swing.JFrame {
     private javax.swing.JPanel card_seatSelection;
     private javax.swing.JPanel cardstack;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lbl_cnic;
+    private javax.swing.JLabel lbl_CNIC;
     private javax.swing.JLabel lbl_contact;
+    private javax.swing.JLabel lbl_contact1;
     private javax.swing.JLabel lbl_firstName;
     private javax.swing.JLabel lbl_lastName;
-    private javax.swing.JPanel panel_cnic;
-    private javax.swing.JPanel panel_cnicField;
+    private javax.swing.JPanel panel_CNIC;
+    private javax.swing.JPanel panel_CNICField;
     private javax.swing.JPanel panel_contact;
+    private javax.swing.JPanel panel_contact1;
     private javax.swing.JPanel panel_contactField;
+    private javax.swing.JPanel panel_contactField1;
     private javax.swing.JPanel panel_firstName;
     private javax.swing.JPanel panel_firstNameField;
     private javax.swing.JPanel panel_lastName;
     private javax.swing.JPanel panel_lastNameField;
-    private javax.swing.JTextField txtbox_cnic;
+    private javax.swing.JTextField txtbox_CNIC;
     private javax.swing.JTextField txtbox_contact;
+    private javax.swing.JTextField txtbox_contact1;
     private javax.swing.JTextField txtbox_firstName;
     private javax.swing.JTextField txtbox_lastName;
     // End of variables declaration//GEN-END:variables

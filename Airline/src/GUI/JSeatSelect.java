@@ -4,7 +4,11 @@
  */
 package GUI;
 
+import Business.Customer;
+import Business.Flight;
+import Business.FlightList;
 import Business.JSystem;
+import Business.Route;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -14,6 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
@@ -24,9 +29,18 @@ public class JSeatSelect extends javax.swing.JFrame {
     private ArrayList<JPanel> seats;
     private JPanel lastSelectSeat;
     private Color lastSelectSeatColor;
+    
+    private Customer customer;
+    private Route route;
+    int flightIndex;
    
-    public JSeatSelect(JSystem system, String flightId, String firstName, String lastName, String cnic, String address, String contact) {
+    public JSeatSelect(JSystem system, Customer customer, Route route,int flightIndex) {
+        
         this.system = system;
+        this.customer = customer;
+        this.route = route;
+        this.flightIndex = flightIndex;
+        
         initComponents();
         this.setVisible(true);
         
@@ -34,9 +48,19 @@ public class JSeatSelect extends javax.swing.JFrame {
 
         getComponentsRecursive(JSeatSelect.this,seats);
         
-        txtbox_firstName.setText(firstName);
+        txtbox_firstName.setText(customer.getFirstname());
 
-        txtbox_flight.setText("American Express - Dummy");
+        txtbox_flight.setText(route.getFlights().get(flightIndex).getFlightID());
+        
+        txtbox_src.setText(route.getFlights().get(flightIndex).getSource().getCode() + " - " + route.getFlights().get(flightIndex).getSource().getCity() + ", " + route.getFlights().get(flightIndex).getSource().getCountry());
+        
+        txtbox_dest.setText(route.getFlights().get(flightIndex).getDestination().getCode() + " - " + route.getFlights().get(flightIndex).getDestination().getCity() + ", " + route.getFlights().get(flightIndex).getDestination().getCountry());
+        
+        int cost = (int) route.getFlights().get(flightIndex).getCost();
+        
+        txtbox_flightCost.setText(String.format("$%d",cost));
+        
+       
 
         lastSelectSeatColor = Color.black;
         for (int i = 0; i < seats.size(); i++) {
@@ -61,8 +85,10 @@ public class JSeatSelect extends javax.swing.JFrame {
                         p.setBackground(Color.LIGHT_GRAY);
                         Seat_Loc.setText(seatName);
                         if (p.getParent() == FirstClass) {
+                            txtbox_total.setText(String.format("$%d",550+cost));
                             txtbox_fseatCost.setText("$550");
                         } else {
+                            txtbox_total.setText(String.format("$%d",250+cost));
                             txtbox_fseatCost.setText("$250");
                         }
                     }
@@ -79,8 +105,8 @@ public class JSeatSelect extends javax.swing.JFrame {
         
         //System.out.println(c.getParent().toString());
         Dimension d = c.getSize();
-        if(d.height == 26 && d.width == 28){
-          //  System.out.println(c.toString());
+        if (d.height == 26 && d.width == 28) {
+            //  System.out.println(c.toString());
             seats.add((JPanel) c);
         }
         
@@ -91,7 +117,7 @@ public class JSeatSelect extends javax.swing.JFrame {
  
 }
     
-
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -230,10 +256,18 @@ public class JSeatSelect extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         panel_firstName = new javax.swing.JPanel();
         lbl_firstName = new javax.swing.JLabel();
-        txtbox_fseatCost = new javax.swing.JTextField();
+        txtbox_total = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         Seat_Loc = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtbox_src = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtbox_flightCost = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtbox_dest = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtbox_fseatCost = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2292,14 +2326,14 @@ public class JSeatSelect extends javax.swing.JFrame {
 
         panel_firstName.setBackground(new java.awt.Color(77, 80, 97));
 
-        lbl_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        lbl_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         lbl_firstName.setForeground(new java.awt.Color(255, 255, 255));
         lbl_firstName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lbl_firstName.setText("SEAT COST:");
+        lbl_firstName.setText("Total:");
 
-        txtbox_fseatCost.setEditable(false);
-        txtbox_fseatCost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
-        txtbox_fseatCost.setText("$");
+        txtbox_total.setEditable(false);
+        txtbox_total.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
+        txtbox_total.setText("$");
 
         javax.swing.GroupLayout panel_firstNameLayout = new javax.swing.GroupLayout(panel_firstName);
         panel_firstName.setLayout(panel_firstNameLayout);
@@ -2307,9 +2341,9 @@ public class JSeatSelect extends javax.swing.JFrame {
             panel_firstNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_firstNameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtbox_fseatCost, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_firstName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtbox_total, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panel_firstNameLayout.setVerticalGroup(
@@ -2318,7 +2352,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panel_firstNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_firstName)
-                    .addComponent(txtbox_fseatCost, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtbox_total, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2334,7 +2368,56 @@ public class JSeatSelect extends javax.swing.JFrame {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("Seat Selected:");
 
+        Seat_Loc.setEditable(false);
+        Seat_Loc.setBackground(new java.awt.Color(255, 255, 255));
         Seat_Loc.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+
+        jLabel17.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel17.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel17.setText("Src:");
+
+        txtbox_src.setEditable(false);
+        txtbox_src.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+
+        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel18.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel18.setText("Dest:");
+
+        txtbox_flightCost.setEditable(false);
+        txtbox_flightCost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_flightCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbox_flightCostActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel19.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel19.setText("Flight Cost:");
+
+        txtbox_dest.setEditable(false);
+        txtbox_dest.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_dest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbox_destActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel20.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel20.setText("Seat Cost:");
+
+        txtbox_fseatCost.setEditable(false);
+        txtbox_fseatCost.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        txtbox_fseatCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbox_fseatCostActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel95Layout = new javax.swing.GroupLayout(jPanel95);
         jPanel95.setLayout(jPanel95Layout);
@@ -2344,30 +2427,46 @@ public class JSeatSelect extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel95Layout.createSequentialGroup()
-                        .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel95Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(jPanel95Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(9, 9, 9)))
-                        .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtbox_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                            .addComponent(txtbox_flight)))
-                    .addGroup(jPanel95Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Seat_Loc, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addComponent(Seat_Loc, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                    .addGroup(jPanel95Layout.createSequentialGroup()
+                        .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel95Layout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                .addGroup(jPanel95Layout.createSequentialGroup()
+                                    .addComponent(jLabel14)
+                                    .addGap(9, 9, 9)))
+                            .addGroup(jPanel95Layout.createSequentialGroup()
+                                .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18))
+                                .addGap(20, 20, 20)))
+                        .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtbox_src)
+                            .addComponent(txtbox_firstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(txtbox_flight, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtbox_dest))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(panel_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel95Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbox_flightCost))
+                    .addGroup(jPanel95Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtbox_fseatCost)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel95Layout.setVerticalGroup(
             jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel95Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel95Layout.createSequentialGroup()
@@ -2378,7 +2477,25 @@ public class JSeatSelect extends javax.swing.JFrame {
                         .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(txtbox_flight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtbox_src, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtbox_flightCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel95Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(txtbox_dest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel95Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(txtbox_fseatCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 8, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel16)
@@ -2428,14 +2545,14 @@ public class JSeatSelect extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backDrop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backDrop10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(backDrop12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(backDrop13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel95, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel95, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(backDrop2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2451,7 +2568,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                     .addComponent(MiddleClass3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backDrop11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -2459,8 +2576,20 @@ public class JSeatSelect extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(Seat_Loc.getText().toString().isEmpty()){
+            showMessageDialog(null, "Please Select a Seat!");
+            return;
+        }
         
-        completeBooking booking = new completeBooking();
+        //completeBooking booking = new JTicket();
+        this.dispose();
+        flightIndex++;
+        if (flightIndex < route.getFlights().size()) {
+            JSeatSelect j = new JSeatSelect(system, customer, route, flightIndex);
+        } else {
+            JTicket booking = new JTicket(system, route, customer);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void A1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1MouseEntered
@@ -2475,6 +2604,18 @@ public class JSeatSelect extends javax.swing.JFrame {
     private void txtbox_firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbox_firstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbox_firstNameActionPerformed
+
+    private void txtbox_flightCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbox_flightCostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbox_flightCostActionPerformed
+
+    private void txtbox_destActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbox_destActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbox_destActionPerformed
+
+    private void txtbox_fseatCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbox_fseatCostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbox_fseatCostActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2597,7 +2738,11 @@ public class JSeatSelect extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2612,8 +2757,12 @@ public class JSeatSelect extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel95;
     private javax.swing.JLabel lbl_firstName;
     private javax.swing.JPanel panel_firstName;
+    private javax.swing.JTextField txtbox_dest;
     private javax.swing.JTextField txtbox_firstName;
     private javax.swing.JTextField txtbox_flight;
+    private javax.swing.JTextField txtbox_flightCost;
     private javax.swing.JTextField txtbox_fseatCost;
+    private javax.swing.JTextField txtbox_src;
+    private javax.swing.JTextField txtbox_total;
     // End of variables declaration//GEN-END:variables
 }

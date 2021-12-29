@@ -1,8 +1,12 @@
 package GUI;
 
+import Business.Customer;
 import Business.JSystem;
+import Business.Person;
+import Business.Route;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.HashSet;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JTextField;
 
@@ -13,6 +17,7 @@ public class JBooking extends javax.swing.JFrame {
     private CardLayout cards;
     private String flightId;
     private ArrayList<JTextField> textFields;
+    private Route route;
     
     public JBooking(JSystem system) {
         this.system = system;
@@ -20,12 +25,13 @@ public class JBooking extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public JBooking(JSystem system, String id, String src, String dest, String Ddate, String Dtime, String Connections){
+    public JBooking(JSystem system, Route route){
         this.system = system;
+        this.route = route;
         initComponents();
         this.setVisible(true);
         
-        flightId = id;
+        
         textFields = new ArrayList<>();
         textFields.add(txtbox_firstName);
         textFields.add(txtbox_lastName);
@@ -415,15 +421,27 @@ public class JBooking extends javax.swing.JFrame {
         if(anyFieldsEmpty()){
             showMessageDialog(null, "Please Fill Out All Details To Continue!");
         } else{
+            
             String firstName = txtbox_firstName.getText().trim();
             String lastName = txtbox_lastName.getText().trim();
             String cnic = txtbox_cnic.getText().trim();
             String address = txtbox_address.getText().trim();
             String contact = txtbox_contact.getText().trim();
             
+            Customer customer = new Customer();
+            customer.setFirstname(firstName);
+            customer.setLastname(lastName);
+            customer.setCNIC(cnic);
+            customer.setContact(contact);
+            
+            if (!system.addCustomer(customer)) {
+                showMessageDialog(null, "You Already Exist. Your Previous Details are Saved.");
+            }  
             
             this.dispose();
-            JSeatSelect seats = new JSeatSelect(system, flightId, firstName, lastName, cnic, address, contact);
+            JSeatSelect seats = new JSeatSelect(system, customer,route,0);
+
+
         }
     }//GEN-LAST:event_btn_nextMouseClicked
 

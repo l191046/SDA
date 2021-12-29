@@ -64,12 +64,11 @@ ADD CONSTRAINT PK_Airport PRIMARY KEY (Code);
 CREATE TABLE [Flight_Seats]
 (
 	[FlightId] varchar(10) NOT NULL,
-	[SeatId] varchar(5) NOT NULL,
+	[SeatId] int NOT NULL,
 	[Status] varchar(30)
 )
 GO
 ALTER TABLE Flight_Seats
-
 ADD CONSTRAINT PK_Seats PRIMARY KEY (FlightId,SeatId);
 
 CREATE TABLE [Ticket]
@@ -79,7 +78,6 @@ CREATE TABLE [Ticket]
 [SeatId] varchar(5) NOT NULL
 )
 GO
-
 ALTER TABLE Ticket
 ADD CONSTRAINT PK_Ticket PRIMARY KEY (CNIC,FlightId,SeatId);
 
@@ -140,6 +138,7 @@ INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','FGH23','C4')
 --===========STORED PROCEDURES==========================
 
 --===========CUSTOMER===============
+GO
 Create PROCEDURE search_customer
 @cnic		varchar(13),
 @found		int output
@@ -318,8 +317,6 @@ AS
 	WHERE [Airport].Code = @airport
 GO
 
-
-
 --===========BOOKING===============
 Create procedure check_seat
 @flightId varchar(10),
@@ -328,35 +325,38 @@ Create procedure check_seat
 AS
 IF EXISTS
 (
-Select *
-FROM [Flight_Seats]
-WHERE 'Taken'=
-(
-  Select [Flight_Seats].[Status]
-  From Flight_Seats
-  Where (FlightId=@flightId) AND (SeatId=@seatId)
-  )
+	Select *
+	FROM [Flight_Seats]
+	WHERE 'Taken'=
+	(
+		Select [Flight_Seats].[Status]
+		From Flight_Seats
+		Where (FlightId=@flightId) AND (SeatId=@seatId)
+	)
   )
   SET @taken =1
   ELSE
   SET @taken=0
+GO
 
- Create procedure book_seat
-  @cnic varchar(13),
-  @flightId varchar(10),
-  @seatId varchar(5)
-  AS
-  BEGIN
-  INSERT INTO Ticket VALUES
-  (@cnic,@flightId,@seatId)
-  END
-  BEGIN
-  UPDATE [Flight_Seats]
-  SET [Status]='Taken'
-  WHERE [FlightId]=@flightId AND [SeatId]=@seatId
-  END
+Create procedure book_seat
+@cnic varchar(13),
+@flightId varchar(10),
+@seatId varchar(5)
+AS
+BEGIN
+	INSERT INTO Ticket VALUES
+	(@cnic,@flightId,@seatId)
+END
+BEGIN
+	UPDATE [Flight_Seats]
+	SET [Status]='Taken'
+	WHERE [FlightId]=@flightId AND [SeatId]=@seatId
+END
+GO
 
-
+--drop procedure add_flight;
+--EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
 
 select * from Person;
 select * from Admin;
