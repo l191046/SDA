@@ -335,4 +335,10 @@ public class JSystem {
         //----------------------------------
         return true;
     }
+    
+    //Seat Selection
+    public boolean checkSeat(String flightId, String seatLocation){
+        
+        return database.checkSeat(flightId, seatLocation);
+    }
 }

@@ -303,6 +303,27 @@ public class MSsql {
         }
         return false;
     }
+    
+     public boolean checkSeat(String flightId, String seatLocation){
+        boolean found = false;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [check_seat](?,?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("flightId", flightId);
+            Cmt.setString("seatId", seatLocation);
+            Cmt.registerOutParameter("taken", java.sql.Types.INTEGER);
+            Cmt.execute();
+            found = (Cmt.getInt("taken") == 1);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return found;
+     } 
 
   
 }
