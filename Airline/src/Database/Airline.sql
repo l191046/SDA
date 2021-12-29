@@ -125,12 +125,12 @@ INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI29','KHI3','SYD6','10:00',110000,'Cancelled','15:00')
 
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('MCT34','MCT30','JED0','2:00',340000,'On time','13:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('JEB55','JEB0','BGR9','9:00',140000,'On time','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('JEB55','JED0','BGR9','9:00',140000,'On time','16:00')
 
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('MCT92','MCT30','KHI3','4:00',870000,'On time','03:00')
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI49','KHI3','PK35','1:00',510000,'Cancelled','09:00')
 
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE24','PK35','JED)','4:00',980000,'Cancelled','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE24','PK35','JED0','4:00',980000,'Cancelled','16:00')
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('JEB87','JED0','ESB2','8:00',120000,'Cancelled','22:00')
 
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('US1','US International','New York','USA')
@@ -156,7 +156,7 @@ GO
 
 INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','KHI25',45)
 INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','SYD60',22)
-
+GO
 --===========STORED PROCEDURES==========================
 
 --===========CUSTOMER===============

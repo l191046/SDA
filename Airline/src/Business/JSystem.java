@@ -70,7 +70,12 @@ public class JSystem {
                 
                 Airport Src = this.retAirportFromList(flightTable.getString("From"));
                 Airport Dest = this.retAirportFromList(flightTable.getString("To"));
-                
+                if (Src == null){
+                    System.out.println("not found -> " + flightTable.getString("From"));
+                }
+                if (Dest == null){
+                    System.out.println("not found -> " + flightTable.getString("To"));
+                }
              
                 Time Duration = flightTable.getTime("Duration");
                 LocalTime duration = Duration.toLocalTime();
