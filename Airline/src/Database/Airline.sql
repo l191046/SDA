@@ -75,7 +75,7 @@ CREATE TABLE [Ticket]
 (
 [CNIC] varchar(13) NOT NULL,
 [FlightId] varchar(10) NOT NULL,
-[SeatId] int NOT NULL
+[SeatId] varchar(5) NOT NULL
 )
 GO
 ALTER TABLE Ticket
@@ -124,6 +124,17 @@ INSERT Airport([Code],[Name],[City],[Country]) VALUES ('DO60','Doha Internationa
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('MCT30','Muscat International','Muscat','Australia')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('LND21','London Airport','London','England')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('SK32','Skardu Airport','Skardu','Pakistan')
+
+INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('ABC23','E1','Vaccant')
+INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('FGH23','A10','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('DEF25','B2','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('LMN23','D8','Vacant')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('DEF25','F9','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('GHI12','C15','Vacant')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('FGH23','C4','Taken')
+
+INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','FGH23','A10')
+INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','FGH23','C4')
 --===========STORED PROCEDURES==========================
 
 --===========CUSTOMER===============
@@ -306,6 +317,43 @@ AS
 	WHERE [Airport].Code = @airport
 GO
 
+--===========BOOKING===============
+Create procedure check_seat
+@flightId varchar(10),
+@seatId varchar(5),
+@taken int output
+AS
+IF EXISTS
+(
+	Select *
+	FROM [Flight_Seats]
+	WHERE 'Taken'=
+	(
+		Select [Flight_Seats].[Status]
+		From Flight_Seats
+		Where (FlightId=@flightId) AND (SeatId=@seatId)
+	)
+  )
+  SET @taken =1
+  ELSE
+  SET @taken=0
+GO
+
+Create procedure book_seat
+@cnic varchar(13),
+@flightId varchar(10),
+@seatId varchar(5)
+AS
+BEGIN
+	INSERT INTO Ticket VALUES
+	(@cnic,@flightId,@seatId)
+END
+BEGIN
+	UPDATE [Flight_Seats]
+	SET [Status]='Taken'
+	WHERE [FlightId]=@flightId AND [SeatId]=@seatId
+END
+GO
 
 --drop procedure add_flight;
 --EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
