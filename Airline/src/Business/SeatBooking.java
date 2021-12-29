@@ -2,33 +2,29 @@
 package Business;
 
 public class SeatBooking {
-    private int Flight;
+    private Flight Flight;
     private int seatNumber;
 
-    public SeatBooking(int Flight, int seatNumber) {
+    public SeatBooking(Flight Flight, int seatNumber) {
         this.Flight = Flight;
-
         this.seatNumber = seatNumber;
     }
+    public SeatBooking(){}
 
-    public SeatBooking() {
-        
-    }
-
-    public int getFlight() {
+    public Flight getFlight() {
         return Flight;
     }
 
-    public void setFlight(int Flight) {
+    public void setFlight(Flight Flight) {
         this.Flight = Flight;
     }
 
-    public int getseatNumber() {
+    public int getSeatNumber() {
         return seatNumber;
     }
 
-    public void setseatNumber(int seatNumber) {
+    public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
     }
-    
+
 }
