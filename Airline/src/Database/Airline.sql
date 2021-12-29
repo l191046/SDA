@@ -64,7 +64,7 @@ ADD CONSTRAINT PK_Airport PRIMARY KEY (Code);
 CREATE TABLE [Flight_Seats]
 (
 	[FlightId] varchar(10) NOT NULL,
-	[SeatId] int NOT NULL,
+	[SeatId] varchar(5) NOT NULL,
 	[Status] varchar(30)
 )
 GO
@@ -114,7 +114,7 @@ INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('DEF25','MCT30','LND21','1:00',110000,'On time','19:00')
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('EFG25','LND21','DO60','1:00',110000,'On time','21:00')
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('FGH23','US1','SK32','02:30',50000,'On time','11:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('GHI2','SK32','DO60','02:30',50000,'On time','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('GHI12','SK32','DO60','02:30',50000,'On time','16:00')
 
 
 
