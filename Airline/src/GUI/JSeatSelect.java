@@ -60,10 +60,21 @@ public class JSeatSelect extends javax.swing.JFrame {
         
         txtbox_flightCost.setText(String.format("$%d",cost));
         
+        for (int i = 0; i < seats.size(); i++){
+
+        }
+        
        
 
         lastSelectSeatColor = Color.black;
         for (int i = 0; i < seats.size(); i++) {
+            
+            if (system.checkSeat(route.getFlights().get(flightIndex).getFlightID(), seats.get(i).getName())) {
+                //If Seat Exists
+                seats.get(i).setBackground(pannel_taken_key.getBackground());
+                continue;
+            }
+            
             String seatName = seats.get(i).getName();
 
             seats.get(i).addMouseListener(new MouseAdapter() {
@@ -247,7 +258,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         jPanel93 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         backDrop13 = new javax.swing.JPanel();
-        jPanel94 = new javax.swing.JPanel();
+        pannel_taken_key = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel95 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -2268,17 +2279,17 @@ public class JSeatSelect extends javax.swing.JFrame {
         backDrop13.setBackground(new java.awt.Color(255, 255, 255));
         backDrop13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel94.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel94.setToolTipText("");
+        pannel_taken_key.setBackground(new java.awt.Color(102, 102, 102));
+        pannel_taken_key.setToolTipText("");
 
-        javax.swing.GroupLayout jPanel94Layout = new javax.swing.GroupLayout(jPanel94);
-        jPanel94.setLayout(jPanel94Layout);
-        jPanel94Layout.setHorizontalGroup(
-            jPanel94Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pannel_taken_keyLayout = new javax.swing.GroupLayout(pannel_taken_key);
+        pannel_taken_key.setLayout(pannel_taken_keyLayout);
+        pannel_taken_keyLayout.setHorizontalGroup(
+            pannel_taken_keyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 35, Short.MAX_VALUE)
         );
-        jPanel94Layout.setVerticalGroup(
-            jPanel94Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pannel_taken_keyLayout.setVerticalGroup(
+            pannel_taken_keyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 26, Short.MAX_VALUE)
         );
 
@@ -2292,14 +2303,14 @@ public class JSeatSelect extends javax.swing.JFrame {
         backDrop13Layout.setHorizontalGroup(
             backDrop13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backDrop13Layout.createSequentialGroup()
-                .addComponent(jPanel94, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pannel_taken_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
         backDrop13Layout.setVerticalGroup(
             backDrop13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel94, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pannel_taken_key, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
@@ -2753,10 +2764,10 @@ public class JSeatSelect extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel92;
     private javax.swing.JPanel jPanel93;
-    private javax.swing.JPanel jPanel94;
     private javax.swing.JPanel jPanel95;
     private javax.swing.JLabel lbl_firstName;
     private javax.swing.JPanel panel_firstName;
+    private javax.swing.JPanel pannel_taken_key;
     private javax.swing.JTextField txtbox_dest;
     private javax.swing.JTextField txtbox_firstName;
     private javax.swing.JTextField txtbox_flight;
