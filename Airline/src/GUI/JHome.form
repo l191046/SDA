@@ -855,19 +855,32 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lbl_instructions" pref="211" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="err_browse" pref="211" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="82" max="32767" attributes="0"/>
+                          <Component id="lbl_instructions" min="-2" pref="155" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbl_instructions" pref="224" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="err_browse" min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="180" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -881,11 +894,23 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p align = &quot;justify&quot;&gt;Enter Your Source and Destination to view a list of all possible flights.&lt;/p&gt;&#xa;&lt;p&gt;*Date for departure may be left blank&lt;/p&gt;&#xa;&lt;br&gt;&#xa;&lt;h5&gt;NOTE:&lt;/h5&gt;&#xa;&lt;p align = &quot;justify&quot;&gt;Before booking your ticket make sure you have a valid passport and visa. Our airline Will not be responsible for any loss, damages and delays.&lt;/p&gt;&#xa;&lt;/html&gt;"/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p align = &quot;justify&quot;&gt;Enter Your Source and Destination to view a list of all possible flights.&lt;/p&gt;&#xa;&lt;h5&gt;NOTE:&lt;/h5&gt;&#xa;&lt;p align = &quot;justify&quot;&gt;Before booking your ticket make sure you have a valid passport and visa. Our airline Will not be responsible for any loss, damages and delays.&lt;/p&gt;&#xa;&lt;/html&gt;"/>
                     <Property name="verticalAlignment" type="int" value="1"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[235, 250]"/>
                     </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="err_browse">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Microsoft JhengHei UI Light" size="14" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="28" green="28" red="d6" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="ERROR"/>
+                    <Property name="verticalAlignment" type="int" value="1"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -998,11 +1023,11 @@
                       <Component id="backDrop2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="panel_flightCodeBackdrop" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="scroll_status" min="-2" pref="55" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="err_status" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="337" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="scroll_status" min="-2" pref="76" max="-2" attributes="0"/>
+                      <EmptySpace pref="353" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1214,6 +1239,10 @@
                           <Component id="backDrop3" max="32767" attributes="0"/>
                           <Component id="panel_enterCNIC" alignment="1" max="32767" attributes="0"/>
                           <Component id="scroll_history" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="err_history" min="-2" pref="198" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1226,8 +1255,10 @@
                       <Component id="backDrop3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="panel_enterCNIC" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="scroll_history" pref="438" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="err_history" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="scroll_history" pref="418" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1383,27 +1414,8 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Microsoft JhengHei UI" size="18" style="0"/>
                     </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="1">
-                        <Column editable="false" title="Flight Code" type="java.lang.String">
-                          <Data value="PK 214"/>
-                        </Column>
-                        <Column editable="false" title="Source" type="java.lang.String">
-                          <Data value="LHE"/>
-                        </Column>
-                        <Column editable="false" title="Destination" type="java.lang.String">
-                          <Data value="FAT"/>
-                        </Column>
-                        <Column editable="false" title="Departure Time" type="java.lang.String">
-                          <Data value="12:00"/>
-                        </Column>
-                        <Column editable="false" title="Arrival Time" type="java.lang.String">
-                          <Data value="22:00"/>
-                        </Column>
-                        <Column editable="false" title="Status" type="java.lang.String">
-                          <Data value="On time"/>
-                        </Column>
-                      </Table>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="model_history" type="code"/>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
@@ -1457,6 +1469,21 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="err_history">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="28" green="28" red="d6" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Microsoft JhengHei Light" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="28" green="28" red="d6" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="ERROR"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
