@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class JHome extends javax.swing.JFrame {
 
@@ -26,7 +27,6 @@ public class JHome extends javax.swing.JFrame {
         setTableRoutes();
         setTableStatus();
         setComboAirports();
-        populateTableRoutes();
         
         initComponents();
         setVisible(true);
@@ -72,7 +72,10 @@ public class JHome extends javax.swing.JFrame {
         model_routes.setRowCount(0);
         //call system class function
         
-        system.findPaths(this.model_routes, "US1", "DO60");
+        if (this.cal_calendar.getDate() != null){
+            LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            system.findPaths(this.model_routes, "US1", "DO60", date);
+        }
     }
     private void populateTableStatus(String flightID){
         model_status.setRowCount(0);
@@ -1061,13 +1064,13 @@ public class JHome extends javax.swing.JFrame {
     private void btn_searchFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchFlightsMouseClicked
         String Destination = this.cbox_destination.getSelectedItem().toString();
         String Source = this.cbox_source.getSelectedItem().toString();
-        Source = "MCT30";
-        LocalDate date = LocalDate.now();
-        Destination = "PK35";
+        LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        //Source = "MCT30";
+        //LocalDate date = LocalDate.now();
+        //Destination = "PK35";
         
-        
-        DefaultTableModel myModel = (DefaultTableModel) this.table_routes.getModel();
-        system.findPaths(myModel, Source, Destination, date);
+        model_routes.setRowCount(0);
+        system.findPaths(model_routes, Source, Destination, date);
     }//GEN-LAST:event_btn_searchFlightsMouseClicked
 
 

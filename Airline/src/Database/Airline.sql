@@ -127,6 +127,7 @@ INSERT Airport([Code],[Name],[City],[Country]) VALUES ('SK32','Skardu Airport','
 --===========STORED PROCEDURES==========================
 
 --===========CUSTOMER===============
+GO
 Create PROCEDURE search_customer
 @cnic		varchar(13),
 @found		int output
