@@ -172,7 +172,7 @@ public class MSsql {
             Connection con = DriverManager.getConnection(url);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //CALLING STORED PROCEDURE
-            String SQL = "{call [add_customer](?,?,?,?,?)}";
+            String SQL = "{call [add_customer_nofly](?,?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString("cnic", CNIC);
