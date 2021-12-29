@@ -6,6 +6,7 @@ public class Customer extends Person {
     private String contact;
     private MSsql database;
     
+    
     public String getContact() {
         return contact;
     }
