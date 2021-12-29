@@ -116,8 +116,6 @@ INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('FGH23','US1','SK32','02:30',50000,'On time','11:00')
 INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('GHI12','SK32','DO60','02:30',50000,'On time','16:00')
 
-
-
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('US1','US International','New York','USA')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('PK35','Jinnah International','Lahore','Pakistan')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('DO60','Doha International','Doha','UAE')
@@ -135,8 +133,9 @@ INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('FGH23','C4','Taken')
 
 INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','FGH23','A10')
 INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','FGH23','C4')
+GO
 --===========STORED PROCEDURES==========================
-
+GO
 --===========CUSTOMER===============
 GO
 Create PROCEDURE search_customer
@@ -171,6 +170,7 @@ AS
 		(@cnic,@contact,0)
 	END
 GO
+
 --===========ADMIN==================
 CREATE PROCEDURE admin_signin
 @username	varchar(20),

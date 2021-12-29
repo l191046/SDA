@@ -180,11 +180,13 @@ public class JSystem {
         return null;
         
     }   
-    public void findPaths(DefaultTableModel table_model, String Source, String Destination, LocalDate date){
+    public boolean findPaths(DefaultTableModel table_model, String Source, String Destination, LocalDate date){
         Airport Src = this.retAirportFromList(Source);
         Airport Dest = this.retAirportFromList(Destination);
         
         ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest, date);
+        if (myRoutes.isEmpty())
+            return false;
         
         ArrayList<Route> routes = myRoutes.getRoutes();
         String connections;
@@ -208,7 +210,7 @@ public class JSystem {
                     }
             );
         }
-        
+        return true;
     
     }
     
