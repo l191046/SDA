@@ -3,9 +3,9 @@ package Business;
 
 public class SeatBooking {
     private Flight Flight;
-    private int seatNumber;
+    private String seatNumber;
 
-    public SeatBooking(Flight Flight, int seatNumber) {
+    public SeatBooking(Flight Flight, String seatNumber) {
         this.Flight = Flight;
         this.seatNumber = seatNumber;
     }
@@ -19,11 +19,11 @@ public class SeatBooking {
         this.Flight = Flight;
     }
 
-    public int getSeatNumber() {
+    public String getSeatNumber() {
         return seatNumber;
     }
 
-    public void setSeatNumber(int seatNumber) {
+    public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
 
