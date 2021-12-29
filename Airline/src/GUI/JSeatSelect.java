@@ -2582,13 +2582,13 @@ public class JSeatSelect extends javax.swing.JFrame {
             return;
         }
         
-        //completeBooking booking = new completeBooking();
+        //completeBooking booking = new JTicket();
         this.dispose();
         flightIndex++;
         if(flightIndex < route.getFlights().size()){
             JSeatSelect j = new JSeatSelect(system, customer, route, flightIndex);
         } else{
-            completeBooking booking = new completeBooking();
+            JTicket booking = new JTicket(system,route,customer);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
