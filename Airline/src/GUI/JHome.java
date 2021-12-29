@@ -39,10 +39,10 @@ public class JHome extends javax.swing.JFrame {
         model_routes = new DefaultTableModel();
         String header[] = new String[] {
             "No.", "From", "To", "Departure Date", "Departure Time",
-            "Connections", "Cost/PKR"
+            "Connections", "Cost/PKR", "Route_Object_Hidden"
         };
         
-        model_routes.setColumnCount(7);
+        model_routes.setColumnCount(8);
         model_routes.setColumnIdentifiers(header);
     }
     private void setComboAirports(){
@@ -57,7 +57,8 @@ public class JHome extends javax.swing.JFrame {
     private void populateTableRoutes(){
         model_routes.setRowCount(0);
         //call system class function
-        //system.findPaths(this.model_routes, "DCA7", "SYD6");
+        
+        system.findPaths(this.model_routes, "US1", "DO60");
     }
     
     private void setHighlights(String btn_name){
@@ -1044,15 +1045,15 @@ public class JHome extends javax.swing.JFrame {
        
         if (row != -1){
             //open customer info form
-            String id = table_routes.getModel().getValueAt(row, 0).toString();
-            String src = table_routes.getModel().getValueAt(row, 1).toString();
-            String dest = table_routes.getModel().getValueAt(row, 2).toString();
-            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
-            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
-            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
+//            String id = table_routes.getModel().getValueAt(row, 0).toString();
+//            String src = table_routes.getModel().getValueAt(row, 1).toString();
+//            String dest = table_routes.getModel().getValueAt(row, 2).toString();
+//            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
+//            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
+//            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
+            Route r = (Route) table_routes.getModel().getValueAt(row,7);
 
-
-            JBooking booking = new JBooking(system, id, src, dest, Ddate, Dtime, Connections);
+            JBooking booking = new JBooking(system,r);
         }
         
     }//GEN-LAST:event_table_routesMouseClicked

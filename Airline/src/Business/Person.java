@@ -5,6 +5,7 @@ public class Person {
     protected String Firstname;
     protected String Lastname;
     protected String Address;
+    
 
     public String getCNIC() {
         return CNIC;
