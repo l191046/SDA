@@ -187,10 +187,10 @@ public class JSystem {
         ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest, date);
         
         ArrayList<Route> routes = myRoutes.getRoutes();
-        String connections = "";
+        String connections;
         int i = 0;
         for(Route route : routes ){
-            
+            connections = "";
             for(Flight flight: route.getFlights()){
                 connections += flight.getDestination().getCode();
                 connections += "->";
@@ -203,7 +203,8 @@ public class JSystem {
                         route.getFlights().get(0).getTime().toLocalDate().toString(),
                         route.getFlights().get(0).getTime().toLocalTime().toString(),
                         connections,
-                        route.getRouteCost()
+                        route.getRouteCost(),
+                        route
                     }
             );
         }
@@ -323,5 +324,25 @@ public class JSystem {
         customer.setAddress(address);
         customer.setContact(contact);
         nofly_list.addCustomer(customer);
+    }
+    
+    // Customer Management
+    public boolean addCustomer(Customer customer){
+
+        //---------UPDATE DATABASE----------
+        if (database.searchCustomer(customer.getCNIC())){
+            return false;
+        }
+        else{
+            database.addCustomer(
+                    customer.getCNIC(),
+                    customer.getFirstname(),
+                    customer.getLastname(),
+                    customer.getContact(),
+                    customer.getAddress()
+            );
+        }
+        //----------------------------------
+        return true;
     }
 }

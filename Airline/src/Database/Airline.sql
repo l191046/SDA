@@ -107,59 +107,27 @@ INSERT Customer ([CNIC],Contact, No_Fly) VALUES ('3452815234532','93043219342', 
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3453819234532','sukhanamir','crunchyroll',54000,'2000-04-20')
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3452815234532','admin','admin',400000,'2020-01-19')
 
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE23','US1','DO60','02:30',50000,'On time','11:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE45','PK35','DO60','02:30',40000,'On time','23:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI25','PK35','US1','12:00',110000,'Cancelled','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('ABC23','US1','PK35','03:00',50000,'On time','11:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('BCD45','PK35','DO60','03:00',40000,'On time','15:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('CDE25','PK35','MCT30','2:00',110000,'On time','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LMN23','US1','LND21','02:30',50000,'On time','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('DEF25','MCT30','LND21','1:00',110000,'On time','19:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('EFG25','LND21','DO60','1:00',110000,'On time','21:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('FGH23','US1','SK32','02:30',50000,'On time','11:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('GHI2','SK32','DO60','02:30',50000,'On time','16:00')
 
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE60','PK35','KHI3','1:00',430000,'Cancelled','01:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI26','KHI3','CMB42','3:00',500000,'On time','03:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('CMB77','CMB42','SYD6','7:00',110000,'Cancelled','08:00')
 
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('SYD60','SYD6','MCT30','9:00',490000,'On time','12:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('MCT55','MCT30','ESB2','7:00',220000,'Cancelled','23:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('ESB44','ESB2','DCA7','10:00',670000,'On time','09:00')
-
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('DCA47','DCA7','BGR9','8:00',580000,'Cancelled','15:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('BGR55','BGR9','ESB2','6:00',300000,'On time','02:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('ESB90','ESB2','KHI3','3:00',130000,'On time','10:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI29','KHI3','SYD6','10:00',110000,'Cancelled','15:00')
-
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('MCT34','MCT30','JED0','2:00',340000,'On time','13:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('JEB55','JED0','BGR9','9:00',140000,'On time','16:00')
-
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('MCT92','MCT30','KHI3','4:00',870000,'On time','03:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('KHI49','KHI3','PK35','1:00',510000,'Cancelled','09:00')
-
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LHE24','PK35','JED0','4:00',980000,'Cancelled','16:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('JEB87','JED0','ESB2','8:00',120000,'Cancelled','22:00')
 
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('US1','US International','New York','USA')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('PK35','Jinnah International','Lahore','Pakistan')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('DO60','Doha International','Doha','UAE')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('KHI3','Karachi International','Karachi','Pakistan')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('MCT30','Muscat International','Muscat','Qatar')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('JED0','Jeddah International','Jeddah','Saudia Arabia')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('ESB2','Ankara International','Ankara','Turkey')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('BGR9','Paris International','Paris','France')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('DCA7','Washington International','Washington','USA')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('SYD6','Sydney International','Sydeny','Australia')
-INSERT Airport([Code],[Name],[City],[Country]) VALUES ('CMB42','Columbia International','Columbia','SriLanka')
-
-INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('LHE23',30,'Vaccant')
-INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('KHI25',45,'Taken')
-INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('MCT92',77,'Taken')
-INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('KHI49',13,'Vacant')
-INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('DCA47',57,'Taken')
-INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('LHE60',44,'Vacant')
-INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('SYD60',22,'Taken')
-GO
-
-INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','KHI25',45)
-INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','SYD60',22)
-GO
+INSERT Airport([Code],[Name],[City],[Country]) VALUES ('MCT30','Muscat International','Muscat','Australia')
+INSERT Airport([Code],[Name],[City],[Country]) VALUES ('LND21','London Airport','London','England')
+INSERT Airport([Code],[Name],[City],[Country]) VALUES ('SK32','Skardu Airport','Skardu','Pakistan')
 --===========STORED PROCEDURES==========================
 
 --===========CUSTOMER===============
+GO
 Create PROCEDURE search_customer
 @cnic		varchar(13),
 @found		int output
@@ -303,6 +271,27 @@ INSERT INTO Customer VALUES
 (@cnic,@contact,1)
 END
 GO
+
+CREATE PROCEDURE add_customer_0
+@cnic	varchar(13),
+@contact	char(11),
+@fname		nvarchar(255),
+@lname		nvarchar(255),
+@address	varchar(255)
+
+AS
+BEGIN
+INSERT INTO Person VALUES
+(@fname,@lname,@cnic,@address)
+
+END
+BEGIN 
+INSERT INTO Customer VALUES
+(@cnic,@contact,0)
+END
+GO
+
+
 --===========AIRPORT===============
 CREATE PROCEDURE get_airport_list
 AS

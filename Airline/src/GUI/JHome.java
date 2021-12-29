@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class JHome extends javax.swing.JFrame {
 
@@ -26,7 +27,6 @@ public class JHome extends javax.swing.JFrame {
         setTableRoutes();
         setTableStatus();
         setComboAirports();
-        populateTableRoutes();
         
         initComponents();
         setVisible(true);
@@ -45,10 +45,10 @@ public class JHome extends javax.swing.JFrame {
         model_routes = new DefaultTableModel();
         String header[] = new String[] {
             "No.", "From", "To", "Departure Date", "Departure Time",
-            "Connections", "Cost/PKR"
+            "Connections", "Cost/PKR", "Route_Object_Hidden"
         };
         
-        model_routes.setColumnCount(7);
+        model_routes.setColumnCount(8);
         model_routes.setColumnIdentifiers(header);
     }
     private void setTableStatus(){
@@ -71,7 +71,11 @@ public class JHome extends javax.swing.JFrame {
     private void populateTableRoutes(){
         model_routes.setRowCount(0);
         //call system class function
-        //system.findPaths(this.model_routes, "DCA7", "SYD6");
+        
+        if (this.cal_calendar.getDate() != null){
+            LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            system.findPaths(this.model_routes, "US1", "DO60", date);
+        }
     }
     private void populateTableStatus(String flightID){
         model_status.setRowCount(0);
@@ -1045,28 +1049,28 @@ public class JHome extends javax.swing.JFrame {
        
         if (row != -1){
             //open customer info form
-            String id = table_routes.getModel().getValueAt(row, 0).toString();
-            String src = table_routes.getModel().getValueAt(row, 1).toString();
-            String dest = table_routes.getModel().getValueAt(row, 2).toString();
-            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
-            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
-            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
+//            String id = table_routes.getModel().getValueAt(row, 0).toString();
+//            String src = table_routes.getModel().getValueAt(row, 1).toString();
+//            String dest = table_routes.getModel().getValueAt(row, 2).toString();
+//            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
+//            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
+//            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
+            Route r = (Route) table_routes.getModel().getValueAt(row,7);
 
-
-            JBooking booking = new JBooking(system, id, src, dest, Ddate, Dtime, Connections);
+            JBooking booking = new JBooking(system,r);
         }
         
     }//GEN-LAST:event_table_routesMouseClicked
     private void btn_searchFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchFlightsMouseClicked
         String Destination = this.cbox_destination.getSelectedItem().toString();
         String Source = this.cbox_source.getSelectedItem().toString();
-        Source = "MCT30";
-        LocalDate date = LocalDate.now();
-        Destination = "PK35";
+        LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        //Source = "MCT30";
+        //LocalDate date = LocalDate.now();
+        //Destination = "PK35";
         
-        
-        DefaultTableModel myModel = (DefaultTableModel) this.table_routes.getModel();
-        system.findPaths(myModel, Source, Destination, date);
+        model_routes.setRowCount(0);
+        system.findPaths(model_routes, Source, Destination, date);
     }//GEN-LAST:event_btn_searchFlightsMouseClicked
 
 

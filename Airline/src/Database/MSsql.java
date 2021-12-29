@@ -205,6 +205,30 @@ public class MSsql {
         }
         return false;
     }
+    
+    public boolean addCustomer(String CNIC, String fname, String lname, String contact, String address){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [add_customer_0](?,?,?,?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("cnic", CNIC);
+            Cmt.setString("contact", contact);
+            Cmt.setString("fname", fname);
+            Cmt.setString("lname", lname);
+            Cmt.setString("address", address);
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+        
     public boolean searchCustomer(String CNIC){
         boolean found = false;
         try {
