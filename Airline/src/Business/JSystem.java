@@ -183,6 +183,7 @@ public class JSystem {
     public boolean findPaths(DefaultTableModel table_model, String Source, String Destination, LocalDate date){
         Airport Src = this.retAirportFromList(Source);
         Airport Dest = this.retAirportFromList(Destination);
+       
         
         ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest, date);
         if (myRoutes.isEmpty())

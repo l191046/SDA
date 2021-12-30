@@ -370,7 +370,7 @@ BEGIN
 END
 GO
 
-
+*/
 Create procedure book_seat
 @flightId varchar(10),
 @seatId varchar(5)

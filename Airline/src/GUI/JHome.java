@@ -9,6 +9,7 @@ import java.util.HashSet;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 
 public class JHome extends javax.swing.JFrame {
 
@@ -29,7 +30,8 @@ public class JHome extends javax.swing.JFrame {
         setTableStatus();
         setTableHistory();
         setComboAirports();
-        populateTableRoutes();
+        LocalDate  date = LocalDate.now();
+        populateTableRoutes("US1","DO60",date);
         
         initComponents();
         setVisible(true);       

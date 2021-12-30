@@ -70,11 +70,11 @@ public class JSeatSelect extends javax.swing.JFrame {
         lastSelectSeatColor = Color.black;
         for (int i = 0; i < seats.size(); i++) {
             
-            if (system.checkSeat(route.getFlights().get(flightIndex).getFlightID(), seats.get(i).getName())) {
-                //If Seat Exists
-                seats.get(i).setBackground(pannel_taken_key.getBackground());
-                continue;
-            }
+//            if (system.checkSeat(route.getFlights().get(flightIndex).getFlightID(), seats.get(i).getName())) {
+//                //If Seat Exists
+//                seats.get(i).setBackground(pannel_taken_key.getBackground());
+//                continue;
+//            }
             
             String seatName = seats.get(i).getName();
 
@@ -100,16 +100,25 @@ public class JSeatSelect extends javax.swing.JFrame {
                         
                         if (p.getParent() == FirstClass) {
                             txtbox_total.setText(String.format("$%d",550+cost));
-                            txtbox_fseatCost.setText("$550");
+                            txtbox_fseatCost.setText("550");
                         } else {
                             txtbox_total.setText(String.format("$%d",250+cost));
-                            txtbox_fseatCost.setText("$250");
+                            txtbox_fseatCost.setText("250");
                         }
                     }
                 }
             });
 
         }
+        
+          for (int i = 0; i < seats.size(); i++) {
+            
+            if (system.checkSeat(route.getFlights().get(flightIndex).getFlightID(), seats.get(i).getName())) {
+                //If Seat Exists
+                seats.get(i).setBackground(pannel_taken_key.getBackground());
+                continue;
+            }
+          }
     }
     
     public void getComponentsRecursive(Container parent,ArrayList<JPanel> seats)
@@ -2343,11 +2352,10 @@ public class JSeatSelect extends javax.swing.JFrame {
         lbl_firstName.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         lbl_firstName.setForeground(new java.awt.Color(255, 255, 255));
         lbl_firstName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lbl_firstName.setText("Total:");
+        lbl_firstName.setText("Total:Rs");
 
         txtbox_total.setEditable(false);
         txtbox_total.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
-        txtbox_total.setText("$");
 
         javax.swing.GroupLayout panel_firstNameLayout = new javax.swing.GroupLayout(panel_firstName);
         panel_firstName.setLayout(panel_firstNameLayout);
@@ -2509,7 +2517,6 @@ public class JSeatSelect extends javax.swing.JFrame {
                             .addComponent(jLabel20)
                             .addComponent(txtbox_fseatCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 8, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel16)
@@ -2595,13 +2602,26 @@ public class JSeatSelect extends javax.swing.JFrame {
             return;
         }
         
-        //completeBooking booking = new JTicket();
+        
+        //ADD ticket seat details
+        ticket.getBookedFlights().get(flightIndex).setSeatId(Seat_Loc.getText());
+        
+        int seatCost = Integer.parseInt(txtbox_fseatCost.getText());
+        int flightCost = route.getRouteCost();
+        ticket.getBookedFlights().get(flightIndex).setSeatCost(seatCost);
+        ticket.getBookedFlights().get(flightIndex).setFlightCost(flightCost);
+        
         this.dispose();
         flightIndex++;
         if (flightIndex < route.getFlights().size()) {
             //Add Flight To DB
             //***Move this to JTicket and add with Ticket
-            system.addSeatToFlight(route.getFlights().get(flightIndex).getFlightID(), Seat_Loc.getText());
+            //system.addSeatToFlight(route.getFlights().get(flightIndex).getFlightID(), Seat_Loc.getText());
+            
+            //Seat Seat Details
+            
+            
+            //icket.addBookedFlight();
             
             JSeatSelect j = new JSeatSelect(system, customer, route, flightIndex,ticket);
         } else {
