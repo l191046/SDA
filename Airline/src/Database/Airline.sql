@@ -131,11 +131,23 @@ INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('DEF25','F9','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('GHI12','C15','Vacant')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('FGH23','C4','Taken')
 
+--Inserted by behzad for testing
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','C4','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','C5','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','A1','Taken')
+
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('BCD45','C4','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('BCD45','B5','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','B1','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','B3','Taken')
+
+--=============================
 INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','FGH23','A10')
 INSERT Ticket([CNIC],[FlightId],[SeatId]) VALUES ('3452815234532','FGH23','C4')
-GO
+
 --===========STORED PROCEDURES==========================
-GO
+
+
 --===========CUSTOMER===============
 GO
 Create PROCEDURE search_customer
@@ -339,6 +351,9 @@ IF EXISTS
   SET @taken=0
 GO
 
+/*
+drop proc book_seat
+
 Create procedure book_seat
 @cnic varchar(13),
 @flightId varchar(10),
@@ -355,6 +370,17 @@ BEGIN
 END
 GO
 
+
+Create procedure book_seat
+@flightId varchar(10),
+@seatId varchar(5)
+AS
+BEGIN
+	INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES (@flightId,@seatId,'Taken')
+END
+GO
+
+
 --drop procedure add_flight;
 --EXEC admin_signin @username = 'abdulmuneem', @password = 'dancingfajita';
 
@@ -364,3 +390,4 @@ select * from Customer;
 select * from Flight;
 select * from Flight_Seats;
 select * from Airport;
+select * from Ticket

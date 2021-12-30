@@ -330,5 +330,24 @@ public class MSsql {
         return found;
      } 
 
+    public void addSeatToFlight(String flightId, String seatLocation) {
+        //This Function Adds seat to flightId
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [book_seat](?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("flightId", flightId);
+            Cmt.setString("seatId", seatLocation);
+            Cmt.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+       
+    }
+
   
 }

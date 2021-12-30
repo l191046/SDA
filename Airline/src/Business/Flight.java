@@ -86,6 +86,8 @@ public class Flight {
     public void setDuration(LocalTime Duration) {
         this.Duration = Duration;
     }
+
+
     
     
     

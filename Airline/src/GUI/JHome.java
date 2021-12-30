@@ -29,6 +29,7 @@ public class JHome extends javax.swing.JFrame {
         setTableStatus();
         setTableHistory();
         setComboAirports();
+        populateTableRoutes();
         
         initComponents();
         setVisible(true);       
