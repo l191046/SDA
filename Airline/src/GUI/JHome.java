@@ -17,6 +17,7 @@ public class JHome extends javax.swing.JFrame {
     private ArrayList<JPanel> highlights;
     private DefaultTableModel model_routes;
     private DefaultTableModel model_status;
+    private DefaultTableModel model_history;
     private DefaultComboBoxModel model_source;
     private DefaultComboBoxModel model_destination;
     
@@ -26,13 +27,16 @@ public class JHome extends javax.swing.JFrame {
         
         setTableRoutes();
         setTableStatus();
+        setTableHistory();
         setComboAirports();
         populateTableRoutes();
         
         initComponents();
-        setVisible(true);
+        setVisible(true);       
         
         this.err_status.setVisible(false);
+        this.err_browse.setVisible(false);
+        this.err_history.setVisible(false);
         
         cards = (CardLayout) this.cardstack.getLayout();
         highlights = new ArrayList<JPanel>();
@@ -60,6 +64,14 @@ public class JHome extends javax.swing.JFrame {
         model_status.setColumnCount(header.length);
         model_status.setColumnIdentifiers(header);
     }
+    private void setTableHistory(){
+        model_history = new DefaultTableModel();
+        String header[] = new String[] {
+            "Flight Code", "From", "To", "Departure Date", "Departure Time", "Arrival Time", "Status"
+        };
+        model_history.setColumnCount(header.length);
+        model_history.setColumnIdentifiers(header);
+    }
     private void setComboAirports(){
         model_source = new DefaultComboBoxModel();
         model_destination = new DefaultComboBoxModel();
@@ -69,19 +81,16 @@ public class JHome extends javax.swing.JFrame {
         system.getComboAirports(model_destination);
     }
     //LOAD TABLE DATA
-    private void populateTableRoutes(){
+    private void populateTableRoutes(String src, String dest, LocalDate date){
         model_routes.setRowCount(0);
-        //call system class function
-        
-//        if (this.cal_calendar.getDate() != null){
-            //LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate date = LocalDate.now();
-            system.findPaths(this.model_routes, "US1", "DO60", date);
-//        }
+        if (!system.findPaths(model_routes, src, dest, date)){
+            this.err_browse.setText("Sorry, no routes found");
+            this.err_browse.setVisible(true);
+        }            
     }
-    private void populateTableStatus(String flightID){
+    private boolean populateTableStatus(String flightID){
         model_status.setRowCount(0);
-        system.checkFlightStatus(flightID, model_status);
+        return system.checkFlightStatus(flightID, model_status);
     }
     private void setHighlights(String btn_name){
        for(int i=0; i<highlights.size(); i++){
@@ -99,8 +108,7 @@ public class JHome extends javax.swing.JFrame {
         cards.show(this.cardstack, "card_checkFlight");
         //set highlights of buttons
         setHighlights("highlight_checkFlight");
-        //hide table
-        this.txtbox_flightCode.setBackground(Color.decode("#CDD1C4"));
+        this.scroll_status.setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -143,6 +151,7 @@ public class JHome extends javax.swing.JFrame {
         btn_searchFlights = new javax.swing.JLabel();
         pnl_instructions = new javax.swing.JPanel();
         lbl_instructions = new javax.swing.JLabel();
+        err_browse = new javax.swing.JLabel();
         pnl_routes = new javax.swing.JPanel();
         scroll_routes = new javax.swing.JScrollPane();
         table_routes = new javax.swing.JTable();
@@ -165,6 +174,7 @@ public class JHome extends javax.swing.JFrame {
         btn_checkHistory = new javax.swing.JLabel();
         scroll_history = new javax.swing.JScrollPane();
         table_history = new javax.swing.JTable();
+        err_history = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -613,9 +623,14 @@ public class JHome extends javax.swing.JFrame {
 
         lbl_instructions.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 12)); // NOI18N
         lbl_instructions.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_instructions.setText("<html>\n<p align = \"justify\">Enter Your Source and Destination to view a list of all possible flights.</p>\n<p>*Date for departure may be left blank</p>\n<br>\n<h5>NOTE:</h5>\n<p align = \"justify\">Before booking your ticket make sure you have a valid passport and visa. Our airline Will not be responsible for any loss, damages and delays.</p>\n</html>");
+        lbl_instructions.setText("<html>\n<p align = \"justify\">Enter Your Source and Destination to view a list of all possible flights.</p>\n<h5>NOTE:</h5>\n<p align = \"justify\">Before booking your ticket make sure you have a valid passport and visa. Our airline Will not be responsible for any loss, damages and delays.</p>\n</html>");
         lbl_instructions.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lbl_instructions.setPreferredSize(new java.awt.Dimension(235, 250));
+
+        err_browse.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        err_browse.setForeground(new java.awt.Color(214, 40, 40));
+        err_browse.setText("ERROR");
+        err_browse.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout pnl_instructionsLayout = new javax.swing.GroupLayout(pnl_instructions);
         pnl_instructions.setLayout(pnl_instructionsLayout);
@@ -625,13 +640,22 @@ public class JHome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbl_instructions, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(pnl_instructionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_instructionsLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(err_browse, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         pnl_instructionsLayout.setVerticalGroup(
             pnl_instructionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_instructionsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_instructions, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_instructionsLayout.createSequentialGroup()
+                .addContainerGap(82, Short.MAX_VALUE)
+                .addComponent(lbl_instructions, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(pnl_instructionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_instructionsLayout.createSequentialGroup()
+                    .addComponent(err_browse, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 180, Short.MAX_VALUE)))
         );
 
         pnl_routes.setBackground(new java.awt.Color(205, 209, 196));
@@ -815,11 +839,11 @@ public class JHome extends javax.swing.JFrame {
                 .addComponent(backDrop2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panel_flightCodeBackdrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scroll_status, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(err_status)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scroll_status, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         cardstack.add(card_checkFlight, "card_checkFlight");
@@ -901,29 +925,7 @@ public class JHome extends javax.swing.JFrame {
         scroll_history.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
 
         table_history.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        table_history.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"PK 214", "LHE", "FAT", "12:00", "22:00", "On time"}
-            },
-            new String [] {
-                "Flight Code", "Source", "Destination", "Departure Time", "Arrival Time", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        table_history.setModel(model_history);
         table_history.setGridColor(new java.awt.Color(205, 209, 196));
         table_history.setIntercellSpacing(new java.awt.Dimension(10, 10));
         table_history.setRowHeight(25);
@@ -940,6 +942,12 @@ public class JHome extends javax.swing.JFrame {
             table_history.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        err_history.setBackground(new java.awt.Color(214, 40, 40));
+        err_history.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 14)); // NOI18N
+        err_history.setForeground(new java.awt.Color(214, 40, 40));
+        err_history.setText("ERROR");
+        err_history.setToolTipText("");
+
         javax.swing.GroupLayout card_historyLayout = new javax.swing.GroupLayout(card_history);
         card_history.setLayout(card_historyLayout);
         card_historyLayout.setHorizontalGroup(
@@ -949,7 +957,10 @@ public class JHome extends javax.swing.JFrame {
                 .addGroup(card_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(backDrop3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_enterCNIC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scroll_history))
+                    .addComponent(scroll_history)
+                    .addGroup(card_historyLayout.createSequentialGroup()
+                        .addComponent(err_history, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         card_historyLayout.setVerticalGroup(
@@ -959,8 +970,10 @@ public class JHome extends javax.swing.JFrame {
                 .addComponent(backDrop3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panel_enterCNIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scroll_history, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(err_history, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scroll_history, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1030,8 +1043,11 @@ public class JHome extends javax.swing.JFrame {
             this.err_status.setText("Please enter Flight Code");
             this.err_status.setVisible(true);
         }
-        else if (system.checkFlightStatus(flight_id, model_status)){
+        else if (populateTableStatus(flight_id)){
             this.err_status.setVisible(false);
+            this.scroll_status.setVisible(true);
+            this.revalidate();
+            this.repaint();
         }
         else {
             this.err_status.setText("Flight not found");
@@ -1041,9 +1057,20 @@ public class JHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_statusMouseClicked
 
     private void btn_checkHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_checkHistoryMouseClicked
-        this.scroll_history.setVisible(true);
-        this.revalidate();
-        this.repaint();
+        this.btn_checkHistory.setFocusable(false);
+        this.err_history.setVisible(false);
+        String cnic = this.txtbox_cnic.getText();
+        if (cnic.equals("")){
+            this.err_history.setText("Please enter CNIC");
+            this.err_history.setVisible(true);
+        }
+        else {
+            //system class function
+            this.scroll_history.setVisible(true);
+            this.revalidate();
+            this.repaint();
+        }
+        this.btn_checkHistory.setFocusable(true);
     }//GEN-LAST:event_btn_checkHistoryMouseClicked
 
     private void table_routesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_routesMouseClicked
@@ -1064,15 +1091,48 @@ public class JHome extends javax.swing.JFrame {
         
     }//GEN-LAST:event_table_routesMouseClicked
     private void btn_searchFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchFlightsMouseClicked
-        String Destination = this.cbox_destination.getSelectedItem().toString();
-        String Source = this.cbox_source.getSelectedItem().toString();
-        LocalDate date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        //Source = "MCT30";
-        //LocalDate date = LocalDate.now();
-        //Destination = "PK35";
+        this.btn_searchFlights.setFocusable(false);
+        this.err_browse.setVisible(false);
         
-        model_routes.setRowCount(0);
-        system.findPaths(model_routes, Source, Destination, date);
+        String Destination = null;
+        String Source = null;
+        LocalDate date = null;
+        
+        String err = "<html>";
+        if (this.cbox_source.getSelectedIndex() == 0){  //SOURCE PRESENCE
+            err += "<p>Please select source</p>";
+        }
+        else {
+            Destination = this.cbox_destination.getSelectedItem().toString();
+        }
+        if (this.cbox_destination.getSelectedIndex() == 0){ //DESTINATION PRESENCE
+            err += "<p>Please select destination</p>";
+        }
+        else {
+            Source = this.cbox_source.getSelectedItem().toString();
+        }
+        if (Source != null && Destination != null && Source.equals(Destination)){   //SRC-DEST COMPARISON
+            if (this.cbox_source.getSelectedIndex() != 0)
+                err += "<p>Select different airports</p>";
+        }
+        if (this.cal_calendar.getDate() == null){
+            err += "<p>Please select date</p>";
+        }
+        else {
+            date = this.cal_calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+        if (date != null && date.isBefore(LocalDate.now())){
+            err += "<p>Please select future date</p>";
+        }
+        err += "</html>";
+        if (err.equals("<html></html>")){
+            populateTableRoutes(Source, Destination, date);
+        }
+        else {
+            this.err_browse.setText(err);
+            this.err_browse.setVisible(true);
+        }
+        this.btn_searchFlights.setFocusable(true);
     }//GEN-LAST:event_btn_searchFlightsMouseClicked
 
 
@@ -1097,6 +1157,8 @@ public class JHome extends javax.swing.JFrame {
     private javax.swing.JPanel cardstack;
     private javax.swing.JComboBox<String> cbox_destination;
     private javax.swing.JComboBox<String> cbox_source;
+    private javax.swing.JLabel err_browse;
+    private javax.swing.JLabel err_history;
     private javax.swing.JLabel err_status;
     private javax.swing.JPanel highlight_checkFlight;
     private javax.swing.JPanel highlight_flights;

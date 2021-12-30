@@ -38,4 +38,8 @@ public class ViableRoutes {
         
     }
     
+    public boolean isEmpty(){
+        return (Routes.size() == 0);
+    }
+    
 }

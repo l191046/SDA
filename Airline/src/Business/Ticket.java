@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Business;
 
 import java.util.ArrayList;
@@ -40,6 +36,7 @@ public class Ticket {
     //private ArrayList<Flight> bookedFlights;
 
     private ArrayList<BookedFlight> bookedFlights;
+
     private Customer customer;
 
     public Ticket(int TicketID) {
@@ -86,5 +83,4 @@ public class Ticket {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
 }
