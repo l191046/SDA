@@ -3367,7 +3367,6 @@
                           <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -3463,7 +3462,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="11"/>
-                <Property name="text" type="java.lang.String" value="Total:"/>
+                <Property name="text" type="java.lang.String" value="Total:Rs"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtbox_total">
@@ -3472,7 +3471,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Microsoft JhengHei UI Light" size="24" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="$"/>
               </Properties>
             </Component>
           </SubComponents>
