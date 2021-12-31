@@ -518,6 +518,7 @@ public class JTicket extends javax.swing.JFrame {
         } catch (AWTException ex) {
             Logger.getLogger(JTicket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        system.addTicket();
     }//GEN-LAST:event_btn_confirmMouseClicked
 
     private void txt_ticketIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ticketIdActionPerformed

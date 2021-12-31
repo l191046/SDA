@@ -28,4 +28,8 @@ public class SeatList {
         }
         return null;
     }
+    
+    public void add(Seat seat){
+        seats.add(seat);
+    }
 }

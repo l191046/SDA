@@ -33,10 +33,11 @@ public class JSeatSelect extends javax.swing.JFrame {
         
         initComponents();
         this.setVisible(true);
-        
+       
         seats = new ArrayList<JPanel>();
 
         getComponentsRecursive(JSeatSelect.this,seats);
+        this.setSeatPanels();
         
         txtbox_firstName.setText(system.ticket_session.getCustomer().getFirstname());
         txtbox_flight.setText(system.route_session.getFlights().get(0).getFlightID());
@@ -101,6 +102,9 @@ public class JSeatSelect extends javax.swing.JFrame {
  
 }
     
+    public void setSeatPanels(){
+        system.setSeatPanels(seats);
+    }
     
 
     @SuppressWarnings("unchecked")
@@ -2560,6 +2564,10 @@ public class JSeatSelect extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(Seat_Loc.getText().toString().isEmpty()){
             showMessageDialog(null, "Please Select a Seat!");
+            return;
+        }
+        if (system.checkSeat(system.route_session.getFlights().get(0).getFlightID(), selectedSeat)) {
+            showMessageDialog(null, "Seat taken");
             return;
         }
         system.addBooking(system.route_session.getFlights().get(0).getFlightID(), selectedSeat);

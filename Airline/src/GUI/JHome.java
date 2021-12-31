@@ -78,9 +78,9 @@ public class JHome extends javax.swing.JFrame {
     private void setTableHistory(){
         model_history = new DefaultTableModel();
         String header[] = new String[] {
-            "Flight Code", "From", "To", "Departure Date", "Departure Time", "Arrival Time", "Status"
+            "Ticket ID", "From", "To", "Departure Date", "Departure Time"
         };
-        model_history.setColumnCount(header.length);
+        model_history.setColumnCount(5);
         model_history.setColumnIdentifiers(header);
     }
     private void setComboAirports(){
@@ -112,7 +112,7 @@ public class JHome extends javax.swing.JFrame {
     }
     private boolean populateTableHistory(String cnic){
         model_history.setRowCount(0);
-        
+        system.getHistory(model_history, cnic);
         return true;
     }
     private void setHighlights(String btn_name){
@@ -994,14 +994,6 @@ public class JHome extends javax.swing.JFrame {
         table_history.setSelectionBackground(new java.awt.Color(92, 128, 188));
         table_history.getTableHeader().setReorderingAllowed(false);
         scroll_history.setViewportView(table_history);
-        if (table_history.getColumnModel().getColumnCount() > 0) {
-            table_history.getColumnModel().getColumn(0).setResizable(false);
-            table_history.getColumnModel().getColumn(1).setResizable(false);
-            table_history.getColumnModel().getColumn(2).setResizable(false);
-            table_history.getColumnModel().getColumn(3).setResizable(false);
-            table_history.getColumnModel().getColumn(4).setResizable(false);
-            table_history.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         err_history.setBackground(new java.awt.Color(214, 40, 40));
         err_history.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 14)); // NOI18N

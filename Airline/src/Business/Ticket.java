@@ -15,6 +15,12 @@ public class Ticket {
         bookings = new ArrayList<SeatBooking>();
     }
 
+    public void setTicketID(String ticketID) {
+        this.ticketID = ticketID;
+    }
+
+    
+    
     public ArrayList<SeatBooking> getBookings() {
         return bookings;
     }
@@ -50,6 +56,12 @@ public class Ticket {
     }
     public String getDestination(){
         return bookings.get(0).getFlight().getDestination().getCode();
+    }
+    public String getDeparture(){
+        return bookings.get(0).getFlight().getTime().toLocalDate().toString();
+    }
+    public String getDepartureTime(){
+        return bookings.get(0).getFlight().getTime().toLocalTime().toString();
     }
     
     public void printToConsole(){

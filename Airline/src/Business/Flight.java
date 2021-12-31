@@ -85,7 +85,7 @@ public class Flight {
         this.Duration = Duration;
     }
 
-    public SeatList getSeats() {
+    public SeatList getSeatList() {
         return seats;
     }
 

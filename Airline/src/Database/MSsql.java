@@ -40,6 +40,24 @@ public class MSsql {
         return instance;
     }
     
+    //retrieve history
+    public ResultSet getTableBookings(){
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [get_bookings]}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
     
     //retrieve table of flights
     public ResultSet getTableFlights(){
