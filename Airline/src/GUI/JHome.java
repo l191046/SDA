@@ -110,6 +110,11 @@ public class JHome extends javax.swing.JFrame {
         model_status.setRowCount(0);
         return system.checkFlightStatus(flightID, model_status);
     }
+    private boolean populateTableHistory(String cnic){
+        model_history.setRowCount(0);
+        
+        return true;
+    }
     private void setHighlights(String btn_name){
        for(int i=0; i<highlights.size(); i++){
            JPanel hl = highlights.get(i);
@@ -1121,10 +1126,15 @@ public class JHome extends javax.swing.JFrame {
             this.err_history.setVisible(true);
         }
         else {
-            //system class function
-            this.scroll_history.setVisible(true);
-            this.revalidate();
-            this.repaint();
+            if (populateTableHistory(cnic)){
+                this.scroll_history.setVisible(true);
+                this.revalidate();
+                this.repaint();
+            }
+            else {
+                this.err_history.setText("CNIC not found");
+                this.err_history.setVisible(true);
+            }
         }
         this.btn_checkHistory.setFocusable(true);
     }//GEN-LAST:event_btn_checkHistoryMouseClicked

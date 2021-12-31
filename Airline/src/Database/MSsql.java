@@ -134,6 +134,7 @@ public class MSsql {
         return false;
     }
     //NOFLY MANAGEMENT
+    /*
     public ResultSet getTableNoFly(){
         ResultSet result = null;
         try {
@@ -150,6 +151,7 @@ public class MSsql {
         }
         return result;
     }
+    */
     public boolean removeFromNoFly(String CNIC){
         try {
             Connection con = DriverManager.getConnection(url);
@@ -331,7 +333,7 @@ public class MSsql {
             Connection con = DriverManager.getConnection(url);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //CALLING STORED PROCEDURE
-            String SQL = "{call [add_customer_0](?,?,?,?,?)}";
+            String SQL = "{call [add_customer](?,?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString("cnic", CNIC);
@@ -347,6 +349,7 @@ public class MSsql {
         }
         return false;
     }    
+    /*
     public boolean searchCustomer(String CNIC){
         boolean found = false;
         try {
@@ -366,5 +369,21 @@ public class MSsql {
         }
         return found;
     }
-    
+    */
+    public ResultSet getTableCustomers(){
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [get_customers]}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

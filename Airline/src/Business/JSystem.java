@@ -26,6 +26,7 @@ public class JSystem {
     private AdminSession admin_session;
     private FlightList flight_list;
     private NoFlyList nofly_list;
+    private CustomerList customer_list;
     private ArrayList<Airport> airportList;
     private PathFinderAlgorithm PathFinder;
     private ViableRoutes myRoutes;
@@ -38,10 +39,12 @@ public class JSystem {
         admin_session = AdminSession.getInstance();
         
         airportList = new ArrayList<Airport>();
-        nofly_list = new NoFlyList();
         flight_list = new FlightList();
+        customer_list = new CustomerList();
+        nofly_list = new NoFlyList(customer_list);
         this.loadAirportList();
         this.loadFlightList();
+        this.loadCustomerList();
         this.loadNoFlyList();
         
         PathFinder = new PathFinderAlgorithm(this.flight_list);
@@ -128,27 +131,40 @@ public class JSystem {
         }
 
     }
-    private void loadNoFlyList(){
-        try (ResultSet result = database.getTableNoFly();){
+    private void loadCustomerList(){
+        try (ResultSet result = database.getTableCustomers();){
             if (result == null)
                 return;
-            while(result.next()){
+            while (result.next()){
                 Customer customer = new Customer();
+                customer.setCNIC(result.getString("CNIC"));
                 customer.setFirstname(result.getString("FirstName"));
                 customer.setLastname(result.getString("LastName"));
-                customer.setCNIC(result.getString("CNIC"));
                 customer.setAddress(result.getString("Address"));
                 customer.setContact(result.getString("Contact"));
-                nofly_list.addCustomer(customer);
+                customer.setNoFly(result.getBoolean("No_Fly"));
+                
+                customer_list.addCustomer(customer);
             }
         }
         catch (Exception e){
-            e.printStackTrace();
+            
         }
+    }
+    private void loadNoFlyList(){
+        nofly_list.loadNoFlyList();
     }
     
     //========STORE TO DATABASE===========
-    
+    private void storeFlightList(){
+        
+    }
+    private void storeAirportList(){
+        
+    }
+    private void storeCustomerList(){
+        
+    }
     
     //=========PATH CALCULATION=========
     private Airport returnAirport(String airportCode){
@@ -251,7 +267,9 @@ public class JSystem {
         );
         return true;
     }
-    
+    public boolean getHistory(String cnic){
+        return false;
+    }
     
     //==========ADMIN=============
     //ADMIN SESSION/PROFILE
@@ -319,7 +337,7 @@ public class JSystem {
     public boolean getFlightCustomers(DefaultTableModel table_model, String flightID){
         if (flightID == null)
             return false;
-        CustomerList list = new CustomerList();
+        FlightCustomerList list = new FlightCustomerList();
         list.loadCustomerList(flightID);
         
         for (Customer customer : list.getCustomers()){
@@ -361,12 +379,14 @@ public class JSystem {
         customer.setLastname(lname);
         customer.setAddress(address);
         customer.setContact(contact);
+        customer.setNoFly(true);
         nofly_list.addCustomer(customer);
     }
     
     // Customer Management
     public boolean addCustomer(Customer customer){
-
+        return customer_list.addCustomer(customer);
+        /*
         //---------UPDATE DATABASE----------
         if (database.searchCustomer(customer.getCNIC())){
             return false;
@@ -381,7 +401,7 @@ public class JSystem {
             );
         }
         //----------------------------------
-        return true;
+        */
     }
     
     //Seat Selection

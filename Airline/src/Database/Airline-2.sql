@@ -182,23 +182,27 @@ IF	EXISTS (
 ELSE
 	SET @found = 0
 END
-GO
 CREATE PROCEDURE add_customer
-@cnic	varchar(13),
-@contact	char(11),
-@fname		nvarchar(255),
-@lname		nvarchar(255),
-@address	varchar(255)
-
+@cnic varchar(13),
+@firstname varchar(255),
+@lastname varchar(255),
+@address varchar(255),
+@contact varchar(11),
+@nofly	bit
 AS
 	BEGIN
-		INSERT INTO Person VALUES
-		(@fname,@lname,@cnic,@address)
+		INSERT into Person Values
+		(@firstname,@lastname,@cnic,@address);
 	END
-	BEGIN 
-		INSERT INTO Customer VALUES
-		(@cnic,@contact,0)
+	BEGIN
+		INSERT into Customer VALUES
+		(@cnic,@contact, @nofly);
 	END
+GO
+CREATE PROCEDURE get_customers
+AS
+	SELECT	*
+	FROM	[Person] inner join [Customer] on Person.CNIC = Customer.CNIC
 GO
 
 --===========ADMIN==================
@@ -312,25 +316,6 @@ END
 BEGIN 
 INSERT INTO Customer VALUES
 (@cnic,@contact,1)
-END
-GO
-
-CREATE PROCEDURE add_customer_0
-@cnic	varchar(13),
-@contact	char(11),
-@fname		nvarchar(255),
-@lname		nvarchar(255),
-@address	varchar(255)
-
-AS
-BEGIN
-INSERT INTO Person VALUES
-(@fname,@lname,@cnic,@address)
-
-END
-BEGIN 
-INSERT INTO Customer VALUES
-(@cnic,@contact,0)
 END
 GO
 
