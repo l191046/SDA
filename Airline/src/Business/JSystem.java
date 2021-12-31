@@ -209,17 +209,6 @@ public class JSystem {
         }
     }
     
-    //========STORE TO DATABASE===========
-    private void storeFlightList(){
-        
-    }
-    private void storeAirportList(){
-        
-    }
-    private void storeCustomerList(){
-        
-    }
-    
     //=========PATH CALCULATION=========
     private Airport returnAirport(String airportCode){
         Airport Src = new Airport();
@@ -542,9 +531,7 @@ public class JSystem {
     }
     public void addBooking(String flightID, String seatID){
         Flight flight = flight_list.searchFlight(flightID);
-        //Seat seat = flight.getSeats().searchSeat(seatID);
-        Seat seat = new Seat();
-        seat.setSeatID(seatID);
+        Seat seat = flight.getSeatList().searchSeat(seatID);
         seat.setTaken(true);
         SeatBooking seatBooking = new SeatBooking();
         seatBooking.setFlight(flight);
@@ -569,8 +556,6 @@ public class JSystem {
         ticket_session.setCustomer(customer);
     }
     
-    public void addSeatToFlight(String flightId, String seatLocation) {
-        database.addSeatToFlight(flightId,seatLocation);
-    }
+    
     
 }

@@ -206,7 +206,7 @@ public class Admin_GUI extends javax.swing.JFrame {
         lbl_salary = new javax.swing.JLabel();
         txtbox_salary = new javax.swing.JTextField();
         btn_edit = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_edit = new javax.swing.JLabel();
         err_Home = new javax.swing.JLabel();
         Manage_flights = new javax.swing.JPanel();
         Company_panel2 = new javax.swing.JPanel();
@@ -756,11 +756,11 @@ public class Admin_GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/edit-3-16.png"))); // NOI18N
-        jLabel1.setText("EDIT");
-        jLabel1.setIconTextGap(-50);
+        lbl_edit.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        lbl_edit.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/edit-3-16.png"))); // NOI18N
+        lbl_edit.setText("EDIT");
+        lbl_edit.setIconTextGap(-50);
 
         javax.swing.GroupLayout btn_editLayout = new javax.swing.GroupLayout(btn_edit);
         btn_edit.setLayout(btn_editLayout);
@@ -768,14 +768,14 @@ public class Admin_GUI extends javax.swing.JFrame {
             btn_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn_editLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel1)
+                .addComponent(lbl_edit)
                 .addGap(5, 5, 5))
         );
         btn_editLayout.setVerticalGroup(
             btn_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn_editLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel1)
+                .addComponent(lbl_edit)
                 .addGap(5, 5, 5))
         );
 
@@ -1221,9 +1221,7 @@ public class Admin_GUI extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtbox_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 45, Short.MAX_VALUE))))
-                    .addGroup(Info_panel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_addNewFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         Info_panel2Layout.setVerticalGroup(
@@ -1650,7 +1648,10 @@ public class Admin_GUI extends javax.swing.JFrame {
             this.btn_edit.setVisible(false);
             this.err_Home.setVisible(false);
         }
-        
+        else {
+            this.lbl_edit.setText(err);
+            this.btn_edit.setVisible(false);
+        }
         this.btn_edit.setFocusable(true); //unlock button
     }//GEN-LAST:event_btn_editMouseClicked
 
@@ -1830,7 +1831,6 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel highlight_noFlyList;
     private javax.swing.JLabel image_label;
     private javax.swing.JPanel internal_cardstack;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -1841,6 +1841,7 @@ public class Admin_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_destination;
     private javax.swing.JLabel lbl_duration;
     private javax.swing.JLabel lbl_duration2;
+    private javax.swing.JLabel lbl_edit;
     private javax.swing.JLabel lbl_employeeInfo;
     private javax.swing.JLabel lbl_employment;
     private javax.swing.JLabel lbl_firstName;
