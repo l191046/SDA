@@ -93,13 +93,14 @@ public class PathFinderAlgorithm {
         
         
         //uncomment after you send the date from GUI
-        /*for(int i = 0; i < viableRoutes.getRoutes().size();i++){
+        for(int i = 0; i < viableRoutes.getRoutes().size();i++){
             LocalDate flightDate = viableRoutes.getRoutes().get(i).getFlights().get(0).getTime().toLocalDate();
             if(!flightDate.equals(Date)){
                 viableRoutes.getRoutes().remove(i);
+                i = -1;
             }
         
-        }*/
+        }
                 
         SorterByCost sorterByCost = new SorterByCost();
         sorterByCost.sort(viableRoutes);
