@@ -40,6 +40,7 @@ public class JHome extends javax.swing.JFrame {
         this.err_history.setVisible(false);
         this.btn_sortTime.setVisible(false);
         this.btn_sortCost.setVisible(false);                
+        this.btn_cancel.setVisible(false);
         
         cards = (CardLayout) this.cardstack.getLayout();
         highlights = new ArrayList<JPanel>();
@@ -133,6 +134,14 @@ public class JHome extends javax.swing.JFrame {
         setHighlights("highlight_checkFlight");
         this.scroll_status.setVisible(false);
     }
+    private void gotoHistory(){
+         //go to card_history
+        cards.show(this.cardstack, "card_history");
+        //set highlights of buttons
+        setHighlights("highlight_history");
+        //hide table
+        this.scroll_history.setVisible(false);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -200,6 +209,7 @@ public class JHome extends javax.swing.JFrame {
         scroll_history = new javax.swing.JScrollPane();
         table_history = new javax.swing.JTable();
         err_history = new javax.swing.JLabel();
+        btn_cancel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -993,6 +1003,11 @@ public class JHome extends javax.swing.JFrame {
         table_history.setRowSelectionAllowed(false);
         table_history.setSelectionBackground(new java.awt.Color(92, 128, 188));
         table_history.getTableHeader().setReorderingAllowed(false);
+        table_history.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_historyMouseClicked(evt);
+            }
+        });
         scroll_history.setViewportView(table_history);
 
         err_history.setBackground(new java.awt.Color(214, 40, 40));
@@ -1000,6 +1015,18 @@ public class JHome extends javax.swing.JFrame {
         err_history.setForeground(new java.awt.Color(214, 40, 40));
         err_history.setText("ERROR");
         err_history.setToolTipText("");
+
+        btn_cancel.setBackground(new java.awt.Color(77, 80, 97));
+        btn_cancel.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cancel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_cancel.setText("CANCEL FLIGHT");
+        btn_cancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cancel.setOpaque(true);
+        btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cancelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout card_historyLayout = new javax.swing.GroupLayout(card_history);
         card_history.setLayout(card_historyLayout);
@@ -1012,7 +1039,9 @@ public class JHome extends javax.swing.JFrame {
                     .addComponent(panel_enterCNIC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(scroll_history)
                     .addGroup(card_historyLayout.createSequentialGroup()
-                        .addComponent(err_history, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(card_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(err_history, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1026,7 +1055,9 @@ public class JHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(err_history, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll_history, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addComponent(scroll_history, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(btn_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1073,12 +1104,7 @@ public class JHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_checkFlightMouseClicked
 
     private void btn_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_historyMouseClicked
-         //go to card_history
-        cards.show(this.cardstack, "card_history");
-        //set highlights of buttons
-        setHighlights("highlight_history");
-        //hide table
-        this.scroll_history.setVisible(false);
+         gotoHistory();
     }//GEN-LAST:event_btn_historyMouseClicked
 
     private void btn_adminLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_adminLoginMouseClicked
@@ -1135,13 +1161,6 @@ public class JHome extends javax.swing.JFrame {
         int row = this.table_routes.getSelectedRow();
        
         if (row != -1){
-            //open customer info form
-//            String id = table_routes.getModel().getValueAt(row, 0).toString();
-//            String src = table_routes.getModel().getValueAt(row, 1).toString();
-//            String dest = table_routes.getModel().getValueAt(row, 2).toString();
-//            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
-//            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
-//            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
             int routeNumber = Integer.parseInt(model_routes.getValueAt(row, 0).toString());
             system.setRouteSession(routeNumber);
             JBooking booking = new JBooking(system);
@@ -1203,6 +1222,26 @@ public class JHome extends javax.swing.JFrame {
         system.getPaths(model_routes);
     }//GEN-LAST:event_btn_sortCostMouseClicked
 
+    private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
+        this.btn_cancel.setFocusable(false);
+        int row = this.table_history.getSelectedRow();
+        if (row != -1){
+            String ticketID = model_history.getValueAt(row, 0).toString();
+            system.cancelTicket(ticketID);
+        }
+        this.btn_cancel.setFocusable(true);
+    }//GEN-LAST:event_btn_cancelMouseClicked
+
+    private void table_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_historyMouseClicked
+        int row = this.table_history.getSelectedRow();
+        if (row != -1){
+            this.btn_cancel.setVisible(true);
+        }
+        else {
+            this.btn_cancel.setVisible(false);
+        }
+    }//GEN-LAST:event_table_historyMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel backDrop;
@@ -1210,6 +1249,7 @@ public class JHome extends javax.swing.JFrame {
     private javax.swing.JPanel backDrop2;
     private javax.swing.JPanel backDrop3;
     private javax.swing.JLabel btn_adminLogin;
+    private javax.swing.JLabel btn_cancel;
     private javax.swing.JPanel btn_checkFlight;
     private javax.swing.JLabel btn_checkHistory;
     private javax.swing.JPanel btn_flights;
