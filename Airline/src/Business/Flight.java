@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Business;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Flight {
     private String FlightID;
@@ -16,9 +13,10 @@ public class Flight {
     private float Cost;
     private String Status;
     private LocalTime Duration;
+    private SeatList seats;
     
     public Flight(){
-    
+        seats = new SeatList();
     }
 
     public Flight(String FlightID, Airport Source, Airport Destination, LocalDateTime Time, float Cost, String Status, LocalTime Duration) {
@@ -87,9 +85,8 @@ public class Flight {
         this.Duration = Duration;
     }
 
+    public SeatList getSeatList() {
+        return seats;
+    }
 
-    
-    
-    
-    
 }

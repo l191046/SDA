@@ -6,12 +6,21 @@ import java.sql.ResultSet;
 
 
 public class NoFlyList {
+    private CustomerList customer_list;
     private ArrayList<Customer> customers;
     private MSsql database;
     
-    public NoFlyList(){
+    public NoFlyList(CustomerList customer_list){
         customers = new ArrayList<Customer>();
         database = MSsql.getInstance();
+        this.customer_list = customer_list;
+    }
+    public void loadNoFlyList(){
+        for (Customer c : customer_list.getCustomers()){
+            if (c.isNoFly()){
+                customers.add(c);
+            }
+        }
     }
     
     public ArrayList<Customer> getCustomers() {
@@ -19,9 +28,15 @@ public class NoFlyList {
     }
     
     public boolean addCustomer(Customer customer){
-        if (searchCustomer(customer.getCNIC()) != -1)
-            return false;
-        customers.add(customer);
+        customer.setNoFly(true);
+        Customer c = customer_list.searchCustomer(customer.getCNIC());
+        if (c!=null)        //if existing customer
+            customers.add(c);
+        else {              //if customer not in system
+            customer_list.addCustomer(customer);
+            customers.add(customer);
+        }
+        /*
         //---------UPDATE DATABASE----------
         if (database.searchCustomer(customer.getCNIC())){
             database.addToNoFly(customer.getCNIC());
@@ -36,25 +51,27 @@ public class NoFlyList {
             );
         }
         //----------------------------------
+        */  
         return true;
     }
     public boolean removeCustomer(String cnic){
-        int i = searchCustomer(cnic);
-        if (i == -1)
+        Customer c = searchCustomer(cnic);
+        if (c == null)
             return false;
+        c.setNoFly(false);
+        customers.remove(c);
         
-        customers.remove(i);
         //-----------UPDATE DATABASE------------
-        database.removeFromNoFly(cnic);
+        //database.removeFromNoFly(cnic);
         //--------------------------------------
         return true;
     }
-    public int searchCustomer(String cnic){
-        for (int i = 0; i < customers.size(); i++){
-            if (customers.get(i).getCNIC().equals(cnic)){
-                return i;
+    public Customer searchCustomer(String cnic){
+        for (Customer c : customers){
+            if (c.getCNIC().equals(cnic)){
+                return c;
             }
         }
-        return -1;
+        return null;
     }
 }

@@ -78,9 +78,9 @@ public class JHome extends javax.swing.JFrame {
     private void setTableHistory(){
         model_history = new DefaultTableModel();
         String header[] = new String[] {
-            "Flight Code", "From", "To", "Departure Date", "Departure Time", "Arrival Time", "Status"
+            "Ticket ID", "From", "To", "Departure Date", "Departure Time"
         };
-        model_history.setColumnCount(header.length);
+        model_history.setColumnCount(5);
         model_history.setColumnIdentifiers(header);
     }
     private void setComboAirports(){
@@ -109,6 +109,11 @@ public class JHome extends javax.swing.JFrame {
     private boolean populateTableStatus(String flightID){
         model_status.setRowCount(0);
         return system.checkFlightStatus(flightID, model_status);
+    }
+    private boolean populateTableHistory(String cnic){
+        model_history.setRowCount(0);
+        system.getHistory(model_history, cnic);
+        return true;
     }
     private void setHighlights(String btn_name){
        for(int i=0; i<highlights.size(); i++){
@@ -989,14 +994,6 @@ public class JHome extends javax.swing.JFrame {
         table_history.setSelectionBackground(new java.awt.Color(92, 128, 188));
         table_history.getTableHeader().setReorderingAllowed(false);
         scroll_history.setViewportView(table_history);
-        if (table_history.getColumnModel().getColumnCount() > 0) {
-            table_history.getColumnModel().getColumn(0).setResizable(false);
-            table_history.getColumnModel().getColumn(1).setResizable(false);
-            table_history.getColumnModel().getColumn(2).setResizable(false);
-            table_history.getColumnModel().getColumn(3).setResizable(false);
-            table_history.getColumnModel().getColumn(4).setResizable(false);
-            table_history.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         err_history.setBackground(new java.awt.Color(214, 40, 40));
         err_history.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 14)); // NOI18N
@@ -1121,10 +1118,15 @@ public class JHome extends javax.swing.JFrame {
             this.err_history.setVisible(true);
         }
         else {
-            //system class function
-            this.scroll_history.setVisible(true);
-            this.revalidate();
-            this.repaint();
+            if (populateTableHistory(cnic)){
+                this.scroll_history.setVisible(true);
+                this.revalidate();
+                this.repaint();
+            }
+            else {
+                this.err_history.setText("CNIC not found");
+                this.err_history.setVisible(true);
+            }
         }
         this.btn_checkHistory.setFocusable(true);
     }//GEN-LAST:event_btn_checkHistoryMouseClicked
@@ -1140,9 +1142,9 @@ public class JHome extends javax.swing.JFrame {
 //            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
 //            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
 //            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
-            Route r = (Route) table_routes.getModel().getValueAt(row,7);
-
-            JBooking booking = new JBooking(system,r);
+            int routeNumber = Integer.parseInt(model_routes.getValueAt(row, 0).toString());
+            system.setRouteSession(routeNumber);
+            JBooking booking = new JBooking(system);
         }
         
     }//GEN-LAST:event_table_routesMouseClicked

@@ -4,13 +4,7 @@
  */
 package GUI;
 
-
-import Business.Customer;
-import Business.Flight;
 import Business.JSystem;
-import Business.Route;
-import Business.Ticket;
-import Business.Ticket.BookedFlight;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,38 +23,19 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Dell
- */
 public class JTicket extends javax.swing.JFrame {
 
-    /**
-     * Creates new form completeBooking
-     */
     private JSystem system;
-    private Customer customer;
-    private Route route;
     private DefaultTableModel table_model;
-    private Ticket ticket;
     
 
-    public JTicket(JSystem system, Route route, Customer customer, Ticket ticket){
-        this.system = system;
-        this.route = route;
-        this.customer = customer;
-        this.ticket = ticket;
+    public JTicket(){
+        this.system = JSystem.getInstance();
         initComponents();
         this.setVisible(true);      
         setTable();
         populateTable();
         populateDataFields();
-        
-        
-
-
-        
-        
     }
 
         //SETUP TABLE FORMAT
@@ -75,36 +50,19 @@ public class JTicket extends javax.swing.JFrame {
     }
     
     private void populateTable(){
-        this.table_model.setRowCount(0);
-         
-        
-        for (BookedFlight bookedFlight : ticket.getBookedFlights()){
-            
-            table_model.addRow( 
-                    new Object[]{
-                        bookedFlight.getFlight().getFlightID(),
-                        bookedFlight.getFlight().getSource().getCode(),
-                        bookedFlight.getFlight().getDestination().getCode(),
-                        bookedFlight.getFlight().getTime(),
-                        bookedFlight.getFlight().getDuration(),
-                        bookedFlight.getSeatId(),
-                        bookedFlight.getFlightCost() + bookedFlight.getSeatCost()
-                    }
-            );
-        }
-
+        system.getTableBooking(table_model);
     }
     
     void populateDataFields(){
-        txt_name.setText(ticket.getCustomer().getFirstname()+ " " + ticket.getCustomer().getLastname());
-        txt_ticketId.setText(String.valueOf(ticket.getTicketID()));
-        txt_cnic.setText(ticket.getCustomer().getCNIC());
+        txt_name.setText(system.ticket_session.getCustomer().getFirstname()+ " " + system.ticket_session.getCustomer().getLastname());
+        txt_ticketId.setText(String.valueOf(system.ticket_session.getTicketID()));
+        txt_cnic.setText(system.ticket_session.getCustomer().getCNIC());
         txt_date.setText(LocalDate.now().toString());
         
-        txt_totalCost.setText(String.valueOf(ticket.getTotal()));
-        txt_numOfFlights.setText(String.valueOf(ticket.getBookedFlights().size()));
-        txt_src.setText(ticket.getBookedFlights().get(0).getFlight().getSource().getCode());
-        txt_dest.setText(ticket.getBookedFlights().get(ticket.getBookedFlights().size()-1).getFlight().getDestination().getCode());
+        txt_totalCost.setText(String.valueOf(system.ticket_session.getTotal()));
+        txt_numOfFlights.setText(String.valueOf(system.ticket_session.getFlightCount()));
+        txt_src.setText(system.ticket_session.getSource());
+        txt_dest.setText(system.ticket_session.getDestination());
         
     }
     
@@ -115,10 +73,6 @@ public class JTicket extends javax.swing.JFrame {
 
         Robot robot = new Robot();  
         return robot.createScreenCapture(rect);
-    }
-    
-    public void createTicket(){
-        //system.addSeatToFlight("", Seat_Loc.getText());
     }
     
     public void captureImage(BufferedImage screen){
@@ -170,7 +124,7 @@ public class JTicket extends javax.swing.JFrame {
         backdrop8 = new javax.swing.JPanel();
         txt_numOfFlights = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_confirm = new javax.swing.JButton();
         txt_note = new javax.swing.JLabel();
         creditCard = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
@@ -488,10 +442,10 @@ public class JTicket extends javax.swing.JFrame {
                 .addComponent(backdrop6, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton1.setText("Make Payment and Download Ticket");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_confirm.setText("Make Payment and Download Ticket");
+        btn_confirm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btn_confirmMouseClicked(evt);
             }
         });
 
@@ -513,7 +467,7 @@ public class JTicket extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(backdrop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_confirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txt_note)
@@ -534,7 +488,7 @@ public class JTicket extends javax.swing.JFrame {
                     .addComponent(jLabel20)
                     .addComponent(creditCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btn_confirm)
                 .addContainerGap(600, Short.MAX_VALUE))
         );
 
@@ -545,7 +499,7 @@ public class JTicket extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cnicActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btn_confirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_confirmMouseClicked
         // TODO add your handling code here:
         if(creditCard.getText().isEmpty()){
             showMessageDialog(null, "Please Enter Credit Card Information.");
@@ -564,27 +518,8 @@ public class JTicket extends javax.swing.JFrame {
         } catch (AWTException ex) {
             Logger.getLogger(JTicket.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-//        try {
-//          BufferedImage screen = printScreen(jPanel1);
-//          ImageIO.write(screen, "jpg", new File("screenshot.jpg"));
-//        } catch (AWTException ae) {
-//            ae.printStackTrace();
-//        }
-
-       // ImageIO.write(screen, "jpg", new File("screenshot.jpg"));
-        
-//        try {
-//          BufferedImage screen = printScreen(jPanel1);
-//          ImageIO.write(screen, "jpg", new File("screenshot.jpg"));
-//        } catch (AWTException ae) {
-//            ae.printStackTrace();
-//        }
-
-       // ImageIO.write(screen, "jpg", new File("screenshot.jpg"));
-
-        
-    }//GEN-LAST:event_jButton1MouseClicked
+        system.addTicket();
+    }//GEN-LAST:event_btn_confirmMouseClicked
 
     private void txt_ticketIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ticketIdActionPerformed
         // TODO add your handling code here:
@@ -609,8 +544,8 @@ public class JTicket extends javax.swing.JFrame {
     private javax.swing.JPanel backdrop6;
     private javax.swing.JPanel backdrop7;
     private javax.swing.JPanel backdrop8;
+    private javax.swing.JButton btn_confirm;
     private javax.swing.JTextField creditCard;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
