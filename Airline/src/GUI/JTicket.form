@@ -28,7 +28,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="backdrop1" max="32767" attributes="0"/>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-          <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+          <Component id="btn_confirm" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txt_note" min="-2" max="-2" attributes="0"/>
@@ -52,7 +52,7 @@
                   <Component id="creditCard" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="btn_confirm" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="600" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -601,12 +601,12 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btn_confirm">
       <Properties>
         <Property name="text" type="java.lang.String" value="Make Payment and Download Ticket"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_confirmMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="txt_note">

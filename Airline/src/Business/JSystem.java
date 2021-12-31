@@ -27,10 +27,78 @@ public class JSystem {
     private FlightList flight_list;
     private NoFlyList nofly_list;
     private CustomerList customer_list;
+    private FlightHistory ticket_list;
     private ArrayList<Airport> airportList;
     private PathFinderAlgorithm PathFinder;
     private ViableRoutes myRoutes;
+    public Route route_session;
+    public Ticket ticket_session;
     
+    public boolean autoSeatSelect(){
+        for (Flight flight : route_session.getFlights()){
+            Seat seat = flight.getSeats().getFirstAvailable();
+            if (seat == null)
+                return false;
+            SeatBooking seatBooking = new SeatBooking();
+            seatBooking.setFlight(flight);
+            seatBooking.setSeat(seat);
+            ticket_session.getBookings().add(seatBooking);
+        }
+        return true;
+    }
+    public void addTicket(){
+        ticket_session.printToConsole();
+        ticket_list.addTicket(ticket_session);
+        ticket_session = null;
+    }
+    public void getTableBooking(DefaultTableModel table_model){
+        table_model.setRowCount(0);
+        for (SeatBooking bookedFlight : ticket_session.getBookings()){
+            
+            table_model.addRow( 
+                    new Object[]{
+                        bookedFlight.getFlight().getFlightID(),
+                        bookedFlight.getFlight().getSource().getCode(),
+                        bookedFlight.getFlight().getDestination().getCode(),
+                        bookedFlight.getFlight().getTime(),
+                        bookedFlight.getFlight().getDuration(),
+                        bookedFlight.getSeat().getSeatID(),
+                        bookedFlight.getFlight().getCost()
+                    }
+            );
+        }
+    }
+    public Flight getBookingFlight(int index){
+        return route_session.getFlights().get(index);
+    }
+    public void addBooking(String flightID, String seatID){
+        Flight flight = flight_list.searchFlight(flightID);
+        //Seat seat = flight.getSeats().searchSeat(seatID);
+        Seat seat = new Seat();
+        seat.setSeatID(seatID);
+        seat.setTaken(true);
+        SeatBooking seatBooking = new SeatBooking();
+        seatBooking.setFlight(flight);
+        seatBooking.setSeat(seat);
+        ticket_session.getBookings().add(seatBooking);
+    }
+    public void setRouteSession(int i){
+        route_session = myRoutes.getRoutes().get(i);
+    }
+    public void setTicketCustomer(String fname, String lname, String cnic, String address, String contact){
+        ticket_session = new Ticket();
+        Customer customer = customer_list.searchCustomer(cnic);
+        if (customer == null){
+            customer = new Customer();
+            customer.setFirstname(fname);
+            customer.setLastname(lname);
+            customer.setCNIC(cnic);
+            customer.setContact(contact);
+            customer.setAddress(address);
+            customer_list.addCustomer(customer);
+        }
+        ticket_session.setCustomer(customer);
+    }
     
     //=========THIS==============
     private static final JSystem instance = new JSystem();
@@ -153,6 +221,20 @@ public class JSystem {
     }
     private void loadNoFlyList(){
         nofly_list.loadNoFlyList();
+    }
+    private void loadFlightSeats(){
+        for (Flight flight : flight_list.getFlights()){
+            try (ResultSet seats = database.getTableSeats(flight.getFlightID())){
+                while (seats.next()){
+                    Seat s = new Seat();
+                    s.setSeatID(seats.getString("SeatId"));
+                    s.setTaken(seats.getString("Status") == "Taken");
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
     
     //========STORE TO DATABASE===========
@@ -413,4 +495,5 @@ public class JSystem {
     public void addSeatToFlight(String flightId, String seatLocation) {
         database.addSeatToFlight(flightId,seatLocation);
     }
+    
 }

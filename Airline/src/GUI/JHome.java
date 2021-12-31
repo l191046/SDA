@@ -1150,9 +1150,9 @@ public class JHome extends javax.swing.JFrame {
 //            String Ddate = table_routes.getModel().getValueAt(row, 3).toString();
 //            String Dtime = table_routes.getModel().getValueAt(row, 4).toString();
 //            String Connections = table_routes.getModel().getValueAt(row, 5).toString();
-            Route r = (Route) table_routes.getModel().getValueAt(row,7);
-
-            JBooking booking = new JBooking(system,r);
+            int routeNumber = Integer.parseInt(model_routes.getValueAt(row, 0).toString());
+            system.setRouteSession(routeNumber);
+            JBooking booking = new JBooking(system);
         }
         
     }//GEN-LAST:event_table_routesMouseClicked

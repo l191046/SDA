@@ -1,11 +1,6 @@
 package GUI;
 
-import Business.Customer;
-import Business.Flight;
 import Business.JSystem;
-import Business.Person;
-import Business.Route;
-import Business.Ticket;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,36 +14,11 @@ public class JBooking extends javax.swing.JFrame {
     private CardLayout cards;
     private String flightId;
     private ArrayList<JTextField> textFields;
-    private Route route;
     
     public JBooking(JSystem system) {
         this.system = system;
         initComponents();
         this.setVisible(true);
-    }
-    
-    public JBooking(JSystem system, Route route){
-        this.system = system;
-        this.route = route;
-        initComponents();
-        this.setVisible(true);
-        
-        
-        textFields = new ArrayList<>();
-        textFields.add(txtbox_firstName);
-        textFields.add(txtbox_lastName);
-        textFields.add(txtbox_cnic);
-        textFields.add(txtbox_address);
-        textFields.add(txtbox_contact);
-    }
-    
-    public boolean anyFieldsEmpty() {
-        for (JTextField textbox : textFields) {
-            if (textbox.getText().trim().isEmpty() ) {
-                return true;   // one field is non-empty, so we can stop immediately
-            }
-        }
-        return false;  // every field was empty (or else we'd have stopped earlier)
     }
     
     @SuppressWarnings("unchecked")
@@ -419,39 +389,31 @@ public class JBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseClicked
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
+        String firstName = txtbox_firstName.getText().trim();
+        String lastName = txtbox_lastName.getText().trim();
+        String cnic = txtbox_cnic.getText().trim();
+        String address = txtbox_address.getText().trim();
+        String contact = txtbox_contact.getText().trim();
+        if (firstName.equals(""))
+            return;
+        if (lastName.equals(""))
+            return;
+        if (cnic.equals(""))
+            return;
+        if (address.equals(""))
+            return;
+        if (contact.equals(""))
+            return;
         
-        if(anyFieldsEmpty()){
-            showMessageDialog(null, "Please Fill Out All Details To Continue!");
-        } else{
-            
-            String firstName = txtbox_firstName.getText().trim();
-            String lastName = txtbox_lastName.getText().trim();
-            String cnic = txtbox_cnic.getText().trim();
-            String address = txtbox_address.getText().trim();
-            String contact = txtbox_contact.getText().trim();
-            
-            Customer customer = new Customer();
-            customer.setFirstname(firstName);
-            customer.setLastname(lastName);
-            customer.setCNIC(cnic);
-            customer.setContact(contact);
-            
-            if (!system.addCustomer(customer)) {
-                showMessageDialog(null, "You Already Exist. Your Previous Details are Saved.");
-            }  
-            
-            this.dispose();
-            Ticket ticket = new Ticket(1);
-            ticket.setCustomer(customer);
-//            for(Flight flight: route.getFlights()){
-//                ticket.addBookedFlight(flight);
-//            }
-//            
-            
-            JSeatSelect seats = new JSeatSelect(system, customer,route,0,ticket);
-
-
+        system.setTicketCustomer(firstName, lastName, cnic, address, contact);
+        if (system.route_session.getFlights().size() == 1){
+            JSeatSelect seats = new JSeatSelect();
         }
+        else {
+            //auto assign seats
+            //system.autoSeatSelect();
+        }
+        this.dispose();
     }//GEN-LAST:event_btn_nextMouseClicked
 
 

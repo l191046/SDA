@@ -91,7 +91,23 @@ public class MSsql {
         }
         return result;
     }
-    
+    public ResultSet getTableSeats(String flightID){
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [get_seats](?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("flightID", flightID);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     
     //===========ADMIN===================
     //PROFILE MANAGEMENT

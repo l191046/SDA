@@ -4,12 +4,7 @@
  */
 package GUI;
 
-import Business.Customer;
-import Business.Flight;
-import Business.FlightList;
 import Business.JSystem;
-import Business.Route;
-import Business.Ticket;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -30,21 +25,11 @@ public class JSeatSelect extends javax.swing.JFrame {
     private ArrayList<JPanel> seats;
     private JPanel lastSelectSeat;
     private Color lastSelectSeatColor;
-    
-    private Customer customer;
-    private Route route;
-    private Ticket ticket;
-    int flightIndex;
+    private String selectedSeat;
    
-    public JSeatSelect(JSystem system, Customer customer, Route route,int flightIndex, Ticket ticket) {
+    public JSeatSelect() {
         
-        this.system = system;
-        this.customer = customer;
-        this.route = route;
-        this.flightIndex = flightIndex;
-        this.ticket = ticket;
-        
-        ticket.addBookedFlight(route.getFlights().get(flightIndex));
+        this.system = JSystem.getInstance();
         
         initComponents();
         this.setVisible(true);
@@ -53,31 +38,17 @@ public class JSeatSelect extends javax.swing.JFrame {
 
         getComponentsRecursive(JSeatSelect.this,seats);
         
-        txtbox_firstName.setText(customer.getFirstname());
-
-        txtbox_flight.setText(route.getFlights().get(flightIndex).getFlightID());
+        txtbox_firstName.setText(system.ticket_session.getCustomer().getFirstname());
+        txtbox_flight.setText(system.route_session.getFlights().get(0).getFlightID());
+        txtbox_src.setText(system.route_session.getFlights().get(0).getSource().getCode());
+        txtbox_src.setText(system.route_session.getFlights().get(0).getDestination().getCode());
         
-        txtbox_src.setText(route.getFlights().get(flightIndex).getSource().getCode() + " - " + route.getFlights().get(flightIndex).getSource().getCity() + ", " + route.getFlights().get(flightIndex).getSource().getCountry());
-        
-        txtbox_dest.setText(route.getFlights().get(flightIndex).getDestination().getCode() + " - " + route.getFlights().get(flightIndex).getDestination().getCity() + ", " + route.getFlights().get(flightIndex).getDestination().getCountry());
-        
-        int cost = (int) route.getFlights().get(flightIndex).getCost();
-        
+        int cost = (int) system.route_session.getFlights().get(0).getCost();
         txtbox_flightCost.setText(String.format("$%d",cost));
-        
-
 
         lastSelectSeatColor = Color.black;
         for (int i = 0; i < seats.size(); i++) {
-            
-//            if (system.checkSeat(route.getFlights().get(flightIndex).getFlightID(), seats.get(i).getName())) {
-//                //If Seat Exists
-//                seats.get(i).setBackground(pannel_taken_key.getBackground());
-//                continue;
-//            }
-            
             String seatName = seats.get(i).getName();
-
             seats.get(i).addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
 
@@ -96,7 +67,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                         }
                         p.setBackground(Color.LIGHT_GRAY);
                         Seat_Loc.setText(seatName);
-                        ticket.setBookedFlightSeat(flightIndex, seatName);
+                        selectedSeat = seatName;
                         
                         if (p.getParent() == FirstClass) {
                             txtbox_total.setText(String.format("$%d",550+cost));
@@ -108,17 +79,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                     }
                 }
             });
-
         }
-        
-          for (int i = 0; i < seats.size(); i++) {
-            
-            if (system.checkSeat(route.getFlights().get(flightIndex).getFlightID(), seats.get(i).getName())) {
-                //If Seat Exists
-                seats.get(i).setBackground(pannel_taken_key.getBackground());
-                continue;
-            }
-          }
     }
     
     public void getComponentsRecursive(Container parent,ArrayList<JPanel> seats)
@@ -280,7 +241,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         panel_firstName = new javax.swing.JPanel();
         lbl_firstName = new javax.swing.JLabel();
         txtbox_total = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_select = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         Seat_Loc = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -2378,10 +2339,10 @@ public class JSeatSelect extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Confirm Seat");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_select.setText("Confirm Seat");
+        btn_select.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_selectActionPerformed(evt);
             }
         });
 
@@ -2473,7 +2434,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                             .addComponent(txtbox_dest))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_select, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel95Layout.createSequentialGroup()
                         .addComponent(jLabel19)
@@ -2518,7 +2479,7 @@ public class JSeatSelect extends javax.swing.JFrame {
                             .addComponent(txtbox_fseatCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 8, Short.MAX_VALUE)))
                 .addGroup(jPanel95Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btn_select)
                     .addComponent(jLabel16)
                     .addComponent(Seat_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -2595,40 +2556,16 @@ public class JSeatSelect extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
         // TODO add your handling code here:
         if(Seat_Loc.getText().toString().isEmpty()){
             showMessageDialog(null, "Please Select a Seat!");
             return;
         }
-        
-        
-        //ADD ticket seat details
-        ticket.getBookedFlights().get(flightIndex).setSeatId(Seat_Loc.getText());
-        
-        int seatCost = Integer.parseInt(txtbox_fseatCost.getText());
-        int flightCost = route.getRouteCost();
-        ticket.getBookedFlights().get(flightIndex).setSeatCost(seatCost);
-        ticket.getBookedFlights().get(flightIndex).setFlightCost(flightCost);
-        
+        system.addBooking(system.route_session.getFlights().get(0).getFlightID(), selectedSeat);
+        JTicket ticket = new JTicket();
         this.dispose();
-        flightIndex++;
-        if (flightIndex < route.getFlights().size()) {
-            //Add Flight To DB
-            //***Move this to JTicket and add with Ticket
-            //system.addSeatToFlight(route.getFlights().get(flightIndex).getFlightID(), Seat_Loc.getText());
-            
-            //Seat Seat Details
-            
-            
-            //icket.addBookedFlight();
-            
-            JSeatSelect j = new JSeatSelect(system, customer, route, flightIndex,ticket);
-        } else {
-            JTicket booking = new JTicket(system, route, customer,ticket);
-        }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_selectActionPerformed
 
     private void A1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1MouseEntered
         // TODO add yfour handling code here:
@@ -2766,8 +2703,8 @@ public class JSeatSelect extends javax.swing.JFrame {
     private javax.swing.JPanel backDrop7;
     private javax.swing.JPanel backDrop8;
     private javax.swing.JPanel backDrop9;
+    private javax.swing.JButton btn_select;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -71,37 +71,30 @@ GO
 ALTER TABLE Flight_Seats
 ADD CONSTRAINT PK_Seats PRIMARY KEY (FlightId,SeatId);
 
-CREATE TABLE [Ticket]
+CREATE TABLE [Booking]
 (
-[TicketId] int NOT NULL,
-[CNIC] varchar(13) NOT NULL
-
+	[TicketId]	varchar(20) NOT NULL,
+	[FlightId] varchar(10) NOT NULL,
+	[SeatId] varchar(5) NOT NULL,
+	[CNIC] varchar(13) NOT NULL
 )
 GO
-ALTER TABLE Ticket
-ADD CONSTRAINT PK_Ticket PRIMARY KEY (TicketId,CNIC);
-
-CREATE TABLE [FlightTicket]
-(
-[TicketId] int NOT NULL,
-[FlightId] varchar(10) NOT NULL
-
-)
-GO
-ALTER TABLE FlightTicket
-ADD CONSTRAINT PK_FlightTicket PRIMARY KEY (TicketId,FlightID);
+ALTER TABLE Booking
+ADD CONSTRAINT PK_Booking PRIMARY KEY (FlightId, SeatId, CNIC);
 
 --============CREATE CONSTRAINTS===========
+ALTER TABLE [Booking]
+ADD CONSTRAINT [BookingToFlightSeat] FOREIGN KEY ([FlightId],[SeatId]) REFERENCES [Flight_Seats] (FlightId,SeatId) ON DELETE CASCADE
+ALTER TABLE [Booking]
+ADD CONSTRAINT [BookingToCustomer]	FOREIGN KEY ([CNIC]) REFERENCES [Customer] (CNIC) ON DELETE CASCADE
+
+
 ALTER TABLE [Flight_Seats]
 ADD CONSTRAINT [Flighttoseat] FOREIGN KEY ([FlightId]) REFERENCES [Flight] ([FlightID]) ON DELETE CASCADE
 GO
 ALTER TABLE [Customer] ADD CONSTRAINT [PersonToCustomerRef] FOREIGN KEY ([CNIC]) REFERENCES [Person] ([CNIC])
 GO
 ALTER TABLE [Admin] ADD CONSTRAINT [PersonToAdminRef] FOREIGN KEY ([CNIC]) REFERENCES [Person] ([CNIC])
-GO
-ALTER TABLE [Ticket] ADD CONSTRAINT [Tickettocust] FOREIGN KEY ([CNIC]) REFERENCES [Customer] ([CNIC])
-GO
-ALTER TABLE [FlightTicket] ADD CONSTRAINT [Tickettoflight] FOREIGN KEY ([FlightId]) REFERENCES [Flight] ([FlightId])
 GO
 
 --=============POPULATE MOCK VALUES===========
@@ -132,37 +125,32 @@ INSERT Airport([Code],[Name],[City],[Country]) VALUES ('MCT30','Muscat Internati
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('LND21','London Airport','London','England')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('SK32','Skardu Airport','Skardu','Pakistan')
 
-INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('ABC23','E1','Vaccant')
-INSERT Flight_Seats ([FlightId],[SeatId],[Status]) VALUES ('FGH23','A10','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','E1','Vaccant')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('FGH23','A10','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('DEF25','B2','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('LMN23','D8','Vacant')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('DEF25','F9','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('GHI12','C15','Vacant')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('FGH23','C4','Taken')
-
---Inserted by behzad for testing
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','C4','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','C5','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','A1','Taken')
-
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('BCD45','C4','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('BCD45','B5','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','B1','Taken')
 INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','B3','Taken')
-
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('CDE25','C5','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('DEF25','C5','Taken')
+INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('EFG25','C5','Taken')
 --=============================
-INSERT Ticket([TicketId],[CNIC]) VALUES (1,'3452815234532')
-INSERT Ticket([TicketId],[CNIC]) VALUES (2,'3453819234532')
-
-INSERT FlightTicket([TicketId],[FlightId]) VALUES (2,'ABC23')
-INSERT FlightTicket([TicketId],[FlightId]) VALUES (2,'CDE25')
-INSERT FlightTicket([TicketId],[FlightId]) VALUES (2,'DEF25')
-INSERT FlightTicket([TicketId],[FlightId]) VALUES (2,'EFG25')
-
-INSERT FlightTicket([TicketId],[FlightId]) VALUES (1,'ABC23')
-INSERT FlightTicket([TicketId],[FlightId]) VALUES (1,'BCD45')
+INSERT Booking([FlightId], [SeatId], [CNIC]) VALUES ('ABC23', 'C4', '3452815234532')
+INSERT Booking([FlightId], [SeatId], [CNIC]) VALUES ('BCD45', 'C4', '3452815234532')
 
 
+INSERT Booking([TicketId], [FlightId], [SeatId], [CNIC]) VALUES ('11111', 'ABC23', 'C5', '3452815234532')
+INSERT Booking([TicketId],[FlightId], [SeatId], [CNIC]) VALUES ('11112','CDE25', 'C5', '3452815234532')
+INSERT Booking([TicketId],[FlightId], [SeatId], [CNIC]) VALUES ('11113','DEF25', 'C5', '3452815234532')
+INSERT Booking([TicketId],[FlightId], [SeatId], [CNIC]) VALUES ('11114','EFG25', 'C5', '3452815234532')
 --===========STORED PROCEDURES==========================
 
 
@@ -182,6 +170,7 @@ IF	EXISTS (
 ELSE
 	SET @found = 0
 END
+GO
 CREATE PROCEDURE add_customer
 @cnic varchar(13),
 @firstname varchar(255),
@@ -277,6 +266,15 @@ AS
 			inner join Customer on Ticket.CNIC = Customer.CNIC
 	WHERE	FlightTicket.FlightId = @flightID
 GO
+
+CREATE PROCEDURE get_seats
+@flightID	varchar(10)
+AS
+	Select	Flight_Seats.SeatId, Flight_Seats.Status
+	FROM	Flight_Seats
+	WHERE	Flight_Seats.FlightId = @flightID
+GO
+
 --===========NO FLY=================
 CREATE PROCEDURE get_nofly
 AS
@@ -356,26 +354,13 @@ IF EXISTS
   SET @taken=0
 GO
 
-Create procedure create_ticket
-@ticketid int,
-@cnic varchar(13)
+CREATE PROCEDURE add_booking
+@flightId	varchar(10),
+@seatId		varchar(5),
+@cnic		varchar(13)
 AS
-Insert into [Ticket] values
-(@ticketid,@cnic)
+	INSERT Booking([FlightId], [SeatId], [CNIC]) VALUES (@flightId, @seatId, @cnic)
 GO
-
-Create procedure create_flighticket
-@ticketid int,
-@flightid varchar(10)
-AS
-Insert into [Ticket] values
-(@ticketid,@flightid)
-GO
-
-Create procedure recent_ticket
-AS
-Select MAX([Ticket].[ticketId])
-FROM [Ticket]
 
 
 --EXEC flight_customers @flightID = 'ABC23';
@@ -414,4 +399,3 @@ select * from Customer;
 select * from Flight;
 select * from Flight_Seats;
 select * from Airport;
-select * from Ticket
