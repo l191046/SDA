@@ -42,7 +42,7 @@ public class JSeatSelect extends javax.swing.JFrame {
         txtbox_firstName.setText(system.ticket_session.getCustomer().getFirstname());
         txtbox_flight.setText(system.route_session.getFlights().get(0).getFlightID());
         txtbox_src.setText(system.route_session.getFlights().get(0).getSource().getCode());
-        txtbox_src.setText(system.route_session.getFlights().get(0).getDestination().getCode());
+        txtbox_dest.setText(system.route_session.getFlights().get(0).getDestination().getCode());
         
         int cost = (int) system.route_session.getFlights().get(0).getCost();
         txtbox_flightCost.setText(String.format("$%d",cost));
