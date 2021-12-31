@@ -307,6 +307,27 @@ public class JSystem {
         flight.setStatus("On time");
         return flight_list.addNewFlight(flight);
     }
+    public boolean getFlightCustomers(DefaultTableModel table_model, String flightID){
+        if (flightID == null)
+            return false;
+        CustomerList list = new CustomerList();
+        list.loadCustomerList(flightID);
+        
+        for (Customer customer : list.getCustomers()){
+            table_model.addRow(
+                    new Object[] {
+                        customer.getCNIC(),
+                        customer.getFirstname(),
+                        customer.getLastname(),
+                        customer.getContact(),
+                        "###"           //UPDATE WHEN DB IS FIXED
+                    }
+            );
+        }
+        
+        return true;
+    }
+    
     //NOFLY MANAGEMENT
     public void getTableNoFly(DefaultTableModel table_model){
         for (Customer customer : nofly_list.getCustomers()){

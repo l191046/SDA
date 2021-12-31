@@ -152,7 +152,7 @@ INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES ('ABC23','B3','Taken')
 
 --=============================
 INSERT Ticket([TicketId],[CNIC]) VALUES (1,'3452815234532')
-INSERT Ticket([TicketId],[CNIC]) VALUES (2,'3452815234532')
+INSERT Ticket([TicketId],[CNIC]) VALUES (2,'3453819234532')
 
 INSERT FlightTicket([TicketId],[FlightId]) VALUES (2,'ABC23')
 INSERT FlightTicket([TicketId],[FlightId]) VALUES (2,'CDE25')
@@ -262,14 +262,16 @@ AS
 GO
 
 CREATE PROCEDURE flight_customers
-@ticketId	varchar(10)
+@flightID	varchar(10)
 
 AS
 	SELECT	[Ticket].CNIC, [Person].FirstName, [Person].LastName,
-			[Customer].Contact
-	FROM	Ticket inner join [Person] on Ticket.CNIC = [Person].CNIC
-			inner join [Customer] on [Person].CNIC = [Customer].CNIC
-	WHERE	[Ticket].TicketId=@ticketId
+			[Person].[Address], Customer.Contact
+	FROM	Ticket
+			inner join FlightTicket on Ticket.TicketID = FlightTicket.TicketId
+			inner join Person on Ticket.CNIC = Person.CNIC
+			inner join Customer on Ticket.CNIC = Customer.CNIC
+	WHERE	FlightTicket.FlightId = @flightID
 GO
 --===========NO FLY=================
 CREATE PROCEDURE get_nofly
@@ -391,6 +393,9 @@ Select MAX([Ticket].[ticketId])
 FROM [Ticket]
 
 
+--EXEC flight_customers @flightID = 'ABC23';
+--drop procedure flight_customers
+
 /*
 drop proc book_seat
 Create procedure book_seat
@@ -416,6 +421,7 @@ BEGIN
 	INSERT Flight_Seats([FlightId],[SeatId],[Status]) VALUES (@flightId,@seatId,'Taken')
 END
 GO
+*/
 --drop procedure add_flight;
 select * from Person;
 select * from Admin;

@@ -1,10 +1,7 @@
 package Business;
 
-import Database.MSsql;
-
 public class Customer extends Person {
     private String contact;
-    private MSsql database;
     
     
     public String getContact() {

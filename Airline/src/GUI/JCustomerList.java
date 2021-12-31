@@ -1,18 +1,22 @@
 package GUI;
 
 import javax.swing.table.DefaultTableModel;
+import Business.JSystem;
 
 public class JCustomerList extends javax.swing.JFrame {
 
     private DefaultTableModel table_customers;
     private String flightID;
+    private JSystem system;
     
     public JCustomerList(String flightID) {
+        system = JSystem.getInstance();
         setTableCustomers();
         initComponents();
         this.setVisible(true);
         this.flightID = flightID;
         this.lbl_flight.setText("FLIGHT: " + flightID);
+        populateTableCustomers();
     }
     
     private void setTableCustomers(){
@@ -22,6 +26,11 @@ public class JCustomerList extends javax.swing.JFrame {
         };
         table_customers.setColumnCount(header.length);
         table_customers.setColumnIdentifiers(header);
+    }
+    private void populateTableCustomers(){
+        if (flightID == null)
+            return;
+        system.getFlightCustomers(table_customers, flightID);
     }
     
     @SuppressWarnings("unchecked")
