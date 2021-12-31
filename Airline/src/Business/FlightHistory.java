@@ -1,9 +1,11 @@
 package Business;
 
 import java.util.ArrayList;
+import Database.MSsql;
 
 public class FlightHistory {
     ArrayList<Ticket> history;
+    MSsql database;
     
     public FlightHistory(){
         history = new ArrayList<Ticket>();
@@ -16,9 +18,9 @@ public class FlightHistory {
     public void addTicket(Ticket ticket){
         history.add(ticket);
         //----------DATABASE----------
-        for (SeatBooking booking : ticket.getBookings()){
-            
+        
+        
         }
         //----------------------------
-    }
+    
 }

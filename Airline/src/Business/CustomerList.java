@@ -21,6 +21,7 @@ public class CustomerList {
         if (searchCustomer(customer.getCNIC()) != null)
             return false;
         customers.add(customer);
+
         //---------UPDATE DATABASE----------
         database.addCustomer(
                 customer.getCNIC(),
