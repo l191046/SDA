@@ -44,4 +44,11 @@ public class Route{
         }
         return cost;
     }
+    
+    public Airport getSource(){
+        return Flights.get(0).getSource();
+    }
+    public Airport getDestination(){
+        return Flights.get(Flights.size()-1).getDestination();
+    }
 }
