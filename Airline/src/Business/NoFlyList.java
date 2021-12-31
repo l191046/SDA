@@ -30,28 +30,17 @@ public class NoFlyList {
     public boolean addCustomer(Customer customer){
         customer.setNoFly(true);
         Customer c = customer_list.searchCustomer(customer.getCNIC());
-        if (c!=null)        //if existing customer
+        if (c!=null){        //if existing customer
             customers.add(c);
+            c.setNoFly(true);
+            //----------UPDATE DATABASE-------------
+            database.addToNoFly(c.CNIC);
+            //--------------------------------------
+        }
         else {              //if customer not in system
             customer_list.addCustomer(customer);
             customers.add(customer);
         }
-        /*
-        //---------UPDATE DATABASE----------
-        if (database.searchCustomer(customer.getCNIC())){
-            database.addToNoFly(customer.getCNIC());
-        }
-        else{
-            database.addToNoFly( 
-                    customer.getCNIC(),
-                    customer.getFirstname(),
-                    customer.getLastname(),
-                    customer.getContact(),
-                    customer.getAddress()
-            );
-        }
-        //----------------------------------
-        */  
         return true;
     }
     public boolean removeCustomer(String cnic){
@@ -62,7 +51,7 @@ public class NoFlyList {
         customers.remove(c);
         
         //-----------UPDATE DATABASE------------
-        //database.removeFromNoFly(cnic);
+        database.removeFromNoFly(cnic);
         //--------------------------------------
         return true;
     }

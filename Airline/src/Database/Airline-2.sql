@@ -21,7 +21,7 @@ ADD CONSTRAINT PK_Person PRIMARY KEY (CNIC);
 CREATE TABLE [Customer] (
   [CNIC] varchar(13) NOT NULL,
   [Contact] char(11),
-  [No_Fly] BIT
+  [No_Fly] int
 )
 GO
 ALTER TABLE Customer
@@ -951,7 +951,7 @@ CREATE PROCEDURE add_customer
 @lastname varchar(255),
 @address varchar(255),
 @contact varchar(11),
-@nofly	bit
+@nofly	int
 AS
 	BEGIN
 		INSERT into Person Values
@@ -1144,6 +1144,11 @@ AS
 GO
 
 
+CREATE PROCEDURE cancel_ticket
+@ticket_id varchar(20)
+AS
+	DELETE FROM Booking Where @ticket_id=Booking.TicketId
+GO
 --EXEC flight_customers @flightID = 'ABC23';
 --drop procedure get_bookings
 

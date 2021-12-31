@@ -233,13 +233,16 @@ public class JSystem {
                 customer.setLastname(result.getString("LastName"));
                 customer.setAddress(result.getString("Address"));
                 customer.setContact(result.getString("Contact"));
-                customer.setNoFly(result.getBoolean("No_Fly"));
-                
-                customer_list.addCustomer(customer);
+                int nofly = result.getInt("No_Fly");
+                if (nofly == 0)
+                    customer.setNoFly(false);
+                else
+                    customer.setNoFly(true);
+                customer_list.getCustomers().add(customer);
             }
         }
         catch (Exception e){
-            
+            e.printStackTrace();
         }
     }
     private void loadNoFlyList(){
@@ -484,21 +487,22 @@ public class JSystem {
     public boolean getFlightCustomers(DefaultTableModel table_model, String flightID){
         if (flightID == null)
             return false;
-        FlightCustomerList list = new FlightCustomerList();
-        list.loadCustomerList(flightID);
         
-        for (Customer customer : list.getCustomers()){
-            table_model.addRow(
-                    new Object[] {
-                        customer.getCNIC(),
-                        customer.getFirstname(),
-                        customer.getLastname(),
-                        customer.getContact(),
-                        "###"           //UPDATE WHEN DB IS FIXED
-                    }
-            );
+        for (Ticket ticket : ticket_list.getHistory()){
+            for (SeatBooking booking : ticket.getBookings()){
+                if (booking.getFlight().getFlightID().equals(flightID)){
+                    table_model.addRow(
+                        new Object[] {
+                            ticket.getCustomer().getCNIC(),
+                            ticket.getCustomer().getFirstname(),
+                            ticket.getCustomer().getLastname(),
+                            ticket.getCustomer().getContact(),
+                            booking.getSeat().getSeatID()
+                        }
+                    );
+                }
+            }
         }
-        
         return true;
     }
     
@@ -549,6 +553,17 @@ public class JSystem {
         }
         //----------------------------------
         */
+    }
+    
+    public void cancelTicket(String ticketID){
+        
+        for(int i = 0; i < this.ticket_list.getHistory().size();i++){
+            if(this.ticket_list.getHistory().get(i).getTicketID().equals(ticketID)){
+                this.ticket_list.getHistory().remove(i);
+            }
+        }
+        database.cancelTicket(ticketID);
+    
     }
     
     //Seat Selection

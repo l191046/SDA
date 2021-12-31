@@ -11,6 +11,7 @@ public class CustomerList {
     
     public CustomerList(){
         customers = new ArrayList<Customer>();
+        database = MSsql.getInstance();
     }
 
     public ArrayList<Customer> getCustomers() {
@@ -20,15 +21,15 @@ public class CustomerList {
         if (searchCustomer(customer.getCNIC()) != null)
             return false;
         customers.add(customer);
-        
+
         //---------UPDATE DATABASE----------
         database.addCustomer(
                 customer.getCNIC(),
                 customer.getFirstname(),
                 customer.getLastname(),
+                customer.getContact(),
                 customer.getAddress(),
-                customer.getContact()
-                
+                customer.isNoFly()
         );
         //----------------------------------
         return true;

@@ -362,19 +362,20 @@ public class MSsql {
     }
 
     //===========CUSTOMER================
-    public boolean addCustomer(String CNIC, String fname, String lname, String contact, String address){
+    public boolean addCustomer(String CNIC, String fname, String lname, String contact, String address, boolean nofly){
         try {
             Connection con = DriverManager.getConnection(url);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //CALLING STORED PROCEDURE
-            String SQL = "{call [add_customer](?,?,?,?,?)}";
+            String SQL = "{call [add_customer](?,?,?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString("cnic", CNIC);
             Cmt.setString("contact", contact);
-            Cmt.setString("fname", fname);
-            Cmt.setString("lname", lname);
+            Cmt.setString("firstname", fname);
+            Cmt.setString("lastname", lname);
             Cmt.setString("address", address);
+            Cmt.setBoolean("nofly", nofly);
             Cmt.execute();
             return true;
         }
@@ -420,12 +421,13 @@ public class MSsql {
         }
         return result;
     }
+    
     public boolean addTicket(String TicketID, String FlightID, String seatID, String cnic){
         try {
             Connection con = DriverManager.getConnection(url);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //CALLING STORED PROCEDURE
-            String SQL = "{call [add_customer](?,?,?,?,?)}";
+            String SQL = "{call [add_booking](?,?,?,?)}";
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString("ticketId", TicketID);
@@ -440,6 +442,24 @@ public class MSsql {
             e.printStackTrace();
         }
         return false;
-    }    
+    }
+  
+    public void cancelTicket(String ticketID){
+        
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [cancel_ticket] (?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("ticket_id", ticketID);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     
+    }
 }
