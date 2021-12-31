@@ -551,6 +551,17 @@ public class JSystem {
         */
     }
     
+    public void cancelTicket(String ticketID){
+        
+        for(int i = 0; i < this.ticket_list.getHistory().size();i++){
+            if(this.ticket_list.getHistory().get(i).getTicketID().equals(ticketID)){
+                this.ticket_list.getHistory().remove(i);
+            }
+        }
+        database.cancelTicket(ticketID);
+    
+    }
+    
     //Seat Selection
     
     public void addSeatToFlight(String flightId, String seatLocation) {
