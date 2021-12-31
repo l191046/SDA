@@ -1144,7 +1144,11 @@ AS
 GO
 
 
-EXEC get_customers;
+CREATE PROCEDURE cancel_ticket
+@ticket_id varchar(20)
+AS
+	DELETE FROM Booking Where @ticket_id=Booking.TicketId
+GO
 --EXEC flight_customers @flightID = 'ABC23';
 --drop procedure get_bookings
 
