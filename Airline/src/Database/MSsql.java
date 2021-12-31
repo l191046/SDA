@@ -420,4 +420,23 @@ public class MSsql {
         }
         return result;
     }
+    
+    public void cancelTicket(String ticketID){
+        
+        ResultSet result = null;
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [cancel_ticket] (?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("ticket_id", ticketID);
+            result=Cmt.executeQuery();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    
+    }
 }
