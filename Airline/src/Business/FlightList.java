@@ -30,7 +30,7 @@ public class FlightList {
         if (searchFlight(new_flight.getFlightID()) != null) //if flight already exists
             return false;
         Flights.add(new_flight);
-        /*
+        
         //---------UPDATE DATABASE------------
         database.addFlight(
                 new_flight.getFlightID(),
@@ -42,7 +42,7 @@ public class FlightList {
                 new_flight.getCost()
         );
         //------------------------------------
-        */
+        
         return true;
     }
     public Flight searchFlight(String id){

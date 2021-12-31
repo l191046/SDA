@@ -420,4 +420,26 @@ public class MSsql {
         }
         return result;
     }
+    public boolean addTicket(String TicketID, String FlightID, String seatID, String cnic){
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //CALLING STORED PROCEDURE
+            String SQL = "{call [add_customer](?,?,?,?,?)}";
+            //PROCEDURE PARAMETERS
+            CallableStatement Cmt = con.prepareCall(SQL);
+            Cmt.setString("ticketId", TicketID);
+            Cmt.setString("flightId", FlightID);
+            Cmt.setString("seatId", seatID);
+            Cmt.setString("cnic", cnic);
+   
+            Cmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }    
+    
 }

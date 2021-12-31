@@ -20,8 +20,16 @@ public class CustomerList {
         if (searchCustomer(customer.getCNIC()) != null)
             return false;
         customers.add(customer);
-        //---------UPDATE DATABASE----------
         
+        //---------UPDATE DATABASE----------
+        database.addCustomer(
+                customer.getCNIC(),
+                customer.getFirstname(),
+                customer.getLastname(),
+                customer.getAddress(),
+                customer.getContact()
+                
+        );
         //----------------------------------
         return true;
     }
