@@ -11,6 +11,7 @@ public class CustomerList {
     
     public CustomerList(){
         customers = new ArrayList<Customer>();
+        database = MSsql.getInstance();
     }
 
     public ArrayList<Customer> getCustomers() {
@@ -21,7 +22,14 @@ public class CustomerList {
             return false;
         customers.add(customer);
         //---------UPDATE DATABASE----------
-        
+        database.addCustomer(
+                customer.getCNIC(),
+                customer.getFirstname(),
+                customer.getLastname(),
+                customer.getContact(),
+                customer.getAddress(),
+                customer.isNoFly()
+        );
         //----------------------------------
         return true;
     }
