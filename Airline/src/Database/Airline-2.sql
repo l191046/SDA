@@ -109,14 +109,14 @@ INSERT Customer ([CNIC],Contact, No_Fly) VALUES ('3452815234532','93043219342', 
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3453819234532','sukhanamir','crunchyroll',54000,'2000-04-20')
 INSERT ADMIN ([CNIC],[Username],[Password],[Salary],[EmploymentDate]) VALUES ('3452815234532','admin','admin',400000,'2020-01-19')
 
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('ABC23','US1','PK35','03:00',50000,'On time','11:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('BCD45','PK35','DO60','03:00',40000,'On time','15:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('CDE25','PK35','MCT30','2:00',110000,'On time','16:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LMN23','US1','LND21','02:30',50000,'On time','16:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('DEF25','MCT30','LND21','1:00',110000,'On time','19:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('EFG25','LND21','DO60','1:00',110000,'On time','21:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('FGH23','US1','SK32','02:30',50000,'On time','11:00')
-INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('GHI12','SK32','DO60','02:30',50000,'On time','16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('ABC23','US1','PK35','03:00',50000,'On time','2022-01-02 11:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('BCD45','PK35','DO60','03:00',40000,'On time','2022-01-02 15:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('CDE25','PK35','MCT30','2:00',110000,'On time','2022-01-02 16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('LMN23','US1','LND21','02:30',50000,'On time','2022-01-02 16:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('DEF25','MCT30','LND21','1:00',110000,'On time','2022-01-02 19:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('EFG25','LND21','DO60','1:00',110000,'On time','2022-01-02 21:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('FGH23','US1','SK32','02:30',50000,'On time','2022-01-02 11:00')
+INSERT Flight([FlightId],[Source],[Destination],[Duration],[Cost],[Status],[Time]) VALUES ('GHI12','SK32','DO60','02:30',50000,'On time','2022-01-02 16:00')
 
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('US1','US International','New York','USA')
 INSERT Airport([Code],[Name],[City],[Country]) VALUES ('PK35','Jinnah International','Lahore','Pakistan')
@@ -1129,11 +1129,12 @@ IF EXISTS
 GO
 
 CREATE PROCEDURE add_booking
+@ticketId	varchar(20),
 @flightId	varchar(10),
 @seatId		varchar(5),
 @cnic		varchar(13)
 AS
-	INSERT Booking([FlightId], [SeatId], [CNIC]) VALUES (@flightId, @seatId, @cnic)
+	INSERT Booking([TicketId], [FlightId], [SeatId], [CNIC]) VALUES (@ticketId, @flightId, @seatId, @cnic)
 GO
 
 CREATE PROCEDURE get_bookings
@@ -1150,7 +1151,7 @@ AS
 	DELETE FROM Booking Where @ticket_id=Booking.TicketId
 GO
 --EXEC flight_customers @flightID = 'ABC23';
---drop procedure get_bookings
+--drop procedure add_booking
 
 /*
 drop proc book_seat
@@ -1185,3 +1186,4 @@ select * from Customer;
 select * from Flight;
 select * from Flight_Seats;
 select * from Airport;
+select * from Booking

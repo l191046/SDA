@@ -167,25 +167,6 @@ public class MSsql {
         }
         return false;
     }
-    //NOFLY MANAGEMENT
-    /*
-    public ResultSet getTableNoFly(){
-        ResultSet result = null;
-        try {
-            Connection con = DriverManager.getConnection(url);
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            //CALLING STORED PROCEDURE
-            String SQL = "{call [get_nofly]}";
-            //PROCEDURE PARAMETERS
-            CallableStatement Cmt = con.prepareCall(SQL);
-            result=Cmt.executeQuery();
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    */
     public boolean removeFromNoFly(String CNIC){
         try {
             Connection con = DriverManager.getConnection(url);
@@ -384,27 +365,6 @@ public class MSsql {
         }
         return false;
     }    
-    /*
-    public boolean searchCustomer(String CNIC){
-        boolean found = false;
-        try {
-            Connection con = DriverManager.getConnection(url);
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            //CALLING STORED PROCEDURE
-            String SQL = "{call [search_customer](?,?)}";
-            //PROCEDURE PARAMETERS
-            CallableStatement Cmt = con.prepareCall(SQL);
-            Cmt.setString("cnic", CNIC);
-            Cmt.registerOutParameter("found", java.sql.Types.INTEGER);
-            Cmt.execute();
-            found = (Cmt.getInt("found") == 1);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return found;
-    }
-    */
     public ResultSet getTableCustomers(){
         ResultSet result = null;
         try {
@@ -446,7 +406,6 @@ public class MSsql {
   
     public void cancelTicket(String ticketID){
         
-        ResultSet result = null;
         try {
             Connection con = DriverManager.getConnection(url);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -455,7 +414,7 @@ public class MSsql {
             //PROCEDURE PARAMETERS
             CallableStatement Cmt = con.prepareCall(SQL);
             Cmt.setString("ticket_id", ticketID);
-            result=Cmt.executeQuery();
+            Cmt.execute();
         }
         catch(Exception e) {
             e.printStackTrace();

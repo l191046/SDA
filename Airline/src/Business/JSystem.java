@@ -29,7 +29,7 @@ public class JSystem {
     private FlightList flight_list;
     private NoFlyList nofly_list;
     private CustomerList customer_list;
-    private FlightHistory ticket_list;
+    private TicketList ticket_list;
     private ArrayList<Airport> airportList;
     private PathFinderAlgorithm PathFinder;
     private ViableRoutes myRoutes;
@@ -130,7 +130,7 @@ public class JSystem {
         flight_list = new FlightList();
         customer_list = new CustomerList();
         nofly_list = new NoFlyList(customer_list);
-        ticket_list = new FlightHistory();
+        ticket_list = new TicketList();
         this.loadAirportList();
         this.loadFlightList();
         this.loadFlightSeats();
@@ -272,7 +272,7 @@ public class JSystem {
             while (result.next()){
                 if (ticket == null || !ticket.getTicketID().equals(result.getString("TicketId"))){
                     if (ticket != null)
-                        ticket_list.addTicket(ticket);
+                        ticket_list.getHistory().add(ticket);
                     ticket = new Ticket();
                     ticket.setTicketID(result.getString("TicketId"));
                     ticket.setCustomer(customer_list.searchCustomer(result.getString("CNIC")));
@@ -285,7 +285,7 @@ public class JSystem {
                 ticket.getBookings().add(booking);
             }
             if (ticket!=null)
-                ticket_list.addTicket(ticket);
+                ticket_list.getHistory().add(ticket);
         }
         catch (Exception e){
             e.printStackTrace();

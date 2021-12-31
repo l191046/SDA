@@ -410,8 +410,8 @@ public class JBooking extends javax.swing.JFrame {
             JSeatSelect seats = new JSeatSelect();
         }
         else {
-            //auto assign seats
-            //system.autoSeatSelect();
+            system.autoSeatSelect();
+            JTicket ticket = new JTicket();
         }
         this.dispose();
     }//GEN-LAST:event_btn_nextMouseClicked
