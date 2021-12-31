@@ -28,6 +28,7 @@ public class JSystem {
     private NoFlyList nofly_list;
     private ArrayList<Airport> airportList;
     private PathFinderAlgorithm PathFinder;
+    private ViableRoutes myRoutes;
     
     
     //=========THIS==============
@@ -180,15 +181,18 @@ public class JSystem {
         return null;
         
     }   
-    public boolean findPaths(DefaultTableModel table_model, String Source, String Destination, LocalDate date){
+    public boolean findPaths(String Source, String Destination, LocalDate date){
         Airport Src = this.retAirportFromList(Source);
         Airport Dest = this.retAirportFromList(Destination);
-       
-        
-        ViableRoutes myRoutes = PathFinder.findPaths(Src, Dest, date);
+        myRoutes = PathFinder.findPaths(Src, Dest, date);
         if (myRoutes.isEmpty())
             return false;
-        
+        return true;
+    }
+    public void getPaths(DefaultTableModel table_model){
+        table_model.setRowCount(0);
+        if (myRoutes == null)
+            return;
         ArrayList<Route> routes = myRoutes.getRoutes();
         String connections;
         int i = 0;
@@ -199,25 +203,30 @@ public class JSystem {
                 connections += flight.getFlightID();
                 
                 if(k != route.getFlights().size()-1)
-                connections += "->";
+                connections += ", ";
             }
 
             table_model.addRow(
                     new Object[] {
                         i,
-                        Src.getCode(),
-                        Dest.getCode(),
+                        route.getSource().getCode(),
+                        route.getDestination().getCode(),
                         route.getFlights().get(0).getTime().toLocalDate().toString(),
                         route.getFlights().get(0).getTime().toLocalTime().toString(),
                         connections,
                         route.getRouteCost(),
-                        route
                     }
             );
             i++;
-        }
-        return true;
-    
+        } 
+    }
+    public void sortPathTime(){
+        SorterByTime sorter = new SorterByTime();
+        sorter.sort(myRoutes);
+    }
+    public void sortPathCost(){
+        SorterByCost sorter = new SorterByCost();
+        sorter.sort(myRoutes);
     }
     
     //==========CUSTOMER==========
