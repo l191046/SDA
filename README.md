@@ -1,2 +1,2 @@
 # SDA
-SDA - Airline Ticketing System using Java Swing
+Software Design and Analysis - Airline Ticketing System using Java Swing
