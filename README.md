@@ -1,2 +1,2 @@
 # SDA
-SDA - Airline Ticketing System
+SDA - Airline Ticketing System using Java Swing
